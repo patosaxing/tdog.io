@@ -1,10 +1,12 @@
 //import RecordVideo from "./Components/RecordVideo";
-import Webcam from "react-webcam";
+import WebcamStreamCapture from "./Components/WebStreamCapture";
 
 function App() {
   return (
     <div className="App">
-      <Webcam audio="true" />
+      {/* <Webcam audio="true" /> */}
+      {/* <button>Record</button> */}
+      <WebcamStreamCapture/>
     </div>
   );
 }
