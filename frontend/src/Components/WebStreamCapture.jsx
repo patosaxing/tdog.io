@@ -1,5 +1,6 @@
 import React from "react";
 import Webcam from "react-webcam";
+import { Button, Typography, } from '@material-ui/core';
 
 export default function WebcamStreamCapture() {
   const webcamRef = React.useRef(null);
@@ -54,12 +55,12 @@ export default function WebcamStreamCapture() {
     <>
       <Webcam audio={true} ref={webcamRef} />
       {capturing ? (
-        <button onClick={handleStopCaptureClick}>Stop⬜Recording</button>
+        <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>Stop⬜Recording</Button>
       ) : (
-        <button onClick={handleStartCaptureClick}>Start🔴Recoding</button>
+        <Button onClick={handleStartCaptureClick}>Start🔴Recoding</Button>
       )}
       {recordedChunks.length > 0 && (
-        <button onClick={handleDownload}>Download 🔽</button>
+        <Button variant="contained" color="primary" onClick={handleDownload}>Downl⮋ad ⮯</Button>
       )}
     </>
   );
