@@ -1,10 +1,10 @@
 //import RecordVideo from "./Components/RecordVideo";
-import VideoRecorder from 'react-video-recorder'
+import Webcam from "react-webcam";
 
 function App() {
   return (
     <div className="App">
-       
+      <Webcam audio="true" />
     </div>
   );
 }
