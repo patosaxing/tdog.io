@@ -1,5 +1,6 @@
 import WebcamStreamCapture from "./Components/WebStreamCapture.jsx";
 import AppBar from "./Components/AppBar.jsx";
+import VideosGrid from "./Components/VideosGrid.jsx";
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <AppBar />
       <WebcamStreamCapture />
+      <VideosGrid />
     </div>
   );
 }
