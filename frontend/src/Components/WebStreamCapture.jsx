@@ -1,7 +1,31 @@
 import React from "react";
 import Webcam from "react-webcam";
+import { Button, Card, CardContent, CardActions } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 export default function WebcamStreamCapture() {
+  // MAterial styling variabl
+  const classes = useStyles();
+  // const bull = <span className={classes.bullet}>•</span>;
+  
+  // Webcam npm
   const webcamRef = React.useRef(null);
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
@@ -51,16 +75,20 @@ export default function WebcamStreamCapture() {
   }, [recordedChunks]);
 
   return (
-    <>
+    <Card className={classes.root}>
+     <CardContent>
       <Webcam audio={true} ref={webcamRef} />
-      {capturing ? (
-        <button onClick={handleStopCaptureClick}>Stop⬜Recording</button>
+     </CardContent>
+     <CardActions>
+     {capturing ? (
+        <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>Stop⬜Recording</Button>
       ) : (
-        <button onClick={handleStartCaptureClick}>Start🔴Recoding</button>
+        <Button onClick={handleStartCaptureClick}>Start🔴Recoding</Button>
       )}
       {recordedChunks.length > 0 && (
-        <button onClick={handleDownload}>Download 🔽</button>
+        <Button variant="contained" color="primary" onClick={handleDownload}>Downl⮋ad ⮯</Button>
       )}
-    </>
+      </CardActions>
+    </Card>
   );
 };
