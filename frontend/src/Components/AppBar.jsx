@@ -1,6 +1,6 @@
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import {AppBar, Button, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu} from '@material-ui/core';
+import { AppBar, Button, Toolbar, IconButton, Typography, InputBase, Badge, MenuItem, Menu } from '@material-ui/core';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -157,7 +157,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
-  let UserLoggedIn = false; //Toggle this to change our App bar
+  let UserLoggedIn = true; //Toggle this to change our App bar
   return (
     <div className={classes.grow}>
       <AppBar position="static">
