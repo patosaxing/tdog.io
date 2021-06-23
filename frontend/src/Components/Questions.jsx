@@ -1,12 +1,11 @@
 import React from "react"
-// import questions from "./Interview_questions.json"
+import questions from "./Interview_questions.json"
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 
 const BootstrapInput = withStyles((theme) => ({
@@ -45,49 +44,37 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
+  margin: {margin: theme.spacing(1)},
 }));
 
 export default function QuestionSelection() {
-  const classes = useStyles();
-  const [age, setAge] = React.useState('');
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-  return (
+    const classes = useStyles()
+    const [category, setCategory] = React.useState("Basic interview questions")
+    const [question, setQuestion] = React.useState('')
+    const handleChangeCat = (event) => {setCategory(event.target.value)}
+    const handleChangeQues = (event) => {setQuestion(random_question())}
+
+    const RandArray = (array) => array[Math.random()*array.length | 0]
+    
+    const random_question = ()=>{
+        var randomly_generated_question = RandArray(questions[category])
+        return(randomly_generated_question)
+    }
+    return (
     <div>
       <FormControl className={classes.margin}>
-        <InputLabel id="demo-customized-select-label">Age</InputLabel>
+        <InputLabel id="demo-customized-select-label">Category</InputLabel>
         <Select
           labelId="demo-customized-select-label"
           id="demo-customized-select"
-          value={age}
-          onChange={handleChange}
+          value={category}
+          onChange={handleChangeCat}
           input={<BootstrapInput />}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+        >  
+        {Object.keys(questions).map(category => (<MenuItem value={category}>{category}</MenuItem>))}
         </Select>
       </FormControl>
-      <FormControl className={classes.margin}>
-        <InputLabel htmlFor="demo-customized-select-native">Age</InputLabel>
-        <NativeSelect
-          id="demo-customized-select-native"
-          value={age}
-          onChange={handleChange}
-          input={<BootstrapInput />}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </NativeSelect>
-      </FormControl>
+      <button onClick={handleChangeQues}>Generate Random Questions</button>
+      <div>{question}</div>
     </div>
   )}
