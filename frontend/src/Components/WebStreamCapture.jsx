@@ -32,8 +32,9 @@ export default function WebcamStreamCapture() {
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
   const [recordedChunks, setRecordedChunks] = React.useState([]);
-  // const [timer, setTimer]= useSelector()
+  const [timer, setTimer] = React.useState()
 
+  // Handling data
   const handleDataAvailable = React.useCallback(
     ({ data }) => {
       if (data.size > 0) {
@@ -42,10 +43,11 @@ export default function WebcamStreamCapture() {
     },
     [setRecordedChunks]
   );
+  const handleTimer = (event, newValue) => {setTimer(newValue)};
+
   const handleStartCaptureClick = React.useCallback(() => {
     setCapturing(true);
-    // console.log(timer)
-    //setTimeout(handleStopCaptureClick,timer*60000)
+    setTimeout(handleStopCaptureClick,timer*60000)
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm"
     });
@@ -82,7 +84,7 @@ export default function WebcamStreamCapture() {
  
   return (
     <Card className={classes.root}>
-      <DiscreteSlider/>
+      <DiscreteSlider timeprop={handleTimer}/>
 
      <CardContent>
       <Webcam audio={true} ref={webcamRef} />

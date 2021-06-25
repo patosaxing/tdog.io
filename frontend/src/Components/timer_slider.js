@@ -4,20 +4,13 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 300,
-  },
-  margin: {
-    height: theme.spacing(3),
-  },
+  root: { width: 300,},
+  margin: {height: theme.spacing(3),},
 }));
 
-export default function DiscreteSlider() { 
+export default function DiscreteSlider({timeprop}) { 
   const classes = useStyles();
-  const [timer, setTimer] = React.useState()
-  const handleTimer = (event, newValue) => {
-      setTimer(newValue)
-  };
+
   return (
     <div className={classes.root}>
       <Typography id="discrete-slider-custom" gutterBottom>
@@ -30,10 +23,9 @@ export default function DiscreteSlider() {
         max={5}
         min={0}
         valueLabelDisplay="auto"
-        onChange={handleTimer}
+        onChange={timeprop}
 
       />
-      {console.log(timer)}
     </div>
   );
 }
