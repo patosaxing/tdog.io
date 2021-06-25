@@ -6,6 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
 
 const BootstrapInput = withStyles((theme) => ({
@@ -71,10 +72,11 @@ export default function QuestionSelection() {
           onChange={handleChangeCat}
           input={<BootstrapInput />}
         >  
-        {Object.keys(questions).map(category => (<MenuItem value={category}>{category}</MenuItem>))}
+        {Object.keys(questions).map(category => (<MenuItem value={category} key={category}>{category}</MenuItem>))}
         </Select>
       </FormControl>
-      <button onClick={handleChangeQues}>Generate Random Questions</button>
+      <br/>
+      <Button variant="contained" color="primary" onClick={handleChangeQues}>Generate Random Questions</Button>
       <div>{question}</div>
     </div>
   )}
