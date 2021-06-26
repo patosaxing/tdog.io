@@ -136,6 +136,7 @@ export default function WebcamStreamCapture() {
     <Card className={classes.root}>
       {/* <DiscreteSlider/> */}
       {/* **** Slider component start****  */}
+      
       <Typography id="discrete-slider-custom" className={classes.sliderTop}>
         Set recording time (minute)
       </Typography>
@@ -153,6 +154,7 @@ export default function WebcamStreamCapture() {
           console.log(value);
         }}
       />
+     
       {/* ****  Slider component end *****/}
 
       <CardContent>
