@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions, Typography, Slider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -82,14 +82,30 @@ export default function WebcamStreamCapture() {
   const mediaRecorderRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
-  const [timer, setTimer] = useState()
-  let numFromSlider;
+  const [timer, setTimer] = useState(0.5)
+  let lenght = timer;
+  console.log('PRIOT enter useEffect', lenght)
 
-  const getSliderValue = (num) => {
-    // console.log('value from getSliderValue', num)
-    let numFromSlider = num;
-    console.log(' after getslider called', numFromSlider)
-    return numFromSlider;
+  useEffect(() => {
+    setTimeout(() => {
+      console.log('timer inside useEffect', timer);
+      // handleStopCaptureClick();
+    }, timer * 100);
+    console.log('this is LENGTH ', timer);
+    setTimer(lenght);
+    console.log('timer after SET', timer);
+    return timer;
+  }, [timer, lenght]);
+
+  async function handleSliderChange(slideNum) {
+    setTimer(slideNum);
+  }
+  const stopViInTime = () => {
+    console.log('this is lenght in stopViInTime', timer);
+    const VT = setTimeout(() => {
+      handleStopCaptureClick();
+    }, timer * 60000);
+    clearTimeout(VT);
   }
 
   const handleDataAvailable = useCallback(
@@ -100,14 +116,12 @@ export default function WebcamStreamCapture() {
     },
     [setRecordedChunks]
   );
-  const handleStartCaptureClick = useCallback(() => {
-    // e.preventDefault();
-    getSliderValue(numFromSlider);
-    console.log('timer INSIDE recording', numFromSlider)
-    setCapturing(true);
-    // let timeRec = numFromSlider;
 
-    //setTimeout(handleStopCaptureClick,timer*60000)
+  const handleStartCaptureClick = useCallback(() => {
+
+    console.log('timer INSIDE recording', timer)
+    setCapturing(true);
+
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm"
     });
@@ -116,6 +130,7 @@ export default function WebcamStreamCapture() {
       handleDataAvailable
     );
     mediaRecorderRef.current.start();
+    stopViInTime();
   }, [handleDataAvailable]);
 
 
@@ -143,7 +158,6 @@ export default function WebcamStreamCapture() {
     }
   }, [recordedChunks]);
 
-
   return (
     <Card className={classes.root}>
       {/* <DiscreteSlider/> */}
@@ -154,8 +168,7 @@ export default function WebcamStreamCapture() {
       </Typography>
       <Slider
         className={classes.slider}
-        defaultValue={4.5}
-        // value={value}
+        defaultValue={0.5}
         aria-labelledby="discrete-slider-custom"
         step={0.5}
         min={-0.000000001}
@@ -163,8 +176,10 @@ export default function WebcamStreamCapture() {
         valueLabelDisplay="auto"
         marks={marks}
         onChange={(e, value) => {
-          setTimer(value);
-          console.log('OnCHange from Slider', timer);
+          console.log('OnCHange from Slider', value);
+          handleSliderChange(value);
+
+          console.log('OnCHange TIMER after slide', { timer });
         }
         }
       />
