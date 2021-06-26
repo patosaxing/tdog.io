@@ -2,7 +2,7 @@ import React from "react";
 import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import DiscreteSlider from "./timer_slider";
+import Slider from "./slider";
 
 
 const useStyles = makeStyles({
@@ -43,11 +43,13 @@ export default function WebcamStreamCapture() {
     },
     [setRecordedChunks]
   );
-  const handleTimer = (event, newValue) => {setTimer(newValue)};
+  const handleTimer = (event, newValue) => {
+    setTimer(newValue)
+    console.log(timer)};
 
   const handleStartCaptureClick = React.useCallback(() => {
     setCapturing(true);
-    setTimeout(handleStopCaptureClick,timer*60000)
+    // setTimeout(handleStopCaptureClick,timer*60000)
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm"
     });
@@ -84,8 +86,7 @@ export default function WebcamStreamCapture() {
  
   return (
     <Card className={classes.root}>
-      <DiscreteSlider timeprop={handleTimer}/>
-
+      <Slider value={handleTimer}/>
      <CardContent>
       <Webcam audio={true} ref={webcamRef} />
      </CardContent>
