@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
+
 const useStyles = makeStyles((theme) => ({
   root: { width: 300,},
   margin: {height: theme.spacing(3),},
@@ -24,6 +25,7 @@ export default function DiscreteSlider({timeprop}) {
         min={0}
         valueLabelDisplay="auto"
         onChange={timeprop}
+        id="Slider"
 
       />
     </div>
