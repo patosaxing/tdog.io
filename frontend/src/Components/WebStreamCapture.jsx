@@ -1,10 +1,8 @@
-import React from "react";
+import React, {useState } from "react";
 import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-// import Slider from "./slider";
-import DiscreteSlider from "./DiscreteSlider";
-
+import Slider from "./slider";
 
 const useStyles = makeStyles({
   root: {
@@ -26,12 +24,15 @@ const useStyles = makeStyles({
 export default function WebcamStreamCapture() {
   const classes = useStyles();
 
+  const [timer, setTimer] = useState(2)
+  const handleTimer = (event) => {setTimer(event.target.value)}
+
   // Webcam npm
   const webcamRef = React.useRef(null);
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
   const [recordedChunks, setRecordedChunks] = React.useState([]);
-  const [timer, setTimer] = React.useState()
+  
 
   // Handling data
   const handleDataAvailable = React.useCallback(
@@ -42,13 +43,11 @@ export default function WebcamStreamCapture() {
     },
     [setRecordedChunks]
   );
-  const handleTimer = (event, newValue) => {
-    setTimer(newValue)
-    console.log("NEW VALUE",newValue)
-    console.log("TIMER",timer)};
 
   const handleStartCaptureClick = React.useCallback(() => {
     setCapturing(true);
+    console.log("Timer:",timer);
+    setTimeout(handleStopCaptureClick,timer*60000)
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm"
     });
@@ -57,7 +56,6 @@ export default function WebcamStreamCapture() {
       handleDataAvailable
       );
     mediaRecorderRef.current.start();
-    setTimeout(handleStopCaptureClick,timer*60000)
   }, [handleDataAvailable]);
 
 
@@ -85,19 +83,21 @@ export default function WebcamStreamCapture() {
  
   return (
     <Card className={classes.root}>
-      <DiscreteSlider timeprop={handleTimer}/>
      <CardContent>
       <Webcam audio={true} ref={webcamRef} />
      </CardContent>
      <CardActions>
      {capturing ? (
-        <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>⬜ Stop Recording (Auto stop in {timer} minutes)</Button>
-      ) : (
-        <Button onClick={handleStartCaptureClick}>🔴 Start Recoding</Button>
-      )}
-      {recordedChunks.length > 0 && (
+       <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>⬜ Stop Recording (Auto stop in {timer} minutes)</Button>
+       ) : (
+         <Button onClick={handleStartCaptureClick}>🔴 Start Recoding</Button>
+         )}
+      {recordedChunks.length > 0 && (<div>
         <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
-      )}
+        <Button variant="contained" color="primary" onClick={handleDownload}>Preview</Button>
+      </div>
+        )}
+      <Slider timer={timer} handleTimer={handleTimer}/>
       </CardActions>
     </Card>
   );
