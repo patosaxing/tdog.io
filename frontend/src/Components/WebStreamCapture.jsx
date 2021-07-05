@@ -2,6 +2,8 @@ import React from "react";
 import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import DiscreteSlider from "./timer_slider";
+
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +32,7 @@ export default function WebcamStreamCapture() {
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
   const [recordedChunks, setRecordedChunks] = React.useState([]);
+  // const [timer, setTimer]= useSelector()
 
   const handleDataAvailable = React.useCallback(
     ({ data }) => {
@@ -41,6 +44,8 @@ export default function WebcamStreamCapture() {
   );
   const handleStartCaptureClick = React.useCallback(() => {
     setCapturing(true);
+    // console.log(timer)
+    //setTimeout(handleStopCaptureClick,timer*60000)
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm"
     });
@@ -73,20 +78,23 @@ export default function WebcamStreamCapture() {
       setRecordedChunks([]);
     }
   }, [recordedChunks]);
-
+  
+ 
   return (
     <Card className={classes.root}>
+      <DiscreteSlider/>
+
      <CardContent>
       <Webcam audio={true} ref={webcamRef} />
      </CardContent>
      <CardActions>
      {capturing ? (
-        <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>Stop⬜Recording</Button>
+        <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>⬜ Stop Recording</Button>
       ) : (
-        <Button onClick={handleStartCaptureClick}>Start🔴Recoding</Button>
+        <Button onClick={handleStartCaptureClick}>🔴 Start Recoding</Button>
       )}
       {recordedChunks.length > 0 && (
-        <Button variant="contained" color="primary" onClick={handleDownload}>Downl⮋ad ⮯</Button>
+        <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
       )}
       </CardActions>
     </Card>
