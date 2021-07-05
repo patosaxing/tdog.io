@@ -1,9 +1,8 @@
-import React from "react";
+import React, {useState } from "react";
 import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions, Typography, Slider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import DiscreteSlider from "./timer_slider";
-
+import Slider from "./slider";
 
 const useStyles = makeStyles({
   root: {
@@ -75,17 +74,19 @@ const marks = [
 ];
 
 export default function WebcamStreamCapture() {
-  // MAterial styling variabl
   const classes = useStyles();
-  // const bull = <span className={classes.bullet}>•</span>;
+
+  const [timer, setTimer] = useState(2)
+  const handleTimer = (event) => {setTimer(event.target.value)}
 
   // Webcam npm
   const webcamRef = React.useRef(null);
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
   const [recordedChunks, setRecordedChunks] = React.useState([]);
-  // const [timer, setTimer]= useSelector()
+  
 
+  // Handling data
   const handleDataAvailable = React.useCallback(
     ({ data }) => {
       if (data.size > 0) {
@@ -94,17 +95,18 @@ export default function WebcamStreamCapture() {
     },
     [setRecordedChunks]
   );
+
   const handleStartCaptureClick = React.useCallback(() => {
     setCapturing(true);
-    // console.log(timer)
-    //setTimeout(handleStopCaptureClick,timer*60000)
+    console.log("Timer:",timer);
+    setTimeout(handleStopCaptureClick,timer*60000)
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm"
     });
     mediaRecorderRef.current.addEventListener(
       "dataavailable",
       handleDataAvailable
-    );
+      );
     mediaRecorderRef.current.start();
   }, [handleDataAvailable]);
 
@@ -131,44 +133,34 @@ export default function WebcamStreamCapture() {
     }
   }, [recordedChunks]);
 
-
+  const handlePreview = React.useCallback(( )=> {
+    if (recordedChunks.length){
+      const blob = new Blob(recordedChunks,{type:"video/webm"})
+      console.log(blob)
+      return( 
+        <video width="400" controls>
+          <source src={blob}/>
+        </video>)
+    }
+  },[])
+ 
   return (
     <Card className={classes.root}>
-      {/* <DiscreteSlider/> */}
-      {/* **** Slider component start****  */}
-      
-      <Typography id="discrete-slider-custom" className={classes.sliderTop}>
-        Set recording time (minute)
-      </Typography>
-      <Slider
-        className={classes.slider}
-        defaultValue={4.5}
-        // value={value}
-        aria-labelledby="discrete-slider-custom"
-        step={0.5}
-        min={-0.000000001}
-        max={5}
-        valueLabelDisplay="auto"
-        marks={marks}
-        onChange={(e, value) => {
-          console.log(value);
-        }}
-      />
-     
-      {/* ****  Slider component end *****/}
-
-      <CardContent>
-        <Webcam audio={true} ref={webcamRef} />
-      </CardContent>
-      <CardActions>
-        {capturing ? (
-          <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>⬜ Stop Recording</Button>
-        ) : (
-          <Button onClick={handleStartCaptureClick}>🔴 Start Recoding</Button>
+     <CardContent>
+      <Webcam audio={true} ref={webcamRef} />
+     </CardContent>
+     <CardActions>
+     {capturing ? (
+       <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>⬜ Stop Recording (Auto stop in {timer} minutes)</Button>
+       ) : (
+         <Button onClick={handleStartCaptureClick}>🔴 Start Recoding</Button>
+         )}
+      {recordedChunks.length > 0 && (<div>
+        <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
+        <Button variant="contained" color="primary" onClick={handlePreview}>Preview</Button>
+      </div>
         )}
-        {recordedChunks.length > 0 && (
-          <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
-        )}
+      <Slider timer={timer} handleTimer={handleTimer}/>
       </CardActions>
     </Card>
   );
