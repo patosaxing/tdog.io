@@ -12,7 +12,7 @@ import InputBase from '@material-ui/core/InputBase';
 const BootstrapInput = withStyles((theme) => ({
   root: {
     'label + &': {
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(2),
     },
   },
   input: {
