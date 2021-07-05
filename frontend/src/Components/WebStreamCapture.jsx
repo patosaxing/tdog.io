@@ -80,6 +80,17 @@ export default function WebcamStreamCapture() {
       setRecordedChunks([]);
     }
   }, [recordedChunks]);
+
+  const handlePreview = React.useCallback(( )=> {
+    if (recordedChunks.length){
+      const blob = new Blob(recordedChunks,{type:"video/webm"})
+      console.log(blob)
+      return( 
+        <video width="400" controls>
+          <source src={blob}/>
+        </video>)
+    }
+  },[])
  
   return (
     <Card className={classes.root}>
@@ -94,7 +105,7 @@ export default function WebcamStreamCapture() {
          )}
       {recordedChunks.length > 0 && (<div>
         <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
-        <Button variant="contained" color="primary" onClick={handleDownload}>Preview</Button>
+        <Button variant="contained" color="primary" onClick={handlePreview}>Preview</Button>
       </div>
         )}
       <Slider timer={timer} handleTimer={handleTimer}/>
