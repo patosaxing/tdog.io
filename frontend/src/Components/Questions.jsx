@@ -12,7 +12,7 @@ import InputBase from '@material-ui/core/InputBase';
 const BootstrapInput = withStyles((theme) => ({
   root: {
     'label + &': {
-      marginTop: theme.spacing(3),
+      marginTop: theme.spacing(1),
     },
   },
   input: {
@@ -21,7 +21,7 @@ const BootstrapInput = withStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #ced4da',
     fontSize: 16,
-    padding: '10px 26px 10px 12px',
+    padding: '15px 15px 10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
@@ -64,7 +64,6 @@ export default function QuestionSelection() {
     return (
     <div>
       <FormControl className={classes.margin}>
-        <InputLabel id="demo-customized-select-label">Category</InputLabel>
         <Select
           labelId="demo-customized-select-label"
           id="demo-customized-select"
@@ -74,8 +73,8 @@ export default function QuestionSelection() {
         >  
         {Object.keys(questions).map(category => (<MenuItem value={category} key={category}>{category}</MenuItem>))}
         </Select>
+        <InputLabel id="demo-customized-select-label">Category</InputLabel>
       </FormControl>
-      <br/>
       <Button variant="contained" color="primary" onClick={handleChangeQues}>Generate Random Questions</Button>
       <div>{question}</div>
     </div>
