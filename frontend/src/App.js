@@ -4,13 +4,14 @@ import VideosGrid from "./Components/VideosGrid.jsx";
 import QuestionSelection from "./Components/Questions";
 
 
+
 function App() {
   return (
     <div className="App">
-      <AppBar />
+      {/* <AppBar /> */}
       <QuestionSelection/>
       <WebcamStreamCapture />
-      <VideosGrid />
+      {/* <VideosGrid /> */}
     </div>
   );
   }
