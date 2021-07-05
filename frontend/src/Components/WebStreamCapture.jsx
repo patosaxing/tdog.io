@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 import Webcam from "react-webcam";
-import { Button, Card, CardContent, CardActions, Typography, Slider } from '@material-ui/core';
+import { Button, Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from "./slider";
 
@@ -26,52 +26,6 @@ const useStyles = makeStyles({
   },
 });
 
-const marks = [
-  {
-    value: 0.00001,
-    label: '➸',
-  },
-  {
-    value: 0.5,
-    label: '0.5',
-  },
-  {
-    value: 1,
-    label: '1',
-  },
-  {
-    value: 1.5,
-    label: '1.5',
-  },
-  {
-    value: 2,
-    label: '2',
-  },
-  {
-    value: 2.5,
-    label: '2.5',
-  },
-  {
-    value: 3,
-    label: '3',
-  },
-  {
-    value: 3.5,
-    label: '3.5',
-  },
-  {
-    value: 4,
-    label: '4',
-  },
-  {
-    value: 4.5,
-    label: '4.5',
-  },
-  {
-    value: 5,
-    label: '5',
-  },
-];
 
 export default function WebcamStreamCapture() {
   const classes = useStyles();
@@ -108,11 +62,10 @@ export default function WebcamStreamCapture() {
       handleDataAvailable
       );
     mediaRecorderRef.current.start();
-    stopViInTime();
-  }, [handleDataAvailable]);
+  }, [handleDataAvailable,timer]);
 
 
-  const handleStopCaptureClick = useCallback(() => {
+  const handleStopCaptureClick = React.useCallback(() => {
     mediaRecorderRef.current.stop();
     setCapturing(false);
   }, [mediaRecorderRef, setCapturing]);
@@ -139,13 +92,15 @@ export default function WebcamStreamCapture() {
   const handlePreview = React.useCallback(( )=> {
     if (recordedChunks.length){
       const blob = new Blob(recordedChunks,{type:"video/webm"})
-      console.log(blob)
-      return( 
-        <video width="400" controls>
-          <source src={blob}/>
-        </video>)
+      const url = URL.createObjectURL(blob);
+      const video_file = document.createElement("video");
+      document.body.appendChild(video_file);
+      video_file.width='800'
+      video_file.src= url
+      video_file.controls=true
+      video_file.type= "video/webm"
     }
-  },[])
+  },[recordedChunks])
  
   return (
     <Card className={classes.root}>
