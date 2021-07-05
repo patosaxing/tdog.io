@@ -1,8 +1,8 @@
 import React, {useState } from "react";
 import Webcam from "react-webcam";
-import { Button, Card, CardContent, CardActions, Typography, Slider } from '@material-ui/core';
+import { Button, Card, CardContent, CardActions, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Slider from "./slider";
+import Slider from "./Slider";
 
 const useStyles = makeStyles({
   root: {
