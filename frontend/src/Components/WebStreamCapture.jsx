@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -26,19 +26,18 @@ const useStyles = makeStyles({
   },
 });
 
-
 export default function WebcamStreamCapture() {
   const classes = useStyles();
 
   const [timer, setTimer] = useState(2)
-  const handleTimer = (event) => {setTimer(event.target.value)}
+  const handleTimer = (event) => { setTimer(event.target.value) }
 
   // Webcam npm
   const webcamRef = React.useRef(null);
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
   const [recordedChunks, setRecordedChunks] = React.useState([]);
-  
+
 
   // Handling data
   const handleDataAvailable = React.useCallback(
@@ -52,17 +51,18 @@ export default function WebcamStreamCapture() {
 
   const handleStartCaptureClick = React.useCallback(() => {
     setCapturing(true);
-    console.log("Timer:",timer);
-    setTimeout(handleStopCaptureClick,timer*60000)
+    console.log("Timer in recording button:", timer);
+    setTimeout(handleStopCaptureClick, timer * 60000)
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm"
     });
     mediaRecorderRef.current.addEventListener(
       "dataavailable",
       handleDataAvailable
-      );
+    );
     mediaRecorderRef.current.start();
-  }, [handleDataAvailable,timer]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleDataAvailable, timer]);
 
 
   const handleStopCaptureClick = React.useCallback(() => {
@@ -91,6 +91,7 @@ export default function WebcamStreamCapture() {
 
   const handlePreview = React.useCallback(( )=> {
     if (recordedChunks.length){
+      
       const blob = new Blob(recordedChunks,{type:"video/webm"})
       const url = URL.createObjectURL(blob);
       const video_file = document.createElement("video");
