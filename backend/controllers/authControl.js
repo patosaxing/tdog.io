@@ -1,6 +1,10 @@
-import bcrypt from 'bcrypt'
-import jwt from ('jsonwebtoken')
-import Users from ('../models/user')
+//const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const Users = require('../models/user')
+
+// import bcrypt from 'bcrypt'
+// import jwt from ('jsonwebtoken')
+// import Users from ('../models/user')
 
 require("dotenv").config()
 
@@ -9,7 +13,7 @@ const authControl = {
     register: async(req, res) => 
     {
         //Adding a console.log for testing
-        console.log("I am hitting register")
+        //console.log("I am hitting register")
         try{
             const 
             {
@@ -28,12 +32,12 @@ const authControl = {
                 .json({ msg: "Password must be at least 6 letters or more" })
             
             //Hashes or protectes the password entered    
-            const passwordHash = await bcrypt.hash(password, 12)
+            //const passwordHash = await bcrypt.hash(password, 12)
 
             //Saves the new user
             const newUser = new Users(
                 {
-                    lastName, firstName, email, password: passwordHash, birthDate
+                    lastName, firstName, email, password, birthDate
                 })
 
             await newUser.save()
@@ -45,7 +49,7 @@ const authControl = {
 
                     user:{
                         ...newUser._doc,
-                        password: "",
+                        password: password,
                     }
                 }
             )

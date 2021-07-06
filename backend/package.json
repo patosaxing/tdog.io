@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "backend for project3",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "nodemon index.js"
   },
