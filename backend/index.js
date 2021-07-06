@@ -1,10 +1,17 @@
 //Express and Cors import statement
-import express from 'express';
-import cors from 'cors';
+const express = require('express')
+const cors =  require('cors')
+
+// import express from 'express';
+// import cors from 'cors';
 
 //Mongoose import
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+// import mongoose from 'mongoose'
+// import dotenv from 'dotenv'
+
+const userRouter = require("./routes/userRoutes")
 
 dotenv.config()
 
@@ -18,20 +25,20 @@ app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+app.use('/', userRouter)
 
-//DATABASE
-//Database credentials
-mongoose.connect(process.env.DB_CONNECTION, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-})
+// //DATABASE
+// //Database credentials
+// mongoose.connect(process.env.DB_CONNECTION, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true
+// })
 
-//Database connection
-const db = mongoose.connection;
-db.once("open", (_) => console.log("TDOGdb is now connected:"));
-db.on("error", (err) => console.error("TDOGdb connection error!", err))
-
+// //Database connection
+// const db = mongoose.connection;
+// db.once("open", (_) => console.log("TDOGdb is now connected:"));
+// db.on("error", (err) => console.error("TDOGdb connection error!", err))
 
 
 app.get('/', (req, res) => {
