@@ -3,6 +3,7 @@ import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from "./slider";
+import ReactModal from 'react-modal';
 
 const useStyles = makeStyles({
   root: {
@@ -36,6 +37,7 @@ export default function WebcamStreamCapture() {
   const webcamRef = React.useRef(null);
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
+  const [preview, setPreview] = React.useState(false);
   const [recordedChunks, setRecordedChunks] = React.useState([]);
 
 
@@ -64,13 +66,10 @@ export default function WebcamStreamCapture() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleDataAvailable, timer]);
 
-
   const handleStopCaptureClick = React.useCallback(() => {
     mediaRecorderRef.current.stop();
     setCapturing(false);
   }, [mediaRecorderRef, setCapturing]);
-
-
 
   const handleDownload = React.useCallback(() => {
     if (recordedChunks.length) {
@@ -89,20 +88,6 @@ export default function WebcamStreamCapture() {
     }
   }, [recordedChunks]);
 
-  const handlePreview = React.useCallback(( )=> {
-    if (recordedChunks.length){
-      
-      const blob = new Blob(recordedChunks,{type:"video/webm"})
-      const url = URL.createObjectURL(blob);
-      const video_file = document.createElement("video");
-      document.body.appendChild(video_file);
-      video_file.width='800'
-      video_file.src= url
-      video_file.controls=true
-      video_file.type= "video/webm"
-    }
-  },[recordedChunks])
- 
   return (
     <Card className={classes.root}>
      <CardContent>
@@ -116,11 +101,46 @@ export default function WebcamStreamCapture() {
          )}
       {recordedChunks.length > 0 && (<div>
         <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
-        <Button variant="contained" color="primary" onClick={handlePreview}>Preview</Button>
+        <Button variant="contained" color="primary" onClick={()=>setPreview(true)}>Preview</Button>
       </div>
         )}
       <Slider timer={timer} handleTimer={handleTimer}/>
       </CardActions>
+      <ReactModal 
+        isOpen={preview} 
+        ariaHideApp={false}
+        // onAfterClose={setPreview(false)}
+        style={{
+          overlay: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 500,
+            bottom: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.75)'
+          },
+          content: {
+            position: 'absolute',
+            top: '40px',
+            left: '40px',
+            right: '40px',
+            bottom: '40px',
+            border: '1px solid #ccc',
+            background: '#fff',
+            overflow: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            borderRadius: '4px',
+            outline: 'none',
+            padding: '20px'
+          }
+        }}
+        >
+      <Button style={{float: 'right'}} onClick={()=>window.location.reload()}>CLOSE X</Button>
+      <video width='800' controls>
+        <source src={URL.createObjectURL(new Blob(recordedChunks,{type:"video/webm"}))} type="video/webm"/>
+      </video>
+      <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
+      </ReactModal>
     </Card>
   );
 };
