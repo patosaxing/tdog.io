@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Slider from "./Slider";
+import Slider from "./slider";
+import ReactModal from 'react-modal';
 
 const useStyles = makeStyles({
   root: {
@@ -36,6 +37,7 @@ export default function WebcamStreamCapture() {
   const webcamRef = React.useRef(null);
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
+  const [preview, setPreview] = React.useState(false);
   const [recordedChunks, setRecordedChunks] = React.useState([]);
 
 
@@ -52,7 +54,7 @@ export default function WebcamStreamCapture() {
   const handleStartCaptureClick = React.useCallback(() => {
     setCapturing(true);
     console.log("Timer in recording button:", timer);
-    setTimeout(handleStopCaptureClick, timer * 30000) // set timer half for debugging
+    setTimeout(handleStopCaptureClick, timer * 60000)
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm"
     });
@@ -63,7 +65,6 @@ export default function WebcamStreamCapture() {
     mediaRecorderRef.current.start();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleDataAvailable, timer]);
-
 
   const handleStopCaptureClick = React.useCallback(() => {
     mediaRecorderRef.current.stop();
@@ -87,35 +88,59 @@ export default function WebcamStreamCapture() {
     }
   }, [recordedChunks]);
 
-  const handlePreview = React.useCallback(() => {
-    if (recordedChunks.length) {
-      const blob = new Blob(recordedChunks, { type: "video/webm" })
-      console.log(blob)
-      return (
-        <video width="400" controls>
-          <source src={blob} />
-        </video>)
-    }
-  }, [recordedChunks])
-
   return (
     <Card className={classes.root}>
-      <CardContent>
-        <Webcam audio={true} ref={webcamRef} />
-      </CardContent>
-      <CardActions>
-        {capturing ? (
-          <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>⬜ Stop Recording (Auto stop in {timer} minutes)</Button>
-        ) : (
-          <Button onClick={handleStartCaptureClick}>🔴 Start Recoding</Button>
+     <CardContent>
+      <Webcam audio={true} ref={webcamRef} />
+     </CardContent>
+     <CardActions>
+     {capturing ? (
+       <Button variant="contained" color="secondary" onClick={handleStopCaptureClick}>⬜ Stop Recording (Auto stop in {timer} minutes)</Button>
+       ) : (
+         <Button onClick={handleStartCaptureClick}>🔴 Start Recoding</Button>
+         )}
+      {recordedChunks.length > 0 && (<div>
+        <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
+        <Button variant="contained" color="primary" onClick={()=>setPreview(true)}>Preview</Button>
+      </div>
         )}
-        {recordedChunks.length > 0 && (<div>
-          <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
-          <Button variant="contained" color="primary" onClick={handlePreview}>Preview</Button>
-        </div>
-        )}
-        <Slider timer={timer} handleTimer={handleTimer} />
+      <Slider timer={timer} handleTimer={handleTimer}/>
       </CardActions>
+      <ReactModal 
+        isOpen={preview} 
+        ariaHideApp={false}
+        // onAfterClose={setPreview(false)}
+        style={{
+          overlay: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 500,
+            bottom: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.75)'
+          },
+          content: {
+            position: 'absolute',
+            top: '40px',
+            left: '40px',
+            right: '40px',
+            bottom: '40px',
+            border: '1px solid #ccc',
+            background: '#fff',
+            overflow: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            borderRadius: '4px',
+            outline: 'none',
+            padding: '20px'
+          }
+        }}
+        >
+      <Button style={{float: 'right'}} onClick={()=>window.location.reload()}>CLOSE X</Button>
+      <video width='800' controls>
+        <source src={URL.createObjectURL(new Blob(recordedChunks,{type:"video/webm"}))} type="video/webm"/>
+      </video>
+      <Button variant="contained" color="primary" onClick={handleDownload}>⬇︎ Downlad</Button>
+      </ReactModal>
     </Card>
   );
 };
