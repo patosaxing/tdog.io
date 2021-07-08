@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Slider from "./Slider";
 import ReactModal from 'react-modal';
 
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -113,10 +114,11 @@ export default function WebcamStreamCapture() {
         style={{
           overlay: {
             position: 'fixed',
-            top: 0,
+            top: 50,
             left: 0,
             right: 500,
             bottom: 0,
+            zIndex: 5000,
             backgroundColor: 'rgba(255, 255, 255, 0.75)'
           },
           content: {
@@ -129,7 +131,7 @@ export default function WebcamStreamCapture() {
             background: '#fff',
             overflow: 'auto',
             WebkitOverflowScrolling: 'touch',
-            borderRadius: '4px',
+            borderRadius: '10px',
             outline: 'none',
             padding: '20px'
           }
