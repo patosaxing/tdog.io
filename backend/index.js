@@ -1,6 +1,10 @@
 //Express and Cors import statement
 const express = require('express');
+const helmet = require("helmet");
+const compression = require('compression');
 const app = express();
+app.use(helmet());
+app.use(compression());
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db"); // move db to config for expanding model

@@ -30,7 +30,7 @@ const authControl = {
             console.log("Herer  3")
             const newUser = new Users({ lastName, firstName, email, password })
             console.log("!!!")
-            const salt = await bcrypt.genSalt(20)
+            const salt = await bcrypt.genSalt(10)
             newUser.salt = salt
             console.log("!!!!", salt)
             newUser.password = await bcrypt.hash(newUser.password, salt)
