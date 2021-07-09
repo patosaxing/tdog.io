@@ -19,7 +19,7 @@ form.addEventListener("submit", async (e) => {
   });
   console.log(msgBody);
 
-  await Email.send({
+  await email.send({
     Host: "smtp.elasticemail.com",
     Username: "tdog.evolveu@gmail.com",
     Password: "3B0B6C90CFA4E796D33BB116BC51B53D3993",
