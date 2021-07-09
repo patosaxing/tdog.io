@@ -12,9 +12,9 @@ const authControl = {
         try {
             const
                 {
-                    lastName, firstName, email, password, birthDate
+                    lastName, firstName, email, password
                 } = req.body
-                
+
             //Function checks to see if the user registering has an existiing email
             console.log("I am hitting page")
             const user_email = await Users.findOne({ email })
@@ -45,7 +45,7 @@ const authControl = {
 
                     user: {
                         ...newUser._doc,
-                        password: password,
+                        // password: password, //should not return the password to frontend
                     }
                 }
             )
@@ -75,7 +75,7 @@ const authControl = {
             //When login is successful, this message shows
             res.send(
                 {
-                    msg: "Login Sucessful",
+                    msg: `Login Sucessful with ${email}`,
 
                     user: {
                         id: user._id,
