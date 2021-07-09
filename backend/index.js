@@ -1,13 +1,17 @@
 //Express and Cors import statement
 const express = require('express');
+const helmet = require("helmet");
+const compression = require('compression');
 const app = express();
+app.use(helmet());
+app.use(compression());
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db"); // move db to config for expanding model
 
 const dotenv = require('dotenv');
 
-const userRouter = require("./routes/userRoutes")
+const userRoutes = require("./routes/userRoutes")
 
 dotenv.config();
 connectDB(); // connection call has to be after .env
@@ -21,7 +25,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
-app.use('/api', userRouter)
+app.use('/', userRoutes)
 
 app.get('/api', (req, res, next) => {
   res.send("TDOG Api is running"); // TESTED -> WORKED
