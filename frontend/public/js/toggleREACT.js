@@ -1,8 +1,9 @@
-const showReact = () => {
-  const loginform = document.getElementById('login-form');
-  const loginButton = document.getElementById('login-form-submit');
+const loginform = document.getElementById('login-form');
+const loginButton = document.getElementById('login-form-submit');
 
-  const email = loginform.usrname.value;
+const showReact = () => {
+
+  const email = loginform.email.value;
   const password = loginform.psw.value;
 
   console.log('Email', email);
