@@ -1,4 +1,4 @@
-//const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Users = require('../models/user')
 
@@ -19,9 +19,23 @@ const authControl = {
             {
                 lastName, firstName, email, password, birthDate
             } = req.body
+            // if(!(lastName && firstName && email && password && birthDate))
+            // {
+            //     return res.status(400).send({ error: "Data not formatted properly" })
+            // }
+
+            // const user = new Users(lastName, firstName, email, password)
+
+            // const salt = await bcrypt.genSalt(20)
+
+            // user.password = await bcrypt.hash(user.password, salt)
+
+            // user.save().then((doc) => res.status(201).send(doc))
 
             //Function checks to see if the user registering has an existiing email
+            console.log("I am hitting page")
             const user_email = await Users.findOne({ email })
+            console.log("Here one", user_email)
             if(user_email)
                 return res.status(400).json({ msg: "This email already exists." })
 
@@ -30,18 +44,31 @@ const authControl = {
             return res
                 .status(400)
                 .json({ msg: "Password must be at least 6 letters or more" })
-            
-            //Hashes or protectes the password entered    
-            //const passwordHash = await bcrypt.hash(password, 12)
+            console.log("Herer  3")
+            const newUser = new Users({lastName, firstName, email, password})
+            console.log("!!!")
+            const salt = await bcrypt.genSalt(20)
+            newUser.salt = salt
+            console.log("!!!!", salt)
+            newUser.password = await bcrypt.hash(newUser.password, salt)
+            console.log("here too")
 
-            //Saves the new user
-            const newUser = new Users(
-                {
-                    lastName, firstName, email, password, birthDate
-                })
+            //newUser.save().then((doc) => res.status(201).send(doc))
+            
+            // //generate salt to hash password
+            // const salt = await bcrypt.genSalt(20)
+            
+            // //Hashes or protectes the password entered    
+            // const passwordHash = await bcrypt.hash(password, salt)
+
+            // //Saves the new user
+            // const newUser = new Users(
+            //     {
+            //         lastName, firstName, email, password : passwordHash, birthDate
+            //     })
 
             await newUser.save()
-            
+            console.log("!!!!!")
             //If registration is successful, the message would show
             res.json(
                 {
@@ -73,7 +100,7 @@ const authControl = {
                 return res.status(400).json({ msg: "This email does not exist." })
 
             //Checks to see if password is correct and exists
-            const isMatch = await bcrypt.compare(password, user.password)
+            const isMatch = await bcrypt.compare(password, user.password) 
             if(!isMatch)
                 return res.status(400).json({ msg: "Password is incorrect." })
 

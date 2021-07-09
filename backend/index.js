@@ -1,6 +1,7 @@
 //Express and Cors import statement
 const express = require('express')
 const cors =  require('cors')
+const cookieParser = require('cookie-parser')
 
 // import express from 'express';
 // import cors from 'cors';
@@ -23,6 +24,7 @@ const port = process.env.PORT || 3000
 //Middleware
 app.use(cors());
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/', userRouter)
