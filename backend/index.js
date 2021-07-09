@@ -1,25 +1,19 @@
 //Express and Cors import statement
-const express = require('express')
-const cors =  require('cors')
-const cookieParser = require('cookie-parser')
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const connectDB = require("./config/db"); // move db to config for expanding model
 
-// import express from 'express';
-// import cors from 'cors';
-
-//Mongoose import
-const mongoose = require('mongoose')
-const dotenv = require('dotenv')
-// import mongoose from 'mongoose'
-// import dotenv from 'dotenv'
+const dotenv = require('dotenv');
 
 const userRouter = require("./routes/userRoutes")
 
-dotenv.config()
-
-const app = express();
+dotenv.config();
+connectDB(); // connection call has to be after .env
 
 //Port Connection
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 
 //Middleware
 app.use(cors());
@@ -27,28 +21,19 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
-app.use('/', userRouter)
+app.use('/api', userRouter)
 
-// //DATABASE
-// //Database credentials
-// mongoose.connect(process.env.DB_CONNECTION, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true
-// })
-
-// //Database connection
-// const db = mongoose.connection;
-// db.once("open", (_) => console.log("TDOGdb is now connected:"));
-// db.on("error", (err) => console.error("TDOGdb connection error!", err))
-
-
-app.get('/', (req, res) => {
+app.get('/api', (req, res, next) => {
+  res.send("TDOG Api is running"); // TESTED -> WORKED
   console.log('this is root');
 });
 
 //Listening Port
-app.listen(port, () =>
-{
+const server = app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`)
-})
+});
+
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Logged Error: ${err.message}`);
+  server.close(() => process.exit(1)); // close server to prevent extra loading/detail
+});

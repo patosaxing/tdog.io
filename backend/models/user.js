@@ -1,4 +1,4 @@
-require("./db")
+// require("../config/db")
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema

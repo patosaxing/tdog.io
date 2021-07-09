@@ -4,13 +4,8 @@ const authControl = require("../controllers/authControl")
 //const User = require("../models/user")
 
 
-router.post("/register", authControl.register);
+router.post("/api/register", authControl.register); // added API to prevent potential collide with front
 
-router.post("/login", authControl.login)
-
-// router.post('/register', (req, res) =>
-// {
-//     res.send("I am hitting homepage")
-// })
+router.post("/api/login", authControl.login)
 
 module.exports = router
