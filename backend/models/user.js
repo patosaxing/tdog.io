@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema(
     {
-        email:{
+        email: {
             type: String,
             lowercase: true,
             required: [true, "can't be blank"]
@@ -13,8 +13,8 @@ const UserSchema = new Schema(
 
         password: { type: String, required: true, maxLength: 1000 },
         salt: { type: String, required: true, maxLength: 1000 },
-        firstName: { type: String, required: true, trim: true, maxLength: 25},
-        lastName: { type: String, required: true, trim: true, maxLength: 25},
+        firstName: { type: String, required: false, trim: true, maxLength: 25 },
+        lastName: { type: String, required: false, trim: true, maxLength: 25 },
         birthDate: { type: Date, required: false }
     }
 )
