@@ -97,7 +97,7 @@
         </div>
         <!-- Login form body -->
         <div class="modal-body"> 
-          <form role="form">
+          <form role="form" id="login-form">
             <div class="form-group">
               <label for="usrname"> Username</label>
               <input type="text" class="form-control" id="usrname" placeholder="Enter email">
@@ -109,7 +109,7 @@
             <div class="checkbox">
               <label><input type="checkbox" value="" checked>Remember me</label>
             </div>
-            <button class="btn btn-custom btn-block" onclick="showReact()">🔑 Login (show REACT)</button>
+            <button class="btn btn-custom btn-block" id="login-form-submit" onclick="showReact()">🔑 Login (show REACT)</button>
             <!-- <button type="submit" class="btn btn-primary btn-block">🛡️ LOG-OUT</button> -->
             <button class="btn btn-secondary btn-block" onclick="hideReact()">🛡️ LOG-OUT (hide REACT)</button>
           </form>
