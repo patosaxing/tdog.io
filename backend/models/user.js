@@ -12,11 +12,32 @@ const UserSchema = new Schema(
             unique: true
         },
 
-        password: { type: String, required: true, maxLength: 1000 },
+        password: {
+            type: String,
+            required: [true, 'Please provide password'],
+            minLength: 6,
+            select: false,   // to prevent it got sent back with res.send
+        },
+        resetPasswordToken: String, // token to keep use stay logged in until logout
+        resetPasswordExpire: Date,
         salt: { type: String, required: true, maxLength: 1000 },
         firstName: { type: String, required: false, trim: true, maxLength: 25 },
         lastName: { type: String, required: false, trim: true, maxLength: 25 },
     }
 )
+UserSchema.methods.getResetPasswordToken = function () {
+    const resetToken = crypto.randomBytes(20).toString("hex");
+  
+    // Hash token (private key) and save to database
+    this.resetPasswordToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+  
+    // Set token expire date
+    this.resetPasswordExpire = Date.now() + 10 * (60 * 1000); // Ten Minutes
+  
+    return resetToken;
+  };
 
 module.exports = mongoose.model("Users", UserSchema)
