@@ -1,7 +1,7 @@
 // require("../config/db")
 const mongoose = require('mongoose')
-
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
+const jwt = require("jsonwebtoken");
 
 const UserSchema = new Schema(
     {
@@ -24,7 +24,14 @@ const UserSchema = new Schema(
         firstName: { type: String, required: false, trim: true, maxLength: 25 },
         lastName: { type: String, required: false, trim: true, maxLength: 25 },
     }
-)
+);
+
+UserSchema.methods.getSignedJwtToken = function () {
+    return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRE,
+    });
+  };
+
 UserSchema.methods.getResetPasswordToken = function () {
     const resetToken = crypto.randomBytes(20).toString("hex");
   

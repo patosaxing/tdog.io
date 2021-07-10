@@ -57,20 +57,23 @@ const authControl = {
 
     //Login Function
     login: async (req, res) => {
+        const { email, password } = req.body;
+        // to reduce server load: Check if email and password is provided
+        if (!email || !password) {
+            return next(new ErrorResponse("Please provide an email and password", 400));
+        }
         try {
-            //Requires information entered in the email and password fields
-            const { email, password } = req.body
 
             const user = await Users.findOne({ email })
 
             //Checks to see if user exists
             if (!user)
-                return res.status(400).json({ msg: "This email does not exist." })
+                return next(new ErrorResponse("Invalid credentials", 401));
 
             //Checks to see if password is correct and exists
             const isMatch = await bcrypt.compare(password, user.password)
             if (!isMatch)
-                return res.status(400).json({ msg: "Password is incorrect." })
+                return res.status(401).json({ msg: "Password is incorrect." })
 
             //When login is successful, this message shows
             res.send(
@@ -81,10 +84,9 @@ const authControl = {
                         id: user._id,
                         password: "Encrypted for security"
                     }
-                })
-        }
-
-        catch (err) {
+                });
+            sendToken(user, 200, res);
+        } catch (err) {
             return res.status(500).json({ msg: err.message });
         }
     }
