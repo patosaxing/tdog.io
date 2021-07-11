@@ -2,6 +2,7 @@
 const express = require('express');
 const helmet = require("helmet");
 const compression = require('compression');
+const colors = require('colors'); // customise consoleLog with colors for easy debugging
 const app = express();
 app.use(helmet());
 app.use(compression());
@@ -29,15 +30,15 @@ app.use('/', userRoutes)
 
 app.get('/api', (req, res, next) => {
   res.send("TDOG Api is running"); // TESTED -> WORKED
-  console.log('this is root');
+  console.log('this is root'.green.bold);
 });
 
 //Listening Port
 const server = app.listen(port, () => {
-  console.log(`Application listening at http://localhost:${port}`)
+  console.log(`Application listening at http://localhost:${port}`.yellow.bold)
 });
 
 process.on("unhandledRejection", (err, promise) => {
-  console.log(`Logged Error: ${err.message}`);
+  console.log(`Logged Error: ${err.message}`.red.bold);
   server.close(() => process.exit(1)); // close server to prevent extra loading/detail
 });
