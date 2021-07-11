@@ -45,7 +45,6 @@ const authControl = {
 
                     user: {
                         ...newUser._doc,
-                        // password: password, //should not return the password to frontend
                     }
                 }
             )
