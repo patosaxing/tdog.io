@@ -18,7 +18,7 @@ const UserSchema = new Schema(
             minLength: 6,
             select: false,   // to prevent it got sent back with res.send
         },
-        resetPasswordToken: String, // token to keep use stay logged in until logout
+        resetPasswordToken: String, // token to keep user stay logged in until logout
         resetPasswordExpire: Date,
         salt: { type: String, required: true, maxLength: 1000 },
         firstName: { type: String, required: false, trim: true, maxLength: 25 },
