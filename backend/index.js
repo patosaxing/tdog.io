@@ -47,7 +47,7 @@ app.post('/api/upload', (req, res) => {
   file.mv(`${__dirname}/frontend/public/uploads/${file.name}`, err => {
     if (err) {
       console.error(err);
-      return res.status(500).send(err);
+      return res.status(500).send(err); //server error
     }
 
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
