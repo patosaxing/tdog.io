@@ -49,7 +49,6 @@ app.post('/api/upload', (req, res) => {
       console.error(err);
       return res.status(500).send(err); //server error
     }
-
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
   });
 });

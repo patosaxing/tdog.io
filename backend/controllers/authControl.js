@@ -55,7 +55,7 @@ const authControl = {
     },
 
     //Login Function
-    login: async (req, res) => {
+    login: async (req, res, next) => {
         const { email, password } = req.body;
         // to reduce server load: Check if email and password is provided
         if (!email || !password) {
