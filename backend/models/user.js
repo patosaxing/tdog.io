@@ -1,15 +1,19 @@
 // require("../config/db")
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
+const crypto = require("crypto"); //supports calculating hashes, authentication
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const UserSchema = new Schema(
+const UserSchema = new mongoose.Schema(
     {
         email: {
             type: String,
             lowercase: true,
             required: [true, "can't be blank"],
-            unique: true
+            unique: true,
+            match: [
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              "Please provide a valid email"],
         },
 
         password: {
@@ -25,6 +29,16 @@ const UserSchema = new Schema(
         lastName: { type: String, required: false, trim: true, maxLength: 25 },
     }
 );
+// Hash the password right at the start
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
 UserSchema.methods.getSignedJwtToken = function () {
     return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
@@ -47,4 +61,6 @@ UserSchema.methods.getResetPasswordToken = function () {
     return resetToken;
   };
 
-module.exports = mongoose.model("Users", UserSchema)
+  const User = mongoose.model("User", UserSchema);
+
+  module.exports = User;

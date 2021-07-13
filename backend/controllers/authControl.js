@@ -63,7 +63,7 @@ const authControl = {
         }
         try {
 
-            const user = await Users.findOne({ email })
+            const user = await Users.findOne({ email }).select("+password");
 
             //Checks to see if user exists
             if (!user)
