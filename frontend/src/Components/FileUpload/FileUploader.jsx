@@ -35,7 +35,7 @@ const FileUpload = () => {
         },
       });
 
-      // Clear percentage
+      // Clear percentage in the progressBar
       setTimeout(() => setUploadPercentage(0), 10000);
 
       const { fileName, filePath } = res.data;
