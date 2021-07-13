@@ -6,53 +6,21 @@ const sendEmail = require("../utils/sendEmail");
 
 const authControl = {
     //Creating the register function
-    register: async (req, res) => {
-        //Adding a console.log for testing
-        //console.log("I am hitting register")
+    register: async (req, res, next) => {
+        const { username, email, password } = req.body;
+      
         try {
-            const
-                {
-                    lastName, firstName, email, password
-                } = req.body
-
-            //Function checks to see if the user registering has an existiing email
-            console.log("I am hitting page")
-            const user_email = await User.findOne({ email })
-            console.log("Here one", user_email)
-            if (user_email)
-                return res.status(400).json({ msg: "This email already exists." })
-
-            //checks to see if password entered are at least 6 characters
-            if (password.length < 6)
-                return res
-                    .status(400)
-                    .json({ msg: "Password must be at least 6 letters or more" })
-            console.log("Herer  3")
-            const newUser = new User({ lastName, firstName, email, password })
-            console.log("!!!")
-            const salt = await bcrypt.genSalt(10)
-            newUser.salt = salt
-            console.log("!!!!", salt)
-            newUser.password = await bcrypt.hash(newUser.password, salt)
-            console.log("here too")
-
-            await newUser.save()
-            console.log("!!!!!")
-            //If registration is successful, the message would show
-            res.json(
-                {
-                    msg: "Registration Sucessful!",
-
-                    user: {
-                        ...newUser._doc,
-                    }
-                }
-            )
+          const user = await User.create({
+            username,
+            email,
+            password,
+          });
+      
+          sendToken(user, 200, res);
+        } catch (err) {
+          next(err);
         }
-        catch (err) {
-            return res.status(500).json({ msg: err.message })
-        }
-    },
+      },
 
     //Login Function
     login: async (req, res, next) => {
@@ -117,7 +85,7 @@ const authControl = {
                     text: message,
                 });
 
-                res.status(200).json({ success: true, data: "Email Sent" });
+                res.status(200).json({ success: true, data: `Email Sent to ${email}` });
             } catch (err) {
                 console.log(err);
 
