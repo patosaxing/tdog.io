@@ -1,7 +1,6 @@
-// require("../config/db")
 const crypto = require("crypto"); //supports calculating hashes, authentication
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema(

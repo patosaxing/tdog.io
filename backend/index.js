@@ -1,4 +1,3 @@
-//Express and Cors import statement
 const express = require('express');
 const dotenv = require('dotenv');
 const helmet = require("helmet");
