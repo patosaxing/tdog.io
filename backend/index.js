@@ -10,6 +10,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db"); // move db to config for expanding model
 const fileUpload = require('express-fileupload'); // upload file to server
+const { uploadFile, deleteFile, generatePublicUrl } = require('./controllers/googleDriveApi')
 
 
 const userRoutes = require("./routes/userRoutes")
@@ -41,17 +42,19 @@ app.post('/api/upload', (req, res) => {
     return res.status(400).json({ msg: 'No file uploaded' });
   }
 
-  const file = req.files.file;
-  console.log(file.name); //this will be fed into G-cloud API
+  const UploadingFile = req.files.file
+  const UploadingFileName = UploadingFile.name;
+  console.log('name of the file is: ', UploadingFileName); //this will be fed into G-cloud API
 
-  file.mv(`${__dirname}/uploads/${file.name}`, err => {
-  // file.mv(`${__dirname}/../frontend/public/uploads/${file.name}`, err => {
+  UploadingFile.mv(`${__dirname}/uploads/${UploadingFileName}`, err => {
+    // file.mv(`${__dirname}/../frontend/public/uploads/${file.name}`, err => {
     if (err) {
       console.error(err);
       return res.status(500).send(err); //server error
     }
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    res.json({ fileName: UploadingFileName, filePath: `/uploads/${UploadingFileName}` });
   });
+  uploadFile(UploadingFileName);
 });
 
 //Listening Port
