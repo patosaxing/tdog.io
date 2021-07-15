@@ -22,18 +22,22 @@ const FileUpload = () => {
 
     try {
       // we added proxy so no need to pass localhost5000
-      const res = await axios.post("http://localhost:5000/api/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        },
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            setUploadPercentage(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          },
+        }
+      );
 
       // Clear percentage in the progressBar
       setTimeout(() => setUploadPercentage(0), 10000);
@@ -42,12 +46,13 @@ const FileUpload = () => {
 
       setUploadedFile({ fileName, filePath });
 
-      setMessage("File Uploaded to TDOG server");
+      setMessage("File Uploaded to Eval-view server");
     } catch (err) {
-      if (err.response.status === 500) {
+      // if (err.response.status === 500) {
+      if (err.status === 500) {
         setMessage("There was a problem with the server");
       } else {
-        setMessage(err.response.data.msg);
+        setMessage(err.msg);
       }
       setUploadPercentage(0);
     }

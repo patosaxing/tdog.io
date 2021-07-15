@@ -2,6 +2,7 @@ const { google } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
 require("dotenv").config();
+const colors = require('colors');
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -24,9 +25,10 @@ const drive = google.drive({
 
 
 // Uploadiing
-exports.uploadFile= async(fileN) => {
-  console.log('file name in G-uploader', fileN);
-  const filePath = path.join(`${__dirname}/uploads/`, fileN);
+exports.uploadFile = async (fileN) => {
+  console.log('file name in G-uploader', fileN.green.bold);
+  const filePath = path.join(`${__dirname}/../uploads/`, fileN);
+  console.log('path of the file to be pushed to G-drive'.red, filePath.yellow);
   try {
     const response = await drive.files.create({
       requestBody: {
@@ -39,16 +41,15 @@ exports.uploadFile= async(fileN) => {
       },
     });
 
-    console.log(response.data);
-    console.log(response.data.id);
+    console.log('response from google drive ⮯⮯⮯'.blue, response.data);
+    console.log('File uploaded with database ID'.green, response.data.id.bgRed);
   } catch (error) {
-    console.log(error.message);
+    console.log('error from google Drive API', error.message);
   }
 }
 
-
 // Deleting
-exports.deleteFile = async (googleFileId)=> {
+exports.deleteFile = async (googleFileId) => {
   try {
     const response = await drive.files.delete({
       fileId: googleFileId,
@@ -59,11 +60,10 @@ exports.deleteFile = async (googleFileId)=> {
   }
 }
 
-
 // GetExternalURL
-exports.generatePublicUrl= async (googleFileId)=> {
+exports.generatePublicUrl = async (googleFileId) => {
   try {
-    
+
     await drive.permissions.create({
       fileId: googleFileId,
       requestBody: {

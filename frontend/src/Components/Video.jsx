@@ -74,8 +74,7 @@ export default function RecipeReviewCard() {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive interview video is from a EvolveU-Cohort6 Learner. She
-          answered all the advance React questions in 15mins.
+          This impressive interview video is from a EvolveU-Cohort6 Learner.
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
