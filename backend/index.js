@@ -42,6 +42,7 @@ app.post('/api/upload', (req, res) => {
   }
 
   const file = req.files.file;
+  console.log(file.name); //this will be fed into G-cloud API
 
   file.mv(`${__dirname}/uploads/${file.name}`, err => {
   // file.mv(`${__dirname}/../frontend/public/uploads/${file.name}`, err => {
