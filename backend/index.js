@@ -10,8 +10,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db"); // move db to config for expanding model
 const fileUpload = require('express-fileupload'); // upload file to server
-const { uploadFile, deleteFile, generatePublicUrl } = require('./controllers/googleDriveApi')
-const {delServerFile} = require('./controllers/handleServerFiles');
+
+const {uploadFiletoServer, delServerFile} = require('./controllers/handleServerFiles');
 
 
 const userRoutes = require("./routes/userRoutes")

@@ -4,18 +4,30 @@ const app = express();
 app.use(fileUpload());
 const fs = require('fs/promises');
 const { unlink } = require('fs/promises');
+const { uploadFile, deleteFile, generatePublicUrl } = require('./controllers/googleDriveApi');
 
-const uploadFiletoServer = async (req, res) => {
+exports.uploadFiletoServer = async (req, res) => {
   if (req.files === null) {
     return res.status(400).json({ msg: 'No file uploaded' });
   }
+  const UploadingFile = req.files.file;
+  console.log('file Detail before uploading'.yellow, UploadingFile);
+  const UploadingFileName = UploadingFile.name;
+  // console.log('new file in server is: '.red, UploadingFileName); //this will be fed into G-cloud API
+  const UploadingFPath = `${__dirname}/uploads/${UploadingFileName}`;
+  console.log('UploadingFPatch', UploadingFPath.red);
+  const delServerFile = async (fPath) => {
+    try {
+      await unlink(fPath);
+      console.log(`successfully deleted ${fPath}`.bgBlue);
+    } catch (error) {
+      console.error('there was an error:', error.message);
+    }
+  };
 
-  const UploadingFile = req.files.file
-  // const UploadingFileName = UploadingFile.name;
-  console.log('new file in server is: '.red, UploadingFile.name); //this will be fed into G-cloud API
 
   await UploadingFile.mv(`${__dirname}/uploads/${UploadingFile.name}`, err => {
-      if (err) {
+    if (err) {
       console.error(err);
       return res.status(500).send(err); //server error
     }
@@ -23,14 +35,9 @@ const uploadFiletoServer = async (req, res) => {
   });
   // push file from server to google drive
   uploadFile(UploadingFileName);
+  delServerFile()
+
 };
 
-exports.delServerFile = async(fPath)=>{
-  try {
-    await unlink(fPath);
-    console.log(`successfully deleted ${fPath}`.bgBlue);
-  } catch (error) {
-    console.error('there was an error:', error.message);
-  }
-};
+
 
