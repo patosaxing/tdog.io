@@ -9,10 +9,8 @@ app.use(compression());
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db"); // move db to config for expanding model
-const fileUpload = require('express-fileupload'); // upload file to server
 
-const {uploadFiletoServer, delServerFile} = require('./controllers/handleServerFiles');
-
+const {uploadFiletoServer} = require('./controllers/handleServerFiles');
 
 const userRoutes = require("./routes/userRoutes")
 
@@ -28,7 +26,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
-app.use(fileUpload());
+// app.use(fileUpload());
 
 app.use('/', userRoutes)
 
@@ -38,28 +36,30 @@ app.get('/api', (req, res, next) => {
 });
 
 // Upload endpoint
-app.post('/api/upload', (req, res) => {
-  if (req.files === null) {
-    return res.status(400).json({ msg: 'No file uploaded' });
-  }
+app.post('/api/upload',uploadFiletoServer);
 
-  const UploadingFile = req.files.file
-    console.log('file Detail before uploading'.yellow, UploadingFile);
-  const UploadingFileName = UploadingFile.name;
-  // console.log('new file in server is: '.red, UploadingFileName); //this will be fed into G-cloud API
-  const UploadingFPatch = `${__dirname}/uploads/${UploadingFileName}`;
-  console.log('UploadingFPatch', UploadingFPatch.red);
-  UploadingFile.mv(`${__dirname}/uploads/${UploadingFileName}`, err => {
-    // file.mv(`${__dirname}/../frontend/public/uploads/${file.name}`, err => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send(err); //server error
-    }
-    res.json({ fileName: UploadingFileName, filePath: `/uploads/${UploadingFileName}` });
-  });
-  uploadFile(UploadingFileName);
-  delServerFile(UploadingFPatch);
-});
+// (req, res) => {
+//   if (req.files === null) {
+//     return res.status(400).json({ msg: 'No file uploaded' });
+//   }
+
+//   const UploadingFile = req.files.file
+//     console.log('file Detail before uploading'.yellow, UploadingFile);
+//   const UploadingFileName = UploadingFile.name;
+//   // console.log('new file in server is: '.red, UploadingFileName); //this will be fed into G-cloud API
+//   const UploadingFPatch = `${__dirname}/uploads/${UploadingFileName}`;
+//   console.log('UploadingFPatch', UploadingFPatch.red);
+//   UploadingFile.mv(`${__dirname}/uploads/${UploadingFileName}`, err => {
+//     // file.mv(`${__dirname}/../frontend/public/uploads/${file.name}`, err => {
+//     if (err) {
+//       console.error(err);
+//       return res.status(500).send(err); //server error
+//     }
+//     res.json({ fileName: UploadingFileName, filePath: `/uploads/${UploadingFileName}` });
+//   });
+//   uploadFile(UploadingFileName);
+//   delServerFile(UploadingFPatch);
+// });
 
 //Listening Port
 const server = app.listen(port, () => {

@@ -4,7 +4,7 @@ const app = express();
 app.use(fileUpload());
 const fs = require('fs/promises');
 const { unlink } = require('fs/promises');
-const { uploadFile, deleteFile, generatePublicUrl } = require('./controllers/googleDriveApi');
+const { uploadToG, deleteFileOnG, generatePublicUrl } = require('./googleDriveApi');
 
 exports.uploadFiletoServer = async (req, res) => {
   if (req.files === null) {
@@ -16,6 +16,8 @@ exports.uploadFiletoServer = async (req, res) => {
   // console.log('new file in server is: '.red, UploadingFileName); //this will be fed into G-cloud API
   const UploadingFPath = `${__dirname}/uploads/${UploadingFileName}`;
   console.log('UploadingFPatch', UploadingFPath.red);
+
+  // delete server file after upload to server
   const delServerFile = async (fPath) => {
     try {
       await unlink(fPath);
@@ -25,7 +27,7 @@ exports.uploadFiletoServer = async (req, res) => {
     }
   };
 
-
+  // Upload file to server
   await UploadingFile.mv(`${__dirname}/uploads/${UploadingFile.name}`, err => {
     if (err) {
       console.error(err);
@@ -33,6 +35,7 @@ exports.uploadFiletoServer = async (req, res) => {
     }
     res.json({ fileName: UploadingFileName, filePath: `/uploads/${UploadingFileName}` });
   });
+
   // push file from server to google drive
   uploadFile(UploadingFileName);
   delServerFile()

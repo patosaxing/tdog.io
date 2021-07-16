@@ -25,7 +25,7 @@ const drive = google.drive({
 
 
 // Uploadiing
-exports.uploadFile = async (fileN) => {
+exports.uploadToG = async (fileN) => {
   console.log('file name in G-uploader', fileN.green.bold);
   const filePath = path.join(`${__dirname}/../uploads/`, fileN);
   console.log('path of the file to be pushed to G-drive'.red, filePath.yellow);
@@ -49,7 +49,7 @@ exports.uploadFile = async (fileN) => {
 }
 
 // Deleting
-exports.deleteFile = async (googleFileId) => {
+exports.deleteFileOnG = async (googleFileId) => {
   try {
     const response = await drive.files.delete({
       fileId: googleFileId,
