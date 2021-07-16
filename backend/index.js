@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db"); // move db to config for expanding model
 const fileUpload = require('express-fileupload'); // upload file to server
 const { uploadFile, deleteFile, generatePublicUrl } = require('./controllers/googleDriveApi')
+const {delServerFile} = require('./controllers/handleServerFiles');
 
 
 const userRoutes = require("./routes/userRoutes")
@@ -43,9 +44,11 @@ app.post('/api/upload', (req, res) => {
   }
 
   const UploadingFile = req.files.file
+    console.log('file Detail before uploading'.yellow, UploadingFile);
   const UploadingFileName = UploadingFile.name;
-  console.log('new file in server is: '.red, UploadingFileName); //this will be fed into G-cloud API
-
+  // console.log('new file in server is: '.red, UploadingFileName); //this will be fed into G-cloud API
+  const UploadingFPatch = `${__dirname}/uploads/${UploadingFileName}`;
+  console.log('UploadingFPatch', UploadingFPatch.red);
   UploadingFile.mv(`${__dirname}/uploads/${UploadingFileName}`, err => {
     // file.mv(`${__dirname}/../frontend/public/uploads/${file.name}`, err => {
     if (err) {
@@ -55,6 +58,7 @@ app.post('/api/upload', (req, res) => {
     res.json({ fileName: UploadingFileName, filePath: `/uploads/${UploadingFileName}` });
   });
   uploadFile(UploadingFileName);
+  delServerFile(UploadingFPatch);
 });
 
 //Listening Port

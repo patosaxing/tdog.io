@@ -46,7 +46,7 @@ const FileUpload = () => {
 
       setUploadedFile({ fileName, filePath });
 
-      setMessage("File Uploaded to Eval-view server");
+      setMessage("File Uploaded to Eval-view server  ");
     } catch (err) {
       // if (err.response.status === 500) {
       if (err.status === 500) {
