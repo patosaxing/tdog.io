@@ -6,9 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "start": "nodemon index.js",
-    "server": "nodemon index.js",
-    "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "server": "nodemon index.js"
+    
   },
   "author": "tdog.io",
   "license": "ISC",
