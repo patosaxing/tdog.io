@@ -25,6 +25,7 @@ const SearchBox = ({ history }) => {
         className='p-2'
       >
       </Form.Control>
+      <h7 style={{color:'transparent'}}>space</h7>
       <Button type='submit' variant='outline-success' className='p-1'>
         Search
       </Button>
