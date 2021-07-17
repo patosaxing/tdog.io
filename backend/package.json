@@ -7,7 +7,6 @@
   "scripts": {
     "start": "nodemon index.js",
     "server": "nodemon index.js"
-    
   },
   "author": "tdog.io",
   "license": "ISC",

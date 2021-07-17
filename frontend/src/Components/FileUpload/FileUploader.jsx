@@ -5,14 +5,19 @@ import axios from "axios";
 
 const FileUpload = () => {
   const [file, setFile] = useState("");
-  const [filename, setFilename] = useState("Choose File");
+  const [filename, setFilename] = useState("");
   const [uploadedFile, setUploadedFile] = useState({}); // server send back an obj
   const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const onChange = (e) => {
     setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
-    setFilename(e.target.files[0].name);
+    setFilename(e.target.files[0].name); //🅱
+    // console.log(e);
+    // setFile(e.target.file); // we can upload multi files so we choose the 1st
+    // setFilename(e.target.file[0].name); //🅱
+    // setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
+    // setFilename(e.target.files[0].name); //🅱
   };
 
   const onSubmit = async (e) => {
@@ -42,7 +47,7 @@ const FileUpload = () => {
 
       setUploadedFile({ fileName, filePath });
 
-      setMessage("Successfully uploaded to Eval-view server   ");
+      setMessage("Successfully uploaded to Eval-view server  ");
     } catch (err) {
       // if (err.response.status === 500) {
       if (err.status === 500) {
@@ -54,6 +59,7 @@ const FileUpload = () => {
     }
   };
 
+  
   return (
     <Fragment>
       <h3 style={{"marginTop": "20px"}}>VIDEO UPLOADER</h3>
@@ -64,7 +70,7 @@ const FileUpload = () => {
             type="file"
             className="custom-file-input"
             id="customFile"
-            onChange={onChange}
+            onChange={()=>onChange}
           />
           <label className="custom-file-label" htmlFor="customFile">
             {filename}

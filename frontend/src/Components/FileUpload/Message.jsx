@@ -16,6 +16,7 @@ const Message = ({ msg }) => {
   );
 };
 
+
 Message.propTypes = {
   msg: PropTypes.string.isRequired,
 };
