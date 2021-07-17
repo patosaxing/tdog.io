@@ -4,9 +4,9 @@ const authControl = require("../controllers/authControl")
 
 
 
-router.post("/api/register", authControl.register); // added API to prevent potential collide with front
-router.post("/api/login", authControl.login);
-router.post("/api/forgotpassword", authControl.forgotPassword);
-router.put("/api/passwordreset/:resetToken", authControl.resetPassword);
+router.post("/register", authControl.register); // added API to prevent potential collide with front
+router.post("/login", authControl.login);
+router.post("/forgotpassword", authControl.forgotPassword);
+router.put("/passwordreset/:resetToken", authControl.resetPassword);
 
 module.exports = router;

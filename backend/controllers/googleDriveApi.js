@@ -25,31 +25,31 @@ const drive = google.drive({
 
 
 // Uploadiing
-exports.uploadFile = async (fileN) => {
+exports.uploadToG = async (fileN) => {
   console.log('file name in G-uploader', fileN.green.bold);
   const filePath = path.join(`${__dirname}/../uploads/`, fileN);
   console.log('path of the file to be pushed to G-drive'.red, filePath.yellow);
   try {
     const response = await drive.files.create({
       requestBody: {
-        name: fileN, //This can be name of your choice
-        mimeType: 'image/jpg', // to be changed for video
+        name: fileN, //This can be changed
+        mimeType: 'video/webm', // to be changed for video
       },
       media: {
-        mimeType: 'image/jpg', // to be changed for video
+        mimeType: 'video/webm', // to be changed for video
         body: fs.createReadStream(filePath),
       },
     });
-
+    const uploadedID = response.data.id
     console.log('response from google drive ⮯⮯⮯'.blue, response.data);
-    console.log('File uploaded with database ID'.green, response.data.id.bgRed);
+    console.log('File uploaded with database ID'.green, response.data.id.bgGreen);
   } catch (error) {
     console.log('error from google Drive API', error.message);
   }
 }
 
 // Deleting
-exports.deleteFile = async (googleFileId) => {
+exports.deleteFileOnG = async (googleFileId) => {
   try {
     const response = await drive.files.delete({
       fileId: googleFileId,
