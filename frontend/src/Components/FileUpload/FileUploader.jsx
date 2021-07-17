@@ -22,22 +22,18 @@ const FileUpload = () => {
 
     try {
       // we added proxy so no need to pass localhost5000
-      const res = await axios.post(
-        "http://localhost:5000/api/videos/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          onUploadProgress: (progressEvent) => {
-            setUploadPercentage(
-              parseInt(
-                Math.round((progressEvent.loaded * 100) / progressEvent.total)
-              )
-            );
-          },
-        }
-      );
+      const res = await axios.post("/videos/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (progressEvent) => {
+          setUploadPercentage(
+            parseInt(
+              Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            )
+          );
+        },
+      });
 
       // Clear percentage in the progressBar
       setTimeout(() => setUploadPercentage(0), 5000);
@@ -46,7 +42,7 @@ const FileUpload = () => {
 
       setUploadedFile({ fileName, filePath });
 
-      setMessage("Successfully uploaded to Eval-view server  ");
+      setMessage("Successfully uploaded to Eval-view server   ");
     } catch (err) {
       // if (err.response.status === 500) {
       if (err.status === 500) {
@@ -60,6 +56,7 @@ const FileUpload = () => {
 
   return (
     <Fragment>
+      <h3 style={{"marginTop": "20px"}}>VIDEO UPLOADER</h3>
       {message ? <Message msg={message} /> : null}
       <form onSubmit={onSubmit}>
         <div className="custom-file mb-4">
@@ -88,7 +85,7 @@ const FileUpload = () => {
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
             <h3 className="text-center">{uploadedFile.fileName}</h3>
-            <img style={{ width: "100%" }} src={uploadedFile.filePath} alt="" />
+            <img style={{ width: "100%" }} src={uploadedFile.filePath} alt="uploaded" />
           </div>
         </div>
       ) : null}

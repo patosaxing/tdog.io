@@ -36,16 +36,15 @@ app.use('/api/videos', videoRoutes);
 
 
 //Listening Port
-app.listen(port, () => {
+// app.listen(port, () => {
+//   console.log(`Application listening at http://localhost:${port}`.blue)
+// });
+
+const server = app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`.yellow)
 });
 
-// const server = app.listen(port, () => {
-//   console.log(`Application listening at http://localhost:${port}`.yellow)
-// });
-
-// process.on("unhandledRejection", (err, promise) => {
-//   console.log(`Logged Error from listening port: ${err.message}`.red.bold);
-//   console.log(`Logged Error from listening port: ${err}`);
-//   server.close(() => process.exit(1)); // close server to prevent extra loading/detail
-// });
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Logged Error from listening port: ${err}`.magenta);
+  server.close(() => process.exit(1)); // close server to prevent extra loading/detail
+});
