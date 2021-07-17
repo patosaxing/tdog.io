@@ -25,23 +25,27 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
-app.use('/api/users', userRoutes);
-app.use('/api/videos', videoRoutes);
 
 app.get('/api', (req, res, next) => {
   res.send("TDOG Api is running"); // TESTED -> WORKED
   console.log('this is root'.green.bold);
 });
 
+app.use('/api/users', userRoutes);
+app.use('/api/videos', videoRoutes);
 
 
 //Listening Port
-
-const server = app.listen(port, () => {
-  console.log(`Application listening at http://localhost:${port}`.yellow.bold)
+app.listen(port, () => {
+  console.log(`Application listening at http://localhost:${port}`.yellow)
 });
 
-process.on("unhandledRejection", (err, promise) => {
-  console.log(`Logged Error from listening port: ${err.message}`.red.bold);
-  server.close(() => process.exit(1)); // close server to prevent extra loading/detail
-});
+// const server = app.listen(port, () => {
+//   console.log(`Application listening at http://localhost:${port}`.yellow)
+// });
+
+// process.on("unhandledRejection", (err, promise) => {
+//   console.log(`Logged Error from listening port: ${err.message}`.red.bold);
+//   console.log(`Logged Error from listening port: ${err}`);
+//   server.close(() => process.exit(1)); // close server to prevent extra loading/detail
+// });
