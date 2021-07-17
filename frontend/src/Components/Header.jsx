@@ -27,12 +27,12 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Route render={({ history }) => <SearchBox history={history} />} />
-            <h1 style={{color:'transparent'}}>NavBar spacer to Login part</h1>
+            <h1 style={{ color: "transparent" }}>
+              NavBar spacer to Login part
+            </h1>
             <Nav className="ml-auto">
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  🎞️VideoList
-                </Nav.Link>
+              <LinkContainer to="/VideoList">
+                <Nav.Link>🎞️VideoList</Nav.Link>
               </LinkContainer>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
@@ -45,9 +45,7 @@ const Header = () => {
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
-                  <Nav.Link>
-                    🧑‍🤝‍🧑 LOG IN
-                  </Nav.Link>
+                  <Nav.Link>🧑‍🤝‍🧑 LOG IN</Nav.Link>
                 </LinkContainer>
               )}
               {userInfo && userInfo.isAdmin && (
