@@ -75,7 +75,7 @@ export default function QuestionSelection() {
         </Select>
         <InputLabel id="demo-customized-select-label">Category</InputLabel>
       </FormControl>
-      <Button variant="contained" color="primary" onClick={handleChangeQues}>Generate Random Questions</Button>
+      <Button variant="fixed" color="primary" onClick={handleChangeQues}>Generate Random Questions</Button>
       <div>{question}</div>
     </div>
   )}
