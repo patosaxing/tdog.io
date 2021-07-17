@@ -27,10 +27,11 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Route render={({ history }) => <SearchBox history={history} />} />
+            <h1 style={{color:'transparent'}}>NavBar spacer to Login part</h1>
             <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> Cart
+                  🎞️VideoList
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
@@ -45,7 +46,7 @@ const Header = () => {
               ) : (
                 <LinkContainer to="/login">
                   <Nav.Link>
-                    <i className="fas fa-user"></i> Sign In
+                    🧑‍🤝‍🧑 LOG IN
                   </Nav.Link>
                 </LinkContainer>
               )}
