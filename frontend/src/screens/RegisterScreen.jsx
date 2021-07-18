@@ -44,10 +44,10 @@ const RegisterScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='name'>
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control
             type='name'
-            placeholder='Enter name'
+            placeholder='Enter Username'
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>
@@ -83,7 +83,7 @@ const RegisterScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
+        <Button style={{marginTop:'0.5rem'}} type='submit' variant='primary'>
           Register
         </Button>
       </Form>

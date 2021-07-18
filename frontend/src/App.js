@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import WebcamStreamCapture from "./components/WebStreamCapture.jsx";
-// import AppBar from "./Components/AppBar.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx"
 import VideosGrid from "./components/VideosGrid.jsx";

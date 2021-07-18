@@ -2,14 +2,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 // import {
-//   productListReducer,
-//   productDetailsReducer,
-//   productDeleteReducer,
-//   productCreateReducer,
-//   productUpdateReducer,
-//   productReviewCreateReducer,
-//   productTopRatedReducer,
-// } from './reducers/productReducers'
+//   videoListReducer,
+//   videoDetailsReducer,
+//   videoDeleteReducer,
+//   videoCreateReducer,
+//   videoUpdateReducer,
+//   videoReviewCreateReducer,
+//   videoTopRatedReducer,
+// } from './reducers/videoReducers'
 // import { cartReducer } from './reducers/cartReducers'
 import {
   userLoginReducer,
@@ -21,22 +21,22 @@ import {
   userUpdateReducer,
 } from './reducers/userReducers'
 // import {
-//   orderCreateReducer,
-//   orderDetailsReducer,
-//   orderPayReducer,
-//   orderDeliverReducer,
-//   orderListMyReducer,
-//   orderListReducer,
-// } from './reducers/orderReducers'
+//   videoListCreateReducer,
+//   videoListDetailsReducer,
+//   videoListPayReducer,
+//   videoListDeliverReducer,
+//   videoListListMyReducer,
+//   videoListListReducer,
+// } from './reducers/videoListReducers'
 
 const reducer = combineReducers({
-  // productList: productListReducer,
-  // productDetails: productDetailsReducer,
-  // productDelete: productDeleteReducer,
-  // productCreate: productCreateReducer,
-  // productUpdate: productUpdateReducer,
-  // productReviewCreate: productReviewCreateReducer,
-  // productTopRated: productTopRatedReducer,
+  // videoList: videoListReducer,
+  // videoDetails: videoDetailsReducer,
+  // videoDelete: videoDeleteReducer,
+  // videoCreate: videoCreateReducer,
+  // videoUpdate: videoUpdateReducer,
+  // videoReviewCreate: videoReviewCreateReducer,
+  // videoTopRated: videoTopRatedReducer,
   // cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -45,12 +45,12 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
-  // orderCreate: orderCreateReducer,
-  // orderDetails: orderDetailsReducer,
-  // orderPay: orderPayReducer,
-  // orderDeliver: orderDeliverReducer,
-  // orderListMy: orderListMyReducer,
-  // orderList: orderListReducer,
+  // videoListCreate: videoListCreateReducer,
+  // videoListDetails: videoListDetailsReducer,
+  // videoListPay: videoListPayReducer,
+  // videoListDeliver: videoListDeliverReducer,
+  // videoListListMy: videoListListMyReducer,
+  // videoListList: videoListListReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
