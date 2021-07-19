@@ -9,16 +9,9 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
     display: "flex",
-  },
-  slider: {
-    width: 600,
-    margin: "0 2vh",
-    padding: "1rem",
-  },
-  sliderTop: {
-    marginTop: "4vh",
-    padding: "1rem",
-    fontSize: "2rem",
+    borderRadius: "0.5rem",
+    background: "#d9d9d9",
+    boxShadow: "20px -20px 39px #636161 -20px 20px 39px #959191"
   },
   title: {
     fontSize: 4,
@@ -26,12 +19,15 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  webCam: {
+    borderRadius: "0.5rem",
+  },
 });
 
 export default function WebcamStreamCapture() {
   const classes = useStyles();
 
-  const [timer, setTimer] = useState(2);
+  const [timer, setTimer] = useState(1.5);
   const handleTimer = (event) => {
     setTimer(event.target.value);
   };
@@ -92,24 +88,22 @@ export default function WebcamStreamCapture() {
 
   return (
     <Card className={classes.root}>
-      <CardContent>
-        <Webcam audio={true} ref={webcamRef} />
+      <CardContent className={classes.webCam}>
+        <Webcam className={classes.webCam} audio={true} ref={webcamRef} />
       </CardContent>
-        {/* <Slider className="card-link" timer={timer} handleTimer={handleTimer} /> */}
-      <CardActions style={{display:'block'}}>
+      {/* <Slider className="card-link" timer={timer} handleTimer={handleTimer} /> */}
+      <CardActions style={{ display: "block" }}>
         {capturing ? (
           <Button
             variant="contained"
             color="secondary"
             onClick={handleStopCaptureClick}
+            style={{ margin: "2rem" }}
           >
             ⬜ Stop Recording (Auto stop in {timer} minutes)
           </Button>
         ) : (
-          <Button
-            style={{ marginRight: "6rem" }}
-            onClick={handleStartCaptureClick}
-          >
+          <Button style={{ margin: "2rem" }} onClick={handleStartCaptureClick}>
             🔴 Start Recording
           </Button>
         )}
@@ -119,6 +113,7 @@ export default function WebcamStreamCapture() {
               variant="contained"
               color="primary"
               onClick={handleDownload}
+              style={{ margin: "2rem" }}
             >
               ⬇︎ Downlad
             </Button>
@@ -131,7 +126,11 @@ export default function WebcamStreamCapture() {
             </Button>
           </div>
         )}
-        <Slider className="card-link" timer={timer} handleTimer={handleTimer} />
+        <Slider
+          style={{ marginTop: "10rem" }}
+          timer={timer}
+          handleTimer={handleTimer}
+        />
       </CardActions>
       <ReactModal
         isOpen={preview}
