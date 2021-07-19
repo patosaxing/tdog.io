@@ -5,6 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
+import Logo from './ReactSecLogo.png';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,14 +23,17 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Eval-view</Navbar.Brand>
+            <Navbar.Brand> <img style={{maxWidth: "2.75rem"}} src={Logo} alt="Logo" /> Eval-view</Navbar.Brand>
           </LinkContainer>
+          <h6 style={{ color: "transparent" }}>
+              Adjusting NavBar spacer to Search Box
+            </h6>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Route render={({ history }) => <SearchBox history={history} />} />
-            <h1 style={{ color: "transparent" }}>
-              NavBar spacer to Login part
-            </h1>
+            <h4 style={{ color: "transparent" }}>
+              spacer
+            </h4>
             <Nav className="ml-auto">
               <LinkContainer to="/VideoList">
                 <Nav.Link>🎞️VideoList</Nav.Link>

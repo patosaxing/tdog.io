@@ -16,18 +16,18 @@ const SearchBox = ({ history }) => {
   return (
     <div className="form-check-inline">
 
-    <Form onSubmit={submitHandler} style={{display: 'flex'}}>;
+    <Form onSubmit={submitHandler} style={{display: 'flex'}}>
       <Form.Control
         type='text'
         name='q'
         onChange={(e) => setKeyword(e.target.value)}
-        placeholder='Search Video...'
+        placeholder='Search Video ...'
         className='p-2'
       >
       </Form.Control>
-      <h7 style={{color:'transparent'}}>space</h7>
-      <Button type='submit' variant='outline-success' className='p-1'>
-        Search
+      <h6 style={{color:'transparent'}}>s</h6>
+      <Button type='submit' variant='secondary' className='p-1'>
+        🔎
       </Button>
     </Form>
     
