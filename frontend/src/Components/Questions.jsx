@@ -21,7 +21,7 @@ export default function QuestionSelection() {
     <div>
       <Container>
       <Form.Group controlId="formBasicSelect">
-        <Form.Label>Select Category ⮯</Form.Label>
+        <Form.Label>Click to select Category ☟</Form.Label>
         <Form.Control
           as="select"
           value={category}
