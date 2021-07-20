@@ -8,19 +8,27 @@ const authControl = {
     //Creating the register function
     register: async (req, res, next) => {
         const { username, email, password } = req.body;
-      
-        try {
-          const user = await User.create({
-            username,
-            email,
-            password,
-          });
-      
-          sendToken(user, 200, res);
-        } catch (err) {
-          next(err);
+
+        // check if user is already exists
+        const userExists = await User.findOne({ email });
+
+        if (userExists) {
+            res.status(400);
+            throw new Error('User already exists');
         }
-      },
+
+        try {
+            const user = await User.create({
+                username,
+                email,
+                password,
+            });
+
+            sendToken(user, 200, res);
+        } catch (err) {
+            next(err);
+        }
+    },
 
     //Login Function
     login: async (req, res, next) => {
@@ -138,6 +146,6 @@ const authControl = {
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
     res.status(statusCode).json({ sucess: true, token });
-  };
+};
 
 module.exports = authControl

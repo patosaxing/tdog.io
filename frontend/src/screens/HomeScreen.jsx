@@ -9,7 +9,7 @@ import ForgotpasswordScreen from "./ForgotpasswordScreen";
 import PrivateScreen from "./PrivateScreen";
 
 const HomeScreen = () => {
-  const [loggedIN, setLoggedIN] = useState(false);
+  const [loggedIN, setLoggedIN] = useState(true);
   // const [loggedIN, setLoggedIN] = useState(true);
 
   return (
@@ -21,10 +21,10 @@ const HomeScreen = () => {
         <PrivateScreen />
       ) : (
         <div>
-          <h7 style={{ backgroundColor: "lightblue" }}>
+          <h6 style={{ backgroundColor: "lightblue" }}>
             {" "}
             User has NOT logged in
-          </h7>
+          </h6>
           <h1>Log in to access advanced features</h1>
           <hr />
           <h4>Sample videos </h4>

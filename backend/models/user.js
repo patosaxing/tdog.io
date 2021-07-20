@@ -5,6 +5,10 @@ const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema(
   {
+    username: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       lowercase: true,
@@ -21,11 +25,13 @@ const UserSchema = new mongoose.Schema(
       minLength: 6,
       select: false,   // to prevent it got sent back with res.send
     },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     resetPasswordToken: String, // token to keep user stay logged in until logout
     resetPasswordExpire: Date,
-    // salt: { type: String, required: true, maxLength: 1000 },
-    // firstName: { type: String, required: false, trim: true, maxLength: 25 },
-    // lastName: { type: String, required: false, trim: true, maxLength: 25 },
   }
 );
 // Hash the password right at the start
@@ -39,8 +45,8 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.methods.matchPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+UserSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 UserSchema.methods.getSignedJwtToken = function () {

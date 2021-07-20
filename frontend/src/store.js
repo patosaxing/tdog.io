@@ -1,16 +1,16 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-// import {
-//   videoListReducer,
-//   videoDetailsReducer,
-//   videoDeleteReducer,
-//   videoCreateReducer,
-//   videoUpdateReducer,
-//   videoReviewCreateReducer,
-//   videoTopRatedReducer,
-// } from './reducers/videoReducers'
-// import { cartReducer } from './reducers/cartReducers'
+import {
+  videoListReducer,
+  videoDetailsReducer,
+  videoDeleteReducer,
+  videoCreateReducer,
+  videoUpdateReducer,
+  videoReviewCreateReducer,
+  videoTopRatedReducer,
+} from './reducers/videoReducers'
+
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -20,24 +20,14 @@ import {
   userDeleteReducer,
   userUpdateReducer,
 } from './reducers/userReducers'
-// import {
-//   videoListCreateReducer,
-//   videoListDetailsReducer,
-//   videoListPayReducer,
-//   videoListDeliverReducer,
-//   videoListListMyReducer,
-//   videoListListReducer,
-// } from './reducers/videoListReducers'
 
 const reducer = combineReducers({
-  // videoList: videoListReducer,
-  // videoDetails: videoDetailsReducer,
-  // videoDelete: videoDeleteReducer,
-  // videoCreate: videoCreateReducer,
-  // videoUpdate: videoUpdateReducer,
-  // videoReviewCreate: videoReviewCreateReducer,
-  // videoTopRated: videoTopRatedReducer,
-  // cart: cartReducer,
+  videoList: videoListReducer,
+  videoDetails: videoDetailsReducer,
+  videoDelete: videoDeleteReducer,
+  videoCreate: videoCreateReducer,
+  videoUpdate: videoUpdateReducer,
+  videoReviewCreate: videoReviewCreateReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -45,39 +35,19 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
-  // videoListCreate: videoListCreateReducer,
-  // videoListDetails: videoListDetailsReducer,
-  // videoListPay: videoListPayReducer,
-  // videoListDeliver: videoListDeliverReducer,
-  // videoListListMy: videoListListMyReducer,
-  // videoListList: videoListListReducer,
 });
 
-const cartItemsFromStorage = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems'))
-  : []
 
+// use local storage for storing loggED in Token
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null
 
-const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
-  ? JSON.parse(localStorage.getItem('shippingAddress'))
-  : {}
-
-const initialState = {
-  cart: {
-    cartItems: cartItemsFromStorage,
-    shippingAddress: shippingAddressFromStorage,
-  },
-  userLogin: { userInfo: userInfoFromStorage },
-}
 
 const middleware = [thunk]
 
 const store = createStore(
   reducer,
-  initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 )
 
