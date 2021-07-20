@@ -7,7 +7,7 @@ import WebcamStreamCapture from "../components/WebStreamCapture";
 import FileUpload from "../components/FileUpload/FileUploader";
 
 const PrivateScreen = () => {
-  const [loggedIN, setLoggedIN] = useState(false);
+  const [loggedIN, setLoggedIN] = useState(true);
   return (
     <div>
       {loggedIN ? (
