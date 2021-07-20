@@ -1,7 +1,7 @@
 const videos = [
   {
     _id: '1',
-    name: 'Bill Gate',
+    name: 'Leanne Graham',
     video: '/videos/airpods.jpg',
     description:
       'Basic Interview Querstion',
@@ -14,7 +14,7 @@ const videos = [
   },
   {
     _id: '2',
-    name: 'Someone Cool',
+    name: 'Ervin Le',
     video: '/videos/Cool.jpg',
     description:
       'What makes you the best candidate for this job?',
@@ -27,7 +27,7 @@ const videos = [
   },
   {
     _id: '3',
-    name: 'Someone Ready',
+    name: 'Clementine Shallom',
     video: '/videos/ready.jpg',
     description:
       'If we were to offer you the salary you requested but you had to write your job description for the first year of employment, what would it say?',
@@ -35,12 +35,12 @@ const videos = [
     topic: 'Salary',
     view: 32,
     comment: 5,
-    rating: 3,
+    rating: 4.5,
     numReviews: 3,
   },
   {
     _id: '4',
-    name: 'Chuong Tang',
+    name: 'Patricia Lebsack',
     video: '/videos/Chuong.jpg',
     description:
       'If you could remove any state in the United States, which would you choose and why?',
@@ -48,7 +48,7 @@ const videos = [
     topic: 'Imagination',
     view: 42,
     comment: 10,
-    rating: 5,
+    rating: 4.5,
     numReviews: 3,
   },
   {
@@ -66,7 +66,7 @@ const videos = [
   },
   {
     _id: '6',
-    name: 'Kim SomethingUn',
+    name: 'Kurtis Weissnat',
     video: '/videos/KimUn.jpg',
     description:
       'Is there someone that changed or altered your career path?',
@@ -74,7 +74,7 @@ const videos = [
     catopic: 'CareerPath',
     view: 30,
     comment: 0,
-    rating: 4,
+    rating: 2.5,
     numReviews: 4,
   },
 ]

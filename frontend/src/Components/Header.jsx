@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
@@ -9,7 +9,7 @@ import Logo from './ReactSecLogo.png';
 
 const Header = () => {
   const dispatch = useDispatch();
-
+  const [loggedIN, setLoggedIN] = useState(false); // to be deleted when redux is on
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -35,9 +35,10 @@ const Header = () => {
               spacer
             </h4>
             <Nav className="ml-auto">
+            {loggedIN ? (
               <LinkContainer to="/VideoList">
                 <Nav.Link>🎞️VideoList</Nav.Link>
-              </LinkContainer>
+              </LinkContainer>) : <h2>🧑‍🤝‍🧑</h2>}
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">
@@ -49,7 +50,7 @@ const Header = () => {
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
-                  <Nav.Link>🧑‍🤝‍🧑 LOG IN</Nav.Link>
+                  <Nav.Link>LOG IN</Nav.Link>
                 </LinkContainer>
               )}
               {userInfo && userInfo.isAdmin && (

@@ -1,10 +1,6 @@
 export default function Slider({ timer, handleTimer }) {
   const styleObj = {
     width: "17rem",
-    // background: '#d3d3d3',
-    // backgroundColor:'black',
-    // outline: "none",
-    // opacity: "0.7"
   };
   return (
     // <div className="slidercontainer">
