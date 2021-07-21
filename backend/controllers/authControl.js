@@ -3,7 +3,6 @@ const ErrorResponse = require("../utils/errorResponse");
 const User = require('../models/user')
 const sendEmail = require("../utils/sendEmail");
 
-
 const authControl = {
     //Creating the register function
     register: async (req, res, next) => {
@@ -11,9 +10,9 @@ const authControl = {
 
         // check if user is already exists
         const userExists = await User.findOne({ email });
-
         if (userExists) {
-            return next(new ErrorResponse("User already exists, please log in", 400));
+
+            return res.status(400).json("User already exists, ...please log in");
         }
 
         try {
@@ -34,21 +33,23 @@ const authControl = {
         const { email, password } = req.body;
         // to reduce server load: Check if email and password is provided
         if (!email || !password) {
-            return next(new ErrorResponse("Please provide an email and password", 400));
+            return res.status(400).json("Please type in email and password");
+            // return next(new ErrorResponse("Please provide an email and password", 400));
         }
         try {
             // Check that user exists by email
             const user = await User.findOne({ email }).select("+password");
 
             if (!user) {
-                return next(new ErrorResponse("Invalid credentials", 401));
+                return res.status(401).json("Invalid credentials");
+                // return next(new ErrorResponse("Invalid credentials", 401));
             }
 
             // Check that password match
             const isMatch = await user.matchPassword(password);
 
             if (!isMatch) {
-                return next(new ErrorResponse("Invalid credentials", 401));
+                return res.status(401).json("Invalid credentials");
             }
 
             // loggin sucess
@@ -67,7 +68,8 @@ const authControl = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                return next(new ErrorResponse("No email could not be sent", 404));
+                return res.status(404).json("No email could not be sent");
+                // return next(new ErrorResponse("No email could not be sent", 404));
             }
 
             // Reset Token Gen and add to database hashed (private) version of token
@@ -78,7 +80,7 @@ const authControl = {
             // Create reset url to email to provided email
             const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
 
-            // HTML Message
+            // Message sent as an HTML body
             const message = `
             <h1>You have requested a password reset</h1>
             <p>Please make a put request to the following link:</p>

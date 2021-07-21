@@ -3,7 +3,7 @@ const router = express.Router();
 const authControl = require("../controllers/authControl");
 const {protect, admin} = require("../middleware/auth")
 const {
-  // authUser,
+ 
   // registerUser,
   getUserProfile,
   updateUserProfile,

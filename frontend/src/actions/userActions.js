@@ -25,7 +25,7 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
 } from '../constants/userConstants'
-// import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
+
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -38,6 +38,8 @@ export const login = (email, password) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     }
+
+
 
     const { data } = await axios.post(
       '/api/users/login',
@@ -102,14 +104,17 @@ export const register = (username, email, password) => async (dispatch) => {
       payload: data,
     })
 
+    // store successful Token in localStorage
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
+    console.log(error.response);
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response.data
+        // error.response && error.response.data.message
+        //   ? error
+        //   // ? error.response.data.message
+        //   : error.message,
     })
   }
 }

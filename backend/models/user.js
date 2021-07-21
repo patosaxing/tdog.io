@@ -12,7 +12,8 @@ const UserSchema = mongoose.Schema(
     email: {
       type: String,
       lowercase: true,
-      required: [true, "can't be blank"],
+      // required: [true, "can't be blank"],
+      required: true,
       unique: true,
       match: [
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -21,7 +22,8 @@ const UserSchema = mongoose.Schema(
 
     password: {
       type: String,
-      required: [true, 'Please provide password'],
+      required: true,
+      // required: [true, 'Please provide password'],
       minLength: 6,
       select: false,   // to prevent it got sent back with res.send
     },
