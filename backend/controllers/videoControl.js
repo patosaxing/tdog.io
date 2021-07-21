@@ -1,21 +1,21 @@
-const express = require('express');
-const fileUpload = require('express-fileupload'); // upload file to server
-const app = express();
-// app.use(fileUpload());
+// const express = require('express');
+// const fileUpload = require('express-fileupload'); // upload file to server
 const fs = require('fs/promises'); // use NodeJS to delete server file
 const { unlink } = require('fs/promises');
 const { uploadToG, deleteFileOnG, generatePublicUrl } = require('./googleDriveApi');
 
+// const app = express();
+// app.use(fileUpload());
+
 const videoControl = {
   uploadFiletoServer: async (req, res) => {
-    console.log('req detail'.bgRed, req);
+    console.log('req detail'.bgRed, req.files);
     let UploadingFile = req.files.file; //🅱
     console.log('file Detail before uploading'.yellow, UploadingFile);
     // if (req.files === null) {
     if (!UploadingFile) {
       return res.status(400).json({ msg: 'No file uploaded' });
     }
-
 
     const UploadingFileName = UploadingFile.name;
     // console.log('new file in server is: '.red, UploadingFileName); //this will be fed into G-cloud API

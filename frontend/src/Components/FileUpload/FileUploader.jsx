@@ -13,17 +13,19 @@ const FileUpload = () => {
   const onChange = (e) => {
     setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
     setFilename(e.target.files[0].name); //🅱
- 
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", file);
+    let imagefile = document.querySelector("#customFile");
+    formData.append("image", imagefile.files[0]);
+
+    console.log("file onsubmit", imagefile.files[0]);
 
     try {
       // we added proxy so no need to pass localhost5000
-      const res = await axios.post("/videos/upload", formData, {
+      const res = await axios.post("/api/videos/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -55,10 +57,9 @@ const FileUpload = () => {
     }
   };
 
-  
   return (
     <Fragment>
-      <h3 style={{"marginTop": "20px"}}>Upload your video 🎞 to Eval-view</h3>
+      <h3 style={{ marginTop: "20px" }}>Upload your video 🎞 to Eval-view</h3>
       {message ? <Message msg={message} /> : null}
       <form onSubmit={onSubmit}>
         <div className="custom-file mb-4">
@@ -66,7 +67,7 @@ const FileUpload = () => {
             type="file"
             className="custom-file-input"
             id="customFile"
-            onChange={()=>onChange}
+            onChange={() => onChange}
           />
           <label className="custom-file-label" htmlFor="customFile">
             {filename}

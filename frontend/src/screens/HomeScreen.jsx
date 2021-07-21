@@ -10,7 +10,6 @@ import PrivateScreen from "./PrivateScreen";
 
 const HomeScreen = () => {
   const [loggedIN, setLoggedIN] = useState(true);
-  // const [loggedIN, setLoggedIN] = useState(true);
 
   return (
     <div>
