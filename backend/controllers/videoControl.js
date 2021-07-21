@@ -12,7 +12,7 @@ const videoControl = {
     console.log('req detail'.bgRed, req.files);
     let UploadingFile = req.files.file; //🅱
     console.log('file Detail before uploading'.yellow, UploadingFile);
-    // if (req.files === null) {
+   
     if (!UploadingFile) {
       return res.status(400).json({ msg: 'No file uploaded' });
     }

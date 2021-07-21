@@ -18,10 +18,11 @@ const FileUpload = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    let imagefile = document.querySelector("#customFile");
-    formData.append("image", imagefile.files[0]);
+    let submitFile = document.querySelector("#customFile");
+    formData.append("fileToBeUpload", submitFile.files);
 
-    console.log("file onsubmit", imagefile.files[0]);
+    console.log("formData", formData);
+    console.log("file onsubmit", submitFile.files);
 
     try {
       // we added proxy so no need to pass localhost5000
