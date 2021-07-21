@@ -1,17 +1,17 @@
 const crypto = require("crypto");
-const ErrorResponse = require("../utils/errorResponse");
 const User = require('../models/user')
 const sendEmail = require("../utils/sendEmail");
+const asyncHandler = require('express-async-handler');
+const generateToken = require('../utils/generateToken');
 
 const authControl = {
     //Creating the register function
-    register: async (req, res, next) => {
+    register: asyncHandler(async (req, res, next) => {
         const { username, email, password } = req.body;
 
         // check if user is already exists
         const userExists = await User.findOne({ email });
         if (userExists) {
-
             return res.status(400).json("User already exists, ...please log in");
         }
 
@@ -22,42 +22,54 @@ const authControl = {
                 password,
             });
 
-            sendToken(user, 200, res);
+            if (user) {
+                res.status(201).json({
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                    token: generateToken(user._id),
+                });
+            } else {
+                res.status(400);
+                throw new Error('Invalid user data');
+            }
+
         } catch (err) {
             next(err);
         }
-    },
+    }),
 
     //Login Function
-    login: async (req, res, next) => {
+    login: asyncHandler(async (req, res, next) => {
         const { email, password } = req.body;
         // to reduce server load: Check if email and password is provided
         if (!email || !password) {
             return res.status(400).json("Please type in email and password");
-            // return next(new ErrorResponse("Please provide an email and password", 400));
-        }
+                  }
         try {
             // Check that user exists by email
-            const user = await User.findOne({ email }).select("+password");
-
-            if (!user) {
-                return res.status(401).json("Invalid credentials");
-                // return next(new ErrorResponse("Invalid credentials", 401));
-            }
-
+            const user = await User.findOne({ email });
             // Check that password match
             const isMatch = await user.matchPassword(password);
 
-            if (!isMatch) {
-                return res.status(401).json("Invalid credentials");
+            if (user && isMatch) {
+                res.json({
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                    token: generateToken(user._id),
+                });
+            } else {
+                res.status(401);
+                throw new Error('Invalid email or password');
             }
 
-            // loggin sucess
-            sendToken(user, 200, res);
         } catch (err) {
-            next(err); // use middleware to handle error
+            next(err);
         }
-    },
+    }),
 
     // Forgor Password Initiation
     forgotPassword: async (req, res, next) => {
@@ -69,7 +81,7 @@ const authControl = {
 
             if (!user) {
                 return res.status(404).json("No email could not be sent");
-                // return next(new ErrorResponse("No email could not be sent", 404));
+                
             }
 
             // Reset Token Gen and add to database hashed (private) version of token
@@ -102,8 +114,8 @@ const authControl = {
                 user.resetPasswordExpire = undefined;
 
                 await user.save();
-
-                return next(new ErrorResponse("Email could not be sent", 500));
+                return res.status(500).json("Email could not be sent");
+                
             }
         } catch (err) {
             next(err);
@@ -125,7 +137,8 @@ const authControl = {
             });
 
             if (!user) {
-                return next(new ErrorResponse("Invalid Token", 400));
+                return res.status(400).json("invalid Token");
+
             }
 
             user.password = req.body.password;
@@ -157,7 +170,8 @@ const authControl = {
                 isAdmin: user.isAdmin,
             });
         } else {
-            return next(new ErrorResponse("User not found", 401));
+            return res.status(401).json("User not found");
+            
         }
     },
 
@@ -183,7 +197,8 @@ const authControl = {
                 token: generateToken(updatedUser._id),
             });
         } else {
-            return next(new ErrorResponse("User not found", 401));
+            return res.status(401).json("User not found");
+            
         }
     },
 
@@ -204,7 +219,8 @@ const authControl = {
             await user.remove();
             res.json({ message: 'User removed' });
         } else {
-            return next(new ErrorResponse("User not found", 404));
+            return res.status(400).json("User not found");
+            
         }
     },
 
@@ -217,7 +233,8 @@ const authControl = {
         if (user) {
             res.json(user);
         } else {
-            return next(new ErrorResponse("User not found", 404));
+            return res.status(404).json("User not found");
+            
         }
     },
 
@@ -241,7 +258,8 @@ const authControl = {
                 isAdmin: updatedUser.isAdmin,
             });
         } else {
-            return next(new ErrorResponse("User not found", 404));
+            return res.status(404).json("User not found");
+            
         }
     }
 }

@@ -25,22 +25,22 @@ const drive = google.drive({
 
 // Uploadiing
 exports.uploadToG = async (fileN) => {
-  console.log('file name in G-uploader', fileN);
-  // const filePath = path.join(`${__dirname}/../uploads/`, fileN);
+   
   const filePath = path.join(__dirname, "../uploads", fileN);
-  console.log('path of the file to be pushed to G-drive'.red, filePath.yellow);
+  
   try {
     const response = await drive.files.create({
       requestBody: {
         name: fileN, //This can be changed
-        mimeType: 'video/webm', // to be changed for video
+        mimeType: 'video/webm', // type from webcam component
       },
       media: {
-        mimeType: 'video/webm', // to be changed for video
+        mimeType: 'video/webm', 
         body: fs.createReadStream(filePath),
       },
     });
-    const uploadedID = response.data.id
+    const uploadedID = response.data.id;
+    res.send(JSON.stringify(uploadedID));
     console.log('response from google drive ⮯⮯⮯'.blue, response.data);
     console.log('File uploaded with database ID'.green, response.data.id.bgGreen);
   } catch (error) {
