@@ -32,10 +32,10 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
 
-app.get('/api', (req, res, next) => {
-  res.send("TDOG Api is running"); // TESTED -> WORKED
-  console.log('this is root'.green.bold);
-});
+// app.get('/api', (req, res, next) => {
+//   res.send("TDOG Api is running"); // TESTED -> WORKED
+//   console.log('this is root'.green.bold);
+// });
 
 app.use('/api/users', userRoutes);
 app.use('/api/videos', videoRoutes);

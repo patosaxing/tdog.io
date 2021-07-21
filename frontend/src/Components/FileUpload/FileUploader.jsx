@@ -19,13 +19,14 @@ const FileUpload = () => {
     e.preventDefault();
     const formData = new FormData();
     let submitFile = document.querySelector("#customFile");
-    formData.append("fileToBeUpload", submitFile.files);
+    formData.append("file", submitFile.files[0]);
+    formData.append("name", submitFile.files[0].name);
 
     console.log("formData", formData);
     console.log("file onsubmit", submitFile.files);
-
     try {
       // we added proxy so no need to pass localhost5000
+      const postURL = "/api/videos/upload"
       const res = await axios.post("/api/videos/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
