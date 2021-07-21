@@ -26,7 +26,7 @@ const FileUpload = () => {
     console.log("file onsubmit", submitFile.files);
     try {
       // we added proxy so no need to pass localhost5000
-      const postURL = "/api/videos/upload"
+      const postURL = "/api/videos/upload";
       const res = await axios.post("/api/videos/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -40,14 +40,18 @@ const FileUpload = () => {
         },
       });
 
-      // Clear percentage in the progressBar
-      setTimeout(() => setUploadPercentage(0), 5000);
-
       const { fileName, filePath } = res.data;
 
       setUploadedFile({ fileName, filePath });
 
       setMessage("Successfully uploaded to Eval-view server  ");
+      // Clear percentage in the progressBar and reset states
+      setTimeout(() => {
+        setUploadPercentage(0);
+        setMessage("");
+        // setFile("");
+        // setFilename("");
+      }, 5000);
     } catch (err) {
       // if (err.response.status === 500) {
       if (err.status === 500) {

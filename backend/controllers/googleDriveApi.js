@@ -20,14 +20,14 @@ oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 const drive = google.drive({
   version: 'v3',
-  auth: oauth2Client,;
+  auth: oauth2Client,
 });
-
 
 // Uploadiing
 exports.uploadToG = async (fileN) => {
   console.log('file name in G-uploader', fileN);
-  const filePath = path.join(`${__dirname}/../uploads/`, fileN);
+  // const filePath = path.join(`${__dirname}/../uploads/`, fileN);
+  const filePath = path.join(__dirname, "../uploads", fileN);
   console.log('path of the file to be pushed to G-drive'.red, filePath.yellow);
   try {
     const response = await drive.files.create({

@@ -26,10 +26,10 @@ router.post("/upload", (req, res) => {
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
   });
   //  send file from server to google cloud
-  uploadToG();
+  uploadToG(file.name);
 
   // delete file from server after sending to cloud
-  videoControl.delServerFile();
+  videoControl.delServerFile(filePath);
 });
 
 
