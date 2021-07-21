@@ -13,8 +13,7 @@ const authControl = {
         const userExists = await User.findOne({ email });
 
         if (userExists) {
-            res.status(400);
-            throw new Error('User already exists');
+            return next(new ErrorResponse("User already exists, please log in", 400));
         }
 
         try {
@@ -141,8 +140,110 @@ const authControl = {
         } catch (err) {
             next(err);
         }
+    },
+
+    // @desc    Get user profile
+    // @route   GET /api/users/profile
+    getUserProfile: async (req, res, next) => {
+        const user = await User.findById(req.user._id);
+
+        if (user) {
+            res.json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin,
+            });
+        } else {
+            return next(new ErrorResponse("User not found", 401));
+        }
+    },
+
+    // @desc    Update user profile
+    // @route   PUT /api/users/profile
+    updateUserProfile: async (req, res) => {
+        const user = await User.findById(req.user._id);
+
+        if (user) {
+            user.name = req.body.name || user.name;
+            user.email = req.body.email || user.email;
+            if (req.body.password) {
+                user.password = req.body.password;
+            }
+
+            const updatedUser = await user.save();
+
+            res.json({
+                _id: updatedUser._id,
+                username: updatedUser.username,
+                email: updatedUser.email,
+                isAdmin: updatedUser.isAdmin,
+                token: generateToken(updatedUser._id),
+            });
+        } else {
+            return next(new ErrorResponse("User not found", 401));
+        }
+    },
+
+    // @desc    Get all users
+    // @route   GET /api/users
+    getUsers: async (req, res) => {
+        const users = await User.find({});
+        res.json(users);
+    },
+
+    // @desc    Delete user
+    // @route   DELETE /api/users/:id
+    // @access  Private/Admin
+    deleteUser: async (req, res) => {
+        const user = await User.findById(req.params.id);
+
+        if (user) {
+            await user.remove();
+            res.json({ message: 'User removed' });
+        } else {
+            return next(new ErrorResponse("User not found", 404));
+        }
+    },
+
+    // @desc    Get user by ID
+    // @route   GET /api/users/:id
+    // @access  Private/Admin
+    getUserById: async (req, res) => {
+        const user = await User.findById(req.params.id).select('-password');
+
+        if (user) {
+            res.json(user);
+        } else {
+            return next(new ErrorResponse("User not found", 404));
+        }
+    },
+
+    // @desc    Update user
+    // @route   PUT /api/users/:id
+    // @access  Private/Admin
+    updateUser: async (req, res) => {
+        const user = await User.findById(req.params.id);
+
+        if (user) {
+            user.name = req.body.name || user.name;
+            user.email = req.body.email || user.email;
+            user.isAdmin = req.body.isAdmin;
+
+            const updatedUser = await user.save();
+
+            res.json({
+                _id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                isAdmin: updatedUser.isAdmin,
+            });
+        } else {
+            return next(new ErrorResponse("User not found", 404));
+        }
     }
 }
+// Send Token with status coode
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
     res.status(statusCode).json({ sucess: true, token });

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const ErrorResponse = require("../utils/errorResponse");
-const User = require("../models/User");
+const User = require("../models/user");
 
 const protect = async (req, res, next) => {
   let token;
@@ -37,9 +37,8 @@ const admin = (req, res, next) => {
   if (req.user && req.user.isAdmin) {
     next();
   } else {
-    res.status(401);
-    throw new Error('Not authorized as an admin');
+    return next(new ErrorResponse("Not authorized to access this router", 401));
   }
 }
 
-export { protect, admin };
+module.exports = { protect, admin };
