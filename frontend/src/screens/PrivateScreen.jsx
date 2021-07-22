@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col, Alert } from "react-bootstrap";
 import Video from "../components/Video";
 import videos from "../PlaceHolderData/Videos";
 import QuestionSelection from "../components/Questions";
 import WebcamStreamCapture from "../components/WebStreamCapture";
 import FileUpload from "../components/FileUpload/FileUploader";
+import  { useSelector } from "react-redux";
+
 
 const PrivateScreen = () => {
-  const [loggedIN, setLoggedIN] = useState(true);
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
   return (
     <div>
       <div>
-      <Alert variant="info" style={{float: 'right'}}>Welcome: ..'userLogin.state'..</Alert>
+      <Alert variant="info" style={{float: 'right'}}>Welcome to {userInfo.username} workspace</Alert>
         <QuestionSelection />
         <WebcamStreamCapture />
         <FileUpload />

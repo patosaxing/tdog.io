@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
@@ -9,7 +9,6 @@ import Logo from './ReactSecLogo.png';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [loggedIN, setLoggedIN] = useState(false); // to be deleted when redux is on
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -35,12 +34,13 @@ const Header = () => {
               spacer
             </h4>
             <Nav className="ml-auto">
-            {loggedIN ? (
+            {/* {userInfo && (
               <LinkContainer to="/VideoList">
                 <Nav.Link>🎞️VideoList</Nav.Link>
-              </LinkContainer>) : <h2>🧑‍🤝‍🧑</h2>}
+              </LinkContainer>)} */}
+               <h2>🧑‍🤝‍🧑</h2>
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
+                <NavDropdown title={userInfo.username} id="username">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
@@ -54,15 +54,12 @@ const Header = () => {
                 </LinkContainer>
               )}
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title="Admin" id="adminmenu">
+                <NavDropdown title="You are an Admin" id="adminmenu">
                   <LinkContainer to="/admin/userlist">
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/admin/productlist">
-                    <NavDropdown.Item>Products</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/admin/orderlist">
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                  <LinkContainer to="/admin/videolist">
+                    <NavDropdown.Item>Videos</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}

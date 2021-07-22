@@ -8,7 +8,7 @@ import {
   videoCreateReducer,
   videoUpdateReducer,
   videoReviewCreateReducer,
-  videoTopRatedReducer,
+  // videoTopRatedReducer,
 } from './reducers/videoReducers'
 
 import {
@@ -39,9 +39,9 @@ const reducer = combineReducers({
 
 
 // use local storage for storing loggED in Token
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
-  : null
+// const userInfoFromStorage = localStorage.getItem('userInfo')
+//   ? JSON.parse(localStorage.getItem('userInfo'))
+//   : null
 
 
 const middleware = [thunk]
