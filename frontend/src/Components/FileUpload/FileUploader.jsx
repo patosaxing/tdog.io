@@ -4,6 +4,7 @@ import Progress from "./Progress";
 import axios from "axios";
 
 const FileUpload = () => {
+  // eslint-disable-next-line
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("");
   const [uploadedFile, setUploadedFile] = useState({}); // server send back an obj
@@ -26,7 +27,7 @@ const FileUpload = () => {
     console.log("file onsubmit", submitFile.files);
     try {
       // we added proxy so no need to pass localhost5000
-      const postURL = "/api/videos/upload";
+     
       const res = await axios.post("/api/videos/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
