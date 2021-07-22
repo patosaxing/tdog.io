@@ -5,7 +5,6 @@ import Footer from "./components/Footer.jsx"
 import { Container } from 'react-bootstrap';
 import HomeScreen from './screens/HomeScreen';
 
-
 function App() {
   return (
     <Router>
@@ -17,7 +16,6 @@ function App() {
       </main>
       <Footer />
     </Router>
-
   );
 }
 export default App;

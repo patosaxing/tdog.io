@@ -64,7 +64,6 @@ const authControl = {
 
             if (!user) {
                 return res.status(404).json("No email could not be sent");
-
             }
 
             // Reset Token Gen and add to database hashed (private) version of token
@@ -98,7 +97,6 @@ const authControl = {
 
                 await user.save();
                 return res.status(500).json("Email could not be sent");
-
             }
         } catch (err) {
             next(err);

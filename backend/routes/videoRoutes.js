@@ -29,7 +29,11 @@ router.post("/upload", (req, res) => {
   uploadToG(file.name);
 
   // delete file from server after sending to cloud
-  videoControl.delServerFile(filePath);
+  
+
+  setTimeout(() => {
+    videoControl.delServerFile(filePath);
+  }, 1500);
 });
 
 
