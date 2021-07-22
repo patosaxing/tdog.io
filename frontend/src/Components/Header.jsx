@@ -38,9 +38,9 @@ const Header = () => {
               <LinkContainer to="/VideoList">
                 <Nav.Link>🎞️VideoList</Nav.Link>
               </LinkContainer>)} */}
-               {/* <h2>🧑‍🤝‍🧑</h2> */}
+               <h2>🧑‍🤝‍🧑</h2>
               {userInfo ? (
-                <NavDropdown title={userInfo.email} id="username">
+                <NavDropdown title={userInfo.username} id="username">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>

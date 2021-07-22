@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Route } from "react-router-dom";
 import Video from "../components/Video";
@@ -7,16 +7,19 @@ import RegisterScreen from "./RegisterScreen";
 import LoginScreen from "./LoginScreen";
 import ForgotpasswordScreen from "./ForgotpasswordScreen";
 import PrivateScreen from "./PrivateScreen";
+import  { useSelector } from "react-redux";
 
 const HomeScreen = () => {
-  const [loggedIN, setLoggedIN] = useState(true);
+  
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   return (
     <div>
       <Route path="/login" component={LoginScreen} />
       <Route path="/register" component={RegisterScreen} />
       <Route path="/forgotpassword" component={ForgotpasswordScreen} />
-      {loggedIN ? (
+      {userInfo ? (
         <PrivateScreen />
       ) : (
         <div>
