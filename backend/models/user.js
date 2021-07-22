@@ -3,12 +3,17 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = mongoose.Schema(
   {
+    username: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       lowercase: true,
-      required: [true, "can't be blank"],
+      // required: [true, "can't be blank"],
+      required: true,
       unique: true,
       match: [
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -17,17 +22,25 @@ const UserSchema = new mongoose.Schema(
 
     password: {
       type: String,
-      required: [true, 'Please provide password'],
+      required: true,
+      // required: [true, 'Please provide password'],
       minLength: 6,
-      select: false,   // to prevent it got sent back with res.send
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
     resetPasswordToken: String, // token to keep user stay logged in until logout
     resetPasswordExpire: Date,
-    // salt: { type: String, required: true, maxLength: 1000 },
-    // firstName: { type: String, required: false, trim: true, maxLength: 25 },
-    // lastName: { type: String, required: false, trim: true, maxLength: 25 },
   }
 );
+
+UserSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+}
+
+
 // Hash the password right at the start
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
@@ -39,9 +52,11 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.methods.matchPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
-};
+
+
+// UserSchema.methods.matchPassword = async function (enteredPassword) {
+//   return await bcrypt.compare(enteredPassword, this.password);
+// };
 
 UserSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {

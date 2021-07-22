@@ -3,17 +3,21 @@ const dotenv = require('dotenv');
 const helmet = require("helmet");
 const compression = require('compression');
 const colors = require('colors'); // customise consoleLog with colors for easy debugging
+
 const app = express();
-// const fileUpload = require('express-fileupload');
 app.use(helmet()); // routes protection
 app.use(compression());
-// app.use(fileUpload());
+
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db"); // move db to config for expanding model
 
+const fileUpload = require('express-fileupload'); // upload file to server
+app.use(fileUpload());
+
 const userRoutes = require("./routes/userRoutes");
 const videoRoutes = require("./routes/videoRoutes");
+
 
 dotenv.config();
 connectDB(); // connection call has to be after .env
@@ -28,10 +32,10 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 
 
-app.get('/api', (req, res, next) => {
-  res.send("TDOG Api is running"); // TESTED -> WORKED
-  console.log('this is root'.green.bold);
-});
+// app.get('/api', (req, res, next) => {
+//   res.send("TDOG Api is running"); // TESTED -> WORKED
+//   console.log('this is root'.green.bold);
+// });
 
 app.use('/api/users', userRoutes);
 app.use('/api/videos', videoRoutes);

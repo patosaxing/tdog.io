@@ -13,17 +13,21 @@ const FileUpload = () => {
   const onChange = (e) => {
     setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
     setFilename(e.target.files[0].name); //🅱
- 
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", file);
+    let submitFile = document.querySelector("#customFile");
+    formData.append("file", submitFile.files[0]);
+    formData.append("name", submitFile.files[0].name);
 
+    console.log("formData", formData);
+    console.log("file onsubmit", submitFile.files);
     try {
       // we added proxy so no need to pass localhost5000
-      const res = await axios.post("/videos/upload", formData, {
+      const postURL = "/api/videos/upload";
+      const res = await axios.post("/api/videos/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -36,14 +40,18 @@ const FileUpload = () => {
         },
       });
 
-      // Clear percentage in the progressBar
-      setTimeout(() => setUploadPercentage(0), 5000);
-
       const { fileName, filePath } = res.data;
 
       setUploadedFile({ fileName, filePath });
 
       setMessage("Successfully uploaded to Eval-view server  ");
+      // Clear percentage in the progressBar and reset states
+      setTimeout(() => {
+        setUploadPercentage(0);
+        setMessage("");
+        // setFile("");
+        // setFilename("");
+      }, 5000);
     } catch (err) {
       // if (err.response.status === 500) {
       if (err.status === 500) {
@@ -55,10 +63,9 @@ const FileUpload = () => {
     }
   };
 
-  
   return (
     <Fragment>
-      <h3 style={{"marginTop": "20px"}}>Upload your video 🎞 to Eval-view</h3>
+      <h3 style={{ marginTop: "20px" }}>Upload your video 🎞 to Eval-view</h3>
       {message ? <Message msg={message} /> : null}
       <form onSubmit={onSubmit}>
         <div className="custom-file mb-4">
@@ -66,7 +73,7 @@ const FileUpload = () => {
             type="file"
             className="custom-file-input"
             id="customFile"
-            onChange={()=>onChange}
+            onChange={() => onChange}
           />
           <label className="custom-file-label" htmlFor="customFile">
             {filename}

@@ -8,7 +8,7 @@ import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions';
 
 const RegisterScreen = ({ location, history }) => {
-  const [name, setName] = useState('')
+  const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -30,9 +30,14 @@ const RegisterScreen = ({ location, history }) => {
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
-      setMessage('Passwords do not match')
+
+      setMessage('Passwords do not match');
+      // set timer to clear messahe
+      setTimeout(() => {
+        setMessage("");
+      }, 4000);
     } else {
-      dispatch(register(name, email, password))
+      dispatch(register(username, email, password))
     }
   }
 
@@ -48,8 +53,8 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Control
             type='name'
             placeholder='Enter Username'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
           ></Form.Control>
         </Form.Group>
 

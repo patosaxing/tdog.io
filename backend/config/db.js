@@ -13,7 +13,7 @@ const connectDB = async () => {
 };
 //Database connection
 const db = mongoose.connection;
-db.once("open", (_) => console.log("TDOGdb is now connected:"));
+db.once("open", (_) => console.log("TDOGdb is now connected".bgBlue));
 db.on("error", (err) => console.error("TDOGdb connection error!", err))
 
 module.exports = connectDB;

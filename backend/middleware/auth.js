@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
-const ErrorResponse = require("../utils/errorResponse");
-const User = require("../models/User");
 
-exports.protect = async (req, res, next) => {
+const User = require("../models/user");
+
+const protect = async (req, res, next) => {
   let token;
 
   if (
@@ -13,7 +13,8 @@ exports.protect = async (req, res, next) => {
   }
 
   if (!token) {
-    return next(new ErrorResponse("Not authorized to access this route", 401));
+    return res.status(401).json("User not authorized to access this route");
+    // return next(new ErrorResponse("Not authorized to access this route", 401));
   }
 
   try {
@@ -22,13 +23,26 @@ exports.protect = async (req, res, next) => {
     const user = await User.findById(decoded.id);
 
     if (!user) {
-      return next(new ErrorResponse("No user found with this id", 404));
+      return res.status(404).json("No user found with this ID");
+      // return next(new ErrorResponse("No user found with this id", 404));
     }
 
     req.user = user;
 
     next();
   } catch (err) {
-    return next(new ErrorResponse("Not authorized to access this router", 401));
+    return res.status(401).json("User not authorised to access this route");
+    // return next(new ErrorResponse("Not authorized to access this router", 401));
   }
 };
+
+const admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    return res.status(401).json("User not authorized to access this route");
+    // return next(new ErrorResponse("Not authorized to access this router", 401));
+  }
+}
+
+module.exports = { protect, admin };
