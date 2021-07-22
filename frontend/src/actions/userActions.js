@@ -46,7 +46,7 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     )
-    console.log("data from login route", data);
+    // console.log("data from login route", data);
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -57,10 +57,10 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload: 
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response.data
+        // error.response && error.response.data.message
+        //   ? error.response.data.message
+        //   : error.message,
     });
   }
 
