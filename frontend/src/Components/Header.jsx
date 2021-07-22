@@ -7,7 +7,7 @@ import SearchBox from "./SearchBox";
 import { logout } from "../actions/userActions";
 import Logo from "./ReactSecLogo.png";
 import Exit from "../img/Exit.svg";
-import Login from "../img/Login.svg"
+import Login from "../img/Login.svg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -31,17 +31,20 @@ const Header = () => {
             </Navbar.Brand>
           </LinkContainer>
           <h6 style={{ color: "transparent" }}>
-            Adjusting NavBar spacer to Search Box
+            Adjusting NavBar spacer 
           </h6>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+          {userInfo && userInfo.isAdmin && (
             <Route render={({ history }) => <SearchBox history={history} />} />
+            )}
             <h4 style={{ color: "transparent" }}>spacer</h4>
             <Nav className="ml-auto">
-              {/* {userInfo && (
-              <LinkContainer to="/VideoList">
-                <Nav.Link>🎞️VideoList</Nav.Link>
-              </LinkContainer>)} */}
+              {/* {userInfo && userInfo.isAdmin && (
+                <LinkContainer to="/VideoList">
+                  <Nav.Link>🎞️VideoList</Nav.Link>
+                </LinkContainer>
+              )} */}
               <img
                 style={{ maxWidth: "3.5rem" }}
                 src={Login}
@@ -58,7 +61,7 @@ const Header = () => {
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
-                  <Nav.Link>LOG IN</Nav.Link>
+                  <Nav.Link>LOG IN TO YOUR WORKSPACE</Nav.Link>
                 </LinkContainer>
               )}
               {userInfo && userInfo.isAdmin && (

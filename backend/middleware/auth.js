@@ -41,7 +41,6 @@ const admin = (req, res, next) => {
     next();
   } else {
     return res.status(401).json("User not authorized to access this route");
-    // return next(new ErrorResponse("Not authorized to access this router", 401));
   }
 }
 

@@ -14,28 +14,25 @@ const authControl = {
         if (userExists) {
             return res.status(400).json("User already exists, ...please log in");
         }
+        const user = await User.create({
+            username,
+            email,
+            password,
+        });
 
-            const user = await User.create({
-                username,
-                email,
-                password,
+        if (user) {
+            res.status(201).json({
+                _id: user._id,
+                username: user.username,
+                email: user.email,
+                isAdmin: user.isAdmin,
+                token: generateToken(user._id),
             });
-
-            if (user) {
-                res.status(201).json({
-                    _id: user._id,
-                    username: user.username,
-                    email: user.email,
-                    isAdmin: user.isAdmin,
-                    token: generateToken(user._id),
-                });
-            } else {
-                res.status(400);
-                throw new Error('Invalid user data');
-            }
-
+        } else {
+            res.status(400);
+            throw new Error('Invalid user data');
+        }
     }),
-
     //Login Function
     login: asyncHandler(async (req, res, next) => {
         const { email, password } = req.body;
