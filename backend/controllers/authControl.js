@@ -39,12 +39,7 @@ const authControl = {
     //Login Function
     login: asyncHandler(async (req, res, next) => {
         const { email, password } = req.body;
-        // // to reduce server load: Check if email and password is provided
-        // if (!email || !password) {
-        //     return res.status(400).json("Please type in email and password");
-        // }
 
-        // Check that user exists by email
         const user = await User.findOne({ email });
 
         if (user && (await user.matchPassword(password))) {

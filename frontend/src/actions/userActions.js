@@ -57,19 +57,17 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload:
+      payload: 
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
-    })
+    });
   }
+
 }
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
-  localStorage.removeItem('cartItems')
-  localStorage.removeItem('shippingAddress')
-  localStorage.removeItem('paymentMethod')
   dispatch({ type: USER_LOGOUT })
   dispatch({ type: USER_DETAILS_RESET })
   // dispatch({ type: ORDER_LIST_MY_RESET })
@@ -112,10 +110,10 @@ export const register = (username, email, password) => async (dispatch) => {
     dispatch({
       type: USER_REGISTER_FAIL,
       payload: error.response.data
-        // error.response && error.response.data.message
-        //   ? error
-        //   // ? error.response.data.message
-        //   : error.message,
+      // error.response && error.response.data.message
+      //   ? error
+      //   // ? error.response.data.message
+      //   : error.message,
     })
   }
 }
