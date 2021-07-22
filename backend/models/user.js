@@ -25,7 +25,6 @@ const UserSchema = mongoose.Schema(
       required: true,
       // required: [true, 'Please provide password'],
       minLength: 6,
-      select: false,   // to prevent it got sent back with res.send
     },
     isAdmin: {
       type: Boolean,
@@ -36,6 +35,12 @@ const UserSchema = mongoose.Schema(
     resetPasswordExpire: Date,
   }
 );
+
+UserSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+}
+
+
 // Hash the password right at the start
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
@@ -47,9 +52,11 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-UserSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
+
+
+// UserSchema.methods.matchPassword = async function (enteredPassword) {
+//   return await bcrypt.compare(enteredPassword, this.password);
+// };
 
 UserSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {

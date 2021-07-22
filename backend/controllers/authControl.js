@@ -2,7 +2,7 @@ const crypto = require("crypto");
 const User = require('../models/user')
 const sendEmail = require("../utils/sendEmail");
 const asyncHandler = require('express-async-handler');
-const generateToken = require('../utils/generateToken');
+const { generateToken } = require('../utils/generateToken');
 
 const authControl = {
     //Creating the register function
@@ -15,7 +15,6 @@ const authControl = {
             return res.status(400).json("User already exists, ...please log in");
         }
 
-        try {
             const user = await User.create({
                 username,
                 email,
@@ -35,40 +34,32 @@ const authControl = {
                 throw new Error('Invalid user data');
             }
 
-        } catch (err) {
-            next(err);
-        }
     }),
 
     //Login Function
     login: asyncHandler(async (req, res, next) => {
         const { email, password } = req.body;
-        // to reduce server load: Check if email and password is provided
-        if (!email || !password) {
-            return res.status(400).json("Please type in email and password");
-                  }
-        try {
-            // Check that user exists by email
-            const user = await User.findOne({ email });
-            // Check that password match
-            const isMatch = await user.matchPassword(password);
+        // // to reduce server load: Check if email and password is provided
+        // if (!email || !password) {
+        //     return res.status(400).json("Please type in email and password");
+        // }
 
-            if (user && isMatch) {
-                res.json({
-                    _id: user._id,
-                    username: user.username,
-                    email: user.email,
-                    isAdmin: user.isAdmin,
-                    token: generateToken(user._id),
-                });
-            } else {
-                res.status(401);
-                throw new Error('Invalid email or password');
-            }
+        // Check that user exists by email
+        const user = await User.findOne({ email });
 
-        } catch (err) {
-            next(err);
+        if (user && (await user.matchPassword(password))) {
+            res.json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin,
+                token: generateToken(user._id),
+            });
+        } else {
+            res.status(401);
+            throw new Error('Invalid email or password');
         }
+
     }),
 
     // Forgor Password Initiation
@@ -81,7 +72,7 @@ const authControl = {
 
             if (!user) {
                 return res.status(404).json("No email could not be sent");
-                
+
             }
 
             // Reset Token Gen and add to database hashed (private) version of token
@@ -115,7 +106,7 @@ const authControl = {
 
                 await user.save();
                 return res.status(500).json("Email could not be sent");
-                
+
             }
         } catch (err) {
             next(err);
@@ -171,7 +162,7 @@ const authControl = {
             });
         } else {
             return res.status(401).json("User not found");
-            
+
         }
     },
 
@@ -198,7 +189,7 @@ const authControl = {
             });
         } else {
             return res.status(401).json("User not found");
-            
+
         }
     },
 
@@ -220,7 +211,7 @@ const authControl = {
             res.json({ message: 'User removed' });
         } else {
             return res.status(400).json("User not found");
-            
+
         }
     },
 
@@ -234,7 +225,7 @@ const authControl = {
             res.json(user);
         } else {
             return res.status(404).json("User not found");
-            
+
         }
     },
 
@@ -259,7 +250,7 @@ const authControl = {
             });
         } else {
             return res.status(404).json("User not found");
-            
+
         }
     }
 }
