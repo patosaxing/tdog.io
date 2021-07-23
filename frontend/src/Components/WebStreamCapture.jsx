@@ -21,6 +21,7 @@ const useStyles = makeStyles({
   },
   webCam: {
     borderRadius: "0.5rem",
+    marginLeft: '5rem'
   },
 });
 

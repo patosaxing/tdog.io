@@ -14,7 +14,7 @@ const PrivateScreen = () => {
   return (
     <div>
       <div>
-      <Alert variant="info" style={{float: 'right'}}>Welcome to {userInfo.username} workspace</Alert>
+      <Alert variant="info" style={{float: 'right'}}> Welcome to {userInfo.username} workspace 💼</Alert>
         <QuestionSelection />
         <WebcamStreamCapture />
         <FileUpload />
