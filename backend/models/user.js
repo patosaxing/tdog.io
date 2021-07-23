@@ -12,18 +12,13 @@ const UserSchema = mongoose.Schema(
     email: {
       type: String,
       lowercase: true,
-      // required: [true, "can't be blank"],
       required: true,
       unique: true,
-      // match: [
-      //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      //   "Please provide a valid email"],
     },
 
     password: {
       type: String,
       required: true,
-      // required: [true, 'Please provide password'],
       minLength: 6,
     },
     isAdmin: {
