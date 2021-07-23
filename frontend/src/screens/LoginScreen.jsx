@@ -42,6 +42,7 @@ const LoginScreen = ({ location, history }) => {
             type='email'
             placeholder='Enter email'
             value={email}
+            required= 'true'
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -52,12 +53,13 @@ const LoginScreen = ({ location, history }) => {
             type='password'
             placeholder='Enter password'
             value={password}
+            required= 'true'
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Button style={{marginTop:'0.5rem'}} type='submit' variant='primary'>
-          Sign In
+          Sign In ⎆
         </Button>
         <Col>
           Forgot Password?{' '}

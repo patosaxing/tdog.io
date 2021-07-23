@@ -42,6 +42,7 @@ const ForgorpasswordScreen = ({ location, history }) => {
             type='string'
             placeholder='Enter User Name'
             value={userName}
+            required={true}
             onChange={(e) => setUserName(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -52,6 +53,7 @@ const ForgorpasswordScreen = ({ location, history }) => {
             type='email'
             placeholder='Enter email'
             value={email}
+            required={true}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
