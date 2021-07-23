@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     display: "flex",
     borderRadius: "0.5rem",
     background: "#d9d9d9",
-    boxShadow: "20px -20px 39px #636161 -20px 20px 39px #959191"
+    boxShadow: "20px -20px 39px #636161 -20px 20px 39px #959191",
   },
   title: {
     fontSize: 4,
@@ -86,6 +86,11 @@ export default function WebcamStreamCapture() {
     }
   }, [recordedChunks]);
 
+  const closeModal = ()=>{
+    document.getElementById('previewModal').style.display='none'
+    setPreview(false);
+  }
+
   return (
     <Card className={classes.root}>
       <CardContent className={classes.webCam}>
@@ -115,7 +120,7 @@ export default function WebcamStreamCapture() {
               onClick={handleDownload}
               style={{ margin: "2rem" }}
             >
-              ⬇︎ Downlad
+              ⬇︎ Download
             </Button>
             <Button
               variant="contained"
@@ -132,9 +137,30 @@ export default function WebcamStreamCapture() {
           handleTimer={handleTimer}
         />
       </CardActions>
+      {/* <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-animate-top w3-card-4">
+          <header class="w3-container w3-teal">
+            <span
+              onclick="document.getElementById('id01').style.display='none'"
+              class="w3-button w3-display-topright"
+            >
+              &times;
+            </span>
+            <h2>Modal Header</h2>
+          </header>
+          <div class="w3-container">
+            <p>Some text..</p>
+            <p>Some text..</p>
+          </div>
+          <footer class="w3-container w3-teal">
+            <p>Modal Footer</p>
+          </footer>
+        </div>
+      </div> */}
       <ReactModal
         isOpen={preview}
         ariaHideApp={false}
+        id="previewModal"
         // onAfterClose={setPreview(false)}
         style={{
           overlay: {
@@ -148,27 +174,37 @@ export default function WebcamStreamCapture() {
           },
           content: {
             position: "absolute",
-            top: "40px",
-            left: "40px",
-            right: "40px",
-            bottom: "40px",
-            border: "1px solid #ccc",
-            background: "#fff",
+            // margin: 'auto',
+            // top: "2rem",
+            left: "20rem",
+            // right: "40px",
+            // bottom: "40px",
+            border: "1px solid #d6ebfd",
+            background: "#d6ebfd",
             overflow: "auto",
             WebkitOverflowScrolling: "touch",
-            borderRadius: "10px",
+            borderRadius: "2rem",
             outline: "none",
-            padding: "20px",
+            padding: "5rem",
           },
         }}
       >
-        <Button
-          style={{ float: "right" }}
-          onClick={() => window.location.reload()}
-        >
-          CLOSE X
-        </Button>
-        <video width="800" controls>
+        <header style={{ display: "flex" }}>
+          <h4>Preview your recording</h4>
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ marginLeft: "15rem" }}
+            onClick={closeModal}
+            // onClick={() => window.location.reload()}
+          >
+            CLOSE
+          </Button>
+          {/* <span onclick="document.getElementById('previewModal').style.display='none'" 
+        style={{float:'right'}}>Close❌</span> */}
+        </header>
+
+        <video width="600" controls>
           <source
             src={URL.createObjectURL(
               new Blob(recordedChunks, { type: "video/webm" })
