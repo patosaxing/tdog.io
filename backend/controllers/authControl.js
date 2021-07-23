@@ -29,8 +29,10 @@ const authControl = {
                 token: generateToken(user._id),
             });
         } else {
-            res.status(400);
-            throw new Error('Invalid user data');
+            // Good practice: FOr backend security, just send back a generic error to FE
+            return res.status(400).json("Invalid user data. All fields are reuired.");
+            // res.status(400);
+            // throw new Error('Invalid user data');
         }
     }),
     //Login Function
