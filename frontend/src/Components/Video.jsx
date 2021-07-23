@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import SampleVideo from './R.png'
 import Rating from "./Rating";
+import VideoUpload from "../img/VideoUpload.svg";
 
 const Video = ({ video }) => {
   return (
@@ -20,7 +21,7 @@ const Video = ({ video }) => {
         <a href={`/video/${video._id}`}>
         <div style={{ width: 66, height: "auto" }}>
           
-        <Card.Img src={SampleVideo} />
+        <Card.Img src={VideoUpload} />
          
         </div>
       </a>
