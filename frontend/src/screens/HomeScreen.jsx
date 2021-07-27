@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { Route } from "react-router-dom";
-import Video from "../components/Video";
+import Video from "../Components/Video";
 import SampleVideos from "../PlaceHolderData/SampleVideos";
 import RegisterScreen from "./RegisterScreen";
 import LoginScreen from "./LoginScreen";
