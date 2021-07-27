@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import SampleVideo from './R.png'
+// import SampleVideo from './R.png'
 import Rating from "./Rating";
 import VideoUpload from "../img/VideoUpload.svg";
 

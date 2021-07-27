@@ -139,6 +139,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       type: USER_DETAILS_SUCCESS,
       payload: data,
     })
+    console.log(data);
   } catch (error) {
     const message =
       error.response && error.response.data.message
