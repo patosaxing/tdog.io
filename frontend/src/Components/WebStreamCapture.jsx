@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Webcam from "react-webcam";
 import { Button, Card, CardContent, CardActions } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Slider from "./slider";
+import Slider from "./Slider";
 import ReactModal from "react-modal";
 
 const useStyles = makeStyles({
