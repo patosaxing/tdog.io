@@ -6,6 +6,7 @@ import QuestionSelection from "../components/Questions";
 import WebcamStreamCapture from "../components/WebStreamCapture";
 import FileUpload from "../components/FileUpload/FileUploader";
 import  { useSelector } from "react-redux";
+import ProfileCard from '../components/ProfileCard'
 
 
 const PrivateScreen = () => {
@@ -14,8 +15,11 @@ const PrivateScreen = () => {
   return (
     <div>
       <div>
-      <Alert variant="info" style={{float: 'right'}}> Welcome to {userInfo.username} workspace 💼</Alert>
+        <div  style = {{ display: 'flex'}} >
+      {/* <Alert variant="info" style={{float: 'right'}}> Welcome to {userInfo.username} workspace 💼</Alert> */}
         <QuestionSelection />
+        <ProfileCard / >
+        </div>
         <WebcamStreamCapture />
         <FileUpload />
         <h1>Your uploaded videos </h1>

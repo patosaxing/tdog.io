@@ -18,6 +18,9 @@ const authControl = {
             username,
             email,
             password,
+            primarySkill: '',
+            location: '',
+            linkedIN: '',
         });
 
         if (user) {
@@ -27,6 +30,9 @@ const authControl = {
                 email: user.email,
                 isAdmin: user.isAdmin,
                 token: generateToken(user._id),
+                primarySkill: user.primarySkill,
+                location: user.location,
+                linkedIN: user.linkedIN,
             });
         } else {
             // Good practice: FOr backend security, just send back a generic error to FE
@@ -152,6 +158,9 @@ const authControl = {
                 name: user.name,
                 email: user.email,
                 isAdmin: user.isAdmin,
+                primarySkill: user.primarySkill,
+                location: user.location,
+                linkedIN: user.linkedIN,
             });
         } else {
             return res.status(401).json("User not found");
@@ -165,8 +174,12 @@ const authControl = {
         const user = await User.findById(req.user._id);
 
         if (user) {
-            user.name = req.body.name || user.name;
+            user.username = req.body.username || user.username;
             user.email = req.body.email || user.email;
+            user.primarySkill = req.body.primarySkill || user.primarySkill;
+            user.location = req.body.location || user.location;
+            user.linkedIN = req.body.linkedIN || user.linkedIN;
+
             if (req.body.password) {
                 user.password = req.body.password;
             }
@@ -179,6 +192,9 @@ const authControl = {
                 email: updatedUser.email,
                 isAdmin: updatedUser.isAdmin,
                 token: generateToken(updatedUser._id),
+                primarySkill: user.primarySkill,
+                location: user.location,
+                linkedIN: user.linkedIN,
             });
         } else {
             return res.status(401).json("User not found");

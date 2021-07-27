@@ -26,6 +26,18 @@ const UserSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    primarySkill: {
+      type: String,
+      required: false,
+    },
+    location: {
+      type: String,
+      required: false,
+    },
+    linkedIN: {
+      type: String,
+      required: false,
+    },
     resetPasswordToken: String, // token to keep user stay logged in until logout
     resetPasswordExpire: Date,
   }

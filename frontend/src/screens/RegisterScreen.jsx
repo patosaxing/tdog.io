@@ -48,7 +48,7 @@ const RegisterScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
-          <Form.Label>Username</Form.Label>
+          <Form.Label><i class="far fa-address-card"></i> Username</Form.Label>
           <Form.Control
             type="name"
             placeholder="Enter Username"
@@ -59,7 +59,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>📧 Email Address</Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -75,7 +75,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>🔓 Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Enter password"
@@ -84,13 +84,13 @@ const RegisterScreen = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
           <Form.Text style={{fontSize:'0.70rem'}} muted>
-            Must be 6-20 characters long, contain letters and
-            numbers, and must not contain spaces, special characters, or emoji.
+            Min. 6 characters with letters and
+            numbers. NO spaces, special characters, nor emoji.
           </Form.Text>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label><i class="fas fa-lock"></i> Confirm Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Confirm password"

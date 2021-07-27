@@ -19,6 +19,7 @@ const ProfileScreen = ({ location, history }) => {
   const [message, setMessage] = useState(null);
   const [skills, setSkills] = useState("");
   const [userlocation, setUserLocation] = useState("");
+  const [userLinkedIN, setUserLinkedIn] = useState("");
 
   const dispatch = useDispatch();
 
@@ -156,8 +157,8 @@ const ProfileScreen = ({ location, history }) => {
   return (
     <div style={{display: "flex" }}>
       <Row>
-        <Col md={10}>
-          <h2>User Profile 📄</h2>
+        <Col md={15}>
+          <h2>Update User Profile 📄</h2>
           {message && <Message variant="danger">{message}</Message>}
           {}
           {success && <Message variant="success">Profile Updated</Message>}
@@ -167,12 +168,12 @@ const ProfileScreen = ({ location, history }) => {
             <Message variant="danger">{error}</Message>
           ) : (
             <Form autocomplete="off" onSubmit={submitHandler}>
-              <Form.Group controlId="name">
+              <Form.Group controlId="username">
                 <Form.Label><i class="far fa-address-card"></i> Username</Form.Label>
                 <Form.Control
                   type="name"
                   required={true}
-                  placeholder="Enter Username"
+                  placeholder={userInfo ? userInfo.username : 'Enter Username'}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 ></Form.Control>
@@ -182,7 +183,7 @@ const ProfileScreen = ({ location, history }) => {
                 <Form.Label>📧 Email Address</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Enter email"
+                  placeholder={userInfo ? userInfo.email : 'Enter Email'}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 ></Form.Control>
@@ -210,7 +211,7 @@ const ProfileScreen = ({ location, history }) => {
                 <Form.Control
                   type="text"
                   placeholder="Enter Location"
-                  value={userlocation}
+                  value={userInfo ? userInfo.location : 'Your Location'}
                   onChange={(e) => setUserLocation(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -219,9 +220,9 @@ const ProfileScreen = ({ location, history }) => {
                 <Form.Label> <i class="fab fa-linkedin"></i>  LinkedIn</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter Location"
-                  value={userlocation}
-                  onChange={(e) => setUserLocation(e.target.value)}
+                  placeholder="www.linkedin.com/....."
+                  value={userLinkedIN}
+                  onChange={(e) => setUserLinkedIn(e.target.value)}
                 ></Form.Control>
               </Form.Group>
 
@@ -234,8 +235,7 @@ const ProfileScreen = ({ location, history }) => {
                   onChange={(e) => setPassword(e.target.value)}
                 ></Form.Control>
                 <Form.Text style={{ fontSize: "0.70rem" }} muted>
-                  Must be 6-20 characters long, contain letters and numbers, and
-                  must not contain spaces, special characters, or emoji.
+                  Min 6 characters with letters and numbers. NO spaces, special characters, or emoji.
                 </Form.Text>
               </Form.Group>
 
