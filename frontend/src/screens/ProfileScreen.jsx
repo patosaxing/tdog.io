@@ -8,6 +8,8 @@ import { getUserDetails, updateUserProfile } from "../actions/userActions";
 // import { listMyPrivateVideos } from '../actions/Actions'; // do we need to fetch this?
 
 import skillList from '../components/Skills.json';
+import ProfileCard from "../components/ProfileCard"
+
 
 const ProfileScreen = ({ location, history }) => {
   const [username, setUsername] = useState("");
@@ -52,43 +54,6 @@ const ProfileScreen = ({ location, history }) => {
       dispatch(updateUserProfile({ id: user._id, username, email, password }));
     }
   };
-
-  // // Skills text auto fill section
-  // const searchField = document.getElementById("searchField");
-  // console.log(searchField);
-  // const matchList = document.getElementById("match-list");
-
-  // const searchSkills = async (searchText) => {
-  //   const res = await fetch("./components/Skills.json");
-  //   const skills = await res.json();
-
-  //   let matches = skills.filter((skill) => {
-  //     // use regxe to searct for matching the FIRST character in 'Gloabal and Insensitive
-  //     const regex = new RegExp(`^${searchText}`, "gi");
-  //     return skill.name.match(regex);
-  //   });
-
-  //   if (searchText.length === 0) {
-  //     matches = [];
-  //     matchList.innerHTML = "";
-  //   }
-  //   outPutHtml(matches);
-  // };
-
-  // // SHow skill in autofill
-  // const outPutHtml = (matches) => {
-  //   if (matches.length > 0) {
-  //     const html = matches
-  //       .map(
-  //         (match) =>
-  //           `<div className='card card-body mb-1'> <h4>${match.name}</h4> </div>`
-  //       )
-  //       .join("");
-  //     matchList.innerHTML = html;
-  //   }
-  // };
-
-  // // searchField.addEventListener("input", () => searchSkills(searchField.value));
 
   // AutoCOmplteFuntion
   function autocomplete(inp, arr) {
@@ -189,11 +154,10 @@ const ProfileScreen = ({ location, history }) => {
   }
 
   return (
-    <>
-      <h1 style={{ color: "transparent" }}> Profile screen </h1>
+    <div style={{display: "flex" }}>
       <Row>
-        <Col md={3}>
-          <h2>User Profile</h2>
+        <Col md={10}>
+          <h2>User Profile 📄</h2>
           {message && <Message variant="danger">{message}</Message>}
           {}
           {success && <Message variant="success">Profile Updated</Message>}
@@ -204,7 +168,7 @@ const ProfileScreen = ({ location, history }) => {
           ) : (
             <Form autocomplete="off" onSubmit={submitHandler}>
               <Form.Group controlId="name">
-                <Form.Label>👨‍💻 Username</Form.Label>
+                <Form.Label><i class="far fa-address-card"></i> Username</Form.Label>
                 <Form.Control
                   type="name"
                   required={true}
@@ -226,7 +190,7 @@ const ProfileScreen = ({ location, history }) => {
 
               <Form.Group className="autocomplete" controlId="skills">
                 <Form.Label>
-                  ⛷ Skill                   
+                <i class="fas fa-drafting-compass"></i> Skill                   
                 </Form.Label>
                
                 <Form.Control
@@ -251,8 +215,18 @@ const ProfileScreen = ({ location, history }) => {
                 ></Form.Control>
               </Form.Group>
 
+              <Form.Group controlId="userLinkedIn">
+                <Form.Label> <i class="fab fa-linkedin"></i>  LinkedIn</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Location"
+                  value={userlocation}
+                  onChange={(e) => setUserLocation(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
               <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>🔓 Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Enter password"
@@ -266,7 +240,7 @@ const ProfileScreen = ({ location, history }) => {
               </Form.Group>
 
               <Form.Group controlId="confirmPassword">
-                <Form.Label>Confirm Password</Form.Label>
+                <Form.Label><i class="fas fa-lock"></i> Confirm Password</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Confirm password"
@@ -274,7 +248,7 @@ const ProfileScreen = ({ location, history }) => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-
+                  <hr />
               <Button type="submit" variant="primary">
                 Update
               </Button>
@@ -282,7 +256,10 @@ const ProfileScreen = ({ location, history }) => {
           )}
         </Col>
       </Row>
-    </>
+      <Row  style = {{ float: 'right'}} >
+        <ProfileCard />
+      </Row>
+    </div>
   );
 };
 
