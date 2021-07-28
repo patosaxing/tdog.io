@@ -50,7 +50,6 @@ const FileUpload = () => {
       setTimeout(() => {
         setUploadPercentage(0);
         setMessage("");
-
       }, 5000);
     } catch (err) {
       // if (err.response.status === 500) {
