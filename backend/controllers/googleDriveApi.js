@@ -31,7 +31,7 @@ exports.uploadToG = async (fileN) => {
   try {
     const response = await drive.files.create({
       requestBody: {
-        name: fileN, 
+        name: fileN,
         mimeType: 'video/webm', // type from webcam component
       },
       media: {
