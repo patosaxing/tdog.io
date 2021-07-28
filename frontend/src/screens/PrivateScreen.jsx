@@ -4,11 +4,13 @@ import { Row, Col } from "react-bootstrap";
 import Video from "../components/Video";
 
 import videos from "../PlaceHolderData/Videos";
-import QuestionSelection from "../Components/Questions";
-import WebcamStreamCapture from "../Components/WebStreamCapture";
-import FileUpload from "../Components/FileUpload/FileUploader";
-import { useSelector } from "react-redux";
-import ProfileCard from "../components/ProfileCard";
+import QuestionSelection from "../components/Questions";
+import WebcamStreamCapture from "../components/WebStreamCapture";
+import FileUpload from "../components/FileUpload/FileUploader";
+import  { useSelector } from "react-redux";
+import ProfileCard from '../components/ProfileCard'
+
+
 
 const PrivateScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
