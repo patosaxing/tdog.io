@@ -19,6 +19,8 @@ const ProfileScreen = ({ location, history }) => {
   const [primarySkill, setPrimarySkills] = useState("");
   const [userLocation, setuserLocation] = useState("");
   const [userLinkedIN, setUserLinkedIn] = useState("");
+  const [image, setImage] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -183,7 +185,6 @@ const ProfileScreen = ({ location, history }) => {
                 <Form.Control
                   type="name"
                   hidden={true}
-                  // required={true}
                   placeholder={userInfo ? userInfo.username : "Enter Username"}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -237,7 +238,7 @@ const ProfileScreen = ({ location, history }) => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="www.linkedin.com/....."
+                  placeholder="www.linkedin.com/..."
                   value={userLinkedIN}
                   onChange={(e) => setUserLinkedIn(e.target.value)}
                 ></Form.Control>
@@ -268,6 +269,23 @@ const ProfileScreen = ({ location, history }) => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
+
+              <Form.Group controlId='image'>
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter image url'
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              ></Form.Control>
+              <Form.File
+                id='image-file'
+                label='Choose File'
+                custom
+                // onChange={uploadFileHandler}
+              ></Form.File>
+              {uploading && <Loader />}
+            </Form.Group>
               <hr />
               <Button type="submit" variant="primary">
                 Update

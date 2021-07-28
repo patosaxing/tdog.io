@@ -31,7 +31,7 @@ exports.uploadToG = async (fileN) => {
   try {
     const response = await drive.files.create({
       requestBody: {
-        name: fileN, //This can be changed
+        name: fileN, 
         mimeType: 'video/webm', // type from webcam component
       },
       media: {
@@ -39,8 +39,8 @@ exports.uploadToG = async (fileN) => {
         body: fs.createReadStream(filePath),
       },
     });
-    const uploadedID = response.data.id;
-    res.send(JSON.stringify(uploadedID));
+    // const uploadedID = response.data.id;
+    // res.send(JSON.stringify(uploadedID));
     console.log('response from google drive ⮯⮯⮯'.blue, response.data);
     console.log('File uploaded with database ID'.green, response.data.id.bgGreen);
   } catch (error) {

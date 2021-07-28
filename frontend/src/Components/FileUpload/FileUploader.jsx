@@ -13,7 +13,7 @@ const FileUpload = () => {
 
   const onChange = (e) => {
     setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
-    setFilename(e.target.files[0].name); //🅱
+    setFilename(e.target.files[0].name); 
   };
 
   const onSubmit = async (e) => {
@@ -26,7 +26,7 @@ const FileUpload = () => {
     console.log("formData", formData);
     console.log("file onsubmit", submitFile.files);
     try {
-      // we added proxy so no need to pass localhost5000
+      
      
       const res = await axios.post("/api/videos/upload", formData, {
         headers: {
@@ -94,7 +94,7 @@ const FileUpload = () => {
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
             <h3 className="text-center">{uploadedFile.fileName}</h3>
-            {/* <img style={{ width: "100%" }} src={uploadedFile.filePath} alt="uploaded" /> */}
+            <img style={{ width: "100%" }} src={uploadedFile.filePath} alt="uploaded" />
           </div>
         </div>
       ) : null}
