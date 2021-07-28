@@ -1,5 +1,4 @@
 const express = require("express");
-
 const router = express.Router();
 const videoControl = require("../controllers/videoControl");
 // const { uploadToG, deleteFileOnG, generatePublicUrl } = require('../controllers/googleDriveApi');
@@ -30,13 +29,11 @@ const drive = google.drive({
 });
 // *** End of Google code body
 
-
-const googleUpload = async (fileN) => {
-
+// Upload file from backend server to Google Drive
+const uploadToGoogle = async (fileN) => {
   const filePathTwo = path.join(__dirname, "../uploads", fileN);
 
   try {
-    console.log('googleCloudAPI started');
     const response = await drive.files.create({
       requestBody: {
         name: fileN,
@@ -47,51 +44,41 @@ const googleUpload = async (fileN) => {
         body: fs.createReadStream(filePathTwo),
       },
     });
-    // const uploadedID = response.data.id;
-    // res.send(JSON.stringify(uploadedID));
+    const uploadedID = response.data.id;
+    res.send(JSON.stringify(uploadedID));
     console.log('response from google drive ⮯⮯⮯'.blue, response.data);
     console.log('File uploaded with database ID'.green, response.data.id.bgGreen);
 
   } catch (error) {
-    console.log('error from google Drive API', error.message);
+    console.log('ERROR from google Drive API: ', error.message);
   }
 };
 
+// File uploading route
 router.post("/upload", (req, res) => {
-  console.log("this is inside the video route");
-
   if (req.files === null) {
     return res.status(400).json({ msg: 'No file uploaded' });
   }
 
   const file = req.files.file;
   const fileN = file.name;
-  console.log('file from req', file);
-  console.log('file name from req', file.name);
   const filePath = path.join(__dirname, "../uploads", file.name);
-  console.log('path of file', filePath);
+  
   file.mv(filePath, err => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
     }
-
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
 
-
-
     //  send file from server to google cloud
-    googleUpload(fileN);
-
+    uploadToGoogle(fileN);
 
     // delete file from server after sending to cloud
-
-
-    //   setTimeout(() => {
-    //     videoControl.delServerFile(filePath);
-    //   }, 1500);
+      setTimeout(() => {
+        videoControl.delServerFile(filePath);
+      }, 1500);
   })
 });
-
 
 module.exports = router;
