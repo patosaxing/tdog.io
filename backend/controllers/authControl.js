@@ -19,7 +19,7 @@ const authControl = {
             email,
             password,
             primarySkill: '',
-            location: '',
+            userLocation: '',
             linkedIN: '',
         });
 
@@ -31,7 +31,7 @@ const authControl = {
                 isAdmin: user.isAdmin,
                 token: generateToken(user._id),
                 primarySkill: user.primarySkill,
-                location: user.location,
+                userLocation: user.userLocation,
                 linkedIN: user.linkedIN,
             });
         } else {
@@ -54,6 +54,9 @@ const authControl = {
                 email: user.email,
                 isAdmin: user.isAdmin,
                 token: generateToken(user._id),
+                primarySkill: user.primarySkill,
+                userLocation: user.userLocation,
+                linkedIN: user.linkedIN,
             });
         } else {
             return res.status(401).json("Invalid email or password");
@@ -159,7 +162,7 @@ const authControl = {
                 email: user.email,
                 isAdmin: user.isAdmin,
                 primarySkill: user.primarySkill,
-                location: user.location,
+                userLocation: user.userLocation,
                 linkedIN: user.linkedIN,
             });
         } else {
@@ -177,11 +180,20 @@ const authControl = {
             user.username = req.body.username || user.username;
             user.email = req.body.email || user.email;
             user.primarySkill = req.body.primarySkill || user.primarySkill;
-            user.location = req.body.location || user.location;
+            user.userLocation = req.body.userLocation || user.userLocation;
             user.linkedIN = req.body.linkedIN || user.linkedIN;
 
             if (req.body.password) {
                 user.password = req.body.password;
+            }
+            if (req.body.primarySkill) {
+                user.primarySkill = req.body.primarySkill;
+            }
+            if (req.body.linkedIN) {
+                user.linkedIN = req.body.linkedIN;
+            }
+            if (req.body.userLocation) {
+                user.userLocation = req.body.userLocation;
             }
 
             const updatedUser = await user.save();
@@ -192,9 +204,9 @@ const authControl = {
                 email: updatedUser.email,
                 isAdmin: updatedUser.isAdmin,
                 token: generateToken(updatedUser._id),
-                primarySkill: user.primarySkill,
-                location: user.location,
-                linkedIN: user.linkedIN,
+                primarySkill: updatedUser.primarySkill,
+                userLocation: updatedUser.userLocation,
+                linkedIN: updatedUser.linkedIN,
             });
         } else {
             return res.status(401).json("User not found");

@@ -30,7 +30,7 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: false,
     },
-    location: {
+    userLocation: { // must use "userLocation" to avoid naming conflict
       type: String,
       required: false,
     },

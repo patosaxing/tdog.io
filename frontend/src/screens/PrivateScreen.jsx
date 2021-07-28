@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Alert } from "react-bootstrap";
+import { Row, Col, } from "react-bootstrap";
 import Video from "../components/Video";
 import videos from "../PlaceHolderData/Videos";
 import QuestionSelection from "../components/Questions";
@@ -16,7 +16,7 @@ const PrivateScreen = () => {
     <div>
       <div>
         <div  style = {{ display: 'flex'}} >
-      {/* <Alert variant="info" style={{float: 'right'}}> Welcome to {userInfo.username} workspace 💼</Alert> */}
+      
         <QuestionSelection />
         <ProfileCard / >
         </div>
