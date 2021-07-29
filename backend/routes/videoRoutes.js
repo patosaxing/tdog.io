@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const videoControl = require("../controllers/videoControl");
-// const { uploadToG, deleteFileOnG, generatePublicUrl } = require('../controllers/googleDriveApi');
 
 
 // *** START of google code body
@@ -45,9 +44,9 @@ const uploadToGoogle = async (fileN) => {
       },
     });
     const uploadedID = response.data.id;
-    res.send(JSON.stringify(uploadedID));
+   
     console.log('response from google drive ⮯⮯⮯'.blue, response.data);
-    console.log('File uploaded with database ID'.green, response.data.id.bgGreen);
+    console.log('File uploaded with database ID'.green, uploadedID.bgGreen);
 
   } catch (error) {
     console.log('ERROR from google Drive API: ', error.message);

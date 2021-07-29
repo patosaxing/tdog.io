@@ -41,10 +41,10 @@ exports.uploadToG = async (fileN) => {
     });
     // const uploadedID = response.data.id;
     // res.send(JSON.stringify(uploadedID));
-    console.log('response from google drive ⮯⮯⮯'.blue, response.data);
+    // console.log('response from google drive ⮯⮯⮯'.blue, response.data);
     console.log('File uploaded with database ID'.green, response.data.id.bgGreen);
   } catch (error) {
-    console.log('error from google Drive API', error.message);
+    console.log('error from google Drive API: ', error.message);
   }
 }
 
