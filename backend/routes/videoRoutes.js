@@ -44,10 +44,10 @@ const uploadToGoogle = async (fileN) => {
         body: fs.createReadStream(filePathTwo),
       },
     });
-    const uploadedID = response.data.id;
-   
-    console.log('response from google drive ⮯⮯⮯'.blue, response.data);
+    const uploadedID = response.data.id; //🟥
     console.log('File uploaded with database ID'.green, uploadedID.bgGreen);
+    return uploadedID;
+    // console.log('response from google drive ⮯⮯⮯'.blue, response.data);
 
   } catch (error) {
     console.log('ERROR from google Drive API: ', error.message);
@@ -55,31 +55,33 @@ const uploadToGoogle = async (fileN) => {
 };
 
 // File uploading route
-router.post("/upload", (req, res) => {
+router.post("/upload", async(req, res) => {
   if (req.files === null) {
+    console.log('no file selected');
     return res.status(400).json({ msg: 'No file uploaded' });
   }
-
   const file = req.files.file;
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
+
   
   file.mv(filePath, err => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
     }
+  });
+    //  send file from server to google cloud
+    await uploadToGoogle(fileN);
+    console.log('ID after pushing to google',uploadToGoogle ); //🟥
+
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
 
-    //  send file from server to google cloud
-    uploadToGoogle(fileN);
-
-    
     // delete file from server after sending to cloud
-      setTimeout(() => {
-        videoControl.delServerFile(filePath);
-      }, 1500);
-  })
-});
+    setTimeout(() => {
+      videoControl.delServerFile(filePath);
+    }, 1500);
+  });
+
 
 module.exports = router;

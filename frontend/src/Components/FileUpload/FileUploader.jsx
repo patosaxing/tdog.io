@@ -12,13 +12,15 @@ const FileUpload = () => {
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const onChange = (e) => {
+    e.preventDefault();
+    console.log('just log something');
     setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
     setFilename(e.target.files[0].name);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    let formData = new FormData();
 
     let submitFile = document.querySelector("#customFile");
     console.log("submit file :", submitFile);
