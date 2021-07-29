@@ -74,6 +74,7 @@ router.post("/upload", (req, res) => {
     //  send file from server to google cloud
     uploadToGoogle(fileN);
 
+    
     // delete file from server after sending to cloud
       setTimeout(() => {
         videoControl.delServerFile(filePath);

@@ -52,11 +52,12 @@ const FileUpload = () => {
 
         setUploadedFile({ fileName, filePath });
 
-        setMessage("Successfully uploaded to Eval-view server  ");
+        setMessage("📂 Successfully uploaded to Eval-view server  ");
         // Clear percentage in the progressBar and reset states
         setTimeout(() => {
           setUploadPercentage(0);
           setMessage("");
+        
         }, 5000);
       } catch (err) {
         // if (err.response.status === 500) {
