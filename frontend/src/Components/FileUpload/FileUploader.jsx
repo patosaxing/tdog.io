@@ -4,6 +4,7 @@ import Progress from "./Progress";
 import axios from "axios";
 import questions from "../Interview_questions.json";
 import { Form } from "react-bootstrap";
+import CloudUpload from '../../img/CloudUpload.svg'
 
 const FileUpload = () => {
   // eslint-disable-next-line
@@ -75,7 +76,7 @@ const FileUpload = () => {
   };
   return (
     <Fragment>
-      <h3 style={{ marginTop: "20px" }}>Upload your video 🎞 to Eval-view</h3>
+      <h3 style={{ marginTop: "20px" }}><img src={CloudUpload} alt="cloud Upload" /> Upload your video 🎞 to Eval-view  </h3>
       {message ? <Message msg={message} /> : null}
       {/* <h4>{question}</h4> */}
    
