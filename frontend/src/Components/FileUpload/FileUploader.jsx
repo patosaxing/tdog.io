@@ -13,55 +13,62 @@ const FileUpload = () => {
 
   const onChange = (e) => {
     setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
-    setFilename(e.target.files[0].name); 
+    setFilename(e.target.files[0].name);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+
     let submitFile = document.querySelector("#customFile");
+    console.log("submit file :", submitFile);
     formData.append("file", submitFile.files[0]);
-    formData.append("name", submitFile.files[0].name);
 
-    console.log("formData", formData);
-    console.log("file onsubmit", submitFile.files);
-    try {
-      
-     
-      const res = await axios.post("/api/videos/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        },
-      });
-
-      const { fileName, filePath } = res.data;
-
-      setUploadedFile({ fileName, filePath });
-
-      setMessage("Successfully uploaded to Eval-view server  ");
-      // Clear percentage in the progressBar and reset states
-      setTimeout(() => {
-        setUploadPercentage(0);
+    if (submitFile.files.length < 1) {
+      setMessage("👇 Please select a video file");
+      return setTimeout(() => {
         setMessage("");
-      }, 5000);
-    } catch (err) {
-      // if (err.response.status === 500) {
-      if (err.status === 500) {
-        setMessage("There was a problem with the server");
-      } else {
-        setMessage(err.msg);
+      }, 3000);
+    } else {
+      formData.append("name", submitFile.files[0].name);
+      console.log("formData", formData);
+      console.log("file onsubmit", submitFile.files.length);
+
+      try {
+        const res = await axios.post("/api/videos/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            setUploadPercentage(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          },
+        });
+
+        const { fileName, filePath } = res.data;
+
+        setUploadedFile({ fileName, filePath });
+
+        setMessage("Successfully uploaded to Eval-view server  ");
+        // Clear percentage in the progressBar and reset states
+        setTimeout(() => {
+          setUploadPercentage(0);
+          setMessage("");
+        }, 5000);
+      } catch (err) {
+        // if (err.response.status === 500) {
+        if (err.status === 500) {
+          setMessage("There was a problem with the server");
+        } else {
+          setMessage(err.msg);
+        }
+        setUploadPercentage(0);
       }
-      setUploadPercentage(0);
     }
   };
-
   return (
     <Fragment>
       <h3 style={{ marginTop: "20px" }}>Upload your video 🎞 to Eval-view</h3>
@@ -93,7 +100,11 @@ const FileUpload = () => {
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
             <h3 className="text-center">{uploadedFile.fileName}</h3>
-            <img style={{ width: "100%" }} src={uploadedFile.filePath} alt="uploaded" />
+            <img
+              style={{ width: "100%" }}
+              src={uploadedFile.filePath}
+              alt="uploaded"
+            />
           </div>
         </div>
       ) : null}
