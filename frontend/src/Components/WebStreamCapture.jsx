@@ -7,8 +7,8 @@ import ReactModal from "react-modal";
 
 const useStyles = makeStyles({
   root: {
-    width: "80rem",
-    display: "flex",
+    width: "auto",
+    // display: "flex",
     borderRadius: "0.5rem",
     background: "#d9d9d9",
     boxShadow: "20px -20px 39px #636161 -20px 20px 39px #959191",
@@ -106,7 +106,7 @@ export default function WebcamStreamCapture() {
         <Webcam className={classes.webCam} audio={true} ref={webcamRef} />
       </CardContent>
       {/* <Slider className="card-link" timer={timer} handleTimer={handleTimer} /> */}
-      <CardActions style={{ display: "block" }}>
+      <CardActions >
         {capturing ? (
           <Button
             variant="contained"
