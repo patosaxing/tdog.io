@@ -77,7 +77,7 @@ export default function WebcamStreamCapture() {
   };
 
   return (
-    <Container>
+    <Container style={{float: "right"}}>
       <Row>
         <Col md="auto">
           <Webcam audio={true} ref={webcamRef} />
@@ -157,7 +157,7 @@ export default function WebcamStreamCapture() {
           <h4>Preview your recording</h4>
         </header>
 
-        <video style={{ margin: "2rem" }} controls>
+        <video style={{ margin: "0.5rem" }} controls>
           <source
             src={URL.createObjectURL(
               new Blob(recordedChunks, { type: "video/webm" })
