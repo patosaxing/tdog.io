@@ -1,13 +1,12 @@
 import React from "react";
-import { Row, Col, } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Video from "../components/Video";
 import videos from "../PlaceHolderData/Videos";
 import QuestionSelection from "../components/Questions";
 import WebcamStreamCapture from "../components/WebStreamCapture";
 import FileUpload from "../components/FileUpload/FileUploader";
-import  { useSelector } from "react-redux";
-import ProfileCard from '../components/ProfileCard'
-
+import { useSelector } from "react-redux";
+import ProfileCard from "../components/ProfileCard";
 
 const PrivateScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
@@ -15,12 +14,11 @@ const PrivateScreen = () => {
   return (
     <div>
       <div>
-        <div  style = {{ display: 'flex'}} >
-      
-        <QuestionSelection />
-        <ProfileCard / >
+        <div style={{ display: "flex" }}>
+          <ProfileCard />
+          <QuestionSelection />
+          <WebcamStreamCapture />
         </div>
-        <WebcamStreamCapture />
         <FileUpload />
         <h1>Your uploaded videos </h1>
         <Row>

@@ -1,6 +1,8 @@
 export default function Slider({ timer, handleTimer }) {
   const styleObj = {
-    width: "17rem",
+    width: "10rem",
+    margin: '1rem',
+    justifyContent: 'center'
   };
   return (
     // <div className="slidercontainer">
@@ -15,7 +17,7 @@ export default function Slider({ timer, handleTimer }) {
         className="slider"
         style={styleObj}
       ></input>
-      <div>⏱️ Set recording time: {timer} minutes</div>
+      <div style={styleObj} > Set recording ⏱️: {timer} minutes</div>
     </div>
   );
 }

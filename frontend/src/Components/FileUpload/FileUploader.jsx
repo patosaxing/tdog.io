@@ -4,7 +4,7 @@ import Progress from "./Progress";
 import axios from "axios";
 import questions from "../Interview_questions.json";
 import { Form } from "react-bootstrap";
-import CloudUpload from '../../img/CloudUpload.svg'
+import CloudUpload from "../../img/CloudUpload.svg";
 
 const FileUpload = () => {
   // eslint-disable-next-line
@@ -13,7 +13,8 @@ const FileUpload = () => {
   const [uploadedFile, setUploadedFile] = useState({}); // server send back an obj
   const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
-  const [category, setCategory] = React.useState("Basic interview questions");
+  const [category, setCategory] = useState("Basic interview questions");
+  const [Skill, setSkill] = useState("");
 
   const onChange = (e) => {
     console.log("just log something");
@@ -76,10 +77,13 @@ const FileUpload = () => {
   };
   return (
     <Fragment>
-      <h3 style={{ marginTop: "20px" }}><img src={CloudUpload} alt="cloud Upload" /> Upload your video 🎞 to Eval-view  </h3>
+      <h3 style={{ marginTop: "20px" }}>
+        <img src={CloudUpload} alt="cloud Upload" /> Upload your video 🎞 to
+        Eval-view{" "}
+      </h3>
       {message ? <Message msg={message} /> : null}
       {/* <h4>{question}</h4> */}
-   
+
       <Progress percentage={uploadPercentage} />
       <h4 style={{ color: "transparent" }}>spacer</h4>
       <form onSubmit={onSubmit}>
@@ -94,10 +98,9 @@ const FileUpload = () => {
             {filename}
           </label>
         </div>
-    
 
-        <div style={{ float: "right" }}>
-          <h5  >Catergory of this uploading video</h5>
+        <div>
+          <h6>Catergory of this recording</h6>
           <Form.Control
             as="select"
             value={category}
@@ -112,6 +115,16 @@ const FileUpload = () => {
             ))}
           </Form.Control>
         </div>
+        <h4 style={{ color: "transparent" }}>spacer</h4>
+        <Form.Label>Skill related to this recording</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter Skills"
+          value={Skill}
+          required={true}
+          onChange={(e) => setSkill(e.target.value)}
+        ></Form.Control>
+
         <input
           type="submit"
           value="Upload 🖅"

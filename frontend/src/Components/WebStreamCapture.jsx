@@ -7,12 +7,12 @@ import ReactModal from "react-modal";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    width: "80rem",
     display: "flex",
     borderRadius: "0.5rem",
     background: "#d9d9d9",
     boxShadow: "20px -20px 39px #636161 -20px 20px 39px #959191",
-    marginTop: '2rem',
+    marginTop: "1rem",
   },
   title: {
     fontSize: 4,
@@ -22,7 +22,8 @@ const useStyles = makeStyles({
   },
   webCam: {
     borderRadius: "0.5rem",
-    marginLeft: '5rem'
+    marginLeft: "0.25rem",
+    maxWidth: "30rem",
   },
 });
 
@@ -69,12 +70,13 @@ export default function WebcamStreamCapture() {
   const handleStopCaptureClick = React.useCallback(() => {
     // mediaRecorderRef.current.stop();
     console.log("Media Test", mediaRecorderRef.current);
-    if (mediaRecorderRef.current.state === "inactive") 
-      { setCapturing(false);}
-       else { mediaRecorderRef.current.stop();
+    if (mediaRecorderRef.current.state === "inactive") {
+      setCapturing(false);
+    } else {
+      mediaRecorderRef.current.stop();
     }
     setCapturing(false);
-    }, [mediaRecorderRef, setCapturing]);
+  }, [mediaRecorderRef, setCapturing]);
 
   const handleDownload = React.useCallback(() => {
     if (recordedChunks.length) {
@@ -93,10 +95,10 @@ export default function WebcamStreamCapture() {
     }
   }, [recordedChunks]);
 
-  const closeModal = ()=>{
-    document.getElementById('previewModal').style.display='none'
+  const closeModal = () => {
+    document.getElementById("previewModal").style.display = "none";
     setPreview(false);
-  }
+  };
 
   return (
     <Card className={classes.root}>
@@ -139,79 +141,42 @@ export default function WebcamStreamCapture() {
           </div>
         )}
         <Slider
-          style={{ marginTop: "10rem" }}
+          style={{ float: "right" }}
           timer={timer}
           handleTimer={handleTimer}
         />
       </CardActions>
-      {/* <div id="id01" class="w3-modal">
-        <div class="w3-modal-content w3-animate-top w3-card-4">
-          <header class="w3-container w3-teal">
-            <span
-              onclick="document.getElementById('id01').style.display='none'"
-              class="w3-button w3-display-topright"
-            >
-              &times;
-            </span>
-            <h2>Modal Header</h2>
-          </header>
-          <div class="w3-container">
-            <p>Some text..</p>
-            <p>Some text..</p>
-          </div>
-          <footer class="w3-container w3-teal">
-            <p>Modal Footer</p>
-          </footer>
-        </div>
-      </div> */}
+
       <ReactModal
         isOpen={preview}
         ariaHideApp={false}
         id="previewModal"
         // onAfterClose={setPreview(false)}
         style={{
-          overlay: {
-            position: "fixed",
-            top: 50,
-            left: 0,
-            right: 500,
-            bottom: 0,
-            zIndex: 5000,
-            backgroundColor: "rgba(255, 255, 255, 0.75)",
-          },
           content: {
-            position: "absolute",
-            // margin: 'auto',
-            // top: "2rem",
-            left: "20rem",
-            // right: "40px",
-            // bottom: "40px",
-            border: "1px solid #d6ebfd",
-            background: "#d6ebfd",
+            // background: "#d6ebfd",
+            width: "fit-content",
+            height: "fit-content",
+            background: "linear-gradient(145deg, #ffffff, #d6dcdd)",
+            boxShadow: "20px 20px 60px #cacfd1 -20px -20px 60px #ffffff",
             overflow: "auto",
             WebkitOverflowScrolling: "touch",
             borderRadius: "2rem",
-            outline: "none",
-            padding: "5rem",
+            padding: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            marginLeft: "25vw",
           },
+          
         }}
       >
-        <header style={{ display: "flex" }}>
+        <header>
           <h4>Preview your recording</h4>
-          <Button
-            variant="contained"
-            color="secondary"
-            style={{ marginLeft: "15rem" }}
-            onClick={closeModal}
-            // onClick={() => window.location.reload()}
-          >
-            CLOSE
-          </Button>
-          {/* <span onclick="document.getElementById('previewModal').style.display='none'" 
-        style={{float:'right'}}>Close❌</span> */}
         </header>
 
-        <video width="600" controls>
+        <video style={{ margin: "2rem" }}  controls>
           <source
             src={URL.createObjectURL(
               new Blob(recordedChunks, { type: "video/webm" })
@@ -219,9 +184,24 @@ export default function WebcamStreamCapture() {
             type="video/webm"
           />
         </video>
-        <Button variant="contained" color="primary" onClick={handleDownload}>
-          ⬇︎ Downlad
-        </Button>
+        <div style={{ display: "flex" }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={closeModal}
+            // onClick={() => window.location.reload()}
+          >
+            CLOSE preview
+          </Button>
+          <Button
+            style={{ marginLeft: "4rem" }}
+            variant="contained"
+            color="primary"
+            onClick={handleDownload}
+          >
+            Download this
+          </Button>
+        </div>
       </ReactModal>
     </Card>
   );

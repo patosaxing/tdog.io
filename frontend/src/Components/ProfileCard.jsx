@@ -5,8 +5,14 @@ import { useSelector } from "react-redux";
 const ProfileCard = () => {
   const cardStyle = {
     width: "20rem",
-    marginLeft: "20vw",
+    // marginLeft: "1vw",
     // float: "right",
+    display: "flex",
+    flexDirection: "column",
+    zoom: '75%',
+    padding: "0.5rem",
+    height:'27rem',
+    // width: 'auto',
     borderRadius: "1rem",
     background: "#e8e8e8",
     boxShadow: "-20px 20px 60px #d7d2d2 20px -20px 60px #ffffff",
@@ -17,11 +23,11 @@ const ProfileCard = () => {
 
   return (
     <Card style={cardStyle}>
-      <Card.Img variant="top" src={ProfileAvatar} />
-      <Card.Body>
-        <Card.Title style={{ float: "right" }}>
+       <Card.Title>
           {userInfo ? userInfo.username : "USERNAME"}
         </Card.Title>
+      <Card.Img variant="top" src={ProfileAvatar} style={{maxHeight:'10rem'}} />
+      <Card.Body> 
         <Card.Text>
           <i class="fas fa-drafting-compass"></i>{" "}
           {userInfo ? userInfo.primarySkill : "PRIMARY SKILL"}
@@ -35,7 +41,7 @@ const ProfileCard = () => {
           {userInfo ? userInfo.linkedIN : "LinkedIn profile"}
         </Card.Text>
         <Card.Text>
-          <i class="far fa-file-video"></i> Total: "List.Length+1" videos
+          <i class="far fa-file-video"></i> Total: 22 videos
         </Card.Text>
       </Card.Body>
     </Card>

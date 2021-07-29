@@ -9,10 +9,56 @@
    inkscape:version="1.1 (c68e22c387, 2021-05-23)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs35" />
+     id="defs35">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3055">
+      <stop
+         style="stop-color:#999999;stop-opacity:1;"
+         offset="0"
+         id="stop3051" />
+      <stop
+         style="stop-color:#999999;stop-opacity:0;"
+         offset="1"
+         id="stop3053" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient902">
+      <stop
+         style="stop-color:#0000ff;stop-opacity:1;"
+         offset="0"
+         id="stop898" />
+      <stop
+         style="stop-color:#0000ff;stop-opacity:0;"
+         offset="1"
+         id="stop900" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient902"
+       id="radialGradient904"
+       cx="24"
+       cy="24"
+       fx="24"
+       fy="24"
+       r="6"
+       gradientTransform="matrix(1,0,0,1.6666667,0,-16)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3055"
+       id="linearGradient3057"
+       x1="0.12165323"
+       y1="21.854406"
+       x2="48.123333"
+       y2="21.854406"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
   <sodipodi:namedview
      id="namedview33"
      pagecolor="#ffffff"
@@ -35,20 +81,20 @@
      fill="#3dd9eb"
      d="m 38.293605,17.008406 c -0.04,0 -0.08,0.006 -0.12,0.006 -1.995,-5.906 -7.525,-10.1599998 -14.051,-10.1599998 -6.526,0 -12.056,4.2539998 -14.052,10.1599998 -0.04,0 -0.079,-0.006 -0.1199997,-0.006 -5.9069999,0 -10.59699994,5.261 -9.72399994,11.395 0.70200001,4.923 5.10500004,8.451 10.03099964,8.451 h 0.151 27.429 0.151 c 4.927,0 9.329,-3.528 10.03,-8.451 0.872,-6.134 -3.818,-11.395 -9.725,-11.395 z"
      id="path23"
-     style="fill:#cccccc;fill-opacity:1" />
+     style="fill:url(#linearGradient3057);fill-opacity:1" />
   <g
      id="g1449"
-     style="fill:#00aad4"
+     style="fill:url(#radialGradient904);fill-opacity:1"
      transform="matrix(0.93358876,0,0,0.77318008,1.9923372,3.1754789)">
     <polygon
        fill="#6c19ff"
        points="18,21 24,14 30,21 "
        id="polygon25"
-       style="fill:#00aad4" />
+       style="fill:url(#radialGradient904);fill-opacity:1" />
     <polygon
        fill="#6c19ff"
        points="26,19 22,19 22,34 26,34 "
        id="polygon27"
-       style="fill:#00aad4" />
+       style="fill:url(#radialGradient904);fill-opacity:1" />
   </g>
 </svg>

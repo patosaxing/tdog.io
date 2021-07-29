@@ -254,7 +254,7 @@ const ProfileScreen = ({ location, history }) => {
                 ></Form.Control>
                 <Form.Text style={{ fontSize: "0.70rem" }} muted>
                   Min 6 characters with letters and numbers. NO spaces, special
-                  characters, or emoji.
+                  characters, nor emoji.
                 </Form.Text>
               </Form.Group>
 
