@@ -12,8 +12,8 @@ const FileUpload = () => {
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const onChange = (e) => {
-    e.preventDefault();
-    console.log('just log something');
+ 
+    console.log("just log something");
     setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
     setFilename(e.target.files[0].name);
   };
@@ -59,7 +59,6 @@ const FileUpload = () => {
         setTimeout(() => {
           setUploadPercentage(0);
           setMessage("");
-        
         }, 5000);
       } catch (err) {
         // if (err.response.status === 500) {

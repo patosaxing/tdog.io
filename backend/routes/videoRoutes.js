@@ -53,17 +53,15 @@ const uploadToGoogle = async (fileN) => {
     console.log('ERROR from google Drive API: ', error.message);
   }
 };
-
 // File uploading route
 router.post("/upload", async(req, res) => {
-  if (req.files === null) {
-    console.log('no file selected');
-    return res.status(400).json({ msg: 'No file uploaded' });
-  }
+  // if (req.files === null) {
+  //   console.log('no file selected');
+  //   return res.status(400).json({ msg: 'No file uploaded' });
+  // } ///******** */ this has been handled at the frontend component
   const file = req.files.file;
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
-
   
   file.mv(filePath, err => {
     if (err) {
