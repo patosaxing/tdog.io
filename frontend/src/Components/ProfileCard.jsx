@@ -4,18 +4,15 @@ import { useSelector } from "react-redux";
 
 const ProfileCard = () => {
   const cardStyle = {
-    width: "20rem",
-    // marginLeft: "1vw",
-    // float: "right",
+
+    marginRight: "2vw",
     display: "flex",
     flexDirection: "column",
-    zoom: "75%",
     padding: "0.5rem",
-    height: "27rem",
-    // width: 'auto',
+    height: "fit-content",
+    width: "80%",
     borderRadius: "1rem",
     background: "#e8e8e8",
-    boxShadow: "-20px 20px 60px #d7d2d2 20px -20px 60px #ffffff",
   };
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -29,11 +26,10 @@ const ProfileCard = () => {
         style={{ maxHeight: "10rem" }}
       />
 
-      <Dropdown className="d-inline mx-2">
+      <Dropdown className="d-inline">
         <Dropdown.Toggle id="dropdown-autoclose-true">
         {userInfo ? userInfo.username : "USERNAME"}
         </Dropdown.Toggle>
-
         <Dropdown.Menu>
           <Dropdown.Item href="#"><i class="fas fa-drafting-compass"></i>{" "}
           {userInfo ? userInfo.primarySkill : "PRIMARY SKILL"}</Dropdown.Item>

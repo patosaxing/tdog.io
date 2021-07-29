@@ -16,8 +16,8 @@ const PrivateScreen = () => {
       <div>
         <div style={{ display: "flex" }}>
           <ProfileCard />
-          <QuestionSelection />
           <WebcamStreamCapture />
+          <QuestionSelection />
         </div>
         <FileUpload />
         <h1>Your uploaded videos </h1>

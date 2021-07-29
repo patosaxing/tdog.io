@@ -19,7 +19,7 @@ const ProfileScreen = ({ location, history }) => {
   const [primarySkill, setPrimarySkills] = useState("");
   const [userLocation, setuserLocation] = useState("");
   const [userLinkedIN, setUserLinkedIn] = useState("");
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
   const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
@@ -53,7 +53,17 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      dispatch(updateUserProfile({ id: user._id, username, email, password, primarySkill, userLocation, userLinkedIN }));
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          username,
+          email,
+          password,
+          primarySkill,
+          userLocation,
+          userLinkedIN,
+        })
+      );
     }
   };
 
@@ -164,6 +174,9 @@ const ProfileScreen = ({ location, history }) => {
 
   return (
     <div style={{ display: "flex" }}>
+      <div>
+        <ProfileCard />
+      </div>
       <Row>
         <Col md={15}>
           <h2>Update Profile 📄</h2>
@@ -180,7 +193,7 @@ const ProfileScreen = ({ location, history }) => {
               <Form.Group controlId="username">
                 <Form.Label>
                   <i class="far fa-address-card"></i> Username:{" "}
-                  {userInfo? userInfo.username : "Username for this card"}
+                  {userInfo ? userInfo.username : "Username for this card"}
                 </Form.Label>
                 <Form.Control
                   type="name"
@@ -192,7 +205,10 @@ const ProfileScreen = ({ location, history }) => {
               </Form.Group>
 
               <Form.Group controlId="email">
-                <Form.Label>📧 Email Address : {userInfo? userInfo.email : 'Email of this card'}</Form.Label>
+                <Form.Label>
+                  📧 Email Address :{" "}
+                  {userInfo ? userInfo.email : "Email of this card"}
+                </Form.Label>
                 <Form.Control
                   type="email"
                   hidden={true}
@@ -215,7 +231,7 @@ const ProfileScreen = ({ location, history }) => {
                   placeholder="Enter Skill"
                   onChange={(e) => {
                     autocomplete(document.getElementById("myInput"), skillList);
-                    console.log('skill section',e.target);
+                    console.log("skill section", e.target);
                     setPrimarySkills(e.target.value);
                   }}
                 ></Form.Control>
@@ -270,22 +286,22 @@ const ProfileScreen = ({ location, history }) => {
                 ></Form.Control>
               </Form.Group>
 
-              <Form.Group controlId='image'>
-              <Form.Label>Image</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Enter image url'
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
-              ></Form.Control>
-              <Form.File
-                id='image-file'
-                label='Choose File'
-                custom
-                // onChange={uploadFileHandler}
-              ></Form.File>
-              {uploading && <Loader />}
-            </Form.Group>
+              <Form.Group controlId="image">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter image url"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                ></Form.Control>
+                <Form.File
+                  id="image-file"
+                  label="Choose File"
+                  custom
+                  // onChange={uploadFileHandler}
+                ></Form.File>
+                {uploading && <Loader />}
+              </Form.Group>
               <hr />
               <Button type="submit" variant="primary">
                 Update
@@ -293,9 +309,6 @@ const ProfileScreen = ({ location, history }) => {
             </Form>
           )}
         </Col>
-      </Row>
-      <Row style={{ float: "right" }}>
-        <ProfileCard />
       </Row>
     </div>
   );

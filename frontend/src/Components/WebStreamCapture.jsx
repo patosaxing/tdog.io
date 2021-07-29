@@ -77,7 +77,7 @@ export default function WebcamStreamCapture() {
   };
 
   return (
-    <Container style={{float: "right"}}>
+    <Container >
       <Row>
         <Col md="auto">
           <Webcam audio={true} ref={webcamRef} />
@@ -86,7 +86,6 @@ export default function WebcamStreamCapture() {
       <Row>
         <Col md="auto">
           <Slider
-            style={{ float: "right" }}
             timer={timer}
             handleTimer={handleTimer}
           />
@@ -97,13 +96,13 @@ export default function WebcamStreamCapture() {
               variant="secondary"
               // color="secondary"
               onClick={handleStopCaptureClick}
-              style={{ margin: "0.5rem" }}
+              style={{ margin: "0.25rem" }}
             >
               ⬜ Stop Recording (Auto stop in {timer} minutes)
             </Button>
           ) : (
             <Button
-              style={{ margin: "0.5rem" }}
+              style={{ margin: "0.75rem" }}
               onClick={handleStartCaptureClick}
             >
               🔴 Start Recording
@@ -118,11 +117,11 @@ export default function WebcamStreamCapture() {
               <Button
                 variant="success"
                 onClick={handleDownload}
-                style={{ margin: "2rem" }}
+                style={{ marginLeft: "2rem" }}
               >
                 ⇓ Download
               </Button>
-              <Button variant="info" onClick={() => setPreview(true)}>
+              <Button style={{ marginLeft: "18rem" }} variant="info" onClick={() => setPreview(true)}>
                 📽 Preview
               </Button>
             </div>

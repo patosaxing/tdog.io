@@ -16,34 +16,41 @@ export default function QuestionSelection() {
     var randomly_generated_question = RandArray(questions[category]);
     return randomly_generated_question;
   };
+
+  const QuestionStyle ={
+   
+    fontStyle: 'italic',
+    fontSize: '1.25rem',
+    color: 'black',
+    textShadow: '0.05rem 0.05rem grey' 
+    }
+
   return (
-    <div>
       <Container>
-      <Form.Group controlId="formBasicSelect">
-        <Form.Label>Click to select Category ☟</Form.Label>
-        <Form.Control
-          as="select"
-          value={category}
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
+        <Form.Group controlId="formBasicSelect">
+          <Form.Label>Click to select Category ☟</Form.Label>
+          <Form.Control
+            as="select"
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+          >
+            {Object.keys(questions).map((category) => (
+              <option value={category} key={category} active>
+                {category}
+              </option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+        <Button
+          style={{margin: "1rem 0"}}
+          variant="secondary"
+          onClick={handleChangeQues}
         >
-          {Object.keys(questions).map((category) => (
-            <option value={category} key={category} active>
-              {category}
-            </option>
-          ))}
-        </Form.Control>
-      </Form.Group>
-            <hr />
-      {/* <h6 style={{ color: "transparent" }}>spacer</h6> */}
-      <Button variant="secondary" onClick={handleChangeQues}>
-        Generate Random Questions
-      </Button>
-      <hr />
-      <div>{question}</div>
-      <hr />
+          Generate Random Questions
+        </Button>
+        <div style={QuestionStyle}>{question}</div>
       </Container>
-    </div>
   );
 }
