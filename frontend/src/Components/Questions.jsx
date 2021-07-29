@@ -2,7 +2,6 @@ import React from "react";
 import questions from "./Interview_questions.json";
 import { Button, Container, Form } from "react-bootstrap";
 
-
 export default function QuestionSelection() {
   const [category, setCategory] = React.useState("Basic interview questions");
   const [question, setQuestion] = React.useState("");

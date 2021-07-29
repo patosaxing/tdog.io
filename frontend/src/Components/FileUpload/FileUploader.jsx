@@ -2,6 +2,8 @@ import React, { Fragment, useState } from "react";
 import Message from "./Message";
 import Progress from "./Progress";
 import axios from "axios";
+import questions from "../Interview_questions.json";
+import { Form } from "react-bootstrap";
 
 const FileUpload = () => {
   // eslint-disable-next-line
@@ -10,9 +12,9 @@ const FileUpload = () => {
   const [uploadedFile, setUploadedFile] = useState({}); // server send back an obj
   const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [category, setCategory] = React.useState("Basic interview questions");
 
   const onChange = (e) => {
- 
     console.log("just log something");
     setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
     setFilename(e.target.files[0].name);
@@ -75,6 +77,10 @@ const FileUpload = () => {
     <Fragment>
       <h3 style={{ marginTop: "20px" }}>Upload your video 🎞 to Eval-view</h3>
       {message ? <Message msg={message} /> : null}
+      {/* <h4>{question}</h4> */}
+   
+      <Progress percentage={uploadPercentage} />
+      <h4 style={{ color: "transparent" }}>spacer</h4>
       <form onSubmit={onSubmit}>
         <div className="custom-file mb-4">
           <input
@@ -87,9 +93,24 @@ const FileUpload = () => {
             {filename}
           </label>
         </div>
+    
 
-        <Progress percentage={uploadPercentage} />
-
+        <div style={{ float: "right" }}>
+          <h5  >Catergory of this uploading video</h5>
+          <Form.Control
+            as="select"
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+          >
+            {Object.keys(questions).map((category) => (
+              <option value={category} key={category} active>
+                {category}
+              </option>
+            ))}
+          </Form.Control>
+        </div>
         <input
           type="submit"
           value="Upload 🖅"
