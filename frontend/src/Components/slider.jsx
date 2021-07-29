@@ -1,7 +1,7 @@
 export default function Slider({ timer, handleTimer }) {
   const styleObj = {
-    width: "10rem",
-    margin: '1rem',
+    width: "20rem",
+    margin: '0.5rem',
     justifyContent: 'center'
   };
   return (

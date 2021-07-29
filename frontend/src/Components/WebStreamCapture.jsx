@@ -5,10 +5,7 @@ import Slider from "./Slider";
 import ReactModal from "react-modal";
 import { Button, Container, Row, Col } from "react-bootstrap";
 
-
 export default function WebcamStreamCapture() {
-  
-
   const [timer, setTimer] = useState(1.5);
   const handleTimer = (event) => {
     setTimer(event.target.value);
@@ -84,27 +81,29 @@ export default function WebcamStreamCapture() {
       <Row>
         <Col md="auto">
           <Webcam audio={true} ref={webcamRef} />
-          <Slider
-          style={{ float: "right" }}
-          timer={timer}
-          handleTimer={handleTimer}
-        />
         </Col>
       </Row>
       <Row>
         <Col md="auto">
+          <Slider
+            style={{ float: "right" }}
+            timer={timer}
+            handleTimer={handleTimer}
+          />
+        </Col>
+        <Col md="auto">
           {capturing ? (
             <Button
-            variant="secondary"
+              variant="secondary"
               // color="secondary"
               onClick={handleStopCaptureClick}
-              style={{ margin: "2rem" }}
+              style={{ margin: "0.5rem" }}
             >
               ⬜ Stop Recording (Auto stop in {timer} minutes)
             </Button>
           ) : (
             <Button
-              style={{ margin: "2rem" }}
+              style={{ margin: "0.5rem" }}
               onClick={handleStartCaptureClick}
             >
               🔴 Start Recording
@@ -123,18 +122,13 @@ export default function WebcamStreamCapture() {
               >
                 ⇓ Download
               </Button>
-              <Button
-                variant="info"
-              
-                onClick={() => setPreview(true)}
-              >
-                ⎚ Preview
+              <Button variant="info" onClick={() => setPreview(true)}>
+                📽 Preview
               </Button>
             </div>
           )}
         </Col>
       </Row>
-
       <ReactModal
         isOpen={preview}
         ariaHideApp={false}
@@ -173,20 +167,17 @@ export default function WebcamStreamCapture() {
         </video>
         <div style={{ display: "flex" }}>
           <Button
-            variant="contained"
-            color="secondary"
+            variant="outline-danger"
             onClick={closeModal}
-            // onClick={() => window.location.reload()}
           >
-            CLOSE preview
+            X Close preview modal
           </Button>
           <Button
             style={{ marginLeft: "4rem" }}
-            variant="contained"
-            color="primary"
+            variant="outline-success"
             onClick={handleDownload}
           >
-            Download this
+            ⇓ Download this video
           </Button>
         </div>
       </ReactModal>
