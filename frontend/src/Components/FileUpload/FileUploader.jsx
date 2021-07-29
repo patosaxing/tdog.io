@@ -133,7 +133,7 @@ const FileUpload = () => {
       </form>
 
       {/* attempt to display uploaded IMAGE file for testing */}
-      {uploadedFile ? (
+      {/* {uploadedFile ? (
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
             <h3 className="text-center">{uploadedFile.fileName}</h3>
@@ -144,7 +144,7 @@ const FileUpload = () => {
             />
           </div>
         </div>
-      ) : null}
+      ) : null} */}
     </Fragment>
   );
 };
