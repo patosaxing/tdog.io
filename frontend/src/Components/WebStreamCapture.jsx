@@ -1,34 +1,13 @@
 import React, { useState } from "react";
 import Webcam from "react-webcam";
-import { Button, Card, CardContent, CardActions } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+// import { Button, Card, CardContent, CardActions } from "@material-ui/core";
 import Slider from "./Slider";
 import ReactModal from "react-modal";
+import { Button, Container, Row, Col } from "react-bootstrap";
 
-const useStyles = makeStyles({
-  root: {
-    width: "auto",
-    // display: "flex",
-    borderRadius: "0.5rem",
-    background: "#d9d9d9",
-    boxShadow: "20px -20px 39px #636161 -20px 20px 39px #959191",
-    marginTop: "1rem",
-  },
-  title: {
-    fontSize: 4,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  webCam: {
-    borderRadius: "0.5rem",
-    marginLeft: "0.25rem",
-    maxWidth: "30rem",
-  },
-});
 
 export default function WebcamStreamCapture() {
-  const classes = useStyles();
+  
 
   const [timer, setTimer] = useState(1.5);
   const handleTimer = (event) => {
@@ -101,51 +80,60 @@ export default function WebcamStreamCapture() {
   };
 
   return (
-    <Card className={classes.root}>
-      <CardContent className={classes.webCam}>
-        <Webcam className={classes.webCam} audio={true} ref={webcamRef} />
-      </CardContent>
-      {/* <Slider className="card-link" timer={timer} handleTimer={handleTimer} /> */}
-      <CardActions >
-        {capturing ? (
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleStopCaptureClick}
-            style={{ margin: "2rem" }}
-          >
-            ⬜ Stop Recording (Auto stop in {timer} minutes)
-          </Button>
-        ) : (
-          <Button style={{ margin: "2rem" }} onClick={handleStartCaptureClick}>
-            🔴 Start Recording
-          </Button>
-        )}
-        {recordedChunks.length > 0 && (
-          <div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleDownload}
-              style={{ margin: "2rem" }}
-            >
-              ⬇︎ Download
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setPreview(true)}
-            >
-              Preview
-            </Button>
-          </div>
-        )}
-        <Slider
+    <Container>
+      <Row>
+        <Col md="auto">
+          <Webcam audio={true} ref={webcamRef} />
+          <Slider
           style={{ float: "right" }}
           timer={timer}
           handleTimer={handleTimer}
         />
-      </CardActions>
+        </Col>
+      </Row>
+      <Row>
+        <Col md="auto">
+          {capturing ? (
+            <Button
+            variant="secondary"
+              // color="secondary"
+              onClick={handleStopCaptureClick}
+              style={{ margin: "2rem" }}
+            >
+              ⬜ Stop Recording (Auto stop in {timer} minutes)
+            </Button>
+          ) : (
+            <Button
+              style={{ margin: "2rem" }}
+              onClick={handleStartCaptureClick}
+            >
+              🔴 Start Recording
+            </Button>
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col md="auto">
+          {recordedChunks.length > 0 && (
+            <div>
+              <Button
+                variant="success"
+                onClick={handleDownload}
+                style={{ margin: "2rem" }}
+              >
+                ⇓ Download
+              </Button>
+              <Button
+                variant="info"
+              
+                onClick={() => setPreview(true)}
+              >
+                ⎚ Preview
+              </Button>
+            </div>
+          )}
+        </Col>
+      </Row>
 
       <ReactModal
         isOpen={preview}
@@ -169,14 +157,13 @@ export default function WebcamStreamCapture() {
             alignItems: "center",
             marginLeft: "25vw",
           },
-          
         }}
       >
         <header>
           <h4>Preview your recording</h4>
         </header>
 
-        <video style={{ margin: "2rem" }}  controls>
+        <video style={{ margin: "2rem" }} controls>
           <source
             src={URL.createObjectURL(
               new Blob(recordedChunks, { type: "video/webm" })
@@ -203,6 +190,6 @@ export default function WebcamStreamCapture() {
           </Button>
         </div>
       </ReactModal>
-    </Card>
+    </Container>
   );
 }
