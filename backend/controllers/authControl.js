@@ -3,6 +3,7 @@ const User = require('../models/user')
 const sendEmail = require("../utils/sendEmail");
 const asyncHandler = require('express-async-handler');
 const { generateToken } = require('../utils/generateToken');
+const mongoose = require('mongoose');
 
 const authControl = {
     //Creating the register function
@@ -174,45 +175,52 @@ const authControl = {
     // @desc    Update user profile
     // @route   PUT /api/users/profile
     updateUserProfile: async (req, res) => {
+        const id = req.user._id;
         const user = await User.findById(req.user._id);
+        const { username, email, primarySkill, userLocation, linkedIN } = req.body;
 
-        if (user) {
-            user.username = req.body.username || user.username;
-            user.email = req.body.email || user.email;
-            user.primarySkill = req.body.primarySkill || user.primarySkill;
-            user.userLocation = req.body.userLocation || user.userLocation;
-            user.linkedIN = req.body.linkedIN || user.linkedIN;
-
-            if (req.body.password) {
-                user.password = req.body.password;
-            }
-            if (req.body.primarySkill) {
-                user.primarySkill = req.body.primarySkill;
-            }
-            if (req.body.linkedIN) {
-                user.linkedIN = req.body.linkedIN;
-            }
-            if (req.body.userLocation) {
-                user.userLocation = req.body.userLocation;
-            }
-
-            const updatedUser = await user.save();
-
-            res.json({
-                _id: updatedUser._id,
-                username: updatedUser.username,
-                email: updatedUser.email,
-                isAdmin: updatedUser.isAdmin,
-                token: generateToken(updatedUser._id),
-                primarySkill: updatedUser.primarySkill,
-                userLocation: updatedUser.userLocation,
-                linkedIN: updatedUser.linkedIN,
-            });
-        } else {
-            return res.status(401).json("User not found");
-
-        }
+        if (!user) return res.status(404).send(`No user found`);
+        const updatedProfile =  { username, email, primarySkill, userLocation, linkedIN}
+        await User.findByIdAndUpdate(id, updatedProfile, { new: true });
+        res.json(updatedProfile);
     },
+        // if (user) {
+        //     user.username = req.body.username || user.username;
+        //     user.email = req.body.email || user.email;
+        //     user.primarySkill = req.body.primarySkill || user.primarySkill;
+        //     user.userLocation = req.body.userLocation || user.userLocation;
+        //     user.linkedIN = req.body.linkedIN || user.linkedIN;
+
+        //     if (req.body.password) {
+        //         user.password = req.body.password;
+        //     }
+        //     if (req.body.primarySkill) {
+        //         user.primarySkill = req.body.primarySkill;
+        //     }
+        //     if (req.body.linkedIN) {
+        //         user.linkedIN = req.body.linkedIN;
+        //     }
+        //     if (req.body.userLocation) {
+        //         user.userLocation = req.body.userLocation;
+        //     }
+
+        //     const updatedUser = await user.save();
+
+        //     res.json({
+        //         _id: updatedUser._id,
+        //         username: updatedUser.username,
+        //         email: updatedUser.email,
+        //         isAdmin: updatedUser.isAdmin,
+        //         token: generateToken(updatedUser._id),
+        //         primarySkill: updatedUser.primarySkill,
+        //         userLocation: updatedUser.userLocation,
+        //         linkedIN: updatedUser.linkedIN,
+        //     });
+        // } else {
+        //     return res.status(401).json("User not found");
+
+        // }
+    // },
 
     // @desc    Get all users
     // @route   GET /api/users

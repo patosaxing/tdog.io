@@ -8,7 +8,7 @@ const connectDB = async () => {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: true //By default, the returned document does not include the modifications made on the update
+  useFindAndModify: false
 });
 };
 //Database connection
