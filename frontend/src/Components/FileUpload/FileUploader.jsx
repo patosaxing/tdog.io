@@ -84,10 +84,10 @@ const FileUpload = () => {
       {message ? <Message msg={message} /> : null}
       {/* <h4>{question}</h4> */}
 
-      <Progress percentage={uploadPercentage} />
-      <h4 style={{ color: "transparent" }}>spacer</h4>
+      <Progress  percentage={uploadPercentage} />
+     
       <form onSubmit={onSubmit}>
-        <div className="custom-file mb-4">
+        <div className="custom-file my-4">
           <input
             type="file"
             className="custom-file-input"
