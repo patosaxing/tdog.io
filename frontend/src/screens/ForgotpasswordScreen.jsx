@@ -58,7 +58,7 @@ const ForgorpasswordScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button style={{marginTop:'0.5rem'}} type='submit' variant='primary'>
+        <Button className="my-4" type='submit' variant='primary'>
           Reset Password
         </Button>
       </Form>

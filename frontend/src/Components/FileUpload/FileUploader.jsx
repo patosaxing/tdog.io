@@ -77,7 +77,7 @@ const FileUpload = () => {
   };
   return (
     <Fragment>
-      <h3 style={{ marginTop: "20px" }}>
+      <h3 className="my-4">
         <img src={CloudUpload} alt="cloud Upload" /> Upload your video 🎞 to
         Eval-view{" "}
       </h3>
@@ -133,18 +133,7 @@ const FileUpload = () => {
       </form>
 
       {/* attempt to display uploaded IMAGE file for testing */}
-      {/* {uploadedFile ? (
-        <div className="row mt-5">
-          <div className="col-md-6 m-auto">
-            <h3 className="text-center">{uploadedFile.fileName}</h3>
-            <img
-              style={{ width: "100%" }}
-              src={uploadedFile.filePath}
-              alt="uploaded"
-            />
-          </div>
-        </div>
-      ) : null} */}
+      {/*  */}
     </Fragment>
   );
 };

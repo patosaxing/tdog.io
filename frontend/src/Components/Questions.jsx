@@ -32,6 +32,7 @@ export default function QuestionSelection() {
           <Form.Control
             as="select"
             value={category}
+            className="my-2"
             onChange={(e) => {
               setCategory(e.target.value);
             }}
@@ -44,7 +45,7 @@ export default function QuestionSelection() {
           </Form.Control>
         </Form.Group>
         <Button
-          style={{margin: "1rem 0"}}
+          className="my-4"
           variant="secondary"
           onClick={handleChangeQues}
         >
