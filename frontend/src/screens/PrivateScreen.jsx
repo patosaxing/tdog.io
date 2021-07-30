@@ -1,12 +1,14 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Video from "../components/Video";
+
 import videos from "../PlaceHolderData/Videos";
 import QuestionSelection from "../components/Questions";
 import WebcamStreamCapture from "../components/WebStreamCapture";
 import FileUpload from "../components/FileUpload/FileUploader";
 import { useSelector } from "react-redux";
 import ProfileCard from "../components/ProfileCard";
+
 
 const PrivateScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
