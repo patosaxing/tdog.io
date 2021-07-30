@@ -32,8 +32,7 @@ const protect = async (req, res, next) => {
     next();
   } catch (err) {
     return res.status(401).json("User not authorised to access this route");
-    // return next(new ErrorResponse("Not authorized to access this router", 401));
-  }
+      }
 };
 
 const admin = (req, res, next) => {

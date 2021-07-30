@@ -61,8 +61,6 @@ const authControl = {
             });
         } else {
             return res.status(401).json("Invalid email or password");
-            // res.status(401);
-            // throw new Error('Invalid email or password');
         }
 
     }),
@@ -177,50 +175,63 @@ const authControl = {
     updateUserProfile: async (req, res) => {
         const id = req.user._id;
         const user = await User.findById(req.user._id);
-        const { username, email, primarySkill, userLocation, linkedIN } = req.body;
+        // const {password, primarySkill, userLocation, linkedIN } = req.body;
 
-        if (!user) return res.status(404).send(`No user found`);
-        const updatedProfile =  { username, email, primarySkill, userLocation, linkedIN}
-        await User.findByIdAndUpdate(id, updatedProfile, { new: true });
-        res.json(updatedProfile);
-    },
-        // if (user) {
-        //     user.username = req.body.username || user.username;
-        //     user.email = req.body.email || user.email;
-        //     user.primarySkill = req.body.primarySkill || user.primarySkill;
-        //     user.userLocation = req.body.userLocation || user.userLocation;
-        //     user.linkedIN = req.body.linkedIN || user.linkedIN;
-
-        //     if (req.body.password) {
-        //         user.password = req.body.password;
-        //     }
-        //     if (req.body.primarySkill) {
-        //         user.primarySkill = req.body.primarySkill;
-        //     }
-        //     if (req.body.linkedIN) {
-        //         user.linkedIN = req.body.linkedIN;
-        //     }
-        //     if (req.body.userLocation) {
-        //         user.userLocation = req.body.userLocation;
-        //     }
-
-        //     const updatedUser = await user.save();
-
-        //     res.json({
-        //         _id: updatedUser._id,
-        //         username: updatedUser.username,
-        //         email: updatedUser.email,
-        //         isAdmin: updatedUser.isAdmin,
-        //         token: generateToken(updatedUser._id),
-        //         primarySkill: updatedUser.primarySkill,
-        //         userLocation: updatedUser.userLocation,
-        //         linkedIN: updatedUser.linkedIN,
-        //     });
+        // if (!user) {
+        //     return res.status(404).send(`No user found`);
         // } else {
-        //     return res.status(401).json("User not found");
-
+        //     if (req.body.password) {
+        //         password = req.body.password;
+        //     }
         // }
-    // },
+        // const updatedProfile = { password, primarySkill, userLocation, linkedIN }
+        // await User.findByIdAndUpdate(id, updatedProfile, { new: true });
+        // res.json({
+        //     // _id: updatedProfile._id,
+        //     isAdmin: updatedProfile.isAdmin,
+        //     primarySkill: updatedProfile.primarySkill,
+        //     userLocation: updatedProfile.userLocation,
+        //     linkedIN: updatedProfile.linked,
+        //     token: generateToken(updatedProfile._id),
+        // });
+        // },
+        if (user) {
+            user.username = req.body.username || user.username;
+            user.email = req.body.email || user.email;
+            user.primarySkill = req.body.primarySkill || user.primarySkill;
+            user.userLocation = req.body.userLocation || user.userLocation;
+            user.linkedIN = req.body.linkedIN || user.linkedIN;
+
+            if (req.body.password) {
+                user.password = req.body.password;
+            }
+            if (req.body.primarySkill) {
+                user.primarySkill = req.body.primarySkill;
+            }
+            if (req.body.linkedIN) {
+                user.linkedIN = req.body.linkedIN;
+            }
+            if (req.body.userLocation) {
+                user.userLocation = req.body.userLocation;
+            }
+
+            const updatedUser = await user.save();
+
+            res.json({
+                _id: updatedUser._id,
+                username: updatedUser.username,
+                email: updatedUser.email,
+                isAdmin: updatedUser.isAdmin,
+                token: generateToken(updatedUser._id),
+                primarySkill: updatedUser.primarySkill,
+                userLocation: updatedUser.userLocation,
+                linkedIN: updatedUser.linkedIN,
+            });
+        } else {
+            return res.status(401).json("User not found");
+
+        }
+    },
 
     // @desc    Get all users
     // @route   GET /api/users
