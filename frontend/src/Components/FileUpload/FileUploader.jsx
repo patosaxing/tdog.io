@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import Message from "./Message";
 import Progress from "./Progress";
 import axios from "axios";
@@ -78,7 +78,7 @@ const FileUpload = () => {
     }
   };
   return (
-    <Fragment>
+    <div className="fileUploader" >
       <h3 className="my-4">
         <img src={CloudUpload} alt="cloud Upload" /> Upload your video 🎞 to
         Eval-view{" "}
@@ -145,7 +145,7 @@ const FileUpload = () => {
 
       {/* attempt to display uploaded IMAGE file for testing */}
       {/*  */}
-    </Fragment>
+    </div>
   );
 };
 
