@@ -38,8 +38,7 @@ const authControl = {
         } else {
             // Good practice: FOr backend security, just send back a generic error to FE
             return res.status(400).json("Invalid user data. All fields are reuired.");
-            // res.status(400);
-            // throw new Error('Invalid user data');
+            
         }
     }),
     //Login Function
@@ -65,6 +64,7 @@ const authControl = {
 
     }),
 
+    
     // Forgor Password Initiation
     forgotPassword: async (req, res, next) => {
         // Send Email to email provided but first check if user exists
@@ -229,7 +229,6 @@ const authControl = {
             });
         } else {
             return res.status(401).json("User not found");
-
         }
     },
 

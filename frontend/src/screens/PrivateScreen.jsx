@@ -10,7 +10,7 @@ import ProfileCard from "../components/ProfileCard";
 
 const PrivateScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  // const { userInfo } = userLogin;
   return (
     <div>
       <div>

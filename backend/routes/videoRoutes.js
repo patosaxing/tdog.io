@@ -60,14 +60,17 @@ router.post("/upload", async(req, res) => {
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
   
-  file.mv(filePath, err => {
+  await file.mv(filePath, err => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
+    }else{
+      uploadToGoogle(fileN);
     }
   });
+
     //  send file from server to google cloud
-    await uploadToGoogle(fileN);
+    // await uploadToGoogle(fileN);
     console.log('ID after pushing to google',uploadToGoogle ); //🟥
 
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });

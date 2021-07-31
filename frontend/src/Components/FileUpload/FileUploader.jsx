@@ -8,26 +8,26 @@ import CloudUpload from "../../img/CloudUpload.svg";
 
 const FileUpload = () => {
   // eslint-disable-next-line
-  const [file, setFile] = useState("");
-  const [filename, setFilename] = useState("");
-  const [uploadedFile, setUploadedFile] = useState({}); // server send back an obj
+  // const [file, setFile] = useState("");
+  // const [filename, setFilename] = useState("");
+  // const [uploadedFile, setUploadedFile] = useState({}); // server send back an obj
   const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [category, setCategory] = useState("Basic interview questions");
   const [Skill, setSkill] = useState("");
 
-  const onChange = (e) => {
-    console.log("just log something");
-    setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
-    setFilename(e.target.files[0].name);
-  };
+  // const onChange = (e) => {
+  //   console.log("just log something");
+  //   setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
+  //   setFilename(e.target.files[0].name);
+  // };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
 
     let submitFile = document.querySelector("#customFile");
-    console.log("submit file :", submitFile);
+    console.log("submit file :", submitFile.files[0]);
     formData.append("file", submitFile.files[0]);
 
     if (submitFile.files.length < 1) {
@@ -54,20 +54,22 @@ const FileUpload = () => {
           },
         });
 
-        const { fileName, filePath } = res.data;
+        // const { fileName, filePath } = res.data;
 
-        setUploadedFile({ fileName, filePath });
+        // setUploadedFile({ fileName, filePath });
 
         setMessage("📂 Successfully uploaded to Eval-view server  ");
         // Clear percentage in the progressBar and reset states
         setTimeout(() => {
           setUploadPercentage(0);
           setMessage("");
-        }, 5000);
+        }, 4000);
       } catch (err) {
         // if (err.response.status === 500) {
         if (err.status === 500) {
-          setMessage("There was a problem with the server");
+          setMessage(
+            "There was a problem with the server => contact Patrick or Gary"
+          );
         } else {
           setMessage(err.msg);
         }
@@ -84,19 +86,28 @@ const FileUpload = () => {
       {message ? <Message msg={message} /> : null}
       {/* <h4>{question}</h4> */}
 
-      <Progress  percentage={uploadPercentage} />
-     
+      <Progress percentage={uploadPercentage} />
+
       <form onSubmit={onSubmit}>
         <div className="custom-file my-4">
           <input
             type="file"
+            name="file"
+            id="customFile"
+            class="custom-file-input"
+          ></input>
+          <label for="file" class="custom-file-label">
+            Choose File
+          </label>
+          {/* <input
+            type="file"
             className="custom-file-input"
             id="customFile"
-            onChange={() => onChange}
+            onChange={ onChange}
           />
           <label className="custom-file-label" htmlFor="customFile">
             {filename}
-          </label>
+          </label> */}
         </div>
 
         <div>
