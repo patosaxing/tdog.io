@@ -80,7 +80,7 @@ const FileUpload = () => {
   return (
     <div className="fileUploader" >
       <h3 className="my-4">
-        <img src={CloudUpload} alt="cloud Upload" /> Upload your video 🎞 to
+        <img src={CloudUpload} alt="cloud Upload" /> Upload your Recording🎞 to
         Eval-view{" "}
       </h3>
       {message ? <Message msg={message} /> : null}
@@ -95,19 +95,11 @@ const FileUpload = () => {
             name="file"
             id="customFile"
             class="custom-file-input"
+            accept="video/*"
           ></input>
           <label for="file" class="custom-file-label">
             Choose File
           </label>
-          {/* <input
-            type="file"
-            className="custom-file-input"
-            id="customFile"
-            onChange={ onChange}
-          />
-          <label className="custom-file-label" htmlFor="customFile">
-            {filename}
-          </label> */}
         </div>
 
         <div>
