@@ -169,7 +169,7 @@ export const updateVideo = (video) => async (dispatch, getState) => {
 
     const { data } = await axios.put(
       `/api/videos/${video._id}`,
-      pvideo,
+      video,
       config
     );
 
