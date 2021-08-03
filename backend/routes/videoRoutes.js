@@ -16,9 +16,10 @@ router.post("/upload", async (req, res) => {
       console.error(err);
       return res.status(500).send(err);
     } else {
-      uploadToG(fileN); // send file from server to google drive
+      uploadToG(fileN); // send file from server to google drive then save detail to MongoDB
     }
   });
+
 
   res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
 

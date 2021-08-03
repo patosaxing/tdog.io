@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 require("dotenv").config();
 const colors = require('colors');
+const videoControl = require("../controllers/videoControl");
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -60,11 +61,16 @@ exports.uploadToG = async (fileN) => {
 
     const result = await drive.files.get({
       fileId,
-      fields: 'webViewLink, webContentLink',
+      fields: 'webViewLink',
 
     });
 
-    console.log('resutl from ext URL function', result.data);
+    console.log('resutl from ext URL function'.magenta, result.data.webViewLink);
+
+    
+  // Save video metadata to MongoDB
+    videoControl.videoDetailToMongo(fileId, result.data.webViewLink);
+
   } catch (error) {
     console.log('error from google Drive API: ', error.message);
   }

@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const reviewSchema = mongoose.Schema(
   {
-    category: { type: String, required: true },
-    rating: { type: Number, required: true },
-    comment: { type: String, required: true },
+    category: { type: String, required: false },
+    rating: { type: Number, required: false },
+    comment: { type: String, required: false },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: false,
       ref: 'user',
     },
   },
@@ -20,38 +20,38 @@ const videoSchema = mongoose.Schema(
   {
     user: {  // to log video's owner
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: false,
       ref: 'user',
     },
-    category: {
+    category: { // pulling from question catergory
+      type: String,
+      required: false,
+    },
+    videoLink: { // this is video link from Google drive
       type: String,
       required: true,
     },
-    videoLink: { // this is video link from Google cloud provider
+    videoID: { // this is video ID from Google dive
       type: String,
       required: true,
     },
     userNote: { // user can put remark such as "EvolveU only"
       type: String,
-      required: true,
-    },
-    category: { // pulling from question catergory
-      type: String,
-      required: true,
+      required: false,
     },
     description: { // pulling from question detail
       type: String,
-      required: true,
+      required: false,
     },
     reviews: [reviewSchema], // pulling from above
     rating: {
       type: Number,
-      required: true,
-      default: 0.5,
+      required: false,
+      default: 2.5,
     },
     numReviews: { // total number reviews submitted by loggedin user
       type: Number,
-      required: true,
+      required: false,
       default: 0,
     },
     freemium: {
@@ -61,7 +61,7 @@ const videoSchema = mongoose.Schema(
     },
     numberViews: { // total number of times viewed
       type: Number,
-      required: true,
+      required: false,
       default: 0,
     },
   },
@@ -72,4 +72,4 @@ const videoSchema = mongoose.Schema(
 
 const Video = mongoose.model('Video', videoSchema);
 
-export default Video;
+module.exports = Video;
