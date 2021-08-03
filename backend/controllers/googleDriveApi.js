@@ -25,9 +25,9 @@ const drive = google.drive({
 
 // Uploadiing
 exports.uploadToG = async (fileN) => {
-   
+
   const filePath = path.join(__dirname, "../uploads", fileN);
-  
+
   try {
     const response = await drive.files.create({
       requestBody: {
@@ -35,14 +35,34 @@ exports.uploadToG = async (fileN) => {
         mimeType: 'video/webm', // type from webcam component
       },
       media: {
-        mimeType: 'video/webm', 
+        mimeType: 'video/webm',
         body: fs.createReadStream(filePath),
       },
     });
-    // const uploadedID = response.data.id;
+    // const googleFileId = response.data.id;
     // res.send(JSON.stringify(uploadedID));
     // console.log('response from google drive ⮯⮯⮯'.blue, response.data);
     console.log('File uploaded with database ID'.green, response.data.id.bgGreen);
+    const fileId = response.data.id;
+    // Get the file URL from google drive
+    const setPermission = await drive.permissions.create({
+      fileId,
+      requestBody: {
+        role: 'reader',
+        type: 'anyone',
+      },
+    });
+
+    /* 
+    webViewLink: View the file in browser
+    webContentLink: Direct download link 
+    */
+
+    const result = await drive.files.get({
+      fileId,
+      fields: 'webViewLink, webContentLink',
+    });
+    console.log('resutl from ext URL function', result.data);
   } catch (error) {
     console.log('error from google Drive API: ', error.message);
   }
@@ -61,28 +81,28 @@ exports.deleteFileOnG = async (googleFileId) => {
 }
 
 // GetExternalURL
-exports.generatePublicUrl = async (googleFileId) => {
-  try {
+// exports.generatePublicUrl = async (googleFileId) => {
+//   try {
 
-    await drive.permissions.create({
-      fileId: googleFileId,
-      requestBody: {
-        role: 'reader',
-        type: 'anyone',
-      },
-    });
+//     await drive.permissions.create({
+//       fileId: googleFileId,
+//       requestBody: {
+//         role: 'reader',
+//         type: 'anyone',
+//       },
+//     });
 
-    /* 
-    webViewLink: View the file in browser
-    webContentLink: Direct download link 
-    */
-    const result = await drive.files.get({
-      fileId: googleFileId,
-      fields: 'webViewLink, webContentLink',
-    });
-    console.log(result.data);
-  } catch (error) {
-    console.log(error.message);
-  }
-}
+//     /* 
+//     webViewLink: View the file in browser
+//     webContentLink: Direct download link 
+//     */
+//     const result = await drive.files.get({
+//       fileId: googleFileId,
+//       fields: 'webViewLink, webContentLink',
+//     });
+//     console.log(result.data);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
 
