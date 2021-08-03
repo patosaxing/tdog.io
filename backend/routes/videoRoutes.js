@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const videoControl = require("../controllers/videoControl");
-const {uploadToG} = require("../controllers/googleDriveApi");
+const { uploadToG } = require("../controllers/googleDriveApi");
 const path = require('path');
 const fs = require('fs');
 
@@ -10,8 +10,7 @@ router.post("/upload", async (req, res) => {
   const file = req.files.file;
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
-  const user = req.user._id; // how do I access the req from here???🟥
-
+  const user = req.user // how do I access the req from here???🟥;
 
   await file.mv(filePath, err => {
     if (err) {
@@ -21,7 +20,6 @@ router.post("/upload", async (req, res) => {
       uploadToG(fileN, user); // send file from server to google drive then save detail to MongoDB
     }
   });
-
 
   res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
 

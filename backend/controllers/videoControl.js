@@ -15,9 +15,9 @@ const videoControl = {
       console.error('there was an error:', error.message);
     }
   },
-  videoDetailToMongo: async (id, url, uploadUSer) => {
+  videoDetailToMongo: async (id, url, uploadUser) => {
     const videoDetail = new Video({
-    
+
       user: uploadUser,
       category: 'Will be added',
       videoLink: url,

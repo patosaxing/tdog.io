@@ -16,11 +16,6 @@ const FileUpload = () => {
   const [category, setCategory] = useState("Basic interview questions");
   const [Skill, setSkill] = useState("");
 
-  // const onChange = (e) => {
-  //   console.log("just log something");
-  //   setFile(e.target.files[0]); // we can upload multi files so we choose the 1st
-  //   setFilename(e.target.files[0].name);
-  // };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +32,8 @@ const FileUpload = () => {
       }, 3000);
     } else {
       formData.append("name", submitFile.files[0].name);
-      console.log("formData", formData);
+      formData.append("category", category);
+      console.log("formData here:", formData.value);
       console.log("file onsubmit", submitFile.files.length);
 
       try {

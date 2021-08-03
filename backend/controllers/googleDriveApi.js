@@ -67,14 +67,14 @@ exports.uploadToG = async (fileN, uploadUser) => {
 
     console.log('resutl from ext URL function'.magenta, result.data.webViewLink);
 
-    
-  // Save video metadata to MongoDB
+    // Save video metadata to MongoDB
     videoControl.videoDetailToMongo(fileId, result.data.webViewLink, uploadUser);
 
   } catch (error) {
     console.log('error from google Drive API: ', error.message);
   }
 }
+
 
 // Deleting
 exports.deleteFileOnG = async (googleFileId) => {
