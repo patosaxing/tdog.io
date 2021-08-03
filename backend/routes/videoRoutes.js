@@ -65,7 +65,7 @@ router.post("/upload", async (req, res) => {
       console.error(err);
       return res.status(500).send(err);
     } else {
-      uploadToGoogle(fileN);
+       uploadToGoogle(fileN); // send file from server to google drive
     }
   });
 
@@ -76,8 +76,7 @@ router.post("/upload", async (req, res) => {
   // delete file from server after sending to cloud
   setTimeout(() => {
     videoControl.delServerFile(filePath);
-  }, 1500);
+  }, 3000);
 });
-
 
 module.exports = router;
