@@ -25,7 +25,7 @@ const drive = google.drive({
 });
 
 // Uploadiing
-exports.uploadToG = async (fileN) => {
+exports.uploadToG = async (fileN, uploadUser) => {
 
   const filePath = path.join(__dirname, "../uploads", fileN);
 
@@ -69,7 +69,7 @@ exports.uploadToG = async (fileN) => {
 
     
   // Save video metadata to MongoDB
-    videoControl.videoDetailToMongo(fileId, result.data.webViewLink);
+    videoControl.videoDetailToMongo(fileId, result.data.webViewLink, uploadUser);
 
   } catch (error) {
     console.log('error from google Drive API: ', error.message);

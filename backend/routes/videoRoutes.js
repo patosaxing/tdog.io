@@ -10,13 +10,15 @@ router.post("/upload", async (req, res) => {
   const file = req.files.file;
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
+  const user = req.user._id; // how do I access the req from here???🟥
+
 
   await file.mv(filePath, err => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
     } else {
-      uploadToG(fileN); // send file from server to google drive then save detail to MongoDB
+      uploadToG(fileN, user); // send file from server to google drive then save detail to MongoDB
     }
   });
 
