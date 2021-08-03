@@ -41,11 +41,11 @@ exports.uploadToG = async (fileN) => {
     });
     // const googleFileId = response.data.id;
     // res.send(JSON.stringify(uploadedID));
-    // console.log('response from google drive ⮯⮯⮯'.blue, response.data);
-    console.log('File uploaded with database ID'.green, response.data.id.bgGreen);
+    console.log('response from google drive ⮯⮯'.blue, response.data);
+    console.log('File uploaded with database ID', response.data.id.bgGreen);
     const fileId = response.data.id;
     // Get the file URL from google drive
-    const setPermission = await drive.permissions.create({
+    await drive.permissions.create({
       fileId,
       requestBody: {
         role: 'reader',
@@ -61,7 +61,9 @@ exports.uploadToG = async (fileN) => {
     const result = await drive.files.get({
       fileId,
       fields: 'webViewLink, webContentLink',
+
     });
+
     console.log('resutl from ext URL function', result.data);
   } catch (error) {
     console.log('error from google Drive API: ', error.message);
