@@ -21,8 +21,6 @@ const PrivateScreen = () => {
           <QuestionSelection />
         </div>
         <FileUpload />
-        <br />
-        <h1>Your uploaded videos </h1>
         <VideoListScreen />
         {/* <Row>
           {videos.map((video) => (

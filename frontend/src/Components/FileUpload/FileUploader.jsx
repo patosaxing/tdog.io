@@ -94,7 +94,7 @@ const FileUpload = () => {
             accept="video/*"
           ></input>
           <label for="file" class="custom-file-label">
-            Choose File
+          
           </label>
         </div>
 

@@ -15,17 +15,17 @@ const videoControl = {
       console.error('there was an error:', error.message);
     }
   },
-  videoDetailToMongo: async (id, url, uploadUser) => {
+  videoDetailToMongo: async (id, url, videoOwner) => {
     const videoDetail = new Video({
 
-      user: uploadUser,
+      user: videoOwner,
       category: 'Will be added',
       videoLink: url,
       videoID: id,
       userNote: '',
       description: 'testing1',
       reviews: [],
-      ratings: 5,
+      ratings: 3.5,
       numReviews: 100,
     });
     const createdVideo = await videoDetail.save();

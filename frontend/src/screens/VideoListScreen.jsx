@@ -59,10 +59,9 @@ const VideoListScreen = ({ history, match }) => {
 
   return (
     <div>
-      <h1 style={{ color: 'transparent' }}> VideoList screen </h1>
-      <Row className='align-items-center'>
+            <Row className='align-items-center'>
         <Col>
-          <h1>Videos</h1>
+          <h1>Your uploaded Videos</h1>
         </Col>
         <Col className='text-right'>
           <Button className='my-3' onClick={createVideoHandler}>
