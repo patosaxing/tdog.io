@@ -5,6 +5,7 @@ import axios from "axios";
 import questions from "../Interview_questions.json";
 import { Form } from "react-bootstrap";
 import CloudUpload from "../../img/CloudUpload.svg";
+import { useDispatch, useSelector } from 'react-redux';
 
 const FileUpload = () => {
   // eslint-disable-next-line
@@ -15,6 +16,13 @@ const FileUpload = () => {
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [category, setCategory] = useState("Basic interview questions");
   const [Skill, setSkill] = useState("");
+
+  const dispatch = useDispatch();
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user } = userDetails;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
 
   const onSubmit = async (e) => {
