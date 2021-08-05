@@ -30,8 +30,9 @@ const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill) => {
     numReviews: 100,
   });
   const createdVideo = await videoDetail.save();
-  // res.status(201).json(createdVideo);
   console.log('fromMongoDB', createdVideo);
+  // res.status(201).json(createdVideo);
+  return createdVideo;
 };
 
 
@@ -39,7 +40,7 @@ const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill) => {
 // @route   POST /api/videos
 const createVideo = async (req, res) => {
   console.log('req.body from the frontend:', req.body);
-  const file = req.files.file;
+  const file = req.files.file; /// bug here again 🟥
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
   const videoOwner = req.body.userID
@@ -50,28 +51,33 @@ const createVideo = async (req, res) => {
   console.log('Skill from frontend'.red, qSkill);
 
   // upload file to server
-  await file.mv(filePath, err => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send(err);
-    }
-  });
-
-  // send file from server to google drive 
-  const { id, url } = await uploadToG(fileN);
-
-  console.log('id from uploadtoG', id);
-  console.log('url from uploadtoG', url);
-
-  // Create a video record in MongoDB collection
-  videoDetailToMongo(id, url, videoOwner, qCat, qSkill);
-
-
-  delServerFile(filePath);
-
-};
-
-
-
+  const fileUpload = async () => {
+    console.log('testing to see if it called');
+    const fileResult = await (
+      new Promise((resolve, reject) => {
+        file.mv(filePath, async err => {
+          if (err) {
+            console.error(err);
+            reject(res.status(500).send(err)) ;
+          } else {
+            // send file from server to google drive 
+            const googleRes = await uploadToG(fileN);
+            console.log('id from uploadtoG'.blue, googleRes);
+            // console.log('url from uploadtoG', url);
+            resolve(googleRes); 
+          }
+        })
+      }));
+    console.log('***********result is :'.green, fileResult);
+    return fileResult;
+    // Create a video record in MongoDB collection
+    // delServerFile(filePath);
+  };
+  const result = await fileUpload();
+  console.log('reuslt id'.green, result);
+  const {id, url} = result;
+  const videoRecord = await videoDetailToMongo(id, url, videoOwner, qCat, qSkill);
+  res.status(201).json(videoRecord);
+}
 
 module.exports = createVideo;
