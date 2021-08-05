@@ -49,7 +49,7 @@ const FileUpload = () => {
       // console.log("formData Skill", submitFile.files.length);
 
       try {
-        const res = await axios.post("/api/videos/upload", formData, {
+        const res = await axios.post("/api/videos", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
