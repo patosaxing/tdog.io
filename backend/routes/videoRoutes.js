@@ -21,12 +21,13 @@ router.post("/upload", async (req, res) => {
     }
   });
 
+
   res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
 
   // delete file from server after sending to cloud
   setTimeout(() => {
     videoControl.delServerFile(filePath);
-  }, 3000);
+  }, 3500);
 });
 
 module.exports = router;

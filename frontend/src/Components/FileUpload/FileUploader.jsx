@@ -17,9 +17,9 @@ const FileUpload = () => {
   const [category, setCategory] = useState("Basic interview questions");
   const [Skill, setSkill] = useState("");
 
-  const dispatch = useDispatch();
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
+  // const dispatch = useDispatch();
+  // const userDetails = useSelector((state) => state.userDetails);
+  // const { loading, error, user } = userDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -27,6 +27,7 @@ const FileUpload = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    console.log('userInfo from Redux:  ', userInfo);
     let formData = new FormData();
 
     let submitFile = document.querySelector("#customFile");
@@ -72,7 +73,7 @@ const FileUpload = () => {
         // if (err.response.status === 500) {
         if (err.status === 500) {
           setMessage(
-            "There was a problem with the server => contact Patrick or Gary"
+            "There was a problem with the server"
           );
         } else {
           setMessage(err.msg);
