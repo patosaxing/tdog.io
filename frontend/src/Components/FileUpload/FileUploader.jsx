@@ -42,7 +42,9 @@ const FileUpload = () => {
     } else {
       formData.append("name", submitFile.files[0].name);
       formData.append("category", category);
-      console.log("formData here:", formData.value);
+      formData.append("Skills", Skill);
+      
+      console.log("formData here:", formData);
       console.log("file onsubmit", submitFile.files.length);
 
       try {
