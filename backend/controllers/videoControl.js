@@ -58,25 +58,30 @@ const createVideo = async (req, res) => {
         file.mv(filePath, async err => {
           if (err) {
             console.error(err);
-            reject(res.status(500).send(err)) ;
+            reject(res.status(500).send(err));
           } else {
             // send file from server to google drive 
             const googleRes = await uploadToG(fileN);
             console.log('id from uploadtoG'.blue, googleRes);
             // console.log('url from uploadtoG', url);
-            resolve(googleRes); 
+            resolve(googleRes);
           }
         })
       }));
     console.log('***********result is :'.green, fileResult);
     return fileResult;
-    // Create a video record in MongoDB collection
-    // delServerFile(filePath);
+
+    
+    
   };
   const result = await fileUpload();
   console.log('reuslt id'.green, result);
-  const {id, url} = result;
+  const { id, url } = result;
+  // Create a video record in MongoDB collection
   const videoRecord = await videoDetailToMongo(id, url, videoOwner, qCat, qSkill);
+  
+  // delete file in server after successful upload
+  delServerFile(filePath);
   res.status(201).json(videoRecord);
 }
 

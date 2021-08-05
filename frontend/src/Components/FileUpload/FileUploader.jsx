@@ -5,7 +5,7 @@ import axios from "axios";
 import questions from "../Interview_questions.json";
 import { Form } from "react-bootstrap";
 import CloudUpload from "../../img/CloudUpload.svg";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 const FileUpload = () => {
   // eslint-disable-next-line
@@ -24,10 +24,9 @@ const FileUpload = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('userInfo from Redux:  ', userInfo);
+    console.log("userInfo from Redux:  ", userInfo);
     let formData = new FormData();
 
     let submitFile = document.querySelector("#customFile");
@@ -44,40 +43,43 @@ const FileUpload = () => {
       formData.append("category", category);
       formData.append("Skill", Skill);
       formData.append("userID", userInfo._id);
-      
+
       console.log("formData userID:", userInfo._id);
       // console.log("formData Skill", submitFile.files.length);
 
       try {
+        setMessage("...🗃 Uploading your video ⇡...  ");
         const res = await axios.post("/api/videos", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+         
           onUploadProgress: (progressEvent) => {
             setUploadPercentage(
               parseInt(
-                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                Math.round((progressEvent.loaded * 92) / (progressEvent.total * 1.05))
               )
             );
           },
         });
+        
+        
+        
 
-        // const { fileName, filePath } = res.data;
+        setTimeout(() => {
+          setUploadPercentage(100);
+          setMessage("📂 Successfully uploaded to Eval-view server  ");
+        }, 1000);
 
-        // setUploadedFile({ fileName, filePath });
-
-        setMessage("📂 Successfully uploaded to Eval-view server  ");
         // Clear percentage in the progressBar and reset states
         setTimeout(() => {
           setUploadPercentage(0);
           setMessage("");
-        }, 4000);
+        }, 2000);
       } catch (err) {
         // if (err.response.status === 500) {
         if (err.status === 500) {
-          setMessage(
-            "There was a problem with the server"
-          );
+          setMessage("There was a problem with the server");
         } else {
           setMessage(err.msg);
         }
@@ -86,7 +88,7 @@ const FileUpload = () => {
     }
   };
   return (
-    <div className="fileUploader" >
+    <div className="fileUploader">
       <h3 className="my-4">
         <img src={CloudUpload} alt="cloud Upload" /> Upload your Recording🎞 to
         Eval-view{" "}
@@ -105,9 +107,7 @@ const FileUpload = () => {
             class="custom-file-input"
             accept="video/*"
           ></input>
-          <label for="file" class="custom-file-label">
-          
-          </label>
+          <label for="file" class="custom-file-label"></label>
         </div>
 
         <div>
