@@ -42,10 +42,11 @@ const FileUpload = () => {
     } else {
       formData.append("name", submitFile.files[0].name);
       formData.append("category", category);
-      formData.append("Skills", Skill);
+      formData.append("Skill", Skill);
+      formData.append("userID", userInfo._id);
       
-      console.log("formData here:", formData);
-      console.log("file onsubmit", submitFile.files.length);
+      console.log("formData userID:", userInfo._id);
+      // console.log("formData Skill", submitFile.files.length);
 
       try {
         const res = await axios.post("/api/videos/upload", formData, {

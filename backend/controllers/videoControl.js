@@ -15,15 +15,15 @@ const videoControl = {
       console.error('there was an error:', error.message);
     }
   },
-  videoDetailToMongo: async (id, url, videoOwner) => {
+  videoDetailToMongo: async (id, url, videoOwner, qCat, qSkill) => {
     const videoDetail = new Video({
 
       user: videoOwner,
-      category: 'Will be added',
+      category: qCat || '❗notFound',
       videoLink: url,
       videoID: id,
       userNote: '',
-      description: 'testing1',
+      description: qSkill || '❗notFound',
       reviews: [],
       ratings: 3.5,
       numReviews: 100,

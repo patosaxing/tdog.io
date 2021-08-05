@@ -25,7 +25,7 @@ const drive = google.drive({
 });
 
 // Uploadiing
-exports.uploadToG = async (fileN, uploadUser) => {
+exports.uploadToG = async (fileN, uploadUser, qCat, qSkill) => {
 
   const filePath = path.join(__dirname, "../uploads", fileN);
 
@@ -40,11 +40,11 @@ exports.uploadToG = async (fileN, uploadUser) => {
         body: fs.createReadStream(filePath),
       },
     });
-    // const googleFileId = response.data.id;
-    // res.send(JSON.stringify(uploadedID));
+
     console.log('response from google drive ⮯⮯'.blue, response.data);
-    console.log('File uploaded with database ID', response.data.id.bgGreen);
+
     const fileId = response.data.id;
+
     // Get the file URL from google drive
     await drive.permissions.create({
       fileId,
@@ -68,7 +68,7 @@ exports.uploadToG = async (fileN, uploadUser) => {
     console.log('resutl from ext URL function'.magenta, result.data.webViewLink);
 
     // Save video metadata to MongoDB
-    videoControl.videoDetailToMongo(fileId, result.data.webViewLink, uploadUser);
+    videoControl.videoDetailToMongo(fileId, result.data.webViewLink, uploadUser, qCat, qSkill);
 
   } catch (error) {
     console.log('error from google Drive API: ', error.message);
@@ -87,30 +87,3 @@ exports.deleteFileOnG = async (googleFileId) => {
     console.log(error.message);
   }
 }
-
-// GetExternalURL
-// exports.generatePublicUrl = async (googleFileId) => {
-//   try {
-
-//     await drive.permissions.create({
-//       fileId: googleFileId,
-//       requestBody: {
-//         role: 'reader',
-//         type: 'anyone',
-//       },
-//     });
-
-//     /* 
-//     webViewLink: View the file in browser
-//     webContentLink: Direct download link 
-//     */
-//     const result = await drive.files.get({
-//       fileId: googleFileId,
-//       fields: 'webViewLink, webContentLink',
-//     });
-//     console.log(result.data);
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
-
