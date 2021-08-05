@@ -12,7 +12,7 @@ router.post("/upload", async (req, res,) => {
   const file = req.files.file;
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
-  const videoOwner = req.body.userID // how do I access the req from here???🟥;
+  const videoOwner = req.body.userID 
   console.log('userID from frontend'.red, videoOwner.green);
   const qCat = req.body.category;
   console.log('Category from frontend'.red, qCat);
