@@ -32,9 +32,11 @@ const FileUpload = () => {
     let submitFile = document.querySelector("#customFile");
     console.log("submit file :", submitFile.files[0]);
     formData.append("file", submitFile.files[0]);
+    const fileSize = submitFile.files[0].size;
+    console.log('file size for uploading ', fileSize);
 
-    if (submitFile.files.length < 1) {
-      setMessage("👇 Please select a video file");
+    if (fileSize >= 50010) {
+      setMessage("👇 File exceeded size limit of 50MB");
       return setTimeout(() => {
         setMessage("");
       }, 3000);
@@ -53,18 +55,17 @@ const FileUpload = () => {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-         
+
           onUploadProgress: (progressEvent) => {
             setUploadPercentage(
               parseInt(
-                Math.round((progressEvent.loaded * 92) / (progressEvent.total * 1.05))
+                Math.round(
+                  (progressEvent.loaded * 92) / (progressEvent.total * 1.05)
+                )
               )
             );
           },
         });
-        
-        
-        
 
         setTimeout(() => {
           setUploadPercentage(100);
@@ -104,6 +105,7 @@ const FileUpload = () => {
             type="file"
             name="file"
             id="customFile"
+            required={true}
             class="custom-file-input"
             accept="video/*"
           ></input>
