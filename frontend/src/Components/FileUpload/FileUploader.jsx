@@ -35,8 +35,8 @@ const FileUpload = () => {
     const fileSize = submitFile.files[0].size;
     console.log('file size for uploading ', fileSize);
 
-    if (fileSize >= 50010) {
-      setMessage("👇 File exceeded size limit of 50MB");
+    if (fileSize > 50000000) {
+      setMessage("❗ File exceeded size limit of 50MB");
       return setTimeout(() => {
         setMessage("");
       }, 3000);
@@ -50,7 +50,7 @@ const FileUpload = () => {
       // console.log("formData Skill", submitFile.files.length);
 
       try {
-        setMessage("...🗃 Uploading your video ⇡...  ");
+        setMessage("... Uploading ...  ");
         const res = await axios.post("/api/videos", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -60,7 +60,7 @@ const FileUpload = () => {
             setUploadPercentage(
               parseInt(
                 Math.round(
-                  (progressEvent.loaded * 92) / (progressEvent.total * 1.05)
+                  (progressEvent.loaded * 92) / (progressEvent.total * (Math.random() * (1 - 1.1) + 1))
                 )
               )
             );
