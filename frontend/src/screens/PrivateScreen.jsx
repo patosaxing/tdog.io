@@ -20,7 +20,7 @@ const PrivateScreen = () => {
           <WebcamStreamCapture />
           <QuestionSelection />
         </div>
-        <FileUpload / >
+        {/* <FileUpload / > */}
         <VideoListScreen />
        
       </div>

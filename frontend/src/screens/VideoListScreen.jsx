@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import FileUploader from "../components/FileUpload/FileUploader";
 // import Paginate from "../components/Paginate";
 import {
   listMyVideos,
@@ -32,7 +33,7 @@ const VideoListScreen = ({ history }) => {
   //   success: successCreate,
   //   video: createdVideo,
   // } = videoCreate;
-
+  const [showUploader, SetShowUploader] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -62,6 +63,7 @@ const VideoListScreen = ({ history }) => {
 
   return (
     <div>
+      {showUploader && <FileUploader />}
       <Row className="align-items-center">
         <Col>
           <h1>Your uploaded Videos</h1>
@@ -71,6 +73,11 @@ const VideoListScreen = ({ history }) => {
             ➕ Upload a new Video
           </Button>
         </Col> */}
+        <Col className="text-right">
+          <Button className="my-3" onClick={() => SetShowUploader(true)}>
+            ➕ Upload a new Video
+          </Button>
+        </Col>
       </Row>
       {/* {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
