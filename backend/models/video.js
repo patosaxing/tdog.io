@@ -64,6 +64,11 @@ const videoSchema = mongoose.Schema(
       required: false,
       default: 0,
     },
+    public: { 
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,
