@@ -48,7 +48,10 @@ const VideoListScreen = ({ history }) => {
   }, [dispatch, history, userInfo, listMyVideos]);
 
   const deleteHandler = (id) => {
-    if (window.confirm(" ⚠️ Confirm deleting this Video? ")) {
+    // if (window.confirm(" ⚠️ Confirm deleting this Video? ")) {
+    if (
+      window.confirm(" working on this function, not enough brainpower 😢 ")
+    ) {
       dispatch(deleteVideo(id));
     }
   };
@@ -106,7 +109,7 @@ const VideoListScreen = ({ history }) => {
                   <td>{video.rating}</td>
                   <td>{video.category}</td>
                   <td>{video.userNote}</td>
-                  <td>{video.sharePublic ? ' ☑️' : ''}</td>
+                  <td>{video.sharePublic ? " ☑️" : ""}</td>
                   <td>{video.description}</td>
                   <td>
                     <LinkContainer to={`/admin/video/${video._id}/edit`}>
