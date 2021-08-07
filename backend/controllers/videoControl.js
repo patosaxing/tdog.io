@@ -89,11 +89,11 @@ const createVideo = async (req, res) => {
 // @route   GET /api/videos/myvideos
 
 const getMyVideos = async (req, res) => {
-  console.log('line92'.bgRed, req.user);
+  console.log('line92'.bgRed, req.userInfo);
   // const videos = await Video.find({ user: req.userInfo._id });
   const videos = await Video.find({}); // condition will be set here for myVideos only
   res.json(videos);
-  console.log('backend res videos :'.bgRed, videos);
+
 };
 
 
