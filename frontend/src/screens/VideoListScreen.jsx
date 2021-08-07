@@ -45,7 +45,7 @@ const VideoListScreen = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, listMyVideos]);
 
   const deleteHandler = (id) => {
     if (window.confirm(" ⚠️ Confirm deleting this Video? ")) {
@@ -87,6 +87,7 @@ const VideoListScreen = ({ history }) => {
                 <th>Rating</th>
                 <th>CATEGORY</th>
                 <th>UserNote</th>
+                <th>Public</th>
                 <th>Description</th>
                 <th>Edit / DEL</th>
               </tr>
@@ -95,11 +96,17 @@ const VideoListScreen = ({ history }) => {
               {videos.map((video) => (
                 <tr key={video._id}>
                   {/* <td>{video._id}</td> */}
-                  <td><a href={`${video.videoLink}`} target="_blank"> play video </a> </td>
-                  
+                  <td>
+                    <a href={`${video.videoLink}`} target="_blank">
+                      {" "}
+                      play video{" "}
+                    </a>{" "}
+                  </td>
+
                   <td>{video.rating}</td>
                   <td>{video.category}</td>
                   <td>{video.userNote}</td>
+                  <td>{video.sharePublic ? ' ☑️' : ''}</td>
                   <td>{video.description}</td>
                   <td>
                     <LinkContainer to={`/admin/video/${video._id}/edit`}>

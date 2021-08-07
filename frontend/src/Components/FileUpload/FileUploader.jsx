@@ -3,7 +3,7 @@ import Message from "./Message";
 import Progress from "./Progress";
 import axios from "axios";
 import questions from "../Interview_questions.json";
-import { Form } from "react-bootstrap";
+import { Form, InputGroup, FormControl } from "react-bootstrap";
 import CloudUpload from "../../img/CloudUpload.svg";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,6 +16,8 @@ const FileUpload = () => {
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [category, setCategory] = useState("Basic interview questions");
   const [Skill, setSkill] = useState("");
+  const [userNote, setUserNote] = useState("");
+  const [sharePublic, setSharePublic] = useState(false);
 
   // const dispatch = useDispatch();
   // const userDetails = useSelector((state) => state.userDetails);
@@ -33,7 +35,7 @@ const FileUpload = () => {
     console.log("submit file :", submitFile.files[0]);
     formData.append("file", submitFile.files[0]);
     const fileSize = submitFile.files[0].size;
-    console.log('file size for uploading ', fileSize);
+    console.log("file size for uploading ", fileSize);
 
     if (fileSize > 50000000) {
       setMessage("❗ File exceeded size limit of 50MB");
@@ -45,6 +47,9 @@ const FileUpload = () => {
       formData.append("category", category);
       formData.append("Skill", Skill);
       formData.append("userID", userInfo._id);
+      formData.append("sharePublic", sharePublic);
+      formData.append("userNote", userNote);
+
 
       console.log("formData userID:", userInfo._id);
       // console.log("formData Skill", submitFile.files.length);
@@ -60,7 +65,8 @@ const FileUpload = () => {
             setUploadPercentage(
               parseInt(
                 Math.round(
-                  (progressEvent.loaded * 92) / (progressEvent.total * (Math.random() * (1 - 1.1) + 1))
+                  (progressEvent.loaded * 92) /
+                    (progressEvent.total * (Math.random() * (1 - 1.3) + 1))
                 )
               )
             );
@@ -90,10 +96,10 @@ const FileUpload = () => {
   };
   return (
     <div className="fileUploader">
-      <h3 className="my-4">
+      <h4 className="my-4">
         <img src={CloudUpload} alt="cloud Upload" /> Upload your Recording🎞 to
         Eval-view{" "}
-      </h3>
+      </h4>
       {message ? <Message msg={message} /> : null}
       {/* <h4>{question}</h4> */}
 
@@ -128,7 +134,7 @@ const FileUpload = () => {
             ))}
           </Form.Control>
         </div>
-        <h4 style={{ color: "transparent" }}>spacer</h4>
+        <h6 style={{ color: "transparent" }}>spacer</h6>
         <Form.Label>Skill related to this recording</Form.Label>
         <Form.Control
           type="text"
@@ -137,7 +143,19 @@ const FileUpload = () => {
           required={true}
           onChange={(e) => setSkill(e.target.value)}
         ></Form.Control>
-
+        <h6 style={{ color: "transparent" }}>spacer</h6>
+        <Form.Label>Additional notes</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="eg. ABC company uses this question..."
+          value={userNote}
+          required={false}
+          onChange={(e) => setUserNote(e.target.value)}
+        ></Form.Control>
+        <h6 style={{ color: "transparent" }}>spacer</h6>
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Check type="checkbox" label="Share this video to public for feedback" onClick={()=>setSharePublic(true)} />
+        </Form.Group>
         <input
           type="submit"
           value="Upload 🖅"

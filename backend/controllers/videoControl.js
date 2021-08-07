@@ -17,13 +17,14 @@ const delServerFile = async (fPath) => {
 
 
 // @desc    Callback function  to create a video record in MongoDB
-const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill) => {
+const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill, sharePublic, userNote) => {
   const videoDetail = new Video({
     user: videoOwner,
     category: qCat || '❗notFound',
     videoLink: url,
     videoID: id,
-    userNote: '',
+    userNote,
+    sharePublic,
     description: qSkill || '❗notFound',
     reviews: [],
     ratings: 3.5,
@@ -46,6 +47,8 @@ const createVideo = async (req, res) => {
   const videoOwner = req.body.userID
   console.log('userID from frontend'.red, videoOwner.green);
   const qCat = req.body.category;
+  const sharePublic = req.body.sharePublic;
+  const userNote = req.body.userNote;
   console.log('Category from frontend'.red, qCat);
   const qSkill = req.body.Skill;
   console.log('Skill from frontend'.red, qSkill);
@@ -78,7 +81,7 @@ const createVideo = async (req, res) => {
   console.log('reuslt id'.green, result);
   const { id, url } = result;
   // Create a video record in MongoDB collection
-  const videoRecord = await videoDetailToMongo(id, url, videoOwner, qCat, qSkill);
+  const videoRecord = await videoDetailToMongo(id, url, videoOwner, qCat, qSkill, sharePublic, userNote);
 
   // delete file in server after successful upload
   delServerFile(filePath);

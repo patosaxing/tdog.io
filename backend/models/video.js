@@ -64,7 +64,7 @@ const videoSchema = mongoose.Schema(
       required: false,
       default: 0,
     },
-    public: { 
+    sharePublic: {
       type: Boolean,
       required: true,
       default: false,
