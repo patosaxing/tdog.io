@@ -38,9 +38,6 @@ const VideoListScreen = ({ history }) => {
 
   const myVideosList = useSelector((state) => state.myVideosList);
   const { loading, error, videos } = myVideosList;
-  // const { loading: loadingVideos, error: errorVideos, videos } = myVideosList;
-
-  console.log('videos before useEffect', videos);
 
   useEffect(() => {
     if (!userInfo) {
@@ -85,7 +82,7 @@ const VideoListScreen = ({ history }) => {
           <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
+                {/* <th>ID</th> */}
                 <th>Preview Link</th>
                 <th>Rating</th>
                 <th>CATEGORY</th>
@@ -97,9 +94,10 @@ const VideoListScreen = ({ history }) => {
             <tbody>
               {videos.map((video) => (
                 <tr key={video._id}>
-                  <td>{video._id}</td>
-                  <td>{video.videoLink}</td>
-                  <td>${video.rating}</td>
+                  {/* <td>{video._id}</td> */}
+                  <td><a href={`${video.videoLink}`} target="_blank"> play video </a> </td>
+                  
+                  <td>{video.rating}</td>
                   <td>{video.category}</td>
                   <td>{video.userNote}</td>
                   <td>{video.description}</td>
