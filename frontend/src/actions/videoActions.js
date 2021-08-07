@@ -18,11 +18,48 @@ import {
   VIDEO_CREATE_REVIEW_REQUEST,
   VIDEO_CREATE_REVIEW_SUCCESS,
   VIDEO_CREATE_REVIEW_FAIL,
-  VIDEO_TOP_REQUEST,
-  VIDEO_TOP_SUCCESS,
-  VIDEO_TOP_FAIL,
+  VIDEO_LIST_MY_REQUEST,
+  VIDEO_LIST_MY_SUCCESS,
+  VIDEO_LIST_MY_FAIL,
 } from '../constants/videoConstants'; ///COntinue adding constant on this branch : Jul-19
 import { logout } from './userActions';
+
+export const listMyVideos = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: VIDEO_LIST_MY_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/videos/myvideos`, config);
+
+    dispatch({
+      type: VIDEO_LIST_MY_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: VIDEO_LIST_MY_FAIL,
+      payload: message,
+    });
+  }
+}
 
 export const listVideos = (keyword = '', pageNumber = '') => async (
   dispatch) => {
@@ -229,23 +266,23 @@ export const createVideoReview = (videoId, review) => async (
   }
 }
 
-export const listTopVideos = () => async (dispatch) => {
-  try {
-    dispatch({ type: VIDEO_TOP_REQUEST });
+// export const listTopVideos = () => async (dispatch) => {
+//   try {
+//     dispatch({ type: VIDEO_TOP_REQUEST });
 
-    const { data } = await axios.get(`/api/videos/top`);
+//     const { data } = await axios.get(`/api/videos/top`);
 
-    dispatch({
-      type: VIDEO_TOP_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: VIDEO_TOP_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-}
+//     dispatch({
+//       type: VIDEO_TOP_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: VIDEO_TOP_FAIL,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// }

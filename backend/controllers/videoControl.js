@@ -40,7 +40,7 @@ const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill) => {
 // @route   POST /api/videos
 const createVideo = async (req, res) => {
   console.log('req.body from the frontend:', req.body);
-  const file = req.files.file; /// bug here again 🟥
+  const file = req.files.file;
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
   const videoOwner = req.body.userID
@@ -71,18 +71,28 @@ const createVideo = async (req, res) => {
     console.log('***********result is :'.green, fileResult);
     return fileResult;
 
-    
-    
+
+
   };
   const result = await fileUpload();
   console.log('reuslt id'.green, result);
   const { id, url } = result;
   // Create a video record in MongoDB collection
   const videoRecord = await videoDetailToMongo(id, url, videoOwner, qCat, qSkill);
-  
+
   // delete file in server after successful upload
   delServerFile(filePath);
   res.status(201).json(videoRecord);
 }
 
-module.exports = createVideo;
+// @desc    Get logged in user videos
+// @route   GET /api/videos/myvideos
+
+const getMyVideos = async (req, res) => {
+  console.log('line92'.bgRed, req.body.user);
+  // const videos = await Video.find({ user: req.userInfo._id });
+  const videos = await Video.find({ user: req.user});
+  res.json(videos);
+};
+
+module.exports = { createVideo, getMyVideos };

@@ -60,11 +60,10 @@ h2 {
   }
 }
 
-.fileUploader{
-
-border-radius: 1rem;
-background: #f6f4f4;
-box-shadow:  -30px -30px 59px #b4b2b2,
-             30px 30px 59px #ffffff;
-padding: 0.5rem;
+.fileUploader {
+  border-radius: 1rem;
+  background: #f6f4f4;
+  box-shadow: -30px -30px 59px #b4b2b2, 30px 30px 59px #ffffff;
+  padding: 0.5rem;
+  margin: 1.5rem 0;
 }

@@ -20,8 +20,8 @@ const videoSchema = mongoose.Schema(
   {
     user: {  // to log video's owner
       type: mongoose.Schema.Types.ObjectId,
-      required: false,
-      ref: 'user',
+      required: true,
+      ref: 'User',
     },
     category: { // pulling from question catergory
       type: String,

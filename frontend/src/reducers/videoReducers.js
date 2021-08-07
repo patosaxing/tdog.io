@@ -20,9 +20,7 @@ import {
   VIDEO_CREATE_REVIEW_SUCCESS,
   VIDEO_CREATE_REVIEW_FAIL,
   VIDEO_CREATE_REVIEW_RESET,
-  VIDEO_TOP_REQUEST,
-  VIDEO_TOP_SUCCESS,
-  VIDEO_TOP_FAIL,
+ 
 } from '../constants/videoConstants';
 
 export const videoListReducer = (state = { videos: [] }, action) => {
@@ -116,15 +114,15 @@ export const videoReviewCreateReducer = (state = {}, action) => {
   }
 }
 
-export const videoTopRatedReducer = (state = { videos: [] }, action) => {
-  switch (action.type) {
-    case VIDEO_TOP_REQUEST:
-      return { loading: true, videos: [] };
-    case VIDEO_TOP_SUCCESS:
-      return { loading: false, videos: action.payload };
-    case VIDEO_TOP_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-}
+// export const videoTopRatedReducer = (state = { videos: [] }, action) => {
+//   switch (action.type) {
+//     case VIDEO_TOP_REQUEST:
+//       return { loading: true, videos: [] };
+//     case VIDEO_TOP_SUCCESS:
+//       return { loading: false, videos: action.payload };
+//     case VIDEO_TOP_FAIL:
+//       return { loading: false, error: action.payload };
+//     default:
+//       return state;
+//   }
+// }

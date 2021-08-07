@@ -20,15 +20,9 @@ const PrivateScreen = () => {
           <WebcamStreamCapture />
           <QuestionSelection />
         </div>
-        <FileUpload />
+        <FileUpload / >
         <VideoListScreen />
-        {/* <Row>
-          {videos.map((video) => (
-            <Col key={video._id} sm={12} md={6} lg={4} xl={3}>
-              <Video video={video} />
-            </Col>
-          ))}
-        </Row> */}
+       
       </div>
     </div>
   );
