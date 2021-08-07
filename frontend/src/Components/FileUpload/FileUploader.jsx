@@ -50,7 +50,6 @@ const FileUpload = () => {
       formData.append("sharePublic", sharePublic);
       formData.append("userNote", userNote);
 
-
       console.log("formData userID:", userInfo._id);
       // console.log("formData Skill", submitFile.files.length);
 
@@ -119,7 +118,7 @@ const FileUpload = () => {
         </div>
 
         <div>
-          <h6>Catergory of this recording</h6>
+          <h6>Select catergory of this recording</h6>
           <Form.Control
             as="select"
             value={category}
@@ -138,7 +137,7 @@ const FileUpload = () => {
         <Form.Label>Skill related to this recording</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter Skills"
+          placeholder="e.g. Marketing, Project Tracking, Medical Research..."
           value={Skill}
           required={true}
           onChange={(e) => setSkill(e.target.value)}
@@ -147,14 +146,18 @@ const FileUpload = () => {
         <Form.Label>Additional notes</Form.Label>
         <Form.Control
           type="text"
-          placeholder="eg. ABC company uses this question..."
+          placeholder="e.g. ABC company uses this question..."
           value={userNote}
           required={false}
           onChange={(e) => setUserNote(e.target.value)}
         ></Form.Control>
         <h6 style={{ color: "transparent" }}>spacer</h6>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Share this video to public for feedback" onClick={()=>setSharePublic(true)} />
+          <Form.Check
+            type="checkbox"
+            label="Share this video to public for feedback"
+            onClick={() => setSharePublic(true)}
+          />
         </Form.Group>
         <input
           type="submit"
