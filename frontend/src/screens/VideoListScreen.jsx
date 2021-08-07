@@ -74,9 +74,14 @@ const VideoListScreen = ({ history }) => {
           </Button>
         </Col> */}
         <Col className="text-right">
-          <Button className="my-3" onClick={() => SetShowUploader(true)}>
+          {!showUploader && <Button className="my-3" onClick={() => SetShowUploader(true)}>
             ➕ Upload a new Video
-          </Button>
+          </Button>}
+          {showUploader && (
+            <Button className="my-3" onClick={() => SetShowUploader(false)}>
+              Close video upload
+            </Button>
+          )}
         </Col>
       </Row>
       {/* {loadingDelete && <Loader />}
