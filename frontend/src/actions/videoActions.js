@@ -34,17 +34,26 @@ export const listMyVideos = () => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    const config = {
+    let config = {
+      method: 'get',
+      url: `/api/videos/myvideos`,
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
+        'Authorization': `Bearer ${userInfo.token}`
+      }
     };
 
-    const { data } = await axios.get(`/api/videos/myvideos`, config);
-
+    const videos = await axios(config)
+      .then((response) => {
+        return(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log('videos here', videos);
+    
     dispatch({
       type: VIDEO_LIST_MY_SUCCESS,
-      payload: data,
+      // payload: data,
     });
   } catch (error) {
     const message =

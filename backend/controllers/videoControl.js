@@ -3,7 +3,7 @@ const { unlink } = require('fs/promises');
 const Video = require('../models/video');
 const { uploadToG, deleteFileOnG, generatePublicUrl } = require('./googleDriveApi');
 const path = require('path');
-
+const asyncHandler = require('express-async-handler');
 
 // @desc    Callback function to delete file in backend server after gDrive
 const delServerFile = async (fPath) => {
@@ -89,10 +89,12 @@ const createVideo = async (req, res) => {
 // @route   GET /api/videos/myvideos
 
 const getMyVideos = async (req, res) => {
-  console.log('line92'.bgRed, req.body.user);
+  console.log('line92'.bgRed, req.user);
   // const videos = await Video.find({ user: req.userInfo._id });
-  const videos = await Video.find({ user: req.user});
+  const videos = await Video.find({});
   res.json(videos);
+  console.log('videos', videos.red);
 };
+
 
 module.exports = { createVideo, getMyVideos };

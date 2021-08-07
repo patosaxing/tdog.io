@@ -83,6 +83,7 @@ const VideoListScreen = ({ history}) => {
                 <th>Rating</th>
                 <th>CATEGORY</th>
                 <th>UserNote</th>
+                <th>Description</th>
                 <th>Edit / DEL</th>
               </tr>
             </thead>
@@ -94,6 +95,7 @@ const VideoListScreen = ({ history}) => {
                   <td>${video.rating}</td>
                   <td>{video.category}</td>
                   <td>{video.userNote}</td>
+                  <td>{video.description}</td>
                   <td>
                     <LinkContainer to={`/admin/video/${video._id}/edit`}>
                       <Button variant="light" className="btn-sm">
