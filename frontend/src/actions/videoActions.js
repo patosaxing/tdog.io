@@ -21,40 +21,50 @@ import {
   VIDEO_LIST_MY_REQUEST,
   VIDEO_LIST_MY_SUCCESS,
   VIDEO_LIST_MY_FAIL,
-} from '../constants/videoConstants'; ///COntinue adding constant on this branch : Jul-19
+} from '../constants/videoConstants'; ///COntinue adding constant on this branch
 import { logout } from './userActions';
 
 export const listMyVideos = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: VIDEO_LIST_MY_REQUEST,
+      type: VIDEO_LIST_REQUEST,
     });
 
     const {
       userLogin: { userInfo },
     } = getState();
 
-    let config = {
-      method: 'get',
-      url: `/api/videos/myvideos`,
+    const config = {
       headers: {
-        'Authorization': `Bearer ${userInfo.token}`
-      }
+        Authorization: `Bearer ${userInfo.token}`,
+      },
     };
 
-    const videos = await axios(config)
-      .then((response) => {
-        return(JSON.stringify(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log('videos here', videos);
-    
+    const { data } = await axios.get(`/api/videos/myvideos`, config);
+
+
+    // let config = {
+    //   method: 'get',
+    //   url: `/api/videos/myvideos`,
+    //   headers: {
+    //     'Authorization': `Bearer ${userInfo.token}`
+    //   }
+    // };
+
+    // const videos = await axios(config)
+    //   .then((response) => {
+    //     return (JSON.stringify(response.data));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // // return data;
+    // console.log('frontEND videos here', videos);
     dispatch({
-      type: VIDEO_LIST_MY_SUCCESS,
-      // payload: data,
+      type: VIDEO_LIST_SUCCESS,
+      payload: data,
     });
+    
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -64,7 +74,7 @@ export const listMyVideos = () => async (dispatch, getState) => {
       dispatch(logout())
     }
     dispatch({
-      type: VIDEO_LIST_MY_FAIL,
+      type: VIDEO_LIST_FAIL,
       payload: message,
     });
   }

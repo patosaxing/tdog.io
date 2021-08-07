@@ -23,16 +23,17 @@ import {
  
 } from '../constants/videoConstants';
 
-export const videoListReducer = (state = { videos: [] }, action) => {
+export const myVideosListReducer = (state = { videos: [] }, action) => {
   switch (action.type) {
     case VIDEO_LIST_REQUEST:
       return { loading: true, videos: [] };
     case VIDEO_LIST_SUCCESS:
       return {
         loading: false,
-        videos: action.payload.videos,
-        pages: action.payload.pages,
-        page: action.payload.page,
+        videos: action.payload,
+        // videos: action.payload.videos,
+        // pages: action.payload.pages,
+        // page: action.payload.page,
       };
     case VIDEO_LIST_FAIL:
       return { loading: false, error: action.payload };

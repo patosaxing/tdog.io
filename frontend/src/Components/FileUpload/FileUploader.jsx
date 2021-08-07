@@ -51,7 +51,7 @@ const FileUpload = () => {
 
       try {
         setMessage("... Uploading ...  ");
-        const res = await axios.post("/api/videos", formData, {
+        await axios.post("/api/videos", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

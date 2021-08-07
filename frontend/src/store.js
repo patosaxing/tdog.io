@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
-  videoListReducer,
+  myVideosListReducer,
   videoDetailsReducer,
   videoDeleteReducer,
   videoCreateReducer,
@@ -22,7 +22,7 @@ import {
 } from './reducers/userReducers'
 
 const reducer = combineReducers({
-  videoList: videoListReducer,
+  myVideosList: myVideosListReducer,
   videoDetails: videoDetailsReducer,
   videoDelete: videoDeleteReducer,
   videoCreate: videoCreateReducer,

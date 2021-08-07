@@ -4,44 +4,51 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import Paginate from "../components/Paginate";
-import { listMyVideos, deleteVideo, createVideo } from "../actions/videoActions";
-import { VIDEO_CREATE_RESET } from "../constants/videoConstants";
+// import Paginate from "../components/Paginate";
+import {
+  listMyVideos,
+  deleteVideo,
+  createVideo,
+} from "../actions/videoActions";
+// import { VIDEO_CREATE_RESET } from "../constants/videoConstants";
 
-const VideoListScreen = ({ history}) => {
- 
+const VideoListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
-  const videoList = useSelector((state) => state.videoList);
-  const { loading, error, videos, page, pages } = videoList;
+  // const videoList = useSelector((state) => state.videoList);
+  // const { loading, error, videos, page, pages } = videoList;
 
-  const videoDelete = useSelector((state) => state.videoDelete);
-  const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: successDelete,
-  } = videoDelete;
+  // const videoDelete = useSelector((state) => state.videoDelete);
+  // const {
+  //   loading: loadingDelete,
+  //   error: errorDelete,
+  //   success: successDelete,
+  // } = videoDelete;
 
-  const videoCreate = useSelector((state) => state.videoCreate);
-  const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
-    video: createdVideo,
-  } = videoCreate;
+  // const videoCreate = useSelector((state) => state.videoCreate);
+  // const {
+  //   loading: loadingCreate,
+  //   error: errorCreate,
+  //   success: successCreate,
+  //   video: createdVideo,
+  // } = videoCreate;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const myVideosList = useSelector((state) => state.myVideosList);
+  const { loading, error, videos } = myVideosList;
+  // const { loading: loadingVideos, error: errorVideos, videos } = myVideosList;
+
+  console.log('videos before useEffect', videos);
+
   useEffect(() => {
     if (!userInfo) {
-      history.push('/login');
+      history.push("/login");
     } else {
-    
-        dispatch(listMyVideos());
-      } 
+      dispatch(listMyVideos());
     }
-  , [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo]);
 
   const deleteHandler = (id) => {
     if (window.confirm(" ⚠️ Confirm deleting this Video? ")) {
@@ -65,10 +72,10 @@ const VideoListScreen = ({ history}) => {
           </Button>
         </Col> */}
       </Row>
-      {loadingDelete && <Loader />}
+      {/* {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
       {loadingCreate && <Loader />}
-      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
+      {errorCreate && <Message variant="danger">{errorCreate}</Message>} */}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -114,7 +121,7 @@ const VideoListScreen = ({ history}) => {
               ))}
             </tbody>
           </Table>
-          <Paginate pages={pages} page={page} isAdmin={true} />
+          {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
         </>
       )}
     </div>
