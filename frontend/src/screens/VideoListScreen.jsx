@@ -51,7 +51,7 @@ const VideoListScreen = ({ history }) => {
   const deleteHandler = (id) => {
     // if (window.confirm(" ⚠️ Confirm deleting this Video? ")) {
     if (
-      window.confirm(" working on this function, not enough brainpower 😢 ")
+      window.confirm(" working on this function, not enough brainpower 😢 YET ")
     ) {
       dispatch(deleteVideo(id));
     }
