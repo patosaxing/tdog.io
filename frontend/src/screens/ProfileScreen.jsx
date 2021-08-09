@@ -20,7 +20,7 @@ const ProfileScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [primarySkill, setPrimarySkills] = useState([]);
+  const [primarySkillsArray, setPrimarySkillsArray] = useState([]);
   const [userLocation, setuserLocation] = useState("");
   const [linkedIN, setLinkedIn] = useState("");
   const [image, setImage] = useState("");
@@ -52,9 +52,13 @@ const ProfileScreen = ({ location, history }) => {
     // }, [dispatch, history, userInfo, user]);
   }, [dispatch, history, userInfo]);
 
+
+  const primarySkills = primarySkillsArray.map(item=>item.value);
+  console.log(primarySkills);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("primary skill is: ", primarySkill);
+    console.log("primary skills is: ", primarySkills);
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
@@ -64,7 +68,7 @@ const ProfileScreen = ({ location, history }) => {
           username,
           email,
           password,
-          primarySkill,
+          primarySkills,
           userLocation,
           linkedIN,
         })
@@ -126,12 +130,13 @@ const ProfileScreen = ({ location, history }) => {
                 <Select
                   options={skillsList}
                   isMulti
-                  value={primarySkill}
+                  value={primarySkillsArray}
                   closeMenuOnSelect={true}
                   components={animatedComponents}
                   onChange={(e) => {
-                    console.log(e);
-                    setPrimarySkills(e.value);
+                    // SkillsFromList(e);
+                    setPrimarySkillsArray(e);
+                    console.log(primarySkills);
                   }}
                 />
               </Form.Group>

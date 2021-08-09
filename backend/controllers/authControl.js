@@ -19,7 +19,7 @@ const authControl = {
             username,
             email,
             password,
-            primarySkill: [],
+            primarySkills: [],
             userLocation: '',
             linkedIN: '',
         });
@@ -31,7 +31,7 @@ const authControl = {
                 email: user.email,
                 isAdmin: user.isAdmin,
                 token: generateToken(user._id),
-                primarySkill: user.primarySkill,
+                primarySkills: user.primarySkills,
                 userLocation: user.userLocation,
                 linkedIN,
             });
@@ -54,7 +54,7 @@ const authControl = {
                 email: user.email,
                 isAdmin: user.isAdmin,
                 token: generateToken(user._id),
-                primarySkill: user.primarySkill,
+                primarySkills: user.primarySkills,
                 userLocation: user.userLocation,
                 linkedIN: user.linkedIN,
             });
@@ -160,7 +160,7 @@ const authControl = {
                 name: user.name,
                 email: user.email,
                 isAdmin: user.isAdmin,
-                primarySkill: user.primarySkill,
+                primarySkills: user.primarySkills,
                 userLocation: user.userLocation,
                 linkedIN: user.linkedIN,
             });
@@ -198,15 +198,15 @@ const authControl = {
         if (user) {
             user.username = req.body.username || user.username;
             user.email = req.body.email || user.email;
-            user.primarySkill = req.body.primarySkill || user.primarySkill;
+            user.primarySkills = req.body.primarySkills || user.primarySkills;
             user.userLocation = req.body.userLocation || user.userLocation;
             user.linkedIN = req.body.linkedIN || user.linkedIN;
 
             if (req.body.password) {
                 user.password = req.body.password;
             }
-            if (req.body.primarySkill) {
-                user.primarySkill = req.body.primarySkill;
+            if (req.body.primarySkills) {
+                user.primarySkills = req.body.primarySkills;
             }
             if (req.body.linkedIN) {
                 user.linkedIN = req.body.linkedIN;
@@ -223,7 +223,7 @@ const authControl = {
                 email: updatedUser.email,
                 isAdmin: updatedUser.isAdmin,
                 token: generateToken(updatedUser._id),
-                primarySkill: updatedUser.primarySkill,
+                primarySkills: updatedUser.primarySkills,
                 userLocation: updatedUser.userLocation,
                 linkedIN: updatedUser.linkedIN,
             });

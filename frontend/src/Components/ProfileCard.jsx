@@ -32,7 +32,7 @@ const ProfileCard = () => {
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item href="#"><i class="fas fa-drafting-compass"></i>{" "}
-          {userInfo ? userInfo.primarySkill : "PRIMARY SKILL"}</Dropdown.Item>
+          {userInfo ? userInfo.primarySkills : "PRIMARY SKILL"}</Dropdown.Item>
           <Dropdown.Item href="#"> 📍 {userInfo ? userInfo.userLocation : " LOCATION"}</Dropdown.Item>
           <Dropdown.Item href="#">📧 {userInfo ? userInfo.email : "EMAIL"}</Dropdown.Item>
           <Dropdown.Item href="#"><i class="fab fa-linkedin"></i>{" "}

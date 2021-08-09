@@ -26,7 +26,7 @@ const UserSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    primarySkill: {
+    primarySkills: {
       type: [],
       required: false,
     },
