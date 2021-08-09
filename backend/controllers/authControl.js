@@ -33,7 +33,7 @@ const authControl = {
                 token: generateToken(user._id),
                 primarySkills: user.primarySkills,
                 userLocation: user.userLocation,
-                linkedIN,
+                linkedIN: user.linkedIN,
             });
         } else {
             // Good practice: FOr backend security, just send back a generic error to FE
