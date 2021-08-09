@@ -4,7 +4,6 @@ import React from "react";
 // import videos from "../PlaceHolderData/Videos";
 import QuestionSelection from "../components/Questions";
 import WebcamStreamCapture from "../components/WebStreamCapture";
-import FileUpload from "../components/FileUpload/FileUploader";
 import { useSelector } from "react-redux";
 import ProfileCard from "../components/ProfileCard";
 import VideoListScreen from "../screens/VideoListScreen"
@@ -20,7 +19,6 @@ const PrivateScreen = () => {
           <WebcamStreamCapture />
           <QuestionSelection />
         </div>
-        {/* <FileUpload / > */}
         <VideoListScreen />
        
       </div>

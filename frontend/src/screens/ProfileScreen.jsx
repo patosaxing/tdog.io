@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 // import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 // import { listMyPrivateVideos } from '../actions/Actions'; // do we need to fetch this?
 
-import skillList from "../components/Skills.json";
+import {skillsList} from "../components/skillsList";
 import ProfileCard from "../components/ProfileCard";
 
+const animatedComponents = makeAnimated();
+// const {skillOptions} = Skills;
 const ProfileScreen = ({ location, history }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -219,7 +223,13 @@ const ProfileScreen = ({ location, history }) => {
               </Form.Group>
 
               <hr />
-              <Form.Group className="autocomplete" controlId="skills">
+              <Select
+                options= {skillsList}
+                isMulti
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+              />
+              {/* <Form.Group className="autocomplete" controlId="skills">
                 <Form.Label>
                   <i class="fas fa-drafting-compass"></i> Primary Skill
                 </Form.Label>
@@ -235,7 +245,7 @@ const ProfileScreen = ({ location, history }) => {
                     setPrimarySkills(autocomplete(document.getElementById("myInput"), skillList));
                   }}
                 ></Form.Control>
-              </Form.Group>
+              </Form.Group> */}
 
               <Form.Group controlId="userLocation">
                 <Form.Label>📍 Location</Form.Label>

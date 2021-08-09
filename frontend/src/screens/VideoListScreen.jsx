@@ -46,7 +46,7 @@ const VideoListScreen = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, history, userInfo, listMyVideos]);
+  }, [dispatch, history, userInfo]);
 
   const deleteHandler = (id) => {
     // if (window.confirm(" ⚠️ Confirm deleting this Video? ")) {
@@ -74,11 +74,20 @@ const VideoListScreen = ({ history }) => {
           </Button>
         </Col> */}
         <Col className="text-right">
-          {!showUploader && <Button className="my-3" variant="outline-dark" onClick={() => SetShowUploader(true)}>
-            ⮉ Upload a new Video
-          </Button>}
+          {!showUploader && (
+            <Button
+              className="my-3"
+              variant="outline-dark"
+              onClick={() => SetShowUploader(true)}
+            >
+              ⮉ Upload a new Video
+            </Button>
+          )}
           {showUploader && (
-            <Button  variant="outline-danger" onClick={() => SetShowUploader(false)}>
+            <Button
+              variant="outline-danger"
+              onClick={() => SetShowUploader(false)}
+            >
               ❌ Close uploader
             </Button>
           )}
@@ -112,7 +121,11 @@ const VideoListScreen = ({ history }) => {
                 <tr key={video._id}>
                   {/* <td>{video._id}</td> */}
                   <td>
-                    <a href={`${video.videoLink}`} target="_blank">
+                    <a
+                      href={`${video.videoLink}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       {" "}
                       play video{" "}
                     </a>{" "}
