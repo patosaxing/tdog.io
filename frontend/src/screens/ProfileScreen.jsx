@@ -166,10 +166,10 @@ const ProfileScreen = ({ location, history }) => {
       }
     }
     /*execute a function when someone clicks in the document:*/
-    document.addEventListener("click", function (e) {
-      setPrimarySkills(e.target.value);
-      closeAllLists(e.target);
-    });
+    // document.addEventListener("click", function (e) {
+    //   setPrimarySkills(e.target.value);
+    //   // closeAllLists(e.target);
+    // });
   }
 
   return (
@@ -231,8 +231,8 @@ const ProfileScreen = ({ location, history }) => {
                   placeholder="Enter Skill"
                   onChange={(e) => {
                     autocomplete(document.getElementById("myInput"), skillList);
-                    console.log("skill section", e.target);
-                    setPrimarySkills(e.target.value);
+                    console.log("skill section", e.target.value);
+                    setPrimarySkills(autocomplete(document.getElementById("myInput"), skillList));
                   }}
                 ></Form.Control>
               </Form.Group>
