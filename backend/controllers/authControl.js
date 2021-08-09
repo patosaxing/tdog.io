@@ -42,7 +42,7 @@ const authControl = {
         }
     }),
     //Login Function
-    login: asyncHandler(async (req, res, next) => {
+    login: async (req, res, next) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
@@ -62,7 +62,7 @@ const authControl = {
             return res.status(401).json("Invalid email or password");
         }
 
-    }),
+    },
 
 
     // Forgor Password Initiation
