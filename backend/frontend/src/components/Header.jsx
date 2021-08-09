@@ -77,7 +77,7 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
           <Navbar.Text>
-            <a href="https://gwhagerty.github.io/bootstrapp_eval_view/">
+            <a href="https://evalview.github.io/app/">
               {" "}
               <img
                 style={{ maxWidth: "3.5rem" }}

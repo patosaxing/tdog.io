@@ -189,8 +189,8 @@ const ProfileScreen = ({ location, history }) => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-
-              <Form.Group controlId="image">
+                  {/* to be developed 👇 */}
+              {/* <Form.Group controlId="image">
                 <Form.Label>Image</Form.Label>
                 <Form.Control
                   type="text"
@@ -205,7 +205,7 @@ const ProfileScreen = ({ location, history }) => {
                   // onChange={uploadFileHandler}
                 ></Form.File>
                 {uploading && <Loader />}
-              </Form.Group>
+              </Form.Group> */}
               <hr />
               <Button type="submit" variant="primary">
                 Update
