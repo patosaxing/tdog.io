@@ -27,7 +27,7 @@ const UserSchema = mongoose.Schema(
       default: false,
     },
     primarySkill: {
-      type: String,
+      type: [],
       required: false,
     },
     userLocation: { // must use "userLocation" to avoid naming conflict

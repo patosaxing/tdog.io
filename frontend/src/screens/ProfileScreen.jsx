@@ -20,9 +20,9 @@ const ProfileScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [primarySkill, setPrimarySkills] = useState("");
+  const [primarySkill, setPrimarySkills] = useState([]);
   const [userLocation, setuserLocation] = useState("");
-  const [userLinkedIN, setUserLinkedIn] = useState("");
+  const [linkedIN, setLinkedIn] = useState("");
   const [image, setImage] = useState("");
   const [uploading, setUploading] = useState(false);
 
@@ -54,6 +54,7 @@ const ProfileScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log("primary skill is: ", primarySkill);
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
@@ -65,7 +66,7 @@ const ProfileScreen = ({ location, history }) => {
           password,
           primarySkill,
           userLocation,
-          userLinkedIN,
+          linkedIN,
         })
       );
     }
@@ -126,11 +127,11 @@ const ProfileScreen = ({ location, history }) => {
                   options={skillsList}
                   isMulti
                   value={primarySkill}
-                  closeMenuOnSelect={false}
+                  closeMenuOnSelect={true}
                   components={animatedComponents}
                   onChange={(e) => {
-                    console.log(e)
-                    setPrimarySkills(e.value)
+                    console.log(e);
+                    setPrimarySkills(e.value);
                   }}
                 />
               </Form.Group>
@@ -145,7 +146,7 @@ const ProfileScreen = ({ location, history }) => {
                 ></Form.Control>
               </Form.Group>
 
-              <Form.Group controlId="userLinkedIn">
+              <Form.Group controlId="LinkedIn">
                 <Form.Label>
                   {" "}
                   <i class="fab fa-linkedin"></i> LinkedIn
@@ -153,8 +154,8 @@ const ProfileScreen = ({ location, history }) => {
                 <Form.Control
                   type="text"
                   placeholder="www.linkedin.com/..."
-                  value={userLinkedIN}
-                  onChange={(e) => setUserLinkedIn(e.target.value)}
+                  value={linkedIN}
+                  onChange={(e) => setLinkedIn(e.target.value)}
                 ></Form.Control>
               </Form.Group>
 

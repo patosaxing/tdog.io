@@ -19,7 +19,7 @@ const authControl = {
             username,
             email,
             password,
-            primarySkill: '',
+            primarySkill: [],
             userLocation: '',
             linkedIN: '',
         });
@@ -33,12 +33,12 @@ const authControl = {
                 token: generateToken(user._id),
                 primarySkill: user.primarySkill,
                 userLocation: user.userLocation,
-                linkedIN: user.linkedIN,
+                linkedIN,
             });
         } else {
             // Good practice: FOr backend security, just send back a generic error to FE
             return res.status(400).json("Invalid user data. All fields are reuired.");
-            
+
         }
     }),
     //Login Function
@@ -64,7 +64,7 @@ const authControl = {
 
     }),
 
-    
+
     // Forgor Password Initiation
     forgotPassword: async (req, res, next) => {
         // Send Email to email provided but first check if user exists
@@ -166,9 +166,9 @@ const authControl = {
             });
         } else {
             return res.status(401).json("User not found");
-
         }
     },
+
 
     // @desc    Update user profile
     // @route   PUT /api/users/profile
