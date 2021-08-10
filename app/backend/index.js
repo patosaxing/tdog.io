@@ -37,19 +37,19 @@ app.use('/api/videos', videoRoutes);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/frontend/build')));
   app.get('*', (req, res) => {
-    const index = path.join(__dirname, 'build', 'index.html');
+    const index = path.join(__dirname, '/frontend/build/index.html');
     res.sendFile(index);
   })
- } else {
+} else {
   app.get('/', (req, res) => {
     res.send('App is running at ROOT');
   })
 }
-    // res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-  
-  // app.get('*', function (req, res) {
-  //   const index = path.join(__dirname, 'build', 'index.html');
-  //   res.sendFile(index);
+// res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+
+// app.get('*', function (req, res) {
+//   const index = path.join(__dirname, 'build', 'index.html');
+//   res.sendFile(index);
 
 //Port Connection
 const port = process.env.PORT || 5000
