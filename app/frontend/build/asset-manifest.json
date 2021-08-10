@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.27c090a3.chunk.css",
+    "main.js": "/static/js/main.a57e7f09.chunk.js",
+    "main.js.map": "/static/js/main.a57e7f09.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9c201301.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9c201301.js.map",
+    "static/js/2.5fb23607.chunk.js": "/static/js/2.5fb23607.chunk.js",
+    "static/js/2.5fb23607.chunk.js.map": "/static/js/2.5fb23607.chunk.js.map",
+    "static/js/3.fa181572.chunk.js": "/static/js/3.fa181572.chunk.js",
+    "static/js/3.fa181572.chunk.js.map": "/static/js/3.fa181572.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.27c090a3.chunk.css.map": "/static/css/main.27c090a3.chunk.css.map",
+    "static/js/2.5fb23607.chunk.js.LICENSE.txt": "/static/js/2.5fb23607.chunk.js.LICENSE.txt",
+    "static/media/CloudUpload.308c573c.svg": "/static/media/CloudUpload.308c573c.svg",
+    "static/media/Exit.87c6041a.svg": "/static/media/Exit.87c6041a.svg",
+    "static/media/JobSeeker.675aa7b7.svg": "/static/media/JobSeeker.675aa7b7.svg",
+    "static/media/Login.7a715a90.svg": "/static/media/Login.7a715a90.svg",
+    "static/media/ProfileAvatar.abfc4c54.svg": "/static/media/ProfileAvatar.abfc4c54.svg",
+    "static/media/Recruiter.edfb8fcb.svg": "/static/media/Recruiter.edfb8fcb.svg",
+    "static/media/VideoUpload.1d450b25.svg": "/static/media/VideoUpload.1d450b25.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9c201301.js",
+    "static/js/2.5fb23607.chunk.js",
+    "static/css/main.27c090a3.chunk.css",
+    "static/js/main.a57e7f09.chunk.js"
+  ]
+}
