@@ -33,7 +33,6 @@
     "mongodb": "^3.6.9",
     "mongoose": "^5.13.4",
     "nodemailer": "^6.6.2",
-    "npm": "^7.19.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "vimeo": "^2.1.1"
