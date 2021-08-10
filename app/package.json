@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon backend/index.js",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "heroku-postbuild": "npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "tdog.io",
   "license": "ISC",
