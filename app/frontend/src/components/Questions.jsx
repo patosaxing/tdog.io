@@ -28,7 +28,7 @@ export default function QuestionSelection() {
   return (
       <Container>
         <Form.Group controlId="formBasicSelect">
-          <Form.Label>Click to select Category ☟</Form.Label>
+          <Form.Label>Select ☟ question Category for recording</Form.Label>
           <Form.Control
             as="select"
             value={category}
