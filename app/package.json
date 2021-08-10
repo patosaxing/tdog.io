@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon backend/index.js"
   },
   "author": "tdog.io",
   "license": "ISC",

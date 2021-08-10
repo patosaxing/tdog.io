@@ -52,8 +52,7 @@ const ProfileScreen = ({ location, history }) => {
     // }, [dispatch, history, userInfo, user]);
   }, [dispatch, history, userInfo]);
 
-
-  const primarySkills = primarySkillsArray.map(item=>item.value);
+  const primarySkills = primarySkillsArray.map((item) => item.value);
   console.log(primarySkills);
 
   const submitHandler = (e) => {
@@ -183,13 +182,13 @@ const ProfileScreen = ({ location, history }) => {
                   <i class="fas fa-lock"></i> Confirm Password
                 </Form.Label>
                 <Form.Control
-                  type="text"
+                  type="password"
                   placeholder="Confirm password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-                  {/* to be developed 👇 */}
+              {/* to be developed 👇 */}
               {/* <Form.Group controlId="image">
                 <Form.Label>Image</Form.Label>
                 <Form.Control
