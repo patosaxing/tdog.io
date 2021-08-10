@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const connectDB = require("./config/db"); // move db to config for expanding model
 const fileUpload = require('express-fileupload'); // upload file to server
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 const userRoutes = require("./routes/userRoutes");
