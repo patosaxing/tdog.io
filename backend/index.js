@@ -34,19 +34,19 @@ app.use('/api/videos', videoRoutes);
 // const __dirname = path.resolve();
 // app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
   // app.use(express.static('../frontend/build'));
-  app.use(express.static(path.join(__dirname, './frontend/build')));
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
     // const index = path.join(__dirname, 'build','index.html');
     // res.sendFile(index);
   })
-} else {
-  app.get('/', (req, res) => {
-    res.send('App is running at ROOT');
-  })
-}
+// } else {
+//   app.get('/', (req, res) => {
+//     res.send('App is running at ROOT');
+//   })
+// }
 // res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
 
 // app.get('*', function (req, res) {

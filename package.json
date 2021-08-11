@@ -14,8 +14,7 @@
     "start-server": "cd backend && npm start",
     "install": "npm run install-server && npm run install-client",
     "build": "npm run build-client",
-    "start": "set \"INLINE_RUNTIME_CHUNK=false\" &&npm run start-server"
-    
+    "start": "npm run start-server"
   },
   "repository": {
     "type": "git",
