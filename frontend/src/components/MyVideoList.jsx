@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import FileUploader from "../components/FileUpload/FileUploader";
+import Message from "./Message";
+import Loader from "./Loader";
+import FileUploader from "./FileUpload/FileUploader";
 // import Paginate from "../components/Paginate";
 import {
   listMyVideos,
@@ -13,7 +13,7 @@ import {
 } from "../actions/videoActions";
 // import { VIDEO_CREATE_RESET } from "../constants/videoConstants";
 
-const VideoListScreen = ({ history }) => {
+const MyVideoList = ({ history }) => {
   const dispatch = useDispatch();
 
   // const videoList = useSelector((state) => state.videoList);
@@ -161,4 +161,4 @@ const VideoListScreen = ({ history }) => {
   );
 };
 
-export default VideoListScreen;
+export default MyVideoList;

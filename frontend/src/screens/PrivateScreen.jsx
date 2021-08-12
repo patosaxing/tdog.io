@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 // import { Row, Col } from "react-bootstrap";
 // import Video from "../components/Video";
 // import videos from "../PlaceHolderData/Videos";
@@ -6,11 +6,11 @@ import QuestionSelection from "../components/Questions";
 import WebcamStreamCapture from "../components/WebStreamCapture";
 import { useSelector } from "react-redux";
 import ProfileCard from "../components/ProfileCard";
-import VideoListScreen from "../screens/VideoListScreen"
+import MyVideoList from "../components/MyVideoList";
 
 const PrivateScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
-  
+
   // const { userInfo } = userLogin;
   return (
     <div>
@@ -20,8 +20,7 @@ const PrivateScreen = () => {
           <WebcamStreamCapture />
           <QuestionSelection />
         </div>
-        <VideoListScreen />
-       
+        <MyVideoList />
       </div>
     </div>
   );

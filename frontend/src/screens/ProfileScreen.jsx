@@ -7,7 +7,7 @@ import makeAnimated from "react-select/animated";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
-import VideoListScreen from "../screens/VideoListScreen";
+import MyVideoList from "../components/MyVideoList";
 // import { listMyPrivateVideos } from '../actions/Actions'; // do we need to fetch this?
 
 import { skillsList } from "../components/skillsList";
@@ -82,29 +82,29 @@ const ProfileScreen = ({ location, history }) => {
       <div>
         <ProfileCard />
         {!showVideoList ? (
-        <div>
-          <Button
-            className="my-3"
-            variant="primary"
-            onClick={() => SetShowVideoList(true)}
-          >
-            🗁 Show list of all your videos ꄤ
-          </Button>
-        </div>
-      ) : (
-        <div>
-          {" "}
-          <Button
-            className="my-3"
-            variant="secondary"
-            onClick={() => SetShowVideoList(false)}
-          >
-            Update your profile
-          </Button>
-        </div>
-      )}
+          <div>
+            <Button
+              className="my-3"
+              variant="primary"
+              onClick={() => SetShowVideoList(true)}
+            >
+              🗁 Show list of all your videos ꄤ
+            </Button>
+          </div>
+        ) : (
+          <div>
+            {" "}
+            <Button
+              className="my-3"
+              variant="secondary"
+              onClick={() => SetShowVideoList(false)}
+            >
+              Update your profile
+            </Button>
+          </div>
+        )}
       </div>
-      
+
       {!showVideoList ? (
         <Row className="m-3">
           <Col md={15}>
@@ -242,7 +242,7 @@ const ProfileScreen = ({ location, history }) => {
           </Col>
         </Row>
       ) : (
-        <VideoListScreen />
+        <MyVideoList />
       )}
       {/* {!showVideoList ? (
         <div>
