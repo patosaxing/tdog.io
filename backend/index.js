@@ -33,29 +33,11 @@ connectDB(); // connection call has to be after .env
 app.use('/api/users', userRoutes);
 app.use('/api/videos', videoRoutes);
 
-
-
-// const __dirname = path.resolve();
-// app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
-
-// if (process.env.NODE_ENV === 'production') {
-// app.use(express.static('../frontend/build'));
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
-  // const index = path.join(__dirname, 'build','index.html');
-  // res.sendFile(index);
 })
-// } else {
-//   app.get('/', (req, res) => {
-//     res.send('App is running at ROOT');
-//   })
-// }
-// res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
 
-// app.get('*', function (req, res) {
-//   const index = path.join(__dirname, 'build', 'index.html');
-//   res.sendFile(index);
 
 //Port Connection
 const port = process.env.PORT || 5000
@@ -64,12 +46,3 @@ const port = process.env.PORT || 5000
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`.blue)
 });
-
-// const server = app.listen(port, () => {
-//   console.log(`Application listening at http://localhost:${port}`.yellow)
-// });
-
-// process.on("unhandledRejection", (err, promise) => {
-//   console.log(`Logged Error from listening port: ${err}`.magenta);
-//   server.close(() => process.exit(1)); // close server to prevent extra loading/detail
-// });
