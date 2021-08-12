@@ -4,6 +4,8 @@ const Video = require('../models/video');
 const { uploadToG, deleteFileOnG, generatePublicUrl } = require('./googleDriveApi');
 const path = require('path');
 const asyncHandler = require('express-async-handler');
+const JWTdecoder = require('../middleware/JWTdecoder');
+const { ObjectId } = require('mongodb');
 
 // @desc    Callback function to delete file in backend server after gDrive
 const delServerFile = async (fPath) => {
@@ -92,9 +94,10 @@ const createVideo = async (req, res) => {
 // @route   GET /api/videos/myvideos
 
 const getMyVideos = async (req, res) => {
-  console.log('line92'.bgRed, req.userInfo);
+  const userDetail = JWTdecoder(req.headers.authorization);
+  console.log('line92'.bgRed, userDetail.id);
   // const videos = await Video.find({ user: req.userInfo._id });
-  const videos = await Video.find({}); // condition will be set here for myVideos only
+  const videos = await Video.find({ user: ObjectId(`${userDetail.id}`) }); // condition will be set here for myVideos only
   res.json(videos);
 
 };

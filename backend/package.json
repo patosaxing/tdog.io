@@ -11,6 +11,7 @@
   "author": "tdog.io",
   "license": "ISC",
   "dependencies": {
+    "atob": "^2.1.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
