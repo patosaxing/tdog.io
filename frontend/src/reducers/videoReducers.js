@@ -115,6 +115,25 @@ export const videoReviewCreateReducer = (state = {}, action) => {
   }
 }
 
+export const publicVideoReducer = (state = { videos: [] }, action) => {
+  switch (action.type) {
+    case PUBLIC_VIDEO_REQUEST:
+      return { loading: true, videos: [] };
+    case PUBLIC_VIDEO_SUCCESS:
+      return {
+        loading: false,
+        videos: action.payload,
+        // videos: action.payload.videos,
+        // pages: action.payload.pages,
+        // page: action.payload.page,
+      };
+    case PUBLIC_VIDEO_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+}
+
 // export const videoTopRatedReducer = (state = { videos: [] }, action) => {
 //   switch (action.type) {
 //     case VIDEO_TOP_REQUEST:

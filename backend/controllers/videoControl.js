@@ -102,5 +102,14 @@ const getMyVideos = async (req, res) => {
 
 };
 
+const getPublicVideos = async (req, res) => {
+  const userDetail = JWTdecoder(req.headers.authorization);
+  console.log('line92'.bgRed, userDetail.id);
+  // const videos = await Video.find({ user: req.userInfo._id });
+  const videos = await Video.find({ sharePublic: true }); // condition will be set here for myVideos only
+  res.json(videos);
 
-module.exports = { createVideo, getMyVideos };
+};
+
+
+module.exports = { createVideo, getMyVideos, getPublicVideos };

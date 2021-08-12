@@ -79,6 +79,44 @@ export const listMyVideos = () => async (dispatch, getState) => {
     });
   }
 }
+// added to seperate private and shared video
+export const listPublicVideos = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PUBLIC_VIDEO_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/videos/publicvideos`, config);
+
+    dispatch({
+      type: PUBLIC_VIDEO_SUCCESS,
+      payload: data,
+    });
+    
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: PUBLIC_VIDEO_FAIL,
+      payload: message,
+    });
+  }
+}
 
 export const listVideos = (keyword = '', pageNumber = '') => async (
   dispatch) => {
