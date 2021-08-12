@@ -64,8 +64,8 @@ const FileUpload = () => {
             setUploadPercentage(
               parseInt(
                 Math.round(
-                  (progressEvent.loaded * 92) /
-                    (progressEvent.total * (Math.random() * (1 - 1.3) + 1))
+                  (progressEvent.loaded * 95.937) /
+                    (progressEvent.total)
                 )
               )
             );
@@ -102,7 +102,7 @@ const FileUpload = () => {
       {message ? <Message msg={message} /> : null}
       {/* <h4>{question}</h4> */}
 
-      <Progress percentage={uploadPercentage} />
+      <Progress percentage={uploadPercentage*0.93} />
 
       <form onSubmit={onSubmit}>
         <div className="custom-file my-4">

@@ -81,9 +81,32 @@ const ProfileScreen = ({ location, history }) => {
     <div style={{ display: "flex" }}>
       <div>
         <ProfileCard />
+        {!showVideoList ? (
+        <div>
+          <Button
+            className="my-3"
+            variant="primary"
+            onClick={() => SetShowVideoList(true)}
+          >
+            🗁 Show list of all your videos ꄤ
+          </Button>
+        </div>
+      ) : (
+        <div>
+          {" "}
+          <Button
+            className="my-3"
+            variant="secondary"
+            onClick={() => SetShowVideoList(false)}
+          >
+            Update your profile
+          </Button>
+        </div>
+      )}
       </div>
+      
       {!showVideoList ? (
-        <Row>
+        <Row className="m-3">
           <Col md={15}>
             <h2>Update Profile 📄</h2>
 
@@ -221,30 +244,28 @@ const ProfileScreen = ({ location, history }) => {
       ) : (
         <VideoListScreen />
       )}
-      <div>
-        {!showVideoList ? (
-          <div>
-            <Button
-              className="my-3"
-              variant="outline-info"
-              onClick={() => SetShowVideoList(true)}
-            >
-              🗁 Show list of all your videos ꄤ
-            </Button>
-          </div>
-        ) : (
-          <div>
-            {" "}
-            <Button
-              className="my-3"
-              variant="outline-info"
-              onClick={() => SetShowVideoList(false)}
-            >
-              Update your profile
-            </Button>
-          </div>
-        )}
-      </div>
+      {/* {!showVideoList ? (
+        <div>
+          <Button
+            className="my-3"
+            variant="primary"
+            onClick={() => SetShowVideoList(true)}
+          >
+            🗁 Show list of all your videos ꄤ
+          </Button>
+        </div>
+      ) : (
+        <div>
+          {" "}
+          <Button
+            className="m-3"
+            variant="secondary"
+            onClick={() => SetShowVideoList(false)}
+          >
+            Update your profile
+          </Button>
+        </div>
+      )} */}
     </div>
   );
 };
