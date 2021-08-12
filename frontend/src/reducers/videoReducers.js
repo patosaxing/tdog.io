@@ -125,7 +125,8 @@ export const publicVideosReducer = (state = { videos: [] }, action) => {
     case PUBLIC_VIDEO_SUCCESS:
       return {
         loading: false,
-        videos: action.payload.videos,
+        // videos: action.payload.videos,
+        videos: action.payload,
         pages: action.payload.pages,
       };
     case PUBLIC_VIDEO_FAIL:

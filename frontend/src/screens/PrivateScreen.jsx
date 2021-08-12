@@ -10,32 +10,37 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
 import Meta from '../components/Meta';
+import { listPublicVideos } from '../actions/videoActions';
 
-const PrivateScreen = ({ match }) => {
+// const PrivateScreen = ({ match }) => {
+const PrivateScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
-  const keyword = match.params.keyword;
-  const pageNumber = match.params.pageNumber || 1;
+  // const keyword = match.params.keyword;
+  // const pageNumber = match.params.pageNumber || 1;
 
   const dispatch = useDispatch();
 
   const publicVideos = useSelector((state) => state.publicVideos);
-  const { loading, error, videos, page, pages } = publicVideos;
+  const { loading, error, videos } = publicVideos;
+  // const { loading, error, videos, page, pages } = publicVideos;
 
   useEffect(() => {
-    dispatch(publicVideos(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
+    // dispatch(publicVideos(keyword, pageNumber));
+    dispatch(listPublicVideos());
+  }, [dispatch]);
+  // }, [dispatch, keyword, pageNumber]);
 
   // const { userInfo } = userLogin;
   return (
     <div>
-      <Meta />
+      {/* <Meta />
       {!keyword ? (
         <h1> PUBLICK VIDEOS HERE </h1>
       ) : (
         <Link to="/" className="btn btn-light">
           Go Back
         </Link>
-      )}
+      )} */}
       <div>
         <div style={{ display: "flex" }}>
           <ProfileCard />
@@ -56,11 +61,11 @@ const PrivateScreen = ({ match }) => {
                 </Col>
               ))}
             </Row>
-            <Paginate
+            {/* <Paginate
               pages={pages}
               page={page}
               // keyword={keyword ? keyword : ""}
-            />
+            /> */}
           </div>
         )}
       </div>

@@ -100,7 +100,7 @@ export const listPublicVideos = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(`/api/videos/publicvideos`, config);
-
+    console.log("data is", data);
     dispatch({
       type: PUBLIC_VIDEO_SUCCESS,
       payload: data,
