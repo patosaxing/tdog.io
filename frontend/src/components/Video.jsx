@@ -14,7 +14,7 @@ const Video = ({ video }) => {
       <Card.Body>
         
           <Card.Title as="div">
-            <strong>{video.category}</strong>
+            <strong>{video.user}</strong>
           </Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{video.description}</Card.Subtitle>
         

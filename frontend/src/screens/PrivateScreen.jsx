@@ -9,8 +9,9 @@ import ProfileCard from "../components/ProfileCard";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
-import Meta from '../components/Meta';
-import { listPublicVideos } from '../actions/videoActions';
+import Meta from "../components/Meta";
+import { listPublicVideos } from "../actions/videoActions";
+import TypeAnimation from "react-type-animation";
 
 // const PrivateScreen = ({ match }) => {
 const PrivateScreen = () => {
@@ -23,7 +24,7 @@ const PrivateScreen = () => {
   const publicVideos = useSelector((state) => state.publicVideos);
   const { loading, error, videos } = publicVideos;
   // const { loading, error, videos, page, pages } = publicVideos;
-
+  console.log('videos from reducer', videos);
   useEffect(() => {
     // dispatch(publicVideos(keyword, pageNumber));
     dispatch(listPublicVideos());
@@ -53,7 +54,19 @@ const PrivateScreen = () => {
           <Message variant="danger">{error}</Message>
         ) : (
           <div>
-            <h1>Public Video list here</h1>
+            <TypeAnimation
+              cursor={true}
+              sequence={[
+                "Record, pratice interview in a safe environment",
+                2000,
+                "Get feedback, reviews and advice from peers and professionals",
+                2000,
+                "Boost your confidence to help you ace your job interviews.",
+                2000,
+              ]}
+              wrapper="h2"
+              repeat={Infinity}
+            />
             <Row>
               {videos.map((video) => (
                 <Col key={video._id} sm={12} md={6} lg={4} xl={3}>
