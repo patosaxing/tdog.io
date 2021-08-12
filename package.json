@@ -8,6 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd backend && npm run server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-server": "cd backend && npm install && cd ..",
     "install-client": "cd frontend && npm install && cd ..",
     "build-client": "cd frontend && npm run build && cd ..",
@@ -25,5 +28,9 @@
   "bugs": {
     "url": "https://github.com/patosaxing/tdog.io/issues"
   },
-  "homepage": "https://github.com/patosaxing/tdog.io#readme"
+  "homepage": "https://github.com/patosaxing/tdog.io#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  }
 }
