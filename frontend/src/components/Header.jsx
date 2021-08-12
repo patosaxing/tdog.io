@@ -35,7 +35,8 @@ const Header = () => {
           </h6>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-          {userInfo && userInfo.isAdmin && (
+          {/* {userInfo && userInfo.isAdmin && ( */}
+          {userInfo &&  (
             <Route render={({ history }) => <SearchBox history={history} />} />
             )}
             <h4 style={{ color: "transparent" }}>spacer</h4>

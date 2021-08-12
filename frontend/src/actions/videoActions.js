@@ -21,6 +21,9 @@ import {
   VIDEO_LIST_MY_REQUEST,
   VIDEO_LIST_MY_SUCCESS,
   VIDEO_LIST_MY_FAIL,
+  PUBLIC_VIDEO_REQUEST,
+  PUBLIC_VIDEO_SUCCESS,
+  PUBLIC_VIDEO_FAIL,
 } from '../constants/videoConstants'; ///COntinue adding constant on this branch
 import { logout } from './userActions';
 

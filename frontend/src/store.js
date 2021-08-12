@@ -8,6 +8,7 @@ import {
   videoCreateReducer,
   videoUpdateReducer,
   videoReviewCreateReducer,
+  publicVideosReducer,
   // videoTopRatedReducer,
 } from './reducers/videoReducers'
 
@@ -35,6 +36,7 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
+  publicVideos: publicVideosReducer,
 });
 
 

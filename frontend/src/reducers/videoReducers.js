@@ -20,7 +20,10 @@ import {
   VIDEO_CREATE_REVIEW_SUCCESS,
   VIDEO_CREATE_REVIEW_FAIL,
   VIDEO_CREATE_REVIEW_RESET,
- 
+  PUBLIC_VIDEO_REQUEST,
+  PUBLIC_VIDEO_SUCCESS,
+  PUBLIC_VIDEO_FAIL,
+
 } from '../constants/videoConstants';
 
 export const myVideosListReducer = (state = { videos: [] }, action) => {
@@ -115,17 +118,15 @@ export const videoReviewCreateReducer = (state = {}, action) => {
   }
 }
 
-export const publicVideoReducer = (state = { videos: [] }, action) => {
+export const publicVideosReducer = (state = { videos: [] }, action) => {
   switch (action.type) {
     case PUBLIC_VIDEO_REQUEST:
       return { loading: true, videos: [] };
     case PUBLIC_VIDEO_SUCCESS:
       return {
         loading: false,
-        videos: action.payload,
-        // videos: action.payload.videos,
-        // pages: action.payload.pages,
-        // page: action.payload.page,
+        videos: action.payload.videos,
+        pages: action.payload.pages,
       };
     case PUBLIC_VIDEO_FAIL:
       return { loading: false, error: action.payload };
