@@ -18,7 +18,11 @@ const videoRoutes = require("./routes/videoRoutes");
 app.use(cors());
 app.use(express.json({ limit: '20mb', extended: true }));  // limit file size for profile img upload
 app.use(express.urlencoded({ limit: '20mb', extended: true }));  // limit file size for profile img upload
-app.use(helmet()); // routes protection
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  }),
+); // routes protection
 app.use(compression());
 app.use(fileUpload());
 app.use(cookieParser())
@@ -35,13 +39,13 @@ app.use('/api/videos', videoRoutes);
 // app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // if (process.env.NODE_ENV === 'production') {
-  // app.use(express.static('../frontend/build'));
-  app.use(express.static(path.join(__dirname, '../frontend/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-    // const index = path.join(__dirname, 'build','index.html');
-    // res.sendFile(index);
-  })
+// app.use(express.static('../frontend/build'));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  // const index = path.join(__dirname, 'build','index.html');
+  // res.sendFile(index);
+})
 // } else {
 //   app.get('/', (req, res) => {
 //     res.send('App is running at ROOT');
