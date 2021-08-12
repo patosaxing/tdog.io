@@ -26,7 +26,7 @@ const ProfileScreen = ({ location, history }) => {
   const [linkedIN, setLinkedIn] = useState("");
   const [image, setImage] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [showVideoList, SetShowVideoList] = useState(true);
+  const [showVideoList, SetShowVideoList] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -222,13 +222,28 @@ const ProfileScreen = ({ location, history }) => {
         <VideoListScreen />
       )}
       <div>
-        <Button
-          className="my-3"
-          variant="outline-info"
-          onClick={() => SetShowVideoList(true)}
-        >
-          🗁 Show list of all your videos ꄤ
-        </Button>
+        {!showVideoList ? (
+          <div>
+            <Button
+              className="my-3"
+              variant="outline-info"
+              onClick={() => SetShowVideoList(true)}
+            >
+              🗁 Show list of all your videos ꄤ
+            </Button>
+          </div>
+        ) : (
+          <div>
+            {" "}
+            <Button
+              className="my-3"
+              variant="outline-info"
+              onClick={() => SetShowVideoList(false)}
+            >
+              Update your profile
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
