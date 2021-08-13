@@ -36,9 +36,9 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
           {/* {userInfo && userInfo.isAdmin && ( */}
-          {userInfo &&  (
+          {/* {userInfo &&  (
             <Route render={({ history }) => <SearchBox history={history} />} />
-            )}
+            )} */}
             <h4 style={{ color: "transparent" }}>spacer</h4>
             <Nav className="ml-auto">
               {/* {userInfo && userInfo.isAdmin && (

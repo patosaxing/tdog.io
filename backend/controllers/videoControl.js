@@ -112,7 +112,7 @@ const getPublicVideos = async (req, res) => {
   const videos = await Video.find({ sharePublic: true }).populate('user','username');
   // const usernameInVideo = await Video.populate('user');
   console.log('usernameInVideo result here:'.bgBlue, videos)
-  res.send(videos);
+  res.json(videos);
 
 };
 
