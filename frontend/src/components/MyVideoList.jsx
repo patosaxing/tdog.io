@@ -155,8 +155,9 @@ const MyVideoList = ({ history }) => {
           </Table>
           {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
         </div>
-        ) :( <h1> You have not shared any videos yet.</h1>)
-      }
+      ) : (
+        <h1> You have not shared any videos yet.</h1>
+      )}
     </div>
   );
 };
