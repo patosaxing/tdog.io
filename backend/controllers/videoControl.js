@@ -31,7 +31,7 @@ const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill, sharePublic
     sharePublic,
     description: qSkill || '❗notFound',
     reviews: [],
-    ratings: fakeRating, 
+    ratings: fakeRating,
     numReviews: 100,
   });
   const createdVideo = await videoDetail.save();
@@ -108,8 +108,10 @@ const getPublicVideos = async (req, res) => {
   const userDetail = JWTdecoder(req.headers.authorization);
   console.log('line109'.bgBlue, userDetail);
   // const videos = await Video.find({ user: req.userInfo._id });
-  const videos = await Video.find({ sharePublic: true });
-  // console.log('getPublicVideos result here:'.bgBlue , videos)
+  // const videos = await Video.find({ sharePublic: true });
+  const videos = await Video.find({ sharePublic: true }).populate('user');
+  // const usernameInVideo = await Video.populate('user');
+  console.log('usernameInVideo result here:'.bgBlue, videos)
   res.json(videos);
 
 };
