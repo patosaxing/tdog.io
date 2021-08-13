@@ -118,15 +118,15 @@ export const videoReviewCreateReducer = (state = {}, action) => {
   }
 }
 
-export const publicVideosReducer = (state = { videos: [] }, action) => {
+export const publicVideosReducer = (state = { videos: []} , action) => {
   switch (action.type) {
     case PUBLIC_VIDEO_REQUEST:
       return { loading: true, videos: [] };
     case PUBLIC_VIDEO_SUCCESS:
       return {
         loading: false,
-        // videos: action.payload.videos,
         videos: action.payload,
+        // videos: action.payload,
         pages: action.payload.pages,
       };
     case PUBLIC_VIDEO_FAIL:

@@ -19,7 +19,7 @@ const reviewSchema = mongoose.Schema(
 const videoSchema = mongoose.Schema(
   {
     user: {  // to log video's owner
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.Mixed,
       required: true,
       ref: 'User',
     },

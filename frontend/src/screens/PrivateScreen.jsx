@@ -24,13 +24,13 @@ const PrivateScreen = () => {
   const publicVideos = useSelector((state) => state.publicVideos);
   const { loading, error, videos } = publicVideos;
   // const { loading, error, videos, page, pages } = publicVideos;
-  console.log('videos from reducer', videos);
   useEffect(() => {
     // dispatch(publicVideos(keyword, pageNumber));
     dispatch(listPublicVideos());
   }, [dispatch]);
   // }, [dispatch, keyword, pageNumber]);
-
+  
+  console.log('videos from reducer', videos);
   // const { userInfo } = userLogin;
   return (
     <div>
@@ -69,10 +69,13 @@ const PrivateScreen = () => {
             />
             <Row>
               {videos.map((video) => (
-                <Col key={video.videoID} sm={12} md={6} lg={4} xl={3}>
+                
+                
+                <Col key={video.videoID} sm={12} md={6} lg={4} xl={3}> 
                   <Video video={video} />
                 </Col>
-              ))}
+                ))}
+              
             </Row>
             {/* <Paginate
               pages={pages}

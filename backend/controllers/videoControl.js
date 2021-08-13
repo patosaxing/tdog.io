@@ -109,12 +109,11 @@ const getPublicVideos = async (req, res) => {
   console.log('line109'.bgBlue, userDetail);
   // const videos = await Video.find({ user: req.userInfo._id });
   // const videos = await Video.find({ sharePublic: true });
-  const videos = await Video.find({ sharePublic: true }).populate('user','username');
+  const videos = await Video.find({ sharePublic: true }).populate('user', 'username');
   // const usernameInVideo = await Video.populate('user');
   console.log('usernameInVideo result here:'.bgBlue, videos)
   res.json(videos);
 
 };
-
 
 module.exports = { createVideo, getMyVideos, getPublicVideos };

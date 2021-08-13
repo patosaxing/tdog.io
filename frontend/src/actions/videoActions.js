@@ -100,7 +100,14 @@ export const listPublicVideos = () => async (dispatch, getState) => {
     };
 
     const {data} = await axios.get(`/api/videos/publicvideos`, config);
-    console.log("data is", data);
+    
+    data.forEach(item=>{
+      const ownerName = item.user.username
+      console.log(ownerName)
+      item.user = ownerName;
+    });
+
+    console.log("data is....", data);
     dispatch({
       type: PUBLIC_VIDEO_SUCCESS,
       payload: data,
