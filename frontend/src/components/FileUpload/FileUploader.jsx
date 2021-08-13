@@ -64,8 +64,7 @@ const FileUpload = () => {
             setUploadPercentage(
               parseInt(
                 Math.round(
-                  (progressEvent.loaded * 95.937) /
-                    (progressEvent.total)
+                  (progressEvent.loaded * 100 * Math.random()) / progressEvent.total
                 )
               )
             );
@@ -73,15 +72,15 @@ const FileUpload = () => {
         });
 
         setTimeout(() => {
-          setUploadPercentage(100);
           setMessage("📂 Successfully uploaded to Eval-view server  ");
+          setUploadPercentage(100);
         }, 1000);
 
         // Clear percentage in the progressBar and reset states
         setTimeout(() => {
           setUploadPercentage(0);
           setMessage("");
-        }, 2000);
+        }, 2500);
       } catch (err) {
         // if (err.response.status === 500) {
         if (err.status === 500) {
@@ -102,7 +101,7 @@ const FileUpload = () => {
       {message ? <Message msg={message} /> : null}
       {/* <h4>{question}</h4> */}
 
-      <Progress percentage={uploadPercentage*0.93} />
+      <Progress percentage={uploadPercentage} />
 
       <form onSubmit={onSubmit}>
         <div className="custom-file my-4">

@@ -103,7 +103,7 @@ export const listPublicVideos = () => async (dispatch, getState) => {
     console.log("data is", data);
     dispatch({
       type: PUBLIC_VIDEO_SUCCESS,
-      payload: data,
+      payload: [data],
     });
     
   } catch (error) {
