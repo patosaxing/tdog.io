@@ -66,7 +66,7 @@ const MyVideoList = ({ history }) => {
       {showUploader && <FileUploader />}
       <Row className="align-items-center">
         <Col>
-          <h1>Your uploaded Videos</h1>
+          <h5>Your uploaded Videos</h5>
         </Col>
         {/* <Col className='text-right'>
           <Button className='my-3' onClick={createVideoHandler}>
@@ -101,8 +101,8 @@ const MyVideoList = ({ history }) => {
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
-      ) : (
-        <>
+      ) : videos ? (
+        <div>
           <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
@@ -130,11 +130,10 @@ const MyVideoList = ({ history }) => {
                       play video{" "}
                     </a>{" "}
                   </td>
-
                   <td>{video.rating}</td>
                   <td>{video.category}</td>
                   <td>{video.userNote}</td>
-                  <td>{video.sharePublic ? " ☑️" : ""}</td>
+                  <td>{video.sharePublic ? " ☑️" : "❌"}</td>
                   <td>{video.description}</td>
                   <td>
                     <LinkContainer to={`/admin/video/${video._id}/edit`}>
@@ -155,8 +154,9 @@ const MyVideoList = ({ history }) => {
             </tbody>
           </Table>
           {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
-        </>
-      )}
+        </div>
+        ) :( <h1> You have not shared any videos yet.</h1>)
+      }
     </div>
   );
 };

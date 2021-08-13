@@ -97,7 +97,7 @@ const createVideo = async (req, res) => {
 
 const getMyVideos = async (req, res) => {
   const userDetail = JWTdecoder(req.headers.authorization);
-  console.log('line92'.bgRed, userDetail.id);
+  console.log('userID from getMyVideos'.bgRed, userDetail.id);
   // const videos = await Video.find({ user: req.userInfo._id });
   const videos = await Video.find({ user: ObjectId(`${userDetail.id}`) }); // condition will be set here for myVideos only
   res.json(videos);
@@ -106,12 +106,12 @@ const getMyVideos = async (req, res) => {
 
 const getPublicVideos = async (req, res) => {
   const userDetail = JWTdecoder(req.headers.authorization);
-  console.log('line109'.bgBlue, userDetail);
+  // console.log('line109'.bgBlue, userDetail);
   // const videos = await Video.find({ user: req.userInfo._id });
   // const videos = await Video.find({ sharePublic: true });
   const videos = await Video.find({ sharePublic: true }).populate('user', 'username');
   // const usernameInVideo = await Video.populate('user');
-  console.log('usernameInVideo result here:'.bgBlue, videos)
+  console.log('total videos from controller: '.bgYellow.red, videos.length)
   res.json(videos);
 
 };
