@@ -6,7 +6,7 @@ const path = require('path');
 const asyncHandler = require('express-async-handler');
 const JWTdecoder = require('../middleware/JWTdecoder');
 const { ObjectId } = require('mongodb');
-const ratingRange = [2.5, 3, 3.5, 4, 4.5, 5]
+const ratingRange = [3, 3.5, 4, 4.5, 5]
 const fakeRating = ratingRange[(Math.random() * ratingRange.length) | 0];
 
 // @desc    Callback function to delete file in backend server after gDrive
@@ -31,7 +31,7 @@ const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill, sharePublic
     sharePublic,
     description: qSkill || '❗notFound',
     reviews: [],
-    ratings: fakeRating,
+    rating: fakeRating,
     numReviews: 100,
   });
   const createdVideo = await videoDetail.save();
