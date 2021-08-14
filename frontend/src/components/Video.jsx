@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Modal, Button } from "react-bootstrap";
+import { Card, Modal, Button, Offcanvas } from "react-bootstrap";
 // import SampleVideo from './R.png'
 import Rating from "./Rating";
 import VideoUpload from "../img/VideoUpload.svg";
@@ -9,7 +9,7 @@ const Video = ({ video }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [isOpen, setOpen] = useState(false);
+  // const [isOpen, setOpen] = useState(false);
 
   return (
     <Card className="my-3 p-3">
@@ -25,31 +25,19 @@ const Video = ({ video }) => {
           {video.description}
         </Card.Subtitle>
         {/* Offcanvas Start */}
-        <button
-          class="btn btn-primary"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvas1"
-          aria-controls="offcanvasExample"
-        >
-          Open
-        </button>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id={video.videoId}>
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title"> {video.description}</h5>
-            <button
-              type="button"
-              class="btn-close text-reset"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body">
-            <video src="https://drive.google.com/file/d/1WOHcQBa0ZDTRjKfXX0sH_-HkRwQVQTCZ/view?usp=drivesdk" width="320" height="240" controls>
-              
-            </video>
-          </div>
-        </div>
+        <Button variant="primary" onClick={handleShow}>
+        Launch
+      </Button>
+
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
         {/* Offcanvas End */}
         <Card.Text as="div">
           Rating:
