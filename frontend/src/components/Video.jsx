@@ -26,18 +26,20 @@ const Video = ({ video }) => {
         </Card.Subtitle>
         {/* Offcanvas Start */}
         <Button variant="primary" onClick={handleShow}>
-        Launch
-      </Button>
+          Play video
+        </Button>
 
-      <Offcanvas show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
-        </Offcanvas.Body>
-      </Offcanvas>
+        <Offcanvas show={show} onHide={handleClose}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>{video.user}</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <video width="320" height="240" controls>
+              <source src={video.videoLink} type="video/webm"></source>
+              Your browser does not support the video tag.
+            </video>
+          </Offcanvas.Body>
+        </Offcanvas>
         {/* Offcanvas End */}
         <Card.Text as="div">
           Rating:
