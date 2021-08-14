@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Card, Modal, Button, Offcanvas } from "react-bootstrap";
 // import SampleVideo from './R.png'
 import Rating from "./Rating";
-import VideoUpload from "../img/VideoUpload.svg";
-import PreviewVideo from "./PreviewVideo";
+
 
 const Video = ({ video }) => {
   const [show, setShow] = useState(false);
@@ -15,7 +14,7 @@ const Video = ({ video }) => {
     "/view?usp=drivesdk",
     "/preview"
   );
-  console.log(newVideoLink);
+  // console.log(newVideoLink);
   
 
   return (
