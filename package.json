@@ -1,0 +1,36 @@
+{
+  "name": "tdog.io",
+  "version": "1.0.0",
+  "description": "Evalview Full Stack",
+  "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd backend && npm run server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-server": "cd backend && npm install && cd ..",
+    "install-client": "cd frontend && npm install && cd ..",
+    "build-client": "cd frontend && npm run build && cd ..",
+    "start-server": "cd backend && npm start",
+    "install": "npm run install-server && npm run install-client",
+    "build": "npm run build-client",
+    "start": "npm run start-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patosaxing/tdog.io.git"
+  },
+  "author": "TDOG.IO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patosaxing/tdog.io/issues"
+  },
+  "homepage": "https://github.com/patosaxing/tdog.io#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
