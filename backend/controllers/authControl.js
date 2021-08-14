@@ -153,7 +153,7 @@ const authControl = {
     // @route   GET /api/users/profile
     getUserProfile: async (req, res, next) => {
         const user = await User.findById(req.user._id);
-
+        console.log('user from profile'.green, req.user._id);
         if (user) {
             res.json({
                 _id: user._id,

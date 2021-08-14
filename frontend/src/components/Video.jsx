@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Card, Modal, Button } from "react-bootstrap";
 // import SampleVideo from './R.png'
 import Rating from "./Rating";
@@ -9,6 +9,7 @@ const Video = ({ video }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [isOpen, setOpen] = useState(false);
 
   return (
     <Card className="my-3 p-3">
@@ -23,40 +24,38 @@ const Video = ({ video }) => {
         <Card.Subtitle className="mb-2 text-muted">
           {video.description}
         </Card.Subtitle>
-        <div>
-          <Button variant="primary" onClick={handleShow}>
-            Launch demo modal
-          </Button>
-
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              Woohoo, you're reading this text in a modal!
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={handleClose}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
+        {/* Offcanvas Start */}
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvas1"
+          aria-controls="offcanvasExample"
+        >
+          Open
+        </button>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id={video.videoId}>
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title"> {video.description}</h5>
+            <button
+              type="button"
+              class="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <video src="https://drive.google.com/file/d/1WOHcQBa0ZDTRjKfXX0sH_-HkRwQVQTCZ/view?usp=drivesdk" width="320" height="240" controls>
+              
+            </video>
+          </div>
         </div>
-        {/* <a href={video.videoLink}> */}
-        {/* <a href={`/video/${video._id}`}> */}
-        {/* <div style={{ width: 66, height: "auto" }}>
-            <Card.Img src={VideoUpload} />
-          </div> */}
-        {/* </a> */}
+        {/* Offcanvas End */}
         <Card.Text as="div">
           Rating:
           <Rating value={video.rating} text={``} />
           {/* <Rating value={video.rating} text={``} /> */}
         </Card.Text>
-
         <Card.Text as="h6">Total {video.numReviews} reviews</Card.Text>
       </Card.Body>
     </Card>

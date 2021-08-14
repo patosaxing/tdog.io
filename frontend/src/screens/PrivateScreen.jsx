@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Video from "../components/Video";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import QuestionSelection from "../components/Questions";
 import WebcamStreamCapture from "../components/WebStreamCapture";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileCard from "../components/ProfileCard";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import Paginate from "../components/Paginate";
-import Meta from "../components/Meta";
+// import Paginate from "../components/Paginate";
+// import Meta from "../components/Meta";
 import { listPublicVideos } from "../actions/videoActions";
 import TypeAnimation from "react-type-animation";
 
 // const PrivateScreen = ({ match }) => {
 const PrivateScreen = () => {
-  const userLogin = useSelector((state) => state.userLogin);
+  // const userLogin = useSelector((state) => state.userLogin);
   // const keyword = match.params.keyword;
   // const pageNumber = match.params.pageNumber || 1;
 

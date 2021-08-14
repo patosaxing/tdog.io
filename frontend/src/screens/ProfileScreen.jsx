@@ -24,8 +24,7 @@ const ProfileScreen = ({ location, history }) => {
   const [primarySkillsArray, setPrimarySkillsArray] = useState([]);
   const [userLocation, setuserLocation] = useState("");
   const [linkedIN, setLinkedIn] = useState("");
-  const [image, setImage] = useState("");
-  const [uploading, setUploading] = useState(false);
+  // const [uploading, setUploading] = useState(false);
   const [showVideoList, SetShowVideoList] = useState(false);
 
   const dispatch = useDispatch();
