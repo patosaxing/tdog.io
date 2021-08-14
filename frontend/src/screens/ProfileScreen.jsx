@@ -50,7 +50,7 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
-    // }, [dispatch, history, userInfo, user]);
+    // eslint-disable-next-line 
   }, [dispatch, history, userInfo]);
 
   const primarySkills = primarySkillsArray.map((item) => item.value);
