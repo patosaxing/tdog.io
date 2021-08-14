@@ -28,13 +28,13 @@ const Video = ({ video }) => {
           {video.description}
         </Card.Subtitle>
         {/* Offcanvas Start */}
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="secondary" onClick={handleShow}>
           Play video
         </Button>
 
-        <Offcanvas show={show} onHide={handleClose}>
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>{video.videoLink}</Offcanvas.Title>
+        <Offcanvas show={show} onHide={handleClose}placement="end">
+          <Offcanvas.Header closeButton >
+            <Offcanvas.Title>Previewing Video</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
           
@@ -46,6 +46,10 @@ const Video = ({ video }) => {
               autoplay
               allowFullScreen
             ></iframe>
+            <h2>User: {video.user}</h2>
+            <Rating value={video.rating} />
+            <h6>Category: {video.category}</h6>
+            <h6>Description: {video.description}</h6>
             
           </Offcanvas.Body>
         </Offcanvas>
