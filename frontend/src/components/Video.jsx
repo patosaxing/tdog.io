@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  Button,
-  Offcanvas,
-  Col,
-  Form,
-  ListGroup,
-} from "react-bootstrap";
+import { Card, Button, Offcanvas, Col, Form, ListGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Message from "../components/Message";
-import { listVideoDetails, createVideoReview } from '../actions/videoActions';
-import { VIDEO_CREATE_REVIEW_RESET } from '../constants/videoConstants';
+import { listVideoDetails, createVideoReview } from "../actions/videoActions";
+import { VIDEO_CREATE_REVIEW_RESET } from "../constants/videoConstants";
 
 const Video = ({ match, video }) => {
   const [show, setShow] = useState(false);
@@ -32,20 +25,21 @@ const Video = ({ match, video }) => {
   const { userInfo } = userLogin;
 
   const videoReviewCreate = useSelector((state) => state.videoReviewCreate);
-  const { success: successVideoReview, error: errorVideoReview, } = videoReviewCreate;
+  const { success: successVideoReview, error: errorVideoReview } =
+    videoReviewCreate;
 
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(3.5);
 
   useEffect(() => {
     if (successVideoReview) {
-      alert('Review Submitted!');
+      alert("Review Submitted!");
       setRating(3.5);
-      setComment('');
+      setComment("");
       dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
     }
     dispatch(listVideoDetails(video._id));
-  }, [dispatch]);
+  }, [dispatch, successVideoReview]);
   // }, [dispatch, match, successVideoReview]);
 
   const submitHandler = (e) => {
@@ -58,7 +52,7 @@ const Video = ({ match, video }) => {
         videoId,
       })
     );
-  }
+  };
 
   const handleLike = (video) => {};
 
@@ -79,11 +73,11 @@ const Video = ({ match, video }) => {
 
         <Offcanvas show={show} onHide={handleClose} placement="end">
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Previewing Video</Offcanvas.Title>
+            <Offcanvas.Title>User: {video.user}</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <iframe
-            tile={video.user}
+              title={video.user}
               src={newVideoLink}
               type="video/webm"
               width="100%"
@@ -91,13 +85,11 @@ const Video = ({ match, video }) => {
               autoplay
               allowFullScreen
             ></iframe>
-            <h2>User: {video.user}</h2>
             <Rating value={video.rating} text={`${video.numReviews} reviews`} />
             <h6>Category: {video.category}</h6>
             <h6>Description: {video.description}</h6>
             <Col md={6}>
-              <h2>Reviews</h2>
-                console.log('review in this video', video.reviews)
+              <h2>Reviews🗊</h2>
               {video.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {video.reviews.map((review) => (
@@ -109,7 +101,7 @@ const Video = ({ match, video }) => {
                   </ListGroup.Item>
                 ))}
                 <ListGroup.Item>
-                  <h2>Write a Customer Review</h2>
+                  <h2>✍Write a new review</h2>
                   {errorVideoReview && (
                     <Message variant="danger">{errorVideoReview}</Message>
                   )}
