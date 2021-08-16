@@ -64,7 +64,8 @@ const FileUpload = () => {
             setUploadPercentage(
               parseInt(
                 Math.round(
-                  (progressEvent.loaded * 100 * Math.random()) / progressEvent.total
+                  (progressEvent.loaded * 100 * Math.random()) /
+                    progressEvent.total
                 )
               )
             );
@@ -74,6 +75,10 @@ const FileUpload = () => {
         setTimeout(() => {
           setMessage("📂 Successfully uploaded to Eval-view server  ");
           setUploadPercentage(100);
+
+          setSkill("");
+          setUserNote("");
+          setSharePublic(false);
         }, 1000);
 
         // Clear percentage in the progressBar and reset states
