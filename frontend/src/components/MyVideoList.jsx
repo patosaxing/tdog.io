@@ -113,7 +113,7 @@ const MyVideoList = ({ history }) => {
                 <th>UserNote</th>
                 <th>Public</th>
                 <th>Description</th>
-                <th>Edit / DEL</th>
+                {/* <th>Edit / DEL</th> */}
               </tr>
             </thead>
             <tbody>
@@ -135,7 +135,7 @@ const MyVideoList = ({ history }) => {
                   <td>{video.userNote}</td>
                   <td>{video.sharePublic ? " ☑️" : "❌"}</td>
                   <td>{video.description}</td>
-                  <td>
+                  {/* <td>
                     <LinkContainer to={`/admin/video/${video._id}/edit`}>
                       <Button variant="light" className="btn-sm">
                         ⎾<i className="fas fa-edit"></i>⏌
@@ -148,7 +148,7 @@ const MyVideoList = ({ history }) => {
                     >
                       <i className="fas fa-trash"></i>
                     </Button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
