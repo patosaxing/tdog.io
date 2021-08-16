@@ -116,4 +116,48 @@ const getPublicVideos = async (req, res) => {
 
 };
 
-module.exports = { createVideo, getMyVideos, getPublicVideos };
+// @desc    Create new review
+// @route   POST /api/videos/:id/reviews
+// @access  Private
+const createVideoReview = asyncHandler(async (req, res) => {
+  const { rating, comment, videoId } = req.body;
+  console.log('body of createVideoReview'.bgGreen, req.body);
+  // const video = await Video.findById(req.params.id);
+  const video = await Video.findById(videoId);
+  console.log('video from model.find in the controller'.red, video);
+
+  if (video) {
+    // const alreadyReviewed = video.reviews.find(
+    //   (r) => r.user.toString() === req.user._id.toString()
+    // );
+
+    // if (alreadyReviewed) {
+    //   res.status(400);
+    //   throw new Error('Video already reviewed');
+    // }
+
+    const review = {
+      name: req.username,
+      rating: Number(rating),
+      comment,
+      // user: req.user._id,
+    };
+
+    console.log('review obj from copntroller'.bgCyan, review);
+    video.reviews.push(review);
+
+    video.numReviews = video.reviews.length;
+
+    video.rating =
+      video.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      video.reviews.length;
+
+    await video.save();
+    res.status(201).json({ message: 'Review added' });
+  } else {
+    res.status(404);
+    throw new Error('Video not found');
+  }
+});
+
+module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview };

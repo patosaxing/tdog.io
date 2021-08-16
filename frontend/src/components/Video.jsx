@@ -44,15 +44,18 @@ const Video = ({ match, video }) => {
       setComment('');
       dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
     }
-    dispatch(listVideoDetails(match.params.id));
-  }, [dispatch, match, successVideoReview]);
+    dispatch(listVideoDetails(video._id));
+  }, [dispatch]);
+  // }, [dispatch, match, successVideoReview]);
 
   const submitHandler = (e) => {
+    const videoId = video._id;
     e.preventDefault();
     dispatch(
-      createVideoReview(match.params.id, {
+      createVideoReview(video._id, {
         rating,
         comment,
+        videoId,
       })
     );
   }
@@ -94,6 +97,7 @@ const Video = ({ match, video }) => {
             <h6>Description: {video.description}</h6>
             <Col md={6}>
               <h2>Reviews</h2>
+                console.log('review in this video', video.reviews)
               {video.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {video.reviews.map((review) => (

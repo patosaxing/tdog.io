@@ -36,7 +36,7 @@ const VideoScreen = ({ history, match }) => {
 
   useEffect(() => {
     if (successVideoReview) {
-      alert("Review Submitted!");
+      alert("Thank-you! Review Submitted!");
       setRating(2);
       setComment("");
       dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
@@ -44,9 +44,6 @@ const VideoScreen = ({ history, match }) => {
     // dispatch(listVideoDetails(match.params.id));
   }, [dispatch, match, successVideoReview]);
 
-  const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?totalLikes=${totalLikes}`);
-  };
 
   const submitHandler = (e) => {
     e.preventDefault();
