@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
-  Modal,
   Button,
   Offcanvas,
   Col,
@@ -12,8 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Message from "../components/Message";
+import { listVideoDetails, createVideoReview } from '../actions/videoActions';
+import { VIDEO_CREATE_REVIEW_RESET } from '../constants/videoConstants';
 
-const Video = ({ video }) => {
+const Video = ({ match, video }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -36,6 +37,15 @@ const Video = ({ video }) => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(3.5);
 
+  useEffect(() => {
+    if (successVideoReview) {
+      alert('Review Submitted!');
+      setRating(3.5);
+      setComment('');
+      dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
+    }
+    dispatch(listVideoDetails(match.params.id));
+  }, [dispatch, match, successVideoReview]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -70,6 +80,7 @@ const Video = ({ video }) => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <iframe
+            tile={video.user}
               src={newVideoLink}
               type="video/webm"
               width="100%"
