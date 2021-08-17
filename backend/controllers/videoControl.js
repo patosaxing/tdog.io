@@ -165,7 +165,7 @@ const createVideoReview = asyncHandler(async (req, res) => {
 // @desc    Fetch single video
 // @route   GET /api/videos/:id
 const getVideoById = asyncHandler(async (req, res) => {
-  console.log('req from getVideoById'.yellow,req.headers);
+  // console.log('req from getVideoById'.yellow,req.headers);
   const video = await Video.findById(req.params.id);
 
   if (video) {

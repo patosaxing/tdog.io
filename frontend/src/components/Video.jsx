@@ -7,19 +7,24 @@ import Message from "../components/Message";
 import { listVideoDetails, createVideoReview } from "../actions/videoActions";
 import { VIDEO_CREATE_REVIEW_RESET } from "../constants/videoConstants";
 
-const Video = ({ video }) => {
+const Video = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   // const [isOpen, setOpen] = useState(false);
+
+  // console.log(newVideoLink);
+
+  const dispatch = useDispatch();
+
+  const videoDetails = useSelector((state) => state.videoDetails);
+  const { loading, error, video } = videoDetails;
+
   const newVideoLink = `${video.videoLink}`.replace(
     "/view?usp=drivesdk",
     "/preview"
   );
-  // console.log(newVideoLink);
-
-  const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -32,12 +37,12 @@ const Video = ({ video }) => {
   const [rating, setRating] = useState(3.5);
 
   useEffect(() => {
-    // if (successVideoReview) {
-    //   console.log("Review Submitted!");
-    //   setRating(3.5);
-    //   setComment("");
-    //   dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
-    // }
+    if (successVideoReview) {
+      console.log("Review Submitted!");
+      setRating(3.5);
+      setComment("");
+      dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
+    }
     dispatch(listVideoDetails(video._id));
   }, [successVideoReview, dispatch, video._id]);
 
