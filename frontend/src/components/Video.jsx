@@ -7,7 +7,7 @@ import Message from "../components/Message";
 import { listPublicVideos, createVideoReview } from "../actions/videoActions";
 import { VIDEO_CREATE_REVIEW_RESET } from "../constants/videoConstants";
 
-const Video = (video) => {
+const Video = ({video}) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
