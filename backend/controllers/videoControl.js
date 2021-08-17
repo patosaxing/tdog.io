@@ -160,4 +160,19 @@ const createVideoReview = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview };
+
+
+// @desc    Fetch single video
+// @route   GET /api/videos/:id
+const getVideoById = asyncHandler(async (req, res) => {
+  console.log('req from getVideoById'.yellow,req.headers);
+  const video = await Video.findById(req.params.id);
+
+  if (video) {
+    res.json(video);
+  } else {
+    res.status(404);
+    throw new Error('Video not found');
+  }
+});
+module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview, getVideoById };

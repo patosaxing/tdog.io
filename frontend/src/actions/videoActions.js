@@ -153,11 +153,13 @@ export const listVideos = (keyword = '', pageNumber = '') => async (
   }
 }
 
+
 export const listVideoDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: VIDEO_DETAILS_REQUEST });
 
     const { data } = await axios.get(`/api/videos/${id}`);
+    console.log('data from listVideoDetails', data);
 
     dispatch({
       type: VIDEO_DETAILS_SUCCESS,

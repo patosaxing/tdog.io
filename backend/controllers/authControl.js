@@ -74,7 +74,7 @@ const authControl = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                return res.status(404).json("No email could not be sent");
+                return res.status(404).json("Can NOT find this email in our system");
             }
 
             // Reset Token Gen and add to database hashed (private) version of token

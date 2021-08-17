@@ -32,14 +32,14 @@ const Video = ({ video }) => {
   const [rating, setRating] = useState(3.5);
 
   useEffect(() => {
-    if (successVideoReview) {
-      console.log("Review Submitted!");
-      setRating(3.5);
-      setComment("");
-      dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
-    }
+    // if (successVideoReview) {
+    //   console.log("Review Submitted!");
+    //   setRating(3.5);
+    //   setComment("");
+    //   dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
+    // }
     dispatch(listVideoDetails(video._id));
-  }, [successVideoReview]);
+  }, [successVideoReview, dispatch, video._id]);
 
   const submitHandler = (e) => {
     const videoId = video._id;
@@ -65,7 +65,7 @@ const Video = ({ video }) => {
         <Card.Subtitle className="mb-2 text-muted">
           {video.description}
         </Card.Subtitle>
-        {/* Offcanvas Start */}
+        {/******************* Offcanvas Start */}
         <Button variant="secondary" onClick={handleShow}>
           Play video
         </Button>
@@ -81,7 +81,7 @@ const Video = ({ video }) => {
               type="video/webm"
               width="100%"
               height="auto"
-              autoplay
+              autoPlay
               allowFullScreen
             ></iframe>
             <Rating value={video.rating} text={`${video.numReviews} reviews`} />
@@ -150,7 +150,7 @@ const Video = ({ video }) => {
             </Col>
           </Offcanvas.Body>
         </Offcanvas>
-        {/* Offcanvas End */}
+        {/******************* Offcanvas End */}
         <Card.Text as="div">
           Rating: <Rating value={video.rating} text={``} />
           <Button variant="outline-secondary" onClick={handleLike}>
