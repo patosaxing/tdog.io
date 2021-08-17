@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const Rating = ({ value, text, color }) => {
   return (
-    <div className="rating" style={{ color: "#36587c" }}>
+    <div className="rating" style={{ color: "#dda15e" }}>
       <span>
         <i
           className={
