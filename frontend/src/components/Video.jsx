@@ -4,27 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Message from "../components/Message";
-import { listVideoDetails, createVideoReview } from "../actions/videoActions";
+import { listPublicVideos, createVideoReview } from "../actions/videoActions";
 import { VIDEO_CREATE_REVIEW_RESET } from "../constants/videoConstants";
 
-const Video = () => {
+const Video = (video) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // const [isOpen, setOpen] = useState(false);
-
- 
-
-  const dispatch = useDispatch();
-
-  const videoDetails = useSelector((state) => state.videoDetails);
-  // const { loading, error } = videoDetails;
-  const { loading, error, video } = videoDetails;
-
-  console.log('item in Video component',video.reviews);
-
-
+  
+  console.log('####item in Video component',video);
+  const reviewArray = video.reviews;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -40,8 +30,10 @@ const Video = () => {
     "/view?usp=drivesdk",
     "/preview"
   );
-  console.log('$$$$$video before useEffect', video.video);
+  // console.log('$$$$$video before useEffect', video.video);
     //  console.log(newVideoLink);
+
+    const dispatch = useDispatch();
 
   useEffect(() => {
     if (successVideoReview) {
@@ -53,7 +45,7 @@ const Video = () => {
     // dispatch(listVideoDetails(video._id));
   }, [successVideoReview, dispatch, video._id]);
 
-  console.log('****AFTER useEffect', video);
+  // console.log('****AFTER useEffect', video);
 
   const submitHandler = (e) => {
     const videoId = video._id;
@@ -106,9 +98,9 @@ const Video = () => {
             <hr />
             <Col md={6}>
               <h5>Reviews🗊</h5>
-              {video.reviews.length === 0 && <Message>No Reviews</Message>}
+              {reviewArray.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
-                {video.reviews.map((review) => (
+                {reviewArray.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} text={''} />

@@ -23,14 +23,13 @@ const PrivateScreen = () => {
 
   const publicVideos = useSelector((state) => state.publicVideos);
   const { loading, error, videos } = publicVideos;
-  // const { loading, error, videos, page, pages } = publicVideos;
+  
   useEffect(() => {
-    // dispatch(publicVideos(keyword, pageNumber));
+
     dispatch(listPublicVideos());
   }, [dispatch]);
-  // }, [dispatch, keyword, pageNumber]);
   
-  console.log('videos from reducer', videos);
+  console.log('%% videos from PrivateScreen reducer', videos);
   // const { userInfo } = userLogin;
   return (
     <div>

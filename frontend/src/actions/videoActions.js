@@ -104,7 +104,7 @@ export const listPublicVideos = () => async (dispatch, getState) => {
       item.user = ownerName;
     });
 
-    console.log("data is....", data);
+    console.log("data ifrom publicVideos:", data);
     dispatch({
       type: PUBLIC_VIDEO_SUCCESS,
       payload: data,
