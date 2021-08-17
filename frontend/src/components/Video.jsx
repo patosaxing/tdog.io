@@ -7,7 +7,7 @@ import Message from "../components/Message";
 import { listVideoDetails, createVideoReview } from "../actions/videoActions";
 import { VIDEO_CREATE_REVIEW_RESET } from "../constants/videoConstants";
 
-const Video = (video) => {
+const Video = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -18,11 +18,11 @@ const Video = (video) => {
 
   const dispatch = useDispatch();
 
-  // const videoDetails = useSelector((state) => state.videoDetails);
+  const videoDetails = useSelector((state) => state.videoDetails);
   // const { loading, error } = videoDetails;
-  // const { loading, error, video } = videoDetails;
+  const { loading, error, video } = videoDetails;
 
-  console.log('item in Video component',video.video.reviews);
+  console.log('item in Video component',video.reviews);
 
 
 
@@ -36,12 +36,12 @@ const Video = (video) => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(3.5);
 
-  const newVideoLink = `${video.video.videoLink}`.replace(
+  const newVideoLink = `${video.videoLink}`.replace(
     "/view?usp=drivesdk",
     "/preview"
   );
-
-     console.log(newVideoLink);
+  console.log('$$$$$video before useEffect', video.video);
+    //  console.log(newVideoLink);
 
   useEffect(() => {
     if (successVideoReview) {
@@ -53,8 +53,10 @@ const Video = (video) => {
     // dispatch(listVideoDetails(video._id));
   }, [successVideoReview, dispatch, video._id]);
 
+  console.log('****AFTER useEffect', video);
+
   const submitHandler = (e) => {
-    const videoId = video.video._id;
+    const videoId = video._id;
     e.preventDefault();
     dispatch(
       createVideoReview(video._id, {
@@ -71,11 +73,11 @@ const Video = (video) => {
     <Card className="my-3 p-3">
       <Card.Body>
         <Card.Title as="div">
-          <strong>{video.video.user}</strong>
+          <strong>{video.user}</strong>
         </Card.Title>
 
         <Card.Subtitle className="mb-2 text-muted">
-          {video.video.description}
+          {video.description}
         </Card.Subtitle>
 
         {/******************* Offcanvas Start */}
@@ -85,11 +87,11 @@ const Video = (video) => {
 
         <Offcanvas show={show} onHide={handleClose} placement="end">
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>User: {video.video.user}</Offcanvas.Title>
+            <Offcanvas.Title>User: {video.user}</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <iframe
-              title={video.video.user}
+              title={video.user}
               src={newVideoLink}
               type="video/webm"
               width="100%"
@@ -97,19 +99,19 @@ const Video = (video) => {
               autoPlay
               allowFullScreen
             ></iframe>
-            <Rating value={video.video.rating} text={`${video.numReviews} reviews`} />
+            <Rating value={video.rating} text={`${video.numReviews} reviews`} />
             <hr />
-            <h6>Category: {video.video.category}</h6>
-            <h6>Description: {video.video.description}</h6>
+            <h6>Category: {video.category}</h6>
+            <h6>Description: {video.description}</h6>
             <hr />
             <Col md={6}>
               <h5>Reviews🗊</h5>
-              {video.video.reviews.length === 0 && <Message>No Reviews</Message>}
+              {video.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
-                {video.video.reviews.map((review) => (
+                {video.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
-                    <Rating value={review.rating} />
+                    <Rating value={review.rating} text={''} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>

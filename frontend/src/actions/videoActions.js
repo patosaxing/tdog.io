@@ -100,7 +100,7 @@ export const listPublicVideos = () => async (dispatch, getState) => {
     
     data.forEach(item=>{
       const ownerName = item.user.username
-      console.log(ownerName)
+      console.log('ownerName from publicVideos action',ownerName)
       item.user = ownerName;
     });
 

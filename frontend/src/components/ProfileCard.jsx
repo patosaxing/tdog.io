@@ -17,7 +17,7 @@ const ProfileCard = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  console.log("skills here", userInfo);
+  // console.log("skills here", userInfo);
 
   return (
     <Card style={cardStyle}>
