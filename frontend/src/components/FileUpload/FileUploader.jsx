@@ -3,9 +3,9 @@ import Message from "./Message";
 import Progress from "./Progress";
 import axios from "axios";
 import questions from "../Interview_questions.json";
-import { Form, InputGroup, FormControl } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import CloudUpload from "../../img/CloudUpload.svg";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 
 const FileUpload = () => {
   // eslint-disable-next-line

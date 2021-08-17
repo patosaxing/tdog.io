@@ -39,8 +39,7 @@ const Video = ({ match, video }) => {
       dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
     }
     dispatch(listVideoDetails(video._id));
-  }, [ successVideoReview]);
-  
+  }, [successVideoReview]);
 
   const submitHandler = (e) => {
     const videoId = video._id;
@@ -86,10 +85,12 @@ const Video = ({ match, video }) => {
               allowFullScreen
             ></iframe>
             <Rating value={video.rating} text={`${video.numReviews} reviews`} />
+            <hr />
             <h6>Category: {video.category}</h6>
             <h6>Description: {video.description}</h6>
+            <hr />
             <Col md={6}>
-              <h2>Reviews🗊</h2>
+              <h5>Reviews🗊</h5>
               {video.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
                 {video.reviews.map((review) => (
@@ -101,14 +102,14 @@ const Video = ({ match, video }) => {
                   </ListGroup.Item>
                 ))}
                 <ListGroup.Item>
-                  <h2>✍Write a new review</h2>
+                  <h6>✍Add a review: </h6>
                   {errorVideoReview && (
                     <Message variant="danger">{errorVideoReview}</Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
                       <Form.Group controlId="rating">
-                        <Form.Label>Rating</Form.Label>
+                        <Form.Label>Rating ✮</Form.Label>
                         <Form.Control
                           as="select"
                           value={rating}
@@ -127,7 +128,7 @@ const Video = ({ match, video }) => {
                         </Form.Control>
                       </Form.Group>
                       <Form.Group controlId="comment">
-                        <Form.Label>Comment</Form.Label>
+                        <Form.Label>Comment...</Form.Label>
                         <Form.Control
                           as="textarea"
                           row="3"
@@ -152,7 +153,6 @@ const Video = ({ match, video }) => {
         {/* Offcanvas End */}
         <Card.Text as="div">
           Rating: <Rating value={video.rating} text={``} />
-
           <Button variant="outline-secondary" onClick={handleLike}>
             👍
           </Button>

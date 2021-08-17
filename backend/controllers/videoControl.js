@@ -32,7 +32,7 @@ const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill, sharePublic
     description: qSkill || '❗notFound',
     reviews: [],
     rating: fakeRating,
-    numReviews: 100,
+    numReviews: 1,
   });
   const createdVideo = await videoDetail.save();
   console.log('fromMongoDB', createdVideo);
