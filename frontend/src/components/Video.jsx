@@ -54,7 +54,7 @@ const Video = (video) => {
   }, [successVideoReview, dispatch, video._id]);
 
   const submitHandler = (e) => {
-    const videoId = video._id;
+    const videoId = video.video._id;
     e.preventDefault();
     dispatch(
       createVideoReview(video._id, {
