@@ -68,11 +68,11 @@ const PrivateScreen = () => {
             />
             <Row>
               {videos.map((video) => (
+                console.log('video array from Private Screen',video.reviews)
                 
-                
-                <Col key={video.videoID} sm={12} md={6} lg={4} xl={3}> 
-                  <Video video={video} />
-                </Col>
+                // <Col key={video.videoID} sm={12} md={6} lg={4} xl={3}> 
+                //   <Video video={video} />
+                // </Col>
                 ))}
               
             </Row>

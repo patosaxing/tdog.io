@@ -15,6 +15,7 @@ const Video = ({video}) => {
   
   console.log('####item in Video component',video);
   const reviewArray = video.reviews;
+  console.log('revirw in the video',reviewArray);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -31,7 +32,7 @@ const Video = ({video}) => {
     "/preview"
   );
   // console.log('$$$$$video before useEffect', video.video);
-    //  console.log(newVideoLink);
+     console.log(newVideoLink);
 
     const dispatch = useDispatch();
 
@@ -98,16 +99,16 @@ const Video = ({video}) => {
             <hr />
             <Col md={6}>
               <h5>Reviews🗊</h5>
-              {reviewArray.length === 0 && <Message>No Reviews</Message>}
+              {/* {video.reviews.length === 0 && <Message>No Reviews</Message>} */}
               <ListGroup variant="flush">
-                {reviewArray.map((review) => (
+                {/* {video.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} text={''} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
-                ))}
+                ))} */}
                 <ListGroup.Item>
                   <h6>✍Add a review: </h6>
                   {errorVideoReview && (

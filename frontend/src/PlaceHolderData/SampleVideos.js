@@ -1,8 +1,15 @@
+import Sample1 from './img/Sample1.svg'
+import Sample2 from './img/Sample2.svg'
+import Sample3 from './img/Sample3.svg'
+import Sample4 from './img/Sample4.svg'
+import Sample5 from './img/Sample5.svg'
+
+
 const SampleVideos = [
   {
     _id: '1',
     name: 'Basic Interview',
-    video: '/videos/airpods.jpg',
+    video: Sample1,
     description:
       'Basic Interview Querstion',
     category: 'Basic',
@@ -15,7 +22,7 @@ const SampleVideos = [
   {
     _id: '2',
     name: 'Salary Questions',
-    video: '/videos/Cool.jpg',
+    video: Sample2,
     description:
       'What makes you the best candidate for this job?',
     category: 'Basic',
@@ -28,7 +35,7 @@ const SampleVideos = [
   {
     _id: '3',
     name: 'Soft skills interview',
-    video: '/videos/ready.jpg',
+    video: Sample3,
     description:
       'If we were to offer you the salary you requested but you had to write your job description for the first year of employment, what would it say?',
     category: 'Salary',
@@ -41,7 +48,7 @@ const SampleVideos = [
   {
     _id: '4',
     name: 'Project Management',
-    video: '/videos/Chuong.jpg',
+    video: Sample4,
     description:
       'If you could remove any state in the United States, which would you choose and why?',
     category: 'Brainteaser',
