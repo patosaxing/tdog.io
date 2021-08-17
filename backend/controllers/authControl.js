@@ -6,7 +6,7 @@ const { generateToken } = require('../utils/generateToken');
 const mongoose = require('mongoose');
 
 const authControl = {
-    //Creating the register function
+    //Register new user
     register: asyncHandler(async (req, res, next) => {
         const { username, email, password } = req.body;
 
