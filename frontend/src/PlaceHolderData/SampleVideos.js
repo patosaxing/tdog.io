@@ -11,7 +11,7 @@ const SampleVideos = [
     name: 'Basic Interview',
     video: Sample1,
     description:
-      'Basic Interview Querstion',
+      'Tell me about your weaknesses?',
     category: 'Basic',
     topic: 'Soft Skill',
     view: 21,
@@ -24,7 +24,7 @@ const SampleVideos = [
     name: 'Salary Questions',
     video: Sample2,
     description:
-      'What makes you the best candidate for this job?',
+      'What was your last salary in previous job?',
     category: 'Basic',
     topic: 'Resposibility',
     view: 20,
@@ -37,7 +37,7 @@ const SampleVideos = [
     name: 'Soft skills interview',
     video: Sample3,
     description:
-      'If we were to offer you the salary you requested but you had to write your job description for the first year of employment, what would it say?',
+      'What makes you the best candidate for this job?',
     category: 'Salary',
     topic: 'Salary',
     view: 32,
@@ -50,7 +50,7 @@ const SampleVideos = [
     name: 'Project Management',
     video: Sample4,
     description:
-      'If you could remove any state in the United States, which would you choose and why?',
+      'What is front-end loading in project planning?',
     category: 'Brainteaser',
     topic: 'Imagination',
     view: 42,

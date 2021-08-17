@@ -99,16 +99,16 @@ const Video = ({video}) => {
             <hr />
             <Col md={6}>
               <h5>Reviews🗊</h5>
-              {/* {video.reviews.length === 0 && <Message>No Reviews</Message>} */}
+              {video.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
-                {/* {video.reviews.map((review) => (
+                {video.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} text={''} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
-                ))} */}
+                ))}
                 <ListGroup.Item>
                   <h6>✍Add a review: </h6>
                   {errorVideoReview && (
