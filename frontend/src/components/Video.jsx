@@ -33,14 +33,14 @@ const Video = ({ match, video }) => {
 
   useEffect(() => {
     if (successVideoReview) {
-      alert("Review Submitted!");
+      console.log("Review Submitted!");
       setRating(3.5);
       setComment("");
       dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
     }
     dispatch(listVideoDetails(video._id));
-  }, [dispatch, successVideoReview]);
-  // }, [dispatch, match, successVideoReview]);
+  }, [ successVideoReview]);
+  
 
   const submitHandler = (e) => {
     const videoId = video._id;
@@ -151,12 +151,10 @@ const Video = ({ match, video }) => {
         </Offcanvas>
         {/* Offcanvas End */}
         <Card.Text as="div">
-          Rating:
-          <Rating value={video.rating} text={``} />
-          <h1>Total comments: ....</h1>
-          {/* <Rating value={video.rating} text={``} /> */}
-          <Button variant="secondary" onClick={handleLike}>
-            👍Total Like
+          Rating: <Rating value={video.rating} text={``} />
+
+          <Button variant="outline-secondary" onClick={handleLike}>
+            👍
           </Button>
         </Card.Text>
         <Card.Text as="h6">Total {video.numReviews} reviews</Card.Text>
