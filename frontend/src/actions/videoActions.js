@@ -125,33 +125,33 @@ export const listPublicVideos = () => async (dispatch, getState) => {
   }
 }
 
-export const listVideos = (keyword = '', pageNumber = '') => async (
-  dispatch) => {
-  try {
-    dispatch({ type: VIDEO_LIST_REQUEST });
+// export const listVideos = (keyword = '', pageNumber = '') => async (
+//   dispatch) => {
+//   try {
+//     dispatch({ type: VIDEO_LIST_REQUEST });
 
-    const { data } = await axios.get(
-      `/api/videos?keyword=${keyword}&pageNumber=${pageNumber}`
-    );
+//     const { data } = await axios.get(
+//       `/api/videos?keyword=${keyword}&pageNumber=${pageNumber}`
+//     );
 
-    dispatch({
-      type: VIDEO_LIST_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-    if (message === 'Not authorized, token failed') {
-      dispatch(logout())
-    }
-    dispatch({
-      type: VIDEO_LIST_FAIL,
-      payload: message,
-    });
-  }
-}
+//     dispatch({
+//       type: VIDEO_LIST_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     const message =
+//       error.response && error.response.data.message
+//         ? error.response.data.message
+//         : error.message
+//     if (message === 'Not authorized, token failed') {
+//       dispatch(logout())
+//     }
+//     dispatch({
+//       type: VIDEO_LIST_FAIL,
+//       payload: message,
+//     });
+//   }
+// }
 
 
 export const listVideoDetails = (id) => async (dispatch) => {

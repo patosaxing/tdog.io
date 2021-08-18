@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Card, Button, Offcanvas, Col, Form, ListGroup } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { Card, Button, Offcanvas, Col, ListGroup } from "react-bootstrap";
+
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Message from "../components/Message";
-import { listPublicVideos, createVideoReview } from "../actions/videoActions";
-import { VIDEO_CREATE_REVIEW_RESET } from "../constants/videoConstants";
+
 
 const SampleVideo = ({video}) => {
   const [show, setShow] = useState(false);

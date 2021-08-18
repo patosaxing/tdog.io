@@ -98,8 +98,9 @@ const createVideo = async (req, res) => {
 const getMyVideos = async (req, res) => {
   const userDetail = JWTdecoder(req.headers.authorization);
   console.log('userID from getMyVideos'.bgRed, userDetail.id);
-  // const videos = await Video.find({ user: req.userInfo._id });
-  const videos = await Video.find({ user: ObjectId(`${userDetail.id}`) }); // condition will be set here for myVideos only
+  const videos = await Video.find({ user: userDetail.id });
+  // const videos = await Video.find({ user: ObjectId(`${userDetail.id}`) }); // condition will be set here for myVideos only
+  console.log('videos AFTER "VIdeo.Find()"', videos);
   res.json(videos);
 
 };

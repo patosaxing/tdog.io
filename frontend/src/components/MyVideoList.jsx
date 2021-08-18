@@ -39,6 +39,8 @@ const MyVideoList = ({ history }) => {
   const myVideosList = useSelector((state) => state.myVideosList);
   const { loading, error, videos } = myVideosList;
 
+  console.log('::::videos from MyVideoList REDUCER:', videos);
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");

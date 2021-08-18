@@ -2,7 +2,7 @@ import Sample1 from './img/Sample1.svg'
 import Sample2 from './img/Sample2.svg'
 import Sample3 from './img/Sample3.svg'
 import Sample4 from './img/Sample4.svg'
-import Sample5 from './img/Sample5.svg'
+
 
 
 const SampleVideos = [
