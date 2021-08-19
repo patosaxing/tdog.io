@@ -28,7 +28,7 @@ app.use(fileUpload());
 app.use(cookieParser())
 
 dotenv.config();
-connectDB(); 
+connectDB();
 
 app.use('/api/users', userRoutes);
 app.use('/api/videos', videoRoutes);
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'))
 })
-
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 //Port Connection
 const port = process.env.PORT || 5000
