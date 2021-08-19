@@ -28,7 +28,7 @@ app.use(fileUpload());
 app.use(cookieParser())
 
 dotenv.config();
-connectDB(); // connection call has to be after .env
+connectDB(); 
 
 app.use('/api/users', userRoutes);
 app.use('/api/videos', videoRoutes);
