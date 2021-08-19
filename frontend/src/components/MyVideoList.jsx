@@ -41,13 +41,13 @@ const MyVideoList = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo,  successDelete]);
 
   const deleteHandler = (id) => {
-    // if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
-    if (
-      window.confirm(" working on this function, not enough brainpower 😢 YET ")
-    ) {
+    if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
+    // if (
+    //   window.confirm(" working on this function, not enough brainpower 😢 YET ")
+    // ) {
       dispatch(deleteVideo(id));
     }
   };

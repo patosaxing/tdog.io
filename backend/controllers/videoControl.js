@@ -176,4 +176,20 @@ const getVideoById = asyncHandler(async (req, res) => {
     throw new Error('Video not found');
   }
 });
-module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview, getVideoById };
+
+// @desc    Delete a video
+// @route   DELETE /api/videos/:id
+
+const deleteVideoById = asyncHandler(async (req, res) => {
+  const video = await Video.findById(req.params.id);
+
+  if (video) {
+    await video.remove();
+    res.json({ message: 'Video removed' });
+  } else {
+    res.status(404);
+    throw new Error('Video not found');
+  }
+});
+
+module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview, getVideoById, deleteVideoById };
