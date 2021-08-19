@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import MyVideoList from "../components/MyVideoList";
 // import { listMyPrivateVideos } from '../actions/Actions'; // do we need to fetch this?
-
+import { Link } from "react-router-dom";
 import { skillsList } from "../components/skillsList";
 import ProfileCard from "../components/ProfileCard";
 
@@ -50,7 +50,7 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [dispatch, history, userInfo]);
 
   const primarySkills = primarySkillsArray.map((item) => item.value);
@@ -79,6 +79,10 @@ const ProfileScreen = ({ location, history }) => {
   return (
     <div style={{ display: "flex" }}>
       <div>
+        <Link to="/" className="btn btn-light">
+          Go Back
+        </Link>
+        <hr />
         <ProfileCard />
         {!showVideoList ? (
           <div>
@@ -243,28 +247,6 @@ const ProfileScreen = ({ location, history }) => {
       ) : (
         <MyVideoList />
       )}
-      {/* {!showVideoList ? (
-        <div>
-          <Button
-            className="my-3"
-            variant="primary"
-            onClick={() => SetShowVideoList(true)}
-          >
-            🗁 Show list of all your videos ꄤ
-          </Button>
-        </div>
-      ) : (
-        <div>
-          {" "}
-          <Button
-            className="m-3"
-            variant="secondary"
-            onClick={() => SetShowVideoList(false)}
-          >
-            Update your profile
-          </Button>
-        </div>
-      )} */}
     </div>
   );
 };
