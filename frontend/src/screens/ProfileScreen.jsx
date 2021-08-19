@@ -12,6 +12,7 @@ import MyVideoList from "../components/MyVideoList";
 import { Link } from "react-router-dom";
 import { skillsList } from "../components/skillsList";
 import ProfileCard from "../components/ProfileCard";
+import EditVideo from "../components/FileUpload/EditVideo";
 
 const animatedComponents = makeAnimated();
 // const {skillOptions} = Skills;
@@ -247,6 +248,7 @@ const ProfileScreen = ({ location, history }) => {
       ) : (
         <MyVideoList />
       )}
+      <EditVideo />
     </div>
   );
 };
