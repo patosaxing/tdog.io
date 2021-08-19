@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Row, Col } from "react-bootstrap";
+import { Table, Button, Row, Col} from "react-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import Message from "./Message";
 import Loader from "./Loader";
@@ -18,26 +19,19 @@ const MyVideoList = ({ history }) => {
   // const videoList = useSelector((state) => state.videoList);
   // const { loading, error, videos, page, pages } = videoList;
 
-  // const videoDelete = useSelector((state) => state.videoDelete);
-  // const {
-  //   loading: loadingDelete,
-  //   error: errorDelete,
-  //   success: successDelete,
-  // } = videoDelete;
+  const videoDelete = useSelector((state) => state.videoDelete);
+  const {
+    loadingDEL: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = videoDelete;
 
-  // const videoCreate = useSelector((state) => state.videoCreate);
-  // const {
-  //   loading: loadingCreate,
-  //   error: errorCreate,
-  //   success: successCreate,
-  //   video: createdVideo,
-  // } = videoCreate;
   const [showUploader, SetShowUploader] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const myVideosList = useSelector((state) => state.myVideosList);
-  const { loading, error, videos } = myVideosList;
+  const { loadingMYVID, errorMYVID, videos } = myVideosList;
 
   console.log('::::videos from MyVideoList REDUCER:', videos);
 
@@ -47,13 +41,13 @@ const MyVideoList = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo,  successDelete]);
 
   const deleteHandler = (id) => {
-    // if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
-    if (
-      window.confirm(" working on this function, not enough brainpower 😢 YET ")
-    ) {
+    if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
+    // if (
+    //   window.confirm(" working on this function, not enough brainpower 😢 YET ")
+    // ) {
       dispatch(deleteVideo(id));
     }
   };
@@ -94,14 +88,13 @@ const MyVideoList = ({ history }) => {
           )}
         </Col>
       </Row>
-      {/* {loadingDelete && <Loader />}
+      {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
-      {loadingCreate && <Loader />}
-      {errorCreate && <Message variant="danger">{errorCreate}</Message>} */}
-      {loading ? (
+      
+      {loadingMYVID ? (
         <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
+      ) : errorMYVID ? (
+        <Message variant="danger">{errorMYVID}</Message>
       ) : videos ? (
         <div>
           <Table striped bordered hover responsive className="table-sm">
@@ -114,7 +107,7 @@ const MyVideoList = ({ history }) => {
                 <th>UserNote</th>
                 <th>Public</th>
                 <th>Description</th>
-                {/* <th>Edit / DEL</th> */}
+                <th>Edit / DEL</th>
               </tr>
             </thead>
             <tbody>
@@ -136,12 +129,13 @@ const MyVideoList = ({ history }) => {
                   <td>{video.userNote}</td>
                   <td>{video.sharePublic ? " ☑️" : "❌"}</td>
                   <td>{video.description}</td>
-                  {/* <td>
-                    <LinkContainer to={`/admin/video/${video._id}/edit`}>
+                  <td>
+                    <LinkContainer to={`/video/${video._id}/edit`}>
                       <Button variant="light" className="btn-sm">
-                        ⎾<i className="fas fa-edit"></i>⏌
+                        <i className="fas fa-edit"></i>
                       </Button>
                     </LinkContainer>
+                    |
                     <Button
                       variant="danger"
                       className="btn-sm"
@@ -149,7 +143,7 @@ const MyVideoList = ({ history }) => {
                     >
                       <i className="fas fa-trash"></i>
                     </Button>
-                  </td> */}
+                  </td>
                 </tr>
               ))}
             </tbody>
