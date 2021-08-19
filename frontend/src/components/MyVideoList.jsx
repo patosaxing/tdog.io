@@ -41,7 +41,7 @@ const MyVideoList = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, history, userInfo,  successDelete]);
+  }, [dispatch, history, userInfo,  successDelete, showUploader]);
 
   const deleteHandler = (id) => {
     if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
