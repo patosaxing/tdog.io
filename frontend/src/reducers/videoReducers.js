@@ -29,17 +29,17 @@ import {
 export const myVideosListReducer = (state = { videos: [] }, action) => {
   switch (action.type) {
     case VIDEO_LIST_REQUEST:
-      return { loading: true, videos: [] };
+      return { loadingMYVID: true, videos: [] };
     case VIDEO_LIST_SUCCESS:
       return {
-        loading: false,
+        loadingMYVID: false,
         videos: action.payload,
         // videos: action.payload.videos,
         // pages: action.payload.pages,
         // page: action.payload.page,
       };
     case VIDEO_LIST_FAIL:
-      return { loading: false, error: action.payload };
+      return { loadingMYVID: false, errorMYVID: action.payload };
     default:
       return state;
   }
@@ -64,11 +64,11 @@ export const videoDetailsReducer = (
 export const videoDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case VIDEO_DELETE_REQUEST:
-      return { loading: true };
+      return { loadingDEL: true };
     case VIDEO_DELETE_SUCCESS:
-      return { loading: false, success: true };
+      return { loadingDEL: false, success: true };
     case VIDEO_DELETE_FAIL:
-      return { loading: false, error: action.payload };
+      return { loadingDEL: false, error: action.payload };
     default:
       return state;
   }
