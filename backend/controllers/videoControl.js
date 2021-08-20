@@ -88,7 +88,7 @@ const createVideo = async (req, res) => {
   const videoRecord = await videoDetailToMongo(id, url, videoOwner, qCat, qSkill, sharePublic, userNote);
 
   // delete file in server after successful upload
-  // delServerFile(filePath);
+  delServerFile(filePath);
   res.status(201).json(videoRecord);
 }
 
