@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Row, Col} from "react-bootstrap";
+import { Table, Button, Row, Col,Offcanvas, Form} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import Message from "./Message";
@@ -25,6 +25,11 @@ const MyVideoList = ({ history }) => {
     error: errorDelete,
     success: successDelete,
   } = videoDelete;
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [showUploader, SetShowUploader] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
@@ -127,11 +132,11 @@ const MyVideoList = ({ history }) => {
                   <td>{video.sharePublic ? " ☑️" : "❌"}</td>
                   <td>{video.description}</td>
                   <td>
-                    <LinkContainer to={`/video/${video._id}/edit`}>
-                      <Button variant="light" className="btn-sm">
+                    
+                      <Button variant="light" className="btn-sm" onClick={handleShow}>
                         <i className="fas fa-edit"></i>
                       </Button>
-                    </LinkContainer>
+                 
                     |
                     <Button
                       variant="danger"
@@ -150,6 +155,17 @@ const MyVideoList = ({ history }) => {
       ) : (
         <h1> You have not shared any videos yet.</h1>
       )}
+      
+        {/******************* Offcanvas Start */}
+          <Offcanvas show={show} onHide={handleClose} placement="end">
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Canvas Title</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+           
+          </Offcanvas.Body>
+        </Offcanvas>
+        {/******************* Offcanvas End */}
     </div>
   );
 };

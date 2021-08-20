@@ -194,12 +194,14 @@ const ProfileScreen = ({ location, history }) => {
                     onChange={(e) => setLinkedIn(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
-                   <h4 style={{color: '#fb8500'}}><i class="fas fa-user-shield"></i></h4> 
+                <h4 style={{ color: "#fb8500" }}>
+                  <i class="fas fa-user-shield"></i>
+                </h4>
                 <Form.Group controlId="password">
                   <Form.Label>🔓 NEW Password</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Enter NEW password if you want to change it" 
+                    placeholder="Enter NEW password if you want to change it"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   ></Form.Control>
@@ -215,7 +217,7 @@ const ProfileScreen = ({ location, history }) => {
                   </Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Confirm password"
+                    placeholder="Confirm NEW password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   ></Form.Control>
