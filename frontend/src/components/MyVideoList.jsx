@@ -29,14 +29,17 @@ const MyVideoList = ({ history }) => {
 
   const [show, setShow] = useState(false);
   
+  const [vId, setVId] = useState("");
   const [category, setCategory] = useState("Basic interview questions");
   const [description, setDescription] =  useState("Orginal desc");
   const [userNote, setUserNote] = useState("");
   const [sharePublic, setSharePublic] = useState(false);
+
   
 
   const handleClose = () => setShow(false);
   const handleShow = (ID, Cat, description, userNote, Share) => {
+    setVId(ID);
     setCategory(Cat);
     setDescription(description);
     setUserNote(userNote);
@@ -73,7 +76,7 @@ const MyVideoList = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     // dispatch editVideoRequest
-    console.log("edit Video submitted", videos);
+    
   };
 
   return (
@@ -177,12 +180,12 @@ const MyVideoList = ({ history }) => {
       {/******************* Offcanvas Start */}
       <Offcanvas show={show} onHide={handleClose} placement="start">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Enter new Video detail for</Offcanvas.Title>
+          <Offcanvas.Title>Update Video detail for {userInfo.username}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <form onSubmit={onSubmit}>
             <div>
-              <h6>Change catergory of this recording</h6>
+              <h6>Change catergory </h6>
               <Form.Control
                 as="select"
                 value={category}
@@ -213,7 +216,7 @@ const MyVideoList = ({ history }) => {
               value={userNote}
               onChange={(e) => setUserNote(e.target.value)}
             ></Form.Control>
-            <h6 style={{ color: "transparent" }}>spacer</h6>
+            <h6 style={{ color: "red" }}>{vId}</h6>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
