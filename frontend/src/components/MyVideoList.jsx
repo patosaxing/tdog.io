@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Row, Col} from "react-bootstrap";
-import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button, Row, Col, Offcanvas, Form } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "./Message";
 import Loader from "./Loader";
 import FileUploader from "./FileUpload/FileUploader";
 // import Paginate from "../components/Paginate";
+import questions from "./Interview_questions.json";
 import {
   listMyVideos,
   deleteVideo,
@@ -26,6 +27,11 @@ const MyVideoList = ({ history }) => {
     success: successDelete,
   } = videoDelete;
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [showUploader, SetShowUploader] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -33,7 +39,10 @@ const MyVideoList = ({ history }) => {
   const myVideosList = useSelector((state) => state.myVideosList);
   const { loadingMYVID, errorMYVID, videos } = myVideosList;
 
-  console.log('::::videos from MyVideoList REDUCER:', videos);
+  const [category, setCategory] = useState("Basic interview questions");
+  const [Skill, setSkill] = useState("");
+  const [userNote, setUserNote] = useState("");
+  const [sharePublic, setSharePublic] = useState(false);
 
   useEffect(() => {
     if (!userInfo) {
@@ -41,7 +50,7 @@ const MyVideoList = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, history, userInfo,  successDelete, showUploader]);
+  }, [dispatch, history, userInfo, successDelete, showUploader]);
 
   const deleteHandler = (id) => {
     if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
@@ -51,6 +60,11 @@ const MyVideoList = ({ history }) => {
 
   const createVideoHandler = () => {
     dispatch(createVideo());
+  };
+
+  const onSubmit = () => {
+    // dispatch editVideoRequest
+    alert("edit Video submitted");
   };
 
   return (
@@ -87,7 +101,7 @@ const MyVideoList = ({ history }) => {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
-      
+
       {loadingMYVID ? (
         <Loader />
       ) : errorMYVID ? (
@@ -127,11 +141,13 @@ const MyVideoList = ({ history }) => {
                   <td>{video.sharePublic ? " ☑️" : "❌"}</td>
                   <td>{video.description}</td>
                   <td>
-                    <LinkContainer to={`/video/${video._id}/edit`}>
-                      <Button variant="light" className="btn-sm">
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </LinkContainer>
+                    <Button
+                      variant="light"
+                      className="btn-sm"
+                      onClick={handleShow}
+                    >
+                      <i className="fas fa-edit"></i>
+                    </Button>
                     |
                     <Button
                       variant="danger"
@@ -150,6 +166,63 @@ const MyVideoList = ({ history }) => {
       ) : (
         <h1> You have not shared any videos yet.</h1>
       )}
+
+      {/******************* Offcanvas Start */}
+      <Offcanvas show={show} onHide={handleClose} placement="start">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Enter new Video detail</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <form onSubmit={onSubmit}>
+            <div>
+              <h6>Change catergory of this recording</h6>
+              <Form.Control
+                as="select"
+                value={category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
+              >
+                {Object.keys(questions).map((category) => (
+                  <option value={category} key={category} active>
+                    {category}
+                  </option>
+                ))}
+              </Form.Control>
+            </div>
+            <h6 style={{ color: "transparent" }}>spacer</h6>
+            <Form.Label>Skill related to this Video</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="e.g. Marketing, Project Tracking, Medical Research..."
+              value={Skill}
+              onChange={(e) => setSkill(e.target.value)}
+            ></Form.Control>
+            <h6 style={{ color: "transparent" }}>spacer</h6>
+            <Form.Label>Additional notes</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="e.g. ABC company uses this question..."
+              value={userNote}
+              onChange={(e) => setUserNote(e.target.value)}
+            ></Form.Control>
+            <h6 style={{ color: "transparent" }}>spacer</h6>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+              <Form.Check
+                type="checkbox"
+                label="⮪ Select to share with public for feedback"
+                onClick={() => setSharePublic(true)}
+              />
+            </Form.Group>
+            <input
+              type="submit"
+              value="Update 🗊"
+              className="btn btn-info btn-block mt-4"
+            />
+          </form>
+        </Offcanvas.Body>
+      </Offcanvas>
+      {/******************* Offcanvas End */}
     </div>
   );
 };

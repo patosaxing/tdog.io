@@ -169,9 +169,6 @@ const FileUpload = () => {
           className="btn btn-secondary btn-block mt-4"
         />
       </form>
-
-      {/* attempt to display uploaded IMAGE file for testing */}
-      {/*  */}
     </div>
   );
 };
