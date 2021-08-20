@@ -13,7 +13,7 @@ const fakeRating = ratingRange[(Math.random() * ratingRange.length) | 0];
 const delServerFile = async (fPath) => {
   try {
     await unlink(fPath);
-    console.log(`successfully deleted ${fPath}`.bgBlue);
+    // console.log(`successfully deleted ${fPath}`.bgBlue);
   } catch (error) {
     console.error('there was an error:', error.message);
   }
@@ -35,7 +35,7 @@ const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill, sharePublic
     numReviews: 1,
   });
   const createdVideo = await videoDetail.save();
-  console.log('fromMongoDB', createdVideo);
+  // console.log('fromMongoDB', createdVideo);
   // res.status(201).json(createdVideo);
   return createdVideo;
 };
@@ -44,22 +44,22 @@ const videoDetailToMongo = async (id, url, videoOwner, qCat, qSkill, sharePublic
 // @desc    Upload to gDrive and Create a video record in MongoDB
 // @route   POST /api/videos
 const createVideo = async (req, res) => {
-  console.log('req.body from the frontend:', req.body);
+  // console.log('req.body from the frontend:', req.body);
   const file = req.files.file;
   const fileN = file.name;
   const filePath = path.join(__dirname, "../uploads", file.name);
   const videoOwner = req.body.userID
-  console.log('userID from frontend'.red, videoOwner.green);
+  // console.log('userID from frontend'.red, videoOwner.green);
   const qCat = req.body.category;
   const sharePublic = req.body.sharePublic;
   const userNote = req.body.userNote;
-  console.log('Category from frontend'.red, qCat);
+  // console.log('Category from frontend'.red, qCat);
   const qSkill = req.body.Skill;
-  console.log('Skill from frontend'.red, qSkill);
+  // console.log('Skill from frontend'.red, qSkill);
 
   // upload file to server
   const fileUpload = async () => {
-    console.log('testing to see if it called');
+    // console.log('testing to see if it called');
     const fileResult = await (
       new Promise((resolve, reject) => {
         file.mv(filePath, async err => {
@@ -69,20 +69,20 @@ const createVideo = async (req, res) => {
           } else {
             // send file from server to google drive 
             const googleRes = await uploadToG(fileN);
-            console.log('id from uploadtoG'.blue, googleRes);
+            // console.log('id from uploadtoG'.blue, googleRes);
             // console.log('url from uploadtoG', url);
             resolve(googleRes);
           }
         })
       }));
-    console.log('***********result is :'.green, fileResult);
+    // console.log('***********result is :'.green, fileResult);
     return fileResult;
 
 
 
   };
   const result = await fileUpload();
-  console.log('reuslt id'.green, result);
+  // console.log('reuslt id'.green, result);
   const { id, url } = result;
   // Create a video record in MongoDB collection
   const videoRecord = await videoDetailToMongo(id, url, videoOwner, qCat, qSkill, sharePublic, userNote);
@@ -97,10 +97,10 @@ const createVideo = async (req, res) => {
 
 const getMyVideos = async (req, res) => {
   const userDetail = JWTdecoder(req.headers.authorization);
-  console.log('userID from getMyVideos'.bgRed, userDetail.id);
+  // console.log('userID from getMyVideos'.bgRed, userDetail.id);
   const videos = await Video.find({ user: userDetail.id });
   // const videos = await Video.find({ user: ObjectId(`${userDetail.id}`) }); // condition will be set here for myVideos only
-  console.log('videos AFTER "VIdeo.Find()"', videos);
+  // console.log('videos AFTER "VIdeo.Find()"', videos);
   res.json(videos);
 
 };
@@ -112,7 +112,7 @@ const getPublicVideos = async (req, res) => {
   // const videos = await Video.find({ sharePublic: true });
   const videos = await Video.find({ sharePublic: true }).populate('user', 'username');
   // const usernameInVideo = await Video.populate('user');
-  console.log('total videos from controller: '.bgYellow.red, videos.length)
+  // console.log('total videos from controller: '.bgYellow.red, videos.length)
   res.json(videos);
 
 };
@@ -122,10 +122,10 @@ const getPublicVideos = async (req, res) => {
 // @access  Private
 const createVideoReview = asyncHandler(async (req, res) => {
   const { rating, comment, videoId } = req.body;
-  console.log('body of createVideoReview'.bgGreen, req.body);
+  // console.log('body of createVideoReview'.bgGreen, req.body);
   // const video = await Video.findById(req.params.id);
   const video = await Video.findById(videoId);
-  console.log('video from model.find in the controller'.red, video);
+  // console.log('video from model.find in the controller'.red, video);
 
   if (video) {
     // const alreadyReviewed = video.reviews.find(
@@ -144,7 +144,7 @@ const createVideoReview = asyncHandler(async (req, res) => {
       // user: req.user._id,
     };
 
-    console.log('review obj from copntroller'.bgCyan, review);
+    // console.log('review obj from copntroller'.bgCyan, review);
     video.reviews.push(review);
 
     video.numReviews = video.reviews.length;

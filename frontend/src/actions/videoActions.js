@@ -100,11 +100,11 @@ export const listPublicVideos = () => async (dispatch, getState) => {
     
     data.forEach(item=>{
       const ownerName = item.user.username
-      console.log('ownerName from publicVideos action',ownerName)
+      // console.log('ownerName from publicVideos action',ownerName)
       item.user = ownerName;
     });
 
-    console.log("data ifrom publicVideos:", data);
+    // console.log("data ifrom publicVideos:", data);
     dispatch({
       type: PUBLIC_VIDEO_SUCCESS,
       payload: data,
@@ -159,7 +159,7 @@ export const listVideoDetails = (id) => async (dispatch) => {
     dispatch({ type: VIDEO_DETAILS_REQUEST });
 
     const { data } = await axios.get(`/api/videos/${id}`);
-    console.log('data from listVideoDetails', data);
+    // console.log('data from listVideoDetails', data);
 
     dispatch({
       type: VIDEO_DETAILS_SUCCESS,

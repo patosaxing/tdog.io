@@ -44,5 +44,5 @@ const port = process.env.PORT || 5000
 
 // Listening Port
 app.listen(port, () => {
-  console.log(`Application listening at http://localhost:${port}`.blue)
+  console.log(`Evalview server listening at http://localhost:${port}`.blue)
 });
