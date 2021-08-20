@@ -250,7 +250,6 @@ const ProfileScreen = ({ location, history }) => {
       ) : (
         <MyVideoList />
       )}
-      <EditVideo />
     </div>
   );
 };
