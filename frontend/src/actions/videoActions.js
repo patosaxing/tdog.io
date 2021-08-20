@@ -42,23 +42,6 @@ export const listMyVideos = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`/api/videos/myvideos`, config);
 
-
-    // let config = {
-    //   method: 'get',
-    //   url: `/api/videos/myvideos`,
-    //   headers: {
-    //     'Authorization': `Bearer ${userInfo.token}`
-    //   }
-    // };
-
-    // const videos = await axios(config)
-    //   .then((response) => {
-    //     return (JSON.stringify(response.data));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // // return data;
     // console.log('frontEND videos here', videos);
     dispatch({
       type: VIDEO_LIST_SUCCESS,

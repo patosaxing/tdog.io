@@ -30,7 +30,10 @@ const MyVideoList = ({ history }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (ID) => {
+    console.log("clicked this ID", ID);
+    setShow(true);
+  };
 
   const [showUploader, SetShowUploader] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
@@ -50,7 +53,7 @@ const MyVideoList = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, history, userInfo, successDelete, showUploader]);
+  }, [dispatch, userInfo, successDelete, showUploader]);
 
   const deleteHandler = (id) => {
     if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
@@ -62,9 +65,10 @@ const MyVideoList = ({ history }) => {
     dispatch(createVideo());
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     // dispatch editVideoRequest
-    alert("edit Video submitted");
+    console.log("edit Video submitted", videos);
   };
 
   return (
@@ -124,8 +128,72 @@ const MyVideoList = ({ history }) => {
             <tbody>
               {videos.map((video) => (
                 <tr key={video._id}>
-                  {/* <td>{video._id}</td> */}
                   <td>
+                    {/******************* Offcanvas Start */}
+                    <Offcanvas
+                      show={show}
+                      onHide={handleClose}
+                      placement="start"
+                    >
+                      <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>
+                          Enter new Video detail for {video._id}
+                        </Offcanvas.Title>
+                      </Offcanvas.Header>
+                      <Offcanvas.Body>
+                        <form onSubmit={onSubmit}>
+                          <div>
+                            <h6>Change catergory of this recording</h6>
+                            <Form.Control
+                              as="select"
+                              value={category}
+                              onChange={(e) => {
+                                setCategory(e.target.value);
+                              }}
+                            >
+                              {Object.keys(questions).map((category) => (
+                                <option value={category} key={category} active>
+                                  {category}
+                                </option>
+                              ))}
+                            </Form.Control>
+                          </div>
+                          <h6 style={{ color: "transparent" }}>spacer</h6>
+                          <Form.Label>Skill related to this Video</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="e.g. Marketing, Project Tracking, Medical Research..."
+                            value={Skill}
+                            onChange={(e) => setSkill(e.target.value)}
+                          ></Form.Control>
+                          <h6 style={{ color: "transparent" }}>spacer</h6>
+                          <Form.Label>Additional notes</Form.Label>
+                          <Form.Control
+                            type="text"
+                            placeholder="e.g. ABC company uses this question..."
+                            value={userNote}
+                            onChange={(e) => setUserNote(e.target.value)}
+                          ></Form.Control>
+                          <h6 style={{ color: "transparent" }}>spacer</h6>
+                          <Form.Group
+                            className="mb-3"
+                            controlId="formBasicCheckbox"
+                          >
+                            <Form.Check
+                              type="checkbox"
+                              label="⮪ Select to share with public for feedback"
+                              onClick={() => setSharePublic(true)}
+                            />
+                          </Form.Group>
+                          <input
+                            type="submit"
+                            value="Update 🔄"
+                            className="btn btn-outline-primary btn-block mt-4"
+                          />
+                        </form>
+                      </Offcanvas.Body>
+                    </Offcanvas>
+                    {/******************* Offcanvas End */}
                     <a
                       href={`${video.videoLink}`}
                       target="_blank"
@@ -144,7 +212,7 @@ const MyVideoList = ({ history }) => {
                     <Button
                       variant="light"
                       className="btn-sm"
-                      onClick={handleShow}
+                      onClick={()=>handleShow(video._id)}
                     >
                       <i className="fas fa-edit"></i>
                     </Button>
@@ -166,63 +234,6 @@ const MyVideoList = ({ history }) => {
       ) : (
         <h1> You have not shared any videos yet.</h1>
       )}
-
-      {/******************* Offcanvas Start */}
-      <Offcanvas show={show} onHide={handleClose} placement="start">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Enter new Video detail</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <form onSubmit={onSubmit}>
-            <div>
-              <h6>Change catergory of this recording</h6>
-              <Form.Control
-                as="select"
-                value={category}
-                onChange={(e) => {
-                  setCategory(e.target.value);
-                }}
-              >
-                {Object.keys(questions).map((category) => (
-                  <option value={category} key={category} active>
-                    {category}
-                  </option>
-                ))}
-              </Form.Control>
-            </div>
-            <h6 style={{ color: "transparent" }}>spacer</h6>
-            <Form.Label>Skill related to this Video</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="e.g. Marketing, Project Tracking, Medical Research..."
-              value={Skill}
-              onChange={(e) => setSkill(e.target.value)}
-            ></Form.Control>
-            <h6 style={{ color: "transparent" }}>spacer</h6>
-            <Form.Label>Additional notes</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="e.g. ABC company uses this question..."
-              value={userNote}
-              onChange={(e) => setUserNote(e.target.value)}
-            ></Form.Control>
-            <h6 style={{ color: "transparent" }}>spacer</h6>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="⮪ Select to share with public for feedback"
-                onClick={() => setSharePublic(true)}
-              />
-            </Form.Group>
-            <input
-              type="submit"
-              value="Update 🗊"
-              className="btn btn-info btn-block mt-4"
-            />
-          </form>
-        </Offcanvas.Body>
-      </Offcanvas>
-      {/******************* Offcanvas End */}
     </div>
   );
 };
