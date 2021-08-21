@@ -39,12 +39,12 @@ const MyVideoList = ({ history }) => {
   
 
   const handleClose = () => setShow(false);
-  const handleShow = (ID, Cat, description, userNote, Share) => {
+  const handleShow = (ID, Cat, description, userNote, sharePublic) => {
     setVId(ID);
     setCategory(Cat);
     setDescription(description);
     setUserNote(userNote);
-    setSharePublic(Share);
+    setSharePublic(false);
     setShow(true);
   };
 
@@ -70,9 +70,9 @@ const MyVideoList = ({ history }) => {
     }
   };
 
-  const createVideoHandler = () => {
-    dispatch(createVideo());
-  };
+  // const createVideoHandler = () => {
+  //   dispatch(createVideo());
+  // };
 
   const updateVideoDetail = (e) => {
     e.preventDefault();
@@ -81,7 +81,7 @@ const MyVideoList = ({ history }) => {
       category,
       userNote,
       description,
-      sharePublic
+      sharePublic,
     }));
     
   };
