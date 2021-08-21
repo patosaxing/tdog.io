@@ -29,7 +29,7 @@ const PrivateScreen = () => {
     dispatch(listPublicVideos());
   }, [dispatch]);
   
-  console.log('%% videos from PrivateScreen reducer', videos);
+  // console.log('%% videos from PrivateScreen reducer', videos);
   // const { userInfo } = userLogin;
   return (
     <div>

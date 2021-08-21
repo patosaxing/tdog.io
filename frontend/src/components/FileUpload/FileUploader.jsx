@@ -32,10 +32,10 @@ const FileUpload = () => {
     let formData = new FormData();
 
     let submitFile = document.querySelector("#customFile");
-    console.log("submit file :", submitFile.files[0]);
+    // console.log("submit file :", submitFile.files[0]);
     formData.append("file", submitFile.files[0]);
     const fileSize = submitFile.files[0].size;
-    console.log("file size for uploading ", fileSize);
+    // console.log("file size for uploading ", fileSize);
 
     if (fileSize > 50000000) {
       setMessage("❗ File exceeded size limit of 50MB");

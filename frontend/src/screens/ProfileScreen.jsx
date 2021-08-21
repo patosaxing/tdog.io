@@ -55,11 +55,11 @@ const ProfileScreen = ({ location, history }) => {
   }, [dispatch, history, userInfo]);
 
   const primarySkills = primarySkillsArray.map((item) => item.value);
-  console.log(primarySkills);
+  // console.log(primarySkills);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("primary skills is: ", primarySkills);
+    // console.log("primary skills is: ", primarySkills);
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
@@ -167,7 +167,7 @@ const ProfileScreen = ({ location, history }) => {
                     onChange={(e) => {
                       // SkillsFromList(e);
                       setPrimarySkillsArray(e);
-                      console.log(primarySkills);
+                      // console.log(primarySkills);
                     }}
                   />
                 </Form.Group>
