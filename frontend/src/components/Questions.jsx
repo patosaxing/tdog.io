@@ -3,7 +3,9 @@ import questions from "./Interview_questions.json";
 import { Button, Container, Form } from "react-bootstrap";
 
 export default function QuestionSelection() {
-  const [category, setCategory] = React.useState("Select question Category for recording");
+  const [category, setCategory] = React.useState(
+    "Select question Category for recording"
+  );
   const [question, setQuestion] = React.useState("");
 
   const handleChangeQues = (event) => {
@@ -13,9 +15,12 @@ export default function QuestionSelection() {
   const RandArray = (array) => array[(Math.random() * array.length) | 0];
 
   const random_question = () => {
-
-    let randomly_generated_question = RandArray(questions[category]);
-    return randomly_generated_question;
+    if (category == "Select question Category for recording") {
+      return alert("Please select a category 👇");
+    } else {
+      let randomly_generated_question = RandArray(questions[category]);
+      return randomly_generated_question;
+    }
   };
 
   const QuestionStyle = {
@@ -27,24 +32,19 @@ export default function QuestionSelection() {
 
   return (
     <Container>
-    
-       
-          <Form.Select
-            value={category}
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }}
-            aria-label="Default select example"
-          >
-            <option>Select question Category for recording</option>
-            {Object.keys(questions).map((category) => (
-              <option value={category}>{category}</option>
-            ))}
-      
-          </Form.Select>
+      <Form.Select
+        value={category}
+        onChange={(e) => {
+          setCategory(e.target.value);
+        }}
+        aria-label="Default select example"
+      >
+        <option>Select question Category for recording</option>
+        {Object.keys(questions).map((category) => (
+          <option value={category}>{category}</option>
+        ))}
+      </Form.Select>
 
-         
-  
       <Button className="my-4" variant="secondary" onClick={handleChangeQues}>
         Generate Random Questions
       </Button>
