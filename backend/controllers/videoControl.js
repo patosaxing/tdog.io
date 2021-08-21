@@ -105,6 +105,9 @@ const getMyVideos = async (req, res) => {
 
 };
 
+
+// @desc    Get all videos by 'sharePublic:true'
+// @route   GET /api/videos/publicvideos
 const getPublicVideos = async (req, res) => {
   const userDetail = JWTdecoder(req.headers.authorization);
   // console.log('line109'.bgBlue, userDetail);
@@ -119,7 +122,7 @@ const getPublicVideos = async (req, res) => {
 
 // @desc    Create new review
 // @route   POST /api/videos/:id/reviews
-// @access  Private
+
 const createVideoReview = asyncHandler(async (req, res) => {
   const { rating, comment, videoId } = req.body;
   // console.log('body of createVideoReview'.bgGreen, req.body);
@@ -192,4 +195,31 @@ const deleteVideoById = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview, getVideoById, deleteVideoById };
+// @desc    Update a video
+// @route   PUT /api/videos/:id
+
+const updateVideo = asyncHandler(async (req, res) => {
+  const {
+    category,
+    userNote,
+    description,
+    sharePublic,
+  } = req.body;
+
+  const video = await Video.findById(req.params.id);
+
+  if (video) {
+    video.category = category;
+    video.userNote = userNote;
+    video.description = description;
+    video.sharePublic = sharePublic;
+
+    const updatedVideo = await video.save();
+    res.json(updatedVideo);
+  } else {
+    res.status(404);
+    throw new Error('Video not found');
+  }
+});
+
+module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview, getVideoById, deleteVideoById, updateVideo };

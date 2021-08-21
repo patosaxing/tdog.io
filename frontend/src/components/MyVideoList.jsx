@@ -11,6 +11,7 @@ import {
   listMyVideos,
   deleteVideo,
   createVideo,
+  updateVideo
 } from "../actions/videoActions";
 // import { VIDEO_CREATE_RESET } from "../constants/videoConstants";
 
@@ -73,9 +74,15 @@ const MyVideoList = ({ history }) => {
     dispatch(createVideo());
   };
 
-  const onSubmit = (e) => {
+  const updateVideoDetail = (e) => {
     e.preventDefault();
-    // dispatch editVideoRequest
+    dispatch (updateVideo({
+      _id: vId,
+      category,
+      userNote,
+      description,
+      sharePublic
+    }));
     
   };
 
@@ -183,7 +190,7 @@ const MyVideoList = ({ history }) => {
           <Offcanvas.Title>Update Video detail for {userInfo.username}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={updateVideoDetail}>
             <div>
               <h6>Change catergory </h6>
               <Form.Control
