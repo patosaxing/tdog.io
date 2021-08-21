@@ -95,7 +95,7 @@ export default function WebcamStreamCapture() {
               variant="secondary"
               // color="secondary"
               onClick={handleStopCaptureClick}
-              style={{ margin: "0.25rem" }}
+              style={{ margin: "1.25rem" }}
             >
               ⬜ Stop Recording (Auto stop in {timer} minutes)
             </Button>

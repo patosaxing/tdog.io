@@ -48,7 +48,7 @@ export default function QuestionSelection() {
       <Button className="my-4" variant="secondary" onClick={handleChangeQues} >
         Generate Random Questions
       </Button>
-      <div style={QuestionStyle}>{question}</div>
+      <div style={QuestionStyle}> {question} </div>
     </Container>
   );
 }
