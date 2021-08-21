@@ -52,7 +52,7 @@ const PrivateScreen = () => {
         ) : error ? (
           <Message variant="danger">{error}</Message>
         ) : (
-          <div>
+          <div className="my-5">
             <TypeAnimation
               cursor={true}
               sequence={[
