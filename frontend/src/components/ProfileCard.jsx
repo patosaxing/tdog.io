@@ -9,7 +9,7 @@ const ProfileCard = () => {
     flexDirection: "column",
     padding: "0.5rem",
     height: "fit-content",
-    width: "80%",
+    width: "18rem",
     borderRadius: "1rem",
     background: "#e8e8e8",
   };

@@ -13,7 +13,8 @@ export default function QuestionSelection() {
   const RandArray = (array) => array[(Math.random() * array.length) | 0];
 
   const random_question = () => {
-    var randomly_generated_question = RandArray(questions[category]);
+
+    let randomly_generated_question = RandArray(questions[category]);
     return randomly_generated_question;
   };
 

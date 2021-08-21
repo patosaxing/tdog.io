@@ -45,7 +45,7 @@ const PrivateScreen = () => {
         <div style={{ display: "flex" }}>
           <ProfileCard />
           <WebcamStreamCapture />
-          <QuestionSelection />
+          {/* <QuestionSelection /> */}
         </div>
         {loading ? (
           <Loader />

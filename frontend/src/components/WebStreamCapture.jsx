@@ -4,6 +4,7 @@ import Webcam from "react-webcam";
 import Slider from "./Slider";
 import ReactModal from "react-modal";
 import { Button, Container, Row, Col } from "react-bootstrap";
+import Questions from './Questions'
 
 export default function WebcamStreamCapture() {
   const [timer, setTimer] = useState(1.5);
@@ -78,6 +79,9 @@ export default function WebcamStreamCapture() {
 
   return (
     <Container >
+      <Row>
+        <Questions />
+      </Row>
       <Row>
         <Col md="auto">
           <Webcam audio={true} ref={webcamRef} />
