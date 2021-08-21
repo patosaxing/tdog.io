@@ -55,6 +55,8 @@ const MyVideoList = ({ history }) => {
   const myVideosList = useSelector((state) => state.myVideosList);
   const { loadingMYVID, errorMYVID, videos } = myVideosList;
 
+  const videoUpdate = useSelector((state) => state.videoUpdate)
+  const { loading: loadingUpdate, error: errorUpdate, success: successUpdate, } = videoUpdate
 
   useEffect(() => {
     if (!userInfo) {
@@ -62,7 +64,7 @@ const MyVideoList = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, userInfo, successDelete, showUploader]);
+  }, [dispatch, userInfo, successDelete, showUploader, successUpdate]);
 
   const deleteHandler = (id) => {
     if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
@@ -83,7 +85,7 @@ const MyVideoList = ({ history }) => {
       description,
       sharePublic,
     }));
-    
+    setShow(false);
   };
 
   return (
