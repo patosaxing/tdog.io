@@ -11,6 +11,7 @@ import {
   listMyVideos,
   deleteVideo,
   createVideo,
+  updateVideo
 } from "../actions/videoActions";
 // import { VIDEO_CREATE_RESET } from "../constants/videoConstants";
 
@@ -28,9 +29,24 @@ const MyVideoList = ({ history }) => {
   } = videoDelete;
 
   const [show, setShow] = useState(false);
+  
+  const [vId, setVId] = useState("");
+  const [category, setCategory] = useState("Basic interview questions");
+  const [description, setDescription] =  useState("Orginal desc");
+  const [userNote, setUserNote] = useState("");
+  const [sharePublic, setSharePublic] = useState(false);
+
+  
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (ID, Cat, description, userNote, sharePublic) => {
+    setVId(ID);
+    setCategory(Cat);
+    setDescription(description);
+    setUserNote(userNote);
+    setSharePublic(false);
+    setShow(true);
+  };
 
   const [showUploader, SetShowUploader] = useState(false);
   const userLogin = useSelector((state) => state.userLogin);
@@ -39,10 +55,6 @@ const MyVideoList = ({ history }) => {
   const myVideosList = useSelector((state) => state.myVideosList);
   const { loadingMYVID, errorMYVID, videos } = myVideosList;
 
-  const [category, setCategory] = useState("Basic interview questions");
-  const [Skill, setSkill] = useState("");
-  const [userNote, setUserNote] = useState("");
-  const [sharePublic, setSharePublic] = useState(false);
 
   useEffect(() => {
     if (!userInfo) {
@@ -50,7 +62,7 @@ const MyVideoList = ({ history }) => {
     } else {
       dispatch(listMyVideos());
     }
-  }, [dispatch, history, userInfo, successDelete, showUploader]);
+  }, [dispatch, userInfo, successDelete, showUploader]);
 
   const deleteHandler = (id) => {
     if (window.confirm(" ⚠️   Confirm deleting this Video? ")) {
@@ -58,13 +70,20 @@ const MyVideoList = ({ history }) => {
     }
   };
 
-  const createVideoHandler = () => {
-    dispatch(createVideo());
-  };
+  // const createVideoHandler = () => {
+  //   dispatch(createVideo());
+  // };
 
-  const onSubmit = () => {
-    // dispatch editVideoRequest
-    alert("edit Video submitted");
+  const updateVideoDetail = (e) => {
+    e.preventDefault();
+    dispatch (updateVideo({
+      _id: vId,
+      category,
+      userNote,
+      description,
+      sharePublic,
+    }));
+    
   };
 
   return (
@@ -124,7 +143,6 @@ const MyVideoList = ({ history }) => {
             <tbody>
               {videos.map((video) => (
                 <tr key={video._id}>
-                  {/* <td>{video._id}</td> */}
                   <td>
                     <a
                       href={`${video.videoLink}`}
@@ -144,7 +162,7 @@ const MyVideoList = ({ history }) => {
                     <Button
                       variant="light"
                       className="btn-sm"
-                      onClick={handleShow}
+                      onClick={() => handleShow(video._id,video.category, video.description,video.userNote, video.sharePublic  )}
                     >
                       <i className="fas fa-edit"></i>
                     </Button>
@@ -166,16 +184,15 @@ const MyVideoList = ({ history }) => {
       ) : (
         <h1> You have not shared any videos yet.</h1>
       )}
-
       {/******************* Offcanvas Start */}
       <Offcanvas show={show} onHide={handleClose} placement="start">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Enter new Video detail</Offcanvas.Title>
+          <Offcanvas.Title>Update Video detail for {userInfo.username}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={updateVideoDetail}>
             <div>
-              <h6>Change catergory of this recording</h6>
+              <h6>Change catergory </h6>
               <Form.Control
                 as="select"
                 value={category}
@@ -195,8 +212,8 @@ const MyVideoList = ({ history }) => {
             <Form.Control
               type="text"
               placeholder="e.g. Marketing, Project Tracking, Medical Research..."
-              value={Skill}
-              onChange={(e) => setSkill(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             ></Form.Control>
             <h6 style={{ color: "transparent" }}>spacer</h6>
             <Form.Label>Additional notes</Form.Label>
@@ -206,7 +223,7 @@ const MyVideoList = ({ history }) => {
               value={userNote}
               onChange={(e) => setUserNote(e.target.value)}
             ></Form.Control>
-            <h6 style={{ color: "transparent" }}>spacer</h6>
+            <h6 style={{ color: "red" }}>{vId}</h6>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
@@ -216,8 +233,8 @@ const MyVideoList = ({ history }) => {
             </Form.Group>
             <input
               type="submit"
-              value="Update 🗊"
-              className="btn btn-info btn-block mt-4"
+              value="Update 🔄"
+              className="btn btn-outline-primary btn-block mt-4"
             />
           </form>
         </Offcanvas.Body>

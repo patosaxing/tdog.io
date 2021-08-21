@@ -30,7 +30,7 @@ export default function WebcamStreamCapture() {
 
   const handleStartCaptureClick = React.useCallback(() => {
     setCapturing(true);
-    console.log("Timer in recording button:", timer);
+    // console.log("Timer in recording button:", timer);
     setTimeout(handleStopCaptureClick, timer * 60000);
     mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
       mimeType: "video/webm",
@@ -45,7 +45,7 @@ export default function WebcamStreamCapture() {
 
   const handleStopCaptureClick = React.useCallback(() => {
     // mediaRecorderRef.current.stop();
-    console.log("Media Test", mediaRecorderRef.current);
+    // console.log("Media Test", mediaRecorderRef.current);
     if (mediaRecorderRef.current.state === "inactive") {
       setCapturing(false);
     } else {

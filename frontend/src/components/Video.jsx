@@ -13,9 +13,9 @@ const Video = ({video}) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
-  console.log('####item in Video component',video);
-  const reviewArray = video.reviews;
-  console.log('revirw in the video',reviewArray);
+  // console.log('####item in Video component',video);
+  // const reviewArray = video.reviews;
+  // console.log('revirw in the video',reviewArray);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -32,7 +32,7 @@ const Video = ({video}) => {
     "/preview"
   );
   // console.log('$$$$$video before useEffect', video.video);
-     console.log(newVideoLink);
+    //  console.log(newVideoLink);
 
     const dispatch = useDispatch();
 
