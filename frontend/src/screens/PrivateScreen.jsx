@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Video from "../components/Video";
-// import { Link } from "react-router-dom";
-import QuestionSelection from "../components/Questions";
+import Questions from "../components/Questions";
 import WebcamStreamCapture from "../components/WebStreamCapture";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileCard from "../components/ProfileCard";
@@ -23,12 +22,11 @@ const PrivateScreen = () => {
 
   const publicVideos = useSelector((state) => state.publicVideos);
   const { loading, error, videos } = publicVideos;
-  
-  useEffect(() => {
 
+  useEffect(() => {
     dispatch(listPublicVideos());
   }, [dispatch]);
-  
+
   // console.log('%% videos from PrivateScreen reducer', videos);
   // const { userInfo } = userLogin;
   return (
@@ -44,8 +42,10 @@ const PrivateScreen = () => {
       <div>
         <div style={{ display: "flex" }}>
           <ProfileCard />
-          <WebcamStreamCapture />
-          {/* <QuestionSelection /> */}
+          <div>
+            <Questions />
+            <WebcamStreamCapture />
+          </div>
         </div>
         {loading ? (
           <Loader />
@@ -68,13 +68,10 @@ const PrivateScreen = () => {
             />
             <Row>
               {videos.map((video) => (
-            
-                
-                <Col key={video.videoID} sm={12} md={6} lg={4} xl={3}> 
+                <Col key={video.videoID} sm={12} md={6} lg={4} xl={3}>
                   <Video video={video} />
                 </Col>
-                ))}
-              
+              ))}
             </Row>
             {/* <Paginate
               pages={pages}

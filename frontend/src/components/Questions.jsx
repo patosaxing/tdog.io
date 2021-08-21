@@ -31,7 +31,7 @@ export default function QuestionSelection() {
   };
 
   return (
-    <Container>
+    <Container style={{width : "inherit"}}>
       <Form.Select
         value={category}
         onChange={(e) => {
@@ -45,7 +45,7 @@ export default function QuestionSelection() {
         ))}
       </Form.Select>
 
-      <Button className="my-4" variant="secondary" onClick={handleChangeQues}>
+      <Button className="my-4" variant="secondary" onClick={handleChangeQues} >
         Generate Random Questions
       </Button>
       <div style={QuestionStyle}>{question}</div>

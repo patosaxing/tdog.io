@@ -1,10 +1,11 @@
-import { Dropdown, Card } from "react-bootstrap";
+import { Dropdown, Card, Container } from "react-bootstrap";
 import ProfileAvatar from "../img/ProfileAvatar.svg";
 import { useSelector } from "react-redux";
 
 const ProfileCard = () => {
   const cardStyle = {
     marginRight: "2vw",
+    marginTop: "1.75rem",
     display: "flex",
     flexDirection: "column",
     padding: "0.5rem",
@@ -26,9 +27,9 @@ const ProfileCard = () => {
         src={ProfileAvatar}
         style={{ maxHeight: "10rem" }}
       />
-
-      <Dropdown className="d-inline ">
-        <Dropdown.Toggle id="dropdown-autoclose-true">
+   
+      <Dropdown className="d-inline-flex " >
+        <Dropdown.Toggle id="dropdown-autoclose-true" style={{ fontSize: "0.75rem" }}>
           {userInfo ? userInfo.username : "USERNAME"}
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -53,6 +54,7 @@ const ProfileCard = () => {
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
+   
     </Card>
   );
 };

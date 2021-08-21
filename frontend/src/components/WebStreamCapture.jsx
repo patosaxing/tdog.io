@@ -4,7 +4,7 @@ import Webcam from "react-webcam";
 import Slider from "./Slider";
 import ReactModal from "react-modal";
 import { Button, Container, Row, Col } from "react-bootstrap";
-import Questions from './Questions'
+
 
 export default function WebcamStreamCapture() {
   const [timer, setTimer] = useState(1.5);
@@ -79,21 +79,16 @@ export default function WebcamStreamCapture() {
 
   return (
     <Container >
-      <Row>
-        <Questions />
-      </Row>
-      <Row>
-        <Col md="auto">
+   
+      <div className="d-flex">
           <Webcam audio={true} ref={webcamRef} />
-        </Col>
-      </Row>
-      <Row>
-        <Col md="auto">
+          <div>
           <Slider
             timer={timer}
             handleTimer={handleTimer}
+            
           />
-        </Col>
+          <Row>
         <Col md="auto">
           {capturing ? (
             <Button
@@ -106,7 +101,7 @@ export default function WebcamStreamCapture() {
             </Button>
           ) : (
             <Button
-              style={{ margin: "0.75rem" }}
+              style={{ margin: "2rem" }}
               onClick={handleStartCaptureClick}
             >
               🔴 Start Recording
@@ -117,7 +112,7 @@ export default function WebcamStreamCapture() {
       <Row>
         <Col md="auto">
           {recordedChunks.length > 0 && (
-            <div>
+            <div className="d-flex">
               <Button
                 variant="success"
                 onClick={handleDownload}
@@ -125,13 +120,16 @@ export default function WebcamStreamCapture() {
               >
                 ⇓ Download
               </Button>
-              <Button style={{ marginLeft: "18rem" }} variant="info" onClick={() => setPreview(true)}>
+              <Button style={{ marginLeft: "1.5rem" }} variant="info" onClick={() => setPreview(true)}>
                 📽 Preview
               </Button>
             </div>
           )}
         </Col>
       </Row>
+      </div>
+      </div>
+      
       <ReactModal
         isOpen={preview}
         ariaHideApp={false}
