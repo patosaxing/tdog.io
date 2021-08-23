@@ -116,7 +116,7 @@ export const videoReviewCreateReducer = (state = {}, action) => {
       return {};
     case LIKE:
       return {
-        success: true,
+        sucloading: false,
         Likes: action.payload,
       }
     default:

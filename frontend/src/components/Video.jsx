@@ -31,8 +31,8 @@ const Video = ({video}) => {
     "/view?usp=drivesdk",
     "/preview"
   );
-  // console.log('$$$$$video before useEffect', video.video);
-    //  console.log(newVideoLink);
+  const [tempLike, setTempLike] = useState(video.totalLikes);
+ 
 
     const dispatch = useDispatch();
 
@@ -67,6 +67,7 @@ const Video = ({video}) => {
   };
 
   const handleLike = (ID) => {
+    setTempLike(tempLike+1)
     console.log('here is the id of liking video',ID);
     dispatch(likeVideo(ID))
   };
@@ -171,8 +172,11 @@ const Video = ({video}) => {
         <Card.Text as="div">
           Rating: <Rating value={video.rating} text={``} />
           <Button variant="outline-secondary" onClick={()=>handleLike(video._id)}>
-            👍 {video.totalLikes} {video.totalLikes > 1? 'likes' : 'like'}
+            👍 {tempLike} {tempLike > 1? 'likes' : 'like'}
           </Button>
+          {/* <Button variant="outline-secondary" onClick={()=>handleLike(video._id)}>
+            👍 {video.totalLikes} {video.totalLikes > 1? 'likes' : 'like'}
+          </Button> */}
           
         </Card.Text>
         <Card.Text as="h6">Total {video.numReviews} reviews</Card.Text>
