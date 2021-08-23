@@ -84,7 +84,7 @@ const Video = ({video}) => {
         </Card.Subtitle>
 
         {/******************* Offcanvas Start */}
-        <Button variant="secondary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow}>
           Play video
         </Button>
 
@@ -171,12 +171,9 @@ const Video = ({video}) => {
         {/******************* Offcanvas End */}
         <Card.Text as="div">
           Rating: <Rating value={video.rating} text={``} />
-          <Button variant="outline-secondary" onClick={()=>handleLike(video._id)}>
+          <Button variant="outline-primary" onClick={()=>handleLike(video._id)}>
             👍 {tempLike} {tempLike > 1? 'likes' : 'like'}
           </Button>
-          {/* <Button variant="outline-secondary" onClick={()=>handleLike(video._id)}>
-            👍 {video.totalLikes} {video.totalLikes > 1? 'likes' : 'like'}
-          </Button> */}
           
         </Card.Text>
         <Card.Text as="h6">Total {video.numReviews} reviews</Card.Text>
