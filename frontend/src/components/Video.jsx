@@ -171,7 +171,7 @@ const Video = ({video}) => {
         <Card.Text as="div">
           Rating: <Rating value={video.rating} text={``} />
           <Button variant="outline-secondary" onClick={()=>handleLike(video._id)}>
-            👍 {video.totalLikes} likes
+            👍 {video.totalLikes} {video.totalLikes > 1? 'likes' : 'like'}
           </Button>
           
         </Card.Text>
