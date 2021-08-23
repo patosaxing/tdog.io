@@ -15,7 +15,7 @@ export default function QuestionSelection() {
   const RandArray = (array) => array[(Math.random() * array.length) | 0];
 
   const random_question = () => {
-    if (category == "Select question Category for recording") {
+    if (category === "Select question Category for recording") {
       return alert("Please select a category 👇");
     } else {
       let randomly_generated_question = RandArray(questions[category]);

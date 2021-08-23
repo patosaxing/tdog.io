@@ -23,11 +23,15 @@ const PrivateScreen = () => {
   const publicVideos = useSelector((state) => state.publicVideos);
   const { loading, error, videos } = publicVideos;
 
+  const videoReviewCreate = useSelector((state) => state.videoReviewCreate);
+  const { success: successVideoReview, error: errorVideoReview } =
+    videoReviewCreate;
+
   useEffect(() => {
     dispatch(listPublicVideos());
-  }, [dispatch]);
+  }, [dispatch, successVideoReview]);
 
-  // console.log('%% videos from PrivateScreen reducer', videos);
+ 
   // const { userInfo } = userLogin;
   return (
     <div>

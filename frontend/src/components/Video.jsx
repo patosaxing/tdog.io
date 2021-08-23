@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Message from "../components/Message";
-import { listPublicVideos, createVideoReview } from "../actions/videoActions";
+import { listPublicVideos, createVideoReview, listVideoDetails } from "../actions/videoActions";
 import { VIDEO_CREATE_REVIEW_RESET } from "../constants/videoConstants";
 
 const Video = ({video}) => {
@@ -42,6 +42,8 @@ const Video = ({video}) => {
       setRating(3.5);
       setComment("");
       dispatch({ type: VIDEO_CREATE_REVIEW_RESET });
+      // dispatch (listVideoDetails(video._id));
+      
     }
     // dispatch(listVideoDetails(video._id));
   }, [successVideoReview, dispatch, video._id]);
@@ -58,6 +60,10 @@ const Video = ({video}) => {
         videoId,
       })
     );
+    // dispatch (listPublicVideos);
+    alert('Your feedback / review has been added to this Video.\n 🤝 Thank-you!')
+    // setShow(false)
+    // dispatch (listVideoDetails(video._id));
   };
 
   const handleLike = (video) => {};
