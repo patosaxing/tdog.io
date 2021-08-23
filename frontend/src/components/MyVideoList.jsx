@@ -225,11 +225,11 @@ const MyVideoList = ({ history }) => {
               value={userNote}
               onChange={(e) => setUserNote(e.target.value)}
             ></Form.Control>
-            <h6 style={{ color: "red" }}>{vId}</h6>
+            <h6 style={{ color: "transparent" }}>{vId}</h6>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
-                label="⮪ Select to share with public for feedback"
+                label="👈 Select to share with public for feedback"
                 onClick={() => setSharePublic(true)}
               />
             </Form.Group>
