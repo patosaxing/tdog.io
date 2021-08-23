@@ -21,6 +21,7 @@ import {
   PUBLIC_VIDEO_REQUEST,
   PUBLIC_VIDEO_SUCCESS,
   PUBLIC_VIDEO_FAIL,
+  LIKE,
 } from '../constants/videoConstants'; ///COntinue adding constant on this branch
 import { logout } from './userActions';
 
@@ -316,23 +317,12 @@ export const createVideoReview = (videoId, review) => async (
   }
 }
 
-// export const listTopVideos = () => async (dispatch) => {
-//   try {
-//     dispatch({ type: VIDEO_TOP_REQUEST });
+export const likeVideo = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.patch(`/api/videos/${id}/likeVideo`);
 
-//     const { data } = await axios.get(`/api/videos/top`);
-
-//     dispatch({
-//       type: VIDEO_TOP_SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: VIDEO_TOP_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// }
+    dispatch({ type: LIKE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};

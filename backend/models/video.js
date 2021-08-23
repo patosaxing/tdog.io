@@ -59,7 +59,7 @@ const videoSchema = mongoose.Schema(
       required: false, // will set this to true when this is live
       default: 0,
     },
-    numberViews: { // total number of times viewed
+    totalLikes: { // total number of Like clicked
       type: Number,
       required: false,
       default: 0,

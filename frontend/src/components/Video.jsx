@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Message from "../components/Message";
-import { listPublicVideos, createVideoReview, listVideoDetails } from "../actions/videoActions";
+import { listPublicVideos, createVideoReview, listVideoDetails, likeVideo } from "../actions/videoActions";
 import { VIDEO_CREATE_REVIEW_RESET } from "../constants/videoConstants";
 
 const Video = ({video}) => {
@@ -66,7 +66,10 @@ const Video = ({video}) => {
     // dispatch (listVideoDetails(video._id));
   };
 
-  const handleLike = (video) => {};
+  const handleLike = (ID) => {
+    console.log('here is the id of liking video',ID);
+    dispatch(likeVideo(ID))
+  };
 
   return (
     <Card className="my-3 p-3">
@@ -167,9 +170,10 @@ const Video = ({video}) => {
         {/******************* Offcanvas End */}
         <Card.Text as="div">
           Rating: <Rating value={video.rating} text={``} />
-          <Button variant="outline-secondary" onClick={handleLike}>
+          <Button variant="outline-secondary" onClick={()=>handleLike(video._id)}>
             👍
           </Button>
+          Total {video.totalLikes} likes
         </Card.Text>
         <Card.Text as="h6">Total {video.numReviews} reviews</Card.Text>
       </Card.Body>

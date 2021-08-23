@@ -222,4 +222,16 @@ const updateVideo = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview, getVideoById, deleteVideoById, updateVideo };
+const likeVideo = async (req, res) => {
+  const { id } = req.params;
+  console.log('Param from LikeVideo controller'.red, req.params);
+  // if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No Video with id: ${id}`);
+  
+  const video = await Video.findById(id);
+
+  const updatedVideo = await Video.findByIdAndUpdate(id, { totalLikes: video.totalLikes + 1 }, { new: true });
+  
+  res.json(updatedVideo);
+}
+
+module.exports = { createVideo, getMyVideos, getPublicVideos, createVideoReview, getVideoById, deleteVideoById, updateVideo, likeVideo };

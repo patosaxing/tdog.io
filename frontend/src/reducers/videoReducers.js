@@ -23,6 +23,7 @@ import {
   PUBLIC_VIDEO_REQUEST,
   PUBLIC_VIDEO_SUCCESS,
   PUBLIC_VIDEO_FAIL,
+  LIKE,
 
 } from '../constants/videoConstants';
 
@@ -113,12 +114,16 @@ export const videoReviewCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case VIDEO_CREATE_REVIEW_RESET:
       return {};
+    case LIKE:
+      return {loading: false,
+      Likes: action.payload,
+      }
     default:
       return state;
   }
 }
 
-export const publicVideosReducer = (state = { videos: []} , action) => {
+export const publicVideosReducer = (state = { videos: [] }, action) => {
   switch (action.type) {
     case PUBLIC_VIDEO_REQUEST:
       return { loading: true, videos: [] };
