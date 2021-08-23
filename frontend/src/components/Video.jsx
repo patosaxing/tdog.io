@@ -171,9 +171,9 @@ const Video = ({video}) => {
         <Card.Text as="div">
           Rating: <Rating value={video.rating} text={``} />
           <Button variant="outline-secondary" onClick={()=>handleLike(video._id)}>
-            👍
+            👍 {video.totalLikes} likes
           </Button>
-          Total {video.totalLikes} likes
+          
         </Card.Text>
         <Card.Text as="h6">Total {video.numReviews} reviews</Card.Text>
       </Card.Body>

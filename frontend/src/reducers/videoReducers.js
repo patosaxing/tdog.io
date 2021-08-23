@@ -115,8 +115,9 @@ export const videoReviewCreateReducer = (state = {}, action) => {
     case VIDEO_CREATE_REVIEW_RESET:
       return {};
     case LIKE:
-      return {loading: false,
-      Likes: action.payload,
+      return {
+        success: true,
+        Likes: action.payload,
       }
     default:
       return state;
