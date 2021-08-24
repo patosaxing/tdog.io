@@ -74,6 +74,7 @@ const ProfileScreen = ({ location, history }) => {
           linkedIN,
         })
       );
+      setMessage("");
     }
   };
 
