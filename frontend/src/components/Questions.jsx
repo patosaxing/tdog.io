@@ -16,7 +16,13 @@ export default function QuestionSelection() {
 
   const random_question = () => {
     if (category === "Select question Category for recording") {
-      return alert("Please select a category 👇");
+      return (
+        <div class="alert alert-secondary alert-dismissible fade show">
+                   Please select a category prior to generating questions.
+        </div>
+      );
+
+      // return alert("Please select a category 👇");
     } else {
       let randomly_generated_question = RandArray(questions[category]);
       return randomly_generated_question;
@@ -31,7 +37,7 @@ export default function QuestionSelection() {
   };
 
   return (
-    <Container style={{width : "inherit"}}>
+    <Container style={{ width: "inherit" }}>
       <Form.Select
         value={category}
         onChange={(e) => {
@@ -45,7 +51,7 @@ export default function QuestionSelection() {
         ))}
       </Form.Select>
 
-      <Button className="my-4" variant="secondary" onClick={handleChangeQues} >
+      <Button className="my-4" variant="secondary" onClick={handleChangeQues}>
         Generate Random Questions
       </Button>
       <div style={QuestionStyle}> {question} </div>

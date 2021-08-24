@@ -92,7 +92,7 @@ const ProfileScreen = ({ location, history }) => {
               variant="primary"
               onClick={() => SetShowVideoList(true)}
             >
-              🗁 Show list of all your videos ꄤ
+              <i class="far fa-file-video"></i> Show list of all your videos
             </Button>
           </div>
         ) : (
@@ -112,7 +112,7 @@ const ProfileScreen = ({ location, history }) => {
       {!showVideoList ? (
         <Row className="m-3">
           <Col md={15}>
-            <h2>Update Profile 📄</h2>
+            <h2>Update Profile <i class="fas fa-user-circle"></i></h2>
 
             {message && <Message variant="danger">{message}</Message>}
             {}
@@ -173,7 +173,7 @@ const ProfileScreen = ({ location, history }) => {
                 </Form.Group>
 
                 <Form.Group controlId="userLocation">
-                  <Form.Label>📍 Location</Form.Label>
+                  <Form.Label><i class="fas fa-map-marked-alt"></i> Location</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter Location"
@@ -204,11 +204,9 @@ const ProfileScreen = ({ location, history }) => {
                     placeholder="Enter NEW password if you want to change it"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
                   ></Form.Control>
-                  <Form.Text style={{ fontSize: "0.70rem" }} muted>
-                    Min 6 characters with letters and numbers. NO spaces,
-                    special characters, nor emoji.
-                  </Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="confirmPassword">
@@ -220,6 +218,8 @@ const ProfileScreen = ({ location, history }) => {
                     placeholder="Confirm NEW password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
                   ></Form.Control>
                 </Form.Group>
                 {/* to be developed 👇 */}
@@ -241,7 +241,7 @@ const ProfileScreen = ({ location, history }) => {
               </Form.Group> */}
                 <hr />
                 <Button type="submit" variant="primary">
-                  Update
+                  Update <i class="fas fa-sync-alt"></i> 
                 </Button>
               </Form>
             )}

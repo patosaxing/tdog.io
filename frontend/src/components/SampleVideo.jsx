@@ -42,7 +42,7 @@ const SampleVideo = ({video}) => {
             <h6>Description: {video.description}</h6>
             <hr />
             <Col md={6}>
-              <h5>Reviews🗊</h5>
+              <h5>Reviews <i class="far fa-comment-dots"></i></h5>
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h6>✍Add a review: </h6>

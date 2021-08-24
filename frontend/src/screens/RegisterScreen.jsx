@@ -48,12 +48,14 @@ const RegisterScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
-          <Form.Label><i class="far fa-address-card"></i> Username</Form.Label>
+          <Form.Label>
+            <i class="far fa-address-card"></i> Username
+          </Form.Label>
           <Form.Control
             type="name"
             placeholder="Enter Username"
             value={username}
-            required= {true}
+            required={true}
             onChange={(e) => setUserName(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -64,7 +66,7 @@ const RegisterScreen = ({ location, history }) => {
             type="email"
             placeholder="Enter email"
             value={email}
-            required= {true}
+            required={true}
             // onChange={(e) => setEmail(e.target.value)}
             onChange={(e) => {
               !e.target.value.indexOf(".") <= 0
@@ -80,24 +82,27 @@ const RegisterScreen = ({ location, history }) => {
             type="password"
             placeholder="Enter password"
             value={password}
-            required= {true}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-          <Form.Text style={{fontSize:'0.70rem'}} muted>
-            Min. 6 characters with letters and
-            numbers. NO spaces, special characters, nor emoji.
-          </Form.Text>
+            required={true}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+            onChange={(e) => setPassword(e.target.value)}>
+          </Form.Control>
+         
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">
-          <Form.Label><i class="fas fa-lock"></i> Confirm Password</Form.Label>
+          <Form.Label>
+            <i class="fas fa-lock"></i> Confirm Password
+          </Form.Label>
           <Form.Control
             type="password"
             placeholder="Confirm password"
             value={confirmPassword}
-            required= {true}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
+            required={true}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
+            onChange={(e) => setConfirmPassword(e.target.value)}>
+          </Form.Control>
         </Form.Group>
 
         <Button className="my-4" type="submit" variant="primary">

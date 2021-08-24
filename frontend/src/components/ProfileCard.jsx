@@ -39,7 +39,7 @@ const ProfileCard = () => {
           </Dropdown.Item>
           <Dropdown.Item href="#">
             {" "}
-            📍 {userInfo ? userInfo.userLocation : " LOCATION"}
+            <i class="fas fa-map-marked-alt"></i> {userInfo ? userInfo.userLocation : " LOCATION"}
           </Dropdown.Item>
           <Dropdown.Item href="#">
             📧 {userInfo ? userInfo.email : "EMAIL"}
