@@ -67,8 +67,7 @@ exports.uploadToG = async (fileN, uploadUser, qCat, qSkill) => {
 
     // console.log('resutl from ext URL function'.magenta, result.data.webViewLink);
     return { id: response.data.id, url: result.data.webViewLink }
-    // // Save video metadata to MongoDB
-    // videoControl.videoDetailToMongo(fileId, result.data.webViewLink, uploadUser, qCat, qSkill);
+    
 
   } catch (error) {
     console.log('error from google Drive API: ', error.message);
