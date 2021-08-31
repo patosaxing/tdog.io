@@ -58,6 +58,7 @@ const Video = ({video}) => {
         rating,
         comment,
         videoId,
+        reviewer : userInfo.username,
       })
     );
     // dispatch (listPublicVideos);
@@ -114,7 +115,7 @@ const Video = ({video}) => {
               <ListGroup variant="flush">
                 {video.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
-                    <strong>{review.user}</strong>
+                    <strong>{review.reviewer}</strong>
                     <Rating value={review.rating} text={''} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>

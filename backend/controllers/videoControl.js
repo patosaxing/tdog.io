@@ -124,8 +124,8 @@ const getPublicVideos = async (req, res) => {
 // @route   POST /api/videos/:id/reviews
 
 const createVideoReview = asyncHandler(async (req, res) => {
-  const { rating, comment, videoId } = req.body;
-  // console.log('body of createVideoReview'.bgGreen, req.body);
+  const { rating, comment, videoId, reviewer } = req.body;
+  console.log('body of createVideoReview'.bgGreen, req.body);
   // const video = await Video.findById(req.params.id);
   const video = await Video.findById(videoId);
   // console.log('video from model.find in the controller'.red, video);
@@ -144,7 +144,7 @@ const createVideoReview = asyncHandler(async (req, res) => {
       name: req.username,
       rating: Number(rating),
       comment,
-      // user: req.user._id,
+      reviewer,
     };
 
     // console.log('review obj from copntroller'.bgCyan, review);
