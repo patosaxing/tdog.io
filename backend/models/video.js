@@ -10,6 +10,7 @@ const reviewSchema = mongoose.Schema(
       required: false,
       ref: 'user',
     },
+    reviewers: { type: String, required: true}
   },
   {
     timestamps: true, // record the time for submit review

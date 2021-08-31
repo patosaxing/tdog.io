@@ -71,7 +71,7 @@ const Video = ({video}) => {
     console.log('here is the id of liking video',ID);
     dispatch(likeVideo(ID))
   };
-
+  console.log('reviewFromVideoFetching', userInfo.username);
   return (
     <Card className="my-3 p-3">
       <Card.Body>
@@ -110,10 +110,11 @@ const Video = ({video}) => {
             <Col md={6}>
               <h5>Reviews🗊</h5>
               {video.reviews.length === 0 && <Message>No Reviews</Message>}
+              
               <ListGroup variant="flush">
                 {video.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
-                    <strong>{review.name}</strong>
+                    <strong>{review.user}</strong>
                     <Rating value={review.rating} text={''} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
