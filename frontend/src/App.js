@@ -11,7 +11,7 @@ import ProfileScreen from './screens/ProfileScreen'
 function App() {
   return (
     <Router>
-      <Header />
+      <Header style={{position: 'fixed'}}/>
       <main className="py-3">
         <Container>
         <Route path='/register' component={RegisterScreen} />

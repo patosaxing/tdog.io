@@ -60,12 +60,12 @@ const LoginScreen = ({ location, history }) => {
         <Button className="my-4" type='submit' variant='primary'>
           Sign In <i class="fas fa-sign-in-alt"></i>
         </Button>
-        {/* <Col>
+        <Col>
           Forgot Password?{' '}
           <Link to="/forgotpassword" className="login-screen__forgotpassword">
               Reset it here?
             </Link>
-        </Col> */}
+        </Col>
       </Form>
 
       <Row className='py-3'>

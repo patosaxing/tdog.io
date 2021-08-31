@@ -81,6 +81,7 @@ const ProfileScreen = ({ location, history }) => {
   return (
     <div style={{ display: "flex" }}>
       <div>
+      <h1 style={{ color: "transparent" }}>Header spacer</h1>
         <Link to="/" className="btn btn-light">
           Go Back
         </Link>
@@ -126,6 +127,7 @@ const ProfileScreen = ({ location, history }) => {
               <Form autocomplete="off" onSubmit={submitHandler}>
                 <Form.Group controlId="username">
                   <Form.Label>
+                  <h6 style={{ color: "transparent" }}>Header spacer</h6>
                     <i class="far fa-address-card"></i> Username:{" "}
                     {userInfo ? userInfo.username : "Username for this card"}
                   </Form.Label>
@@ -202,7 +204,7 @@ const ProfileScreen = ({ location, history }) => {
                   <Form.Label>🔓 NEW Password</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Enter NEW password if you want to change it"
+                    placeholder="Enter NEW password to change"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
