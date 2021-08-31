@@ -184,10 +184,12 @@ const getVideoById = asyncHandler(async (req, res) => {
 // @route   DELETE /api/videos/:id
 
 const deleteVideoById = asyncHandler(async (req, res) => {
-  const video = await Video.findById(req.params.id);
-
+  const delID = req.params.id;
+  const video = await Video.findById(delID);
+  console.log('ID from pramas', video.videoID);
   if (video) {
     await video.remove();
+    await deleteFileOnG(video.videoID);
     res.json({ message: 'Video removed' });
   } else {
     res.status(404);
