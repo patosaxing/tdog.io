@@ -31,6 +31,7 @@ const LoginScreen = ({ location, history }) => {
 
   return (
     <FormContainer>
+      <h1 style={{ color: "transparent" }}>Header spacer</h1>
       <h1>Sign In</h1>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
@@ -60,12 +61,12 @@ const LoginScreen = ({ location, history }) => {
         <Button className="my-4" type='submit' variant='primary'>
           Sign In <i class="fas fa-sign-in-alt"></i>
         </Button>
-        {/* <Col>
+        <Col>
           Forgot Password?{' '}
-          <Link to="/forgotpassword" className="login-screen__forgotpassword">
+          <Link to={redirect ? `/forgotpassword?redirect=${redirect}` : '/forgotpassword'}>
               Reset it here?
             </Link>
-        </Col> */}
+        </Col>
       </Form>
 
       <Row className='py-3'>

@@ -35,6 +35,7 @@ const PrivateScreen = () => {
   // const { userInfo } = userLogin;
   return (
     <div>
+        <h6 style={{ color: "transparent" }}>Header spacer</h6>
       {/* <Meta />
       {!keyword ? (
         <h1> PUBLICK VIDEOS HERE </h1>

@@ -3,6 +3,7 @@ const router = express.Router();
 const authControl = require("../controllers/authControl");
 const {protect, admin} = require("../middleware/auth")
 
+
 router.post("/register", authControl.register); // added API to prevent potential collide with front
 router.post("/login", authControl.login);
 router.post("/forgotpassword", authControl.forgotPassword);

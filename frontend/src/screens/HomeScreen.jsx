@@ -25,6 +25,7 @@ const HomeScreen = () => {
         <PrivateScreen />
       ) : (
         <div>
+          <h1 style={{ color: "transparent" }}>Header spacer</h1>
           <h6 style={{ backgroundColor: "lightblue" }}>
             {" "}
             User has NOT logged in
