@@ -74,7 +74,7 @@ const authControl = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                return res.status(404).json("The email can't be sent");
+                return res.status(404).json("This email can't be sent");
             }
 
             // Reset Token Gen and add to database hashed (private) version of token
@@ -83,7 +83,7 @@ const authControl = {
             await user.save();
 
             // Create reset url to email to provided email-address
-            const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+            const resetUrl = `http://localhost:3000/users/passwordreset/${resetToken}`;
 
             // Message sent as an HTML body
             const message = `
@@ -141,7 +141,7 @@ const authControl = {
 
             res.status(201).json({
                 success: true,
-                data: "Password Updated Success",
+                data: "Password Reset Success",
                 token: user.getSignedJwtToken(),
             });
         } catch (err) {

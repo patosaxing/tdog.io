@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen'
+import ForgotpasswordScreen from './screens/ForgotpasswordScreen'
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route path='/login' component={LoginScreen} />
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/' component={HomeScreen} exact />
+          <Route path='/forgotpassword' component={ForgotpasswordScreen} exact />
+
         </Container>
       </main>
       <Footer />

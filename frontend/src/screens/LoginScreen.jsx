@@ -63,7 +63,7 @@ const LoginScreen = ({ location, history }) => {
         </Button>
         <Col>
           Forgot Password?{' '}
-          <Link to="/forgotpassword" className="login-screen__forgotpassword">
+          <Link to={redirect ? `/forgotpassword?redirect=${redirect}` : '/forgotpassword'}>
               Reset it here?
             </Link>
         </Col>

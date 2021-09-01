@@ -5,35 +5,49 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { login } from '../actions/userActions'
+import axios from "axios";
 
 const ForgorpasswordScreen = ({ location, history }) => {
-  const [email, setEmail] = useState('')
-  const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const dispatch = useDispatch()
-
-  const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
 
   const redirect = location.search ? location.search.split('=')[1] : '/'
 
-  useEffect(() => {
-    if (userInfo) {
-      history.push(redirect)
-    }
-  }, [history, userInfo, redirect])
 
-  const submitHandler = (e) => {
-    e.preventDefault()
-    dispatch(login(email, userName)) // forgetpassword callback here
-  }
+  const submitHandler= async (e) => {
+    e.preventDefault();
+
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const { data } = await axios.post(
+        "/api/users/forgotpassword",
+        { email },
+        config
+      );
+
+      setSuccess(data.data);
+    } catch (error) {
+      setError(error.response.data.error);
+      setEmail("");
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+    }
+  };
 
   return (
     <FormContainer>
+       <h1 style={{ color: "transparent" }}>Header spacer</h1>
       <h1>Forgot Password</h1>
       {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         
         <Form.Group controlId='userName'>
@@ -46,12 +60,13 @@ const ForgorpasswordScreen = ({ location, history }) => {
             onChange={(e) => setUserName(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
+        <h6 style={{ color: "transparent" }}>Header spacer</h6>
         <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>Please enter the email address you register your account with. We
+            will send you reset password confirmation to this email.</Form.Label>
           <Form.Control
             type='email'
-            placeholder='Enter email'
+            placeholder='Registered email'
             value={email}
             required={true}
             onChange={(e) => setEmail(e.target.value)}
@@ -59,7 +74,7 @@ const ForgorpasswordScreen = ({ location, history }) => {
         </Form.Group>
 
         <Button className="my-4" type='submit' variant='primary'>
-          Reset Password
+          Reset Password <i class="far fa-window-restore"></i>
         </Button>
       </Form>
 
