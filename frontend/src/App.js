@@ -11,13 +11,13 @@ import ProfileScreen from './screens/ProfileScreen'
 function App() {
   return (
     <Router>
-      <Header style={{position: 'fixed'}}/>
+      <Header />
       <main className="py-3">
         <Container>
-        <Route path='/register' component={RegisterScreen} />
-        <Route path='/login' component={LoginScreen} />
-        <Route path='/profile' component={ProfileScreen} />
-        <Route path='/' component={HomeScreen} exact />
+          <Route path='/register' component={RegisterScreen} />
+          <Route path='/login' component={LoginScreen} />
+          <Route path='/profile' component={ProfileScreen} />
+          <Route path='/' component={HomeScreen} exact />
         </Container>
       </main>
       <Footer />

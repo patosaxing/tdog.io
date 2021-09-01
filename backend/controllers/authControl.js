@@ -74,7 +74,7 @@ const authControl = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                return res.status(404).json("Can NOT find this email in our system");
+                return res.status(404).json("The email can't be sent");
             }
 
             // Reset Token Gen and add to database hashed (private) version of token
@@ -82,13 +82,13 @@ const authControl = {
 
             await user.save();
 
-            // Create reset url to email to provided email
+            // Create reset url to email to provided email-address
             const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
 
             // Message sent as an HTML body
             const message = `
             <h1>You have requested a password reset</h1>
-            <p>Please make a put request to the following link:</p>
+            <p>Please go to this link to reset your password:</p>
             <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
           `;
 
