@@ -77,7 +77,7 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
           <Navbar.Text>
-            <a href="https://evalview.github.io/app/">
+            <a href="https://evalview.club">
               {" "}
               <img
                 style={{ maxWidth: "3.5rem" }}
