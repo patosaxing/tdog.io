@@ -83,7 +83,7 @@ const authControl = {
             await user.save();
 
             // Create reset url to email to provided email-address
-            const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+            const resetUrl = `https://evalview.herokuapp.com/passwordreset/${resetToken}`;
 
             // Message sent as an HTML body
             const message = `
