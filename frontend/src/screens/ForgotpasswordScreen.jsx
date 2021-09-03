@@ -19,7 +19,7 @@ const ForgorpasswordScreen = ({ location, history }) => {
 
   const submitHandler= async (e) => {
     e.preventDefault();
-
+    alert('A reset link has been sent to your inbox.')
     const config = {
       header: {
         "Content-Type": "application/json",
@@ -35,7 +35,8 @@ const ForgorpasswordScreen = ({ location, history }) => {
 
       setSuccess(data.data);
     } catch (error) {
-      setError(error.response.data.error);
+      setError(error.response.data);
+      // setError(error.response.data.error);
       setEmail("");
       setTimeout(() => {
         setError("");
