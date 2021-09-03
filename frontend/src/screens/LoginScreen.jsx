@@ -37,7 +37,7 @@ const LoginScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label><i class="far fa-envelope-open"></i> Email Address</Form.Label>
           <Form.Control
             type='email'
             placeholder='Enter email'
@@ -46,9 +46,9 @@ const LoginScreen = ({ location, history }) => {
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
+        <br/>
         <Form.Group controlId='password'>
-          <Form.Label>Password</Form.Label>
+          <Form.Label><i class="fas fa-key"></i> Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Enter password'

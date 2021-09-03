@@ -19,7 +19,7 @@ const ForgorpasswordScreen = ({ location, history }) => {
 
   const submitHandler= async (e) => {
     e.preventDefault();
-    alert('A reset link has been sent to your inbox.')
+    alert('Please check your email')
     const config = {
       header: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const ForgorpasswordScreen = ({ location, history }) => {
       <Form onSubmit={submitHandler}>
         
         <Form.Group controlId='userName'>
-          <Form.Label>User Name</Form.Label>
+          <Form.Label><i class="fas fa-user-shield"></i> User Name</Form.Label>
           <Form.Control
             type='string'
             placeholder='Enter User Name'

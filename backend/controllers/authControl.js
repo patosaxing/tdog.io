@@ -83,7 +83,7 @@ const authControl = {
             await user.save();
 
             // Create reset url to email to provided email-address
-            const resetUrl = `http://localhost:3000/users/passwordreset/${resetToken}`;
+            const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
 
             // Message sent as an HTML body
             const message = `
@@ -95,7 +95,7 @@ const authControl = {
             try {
                 await sendEmail({
                     to: user.email,
-                    subject: "Password Reset Request",
+                    subject: "Evalview Password Reset Request",
                     text: message,
                 });
 
