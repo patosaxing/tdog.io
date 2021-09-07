@@ -66,7 +66,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="email">
-          <Form.Label>📧 Email Address</Form.Label>
+          <Form.Label className="mt-3">📧 Email Address</Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -82,7 +82,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>🔓 Password</Form.Label>
+          <Form.Label className="mt-3">🔓 Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Enter password"
@@ -95,7 +95,7 @@ const RegisterScreen = ({ location, history }) => {
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">
-          <Form.Label>
+          <Form.Label className="mt-3">
             <i class="fas fa-lock"></i> Confirm Password
           </Form.Label>
           <Form.Control
@@ -108,8 +108,8 @@ const RegisterScreen = ({ location, history }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-            <p>
-               <em>By clicking Sign Up, you agree to have read and agreed to<a href="https://docs.google.com/document/d/1vdRH146syKsCYxlzuARm4LKslCHqr4uazxJWaLG020M/edit?usp=sharing" target="_blank" rel="noopener noreferrer"> Evalview Terms and Conditions</a></em>
+            <p className="mt-3">
+               <em>By clicking Sign Up, you agree to have read and agreed to<a href="https://docs.google.com/document/d/1vdRH146syKsCYxlzuARm4LKslCHqr4uazxJWaLG020M/edit?usp=sharing" target="_blank" rel="noopener noreferrer"> Terms and Conditions</a></em>
               
             </p>
         <Button className="my-4" type="submit" variant="primary">
@@ -121,7 +121,7 @@ const RegisterScreen = ({ location, history }) => {
         <Col>
           Have an Account?{" "}
           <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            Login
+            Login <i class="fas fa-sign-in-alt"></i>
           </Link>
         </Col>
       </Row>
