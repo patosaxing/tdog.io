@@ -40,8 +40,13 @@ const RegisterScreen = ({ location, history }) => {
     }
   };
 
+  const displayButton = ()=> {
+
+  }
+
   return (
     <FormContainer>
+      <h1 style={{ color: "transparent" }}>Header spacer</h1>
       <h1>Sign Up</h1>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
@@ -85,9 +90,8 @@ const RegisterScreen = ({ location, history }) => {
             required={true}
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-            onChange={(e) => setPassword(e.target.value)}>
-          </Form.Control>
-         
+            onChange={(e) => setPassword(e.target.value)}
+          ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="confirmPassword">
@@ -101,12 +105,15 @@ const RegisterScreen = ({ location, history }) => {
             required={true}
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
-            onChange={(e) => setConfirmPassword(e.target.value)}>
-          </Form.Control>
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></Form.Control>
         </Form.Group>
-
+            <p>
+               <em>By clicking Sign Up, you agree to have read and agreed to<a href="https://docs.google.com/document/d/1vdRH146syKsCYxlzuARm4LKslCHqr4uazxJWaLG020M/edit?usp=sharing" target="_blank" rel="noopener noreferrer"> Evalview Terms and Conditions</a></em>
+              
+            </p>
         <Button className="my-4" type="submit" variant="primary">
-          Register
+          <i class="fas fa-user-plus"></i> Sign Up
         </Button>
       </Form>
 
